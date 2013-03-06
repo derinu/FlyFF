@@ -11,3 +11,14 @@
 *.lai
 *.la
 *.a
+
+*.exe
+*.idb
+*.pdb
+*.obj
+*.sbr
+*.pch
+*.map
+*.res
+*.cod
+BuildLog.htm
