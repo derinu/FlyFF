@@ -1,0 +1,100 @@
+IDS_TITLE_TXT_0001	Coletor Supremo
+IDS_TITLE_TXT_0002	Empresário
+IDS_TITLE_TXT_0003	Mestre Maquinador
+IDS_TITLE_TXT_0004	Casanova
+IDS_TITLE_TXT_0005	Apaixonado
+IDS_TITLE_TXT_0006	Pavoroso
+IDS_TITLE_TXT_0007	Forte
+IDS_TITLE_TXT_0008	Tank
+IDS_TITLE_TXT_0009	Ligeirinho
+IDS_TITLE_TXT_0010	Einstein
+IDS_TITLE_TXT_0011	Novato
+IDS_TITLE_TXT_0012	Aprendiz
+IDS_TITLE_TXT_0013	Persistente
+IDS_TITLE_TXT_0014	Consagrado
+IDS_TITLE_TXT_0015	Impulsivo
+IDS_TITLE_TXT_0016	Teimoso
+IDS_TITLE_TXT_0017	Premiado
+IDS_TITLE_TXT_0018	Ilustre
+IDS_TITLE_TXT_0019	Épico
+IDS_TITLE_TXT_0020	Campeão
+IDS_TITLE_TXT_0021	Mestre Knight
+IDS_TITLE_TXT_0022	Mestre Blade
+IDS_TITLE_TXT_0023	Mestre Jester
+IDS_TITLE_TXT_0024	Mestre Ranger
+IDS_TITLE_TXT_0025	Mestre Ringmaster
+IDS_TITLE_TXT_0026	Mestre Billposter
+IDS_TITLE_TXT_0027	Mestre Psykeeper
+IDS_TITLE_TXT_0028	Mestre Elementor
+IDS_TITLE_TXT_0029	Herói Knight
+IDS_TITLE_TXT_0030	Herói Blade
+IDS_TITLE_TXT_0031	Herói Jester
+IDS_TITLE_TXT_0032	Herói Ranger
+IDS_TITLE_TXT_0033	Herói Ringmaster
+IDS_TITLE_TXT_0034	Herói Billposter
+IDS_TITLE_TXT_0035	Herói Psykeeper
+IDS_TITLE_TXT_0036	Herói Elementor
+IDS_TITLE_TXT_0037	Lorde
+IDS_TITLE_TXT_0038	Viciado em Pílula Cinza 
+IDS_TITLE_TXT_0039	Viciado em Pílula Amarela 
+IDS_TITLE_TXT_0040	Viciado em Pílula Azul 
+IDS_TITLE_TXT_0041	Viciado em Pílula Vermelha 
+IDS_TITLE_TXT_0042	Viciado em Pílula Dourada 
+IDS_TITLE_TXT_0043	Viciado em Pílula Misteriosa
+IDS_TITLE_TXT_0044	Viciado em Pirulito 
+IDS_TITLE_TXT_0045	Viciado em Biscoito
+IDS_TITLE_TXT_0046	Chocolatra
+IDS_TITLE_TXT_0047	Viciado em Leite
+IDS_TITLE_TXT_0048	Viciado em Pão
+IDS_TITLE_TXT_0049	Viciado em Cachorrão
+IDS_TITLE_TXT_0050	Viciado em Pizza
+IDS_TITLE_TXT_0051	Viciado em Sushi
+IDS_TITLE_TXT_0052	Viciado em Frago
+IDS_TITLE_TXT_0053	Viciado em Doce Estrela
+IDS_TITLE_TXT_0054	Viciado em Carne
+IDS_TITLE_TXT_0055	Viciado em Churrasco
+IDS_TITLE_TXT_0056	Viciado em Torta de Frutos do Mar
+IDS_TITLE_TXT_0057	Viciado em Sopa de Peixe
+IDS_TITLE_TXT_0058	Viciado em Caçarola de Lingüiça
+IDS_TITLE_TXT_0059	Viciado em Cozido de Peixe
+IDS_TITLE_TXT_0060	Viciado em Frutos do Mar no Vapor
+IDS_TITLE_TXT_0061	Viciado em Salada com Carne
+IDS_TITLE_TXT_0062	Viciado em Gratinado
+IDS_TITLE_TXT_0063	Viciado em Pizza de Frutos do Mar
+IDS_TITLE_TXT_0064	Viciado em Suco de Laranja
+IDS_TITLE_TXT_0065	Viciado em Milk Shake de Morango
+IDS_TITLE_TXT_0066	Viciado em Sorvete de Abacaxi
+IDS_TITLE_TXT_0067	Viciado em Banana Jujubar
+IDS_TITLE_TXT_0068	Viciado em Suco de Frutas
+IDS_TITLE_TXT_0069	Viciado em Frutas Geladas
+IDS_TITLE_TXT_0070	Viciado em Parfait
+IDS_TITLE_TXT_0071	Viciado em Sherbert
+IDS_TITLE_TXT_0072	Viciado em Sorvete
+IDS_TITLE_TXT_0073	Viciado em Fruit Punch
+IDS_TITLE_TXT_0074	Caçador de Aibatt
+IDS_TITLE_TXT_0075	Caçador de Lawolf
+IDS_TITLE_TXT_0076	Caçador de Cardpuppet
+IDS_TITLE_TXT_0077	Caçador de Glaphan
+IDS_TITLE_TXT_0078	Caçador de Meteonyker
+IDS_TITLE_TXT_0079	Caçador de Psyclops
+IDS_TITLE_TXT_0080	Caçador de Yetti
+IDS_TITLE_TXT_0081	Caçador de Yetti Mutante
+IDS_TITLE_TXT_0082	Caçador de Augu
+IDS_TITLE_TXT_0083	Caçador de Augu Mutante
+IDS_TITLE_TXT_0084	Caçador de Fantasma Príncipe
+IDS_TITLE_TXT_0085	Caçador de Fantasma Rei
+IDS_TITLE_TXT_0086	Caçador de Mamute
+IDS_TITLE_TXT_0087	Caçador de Mamute Canibal
+IDS_TITLE_TXT_0088	Caçador de Kingster
+IDS_TITLE_TXT_0089	Caçador de Kragen
+IDS_TITLE_TXT_0090	Caçador de Crepper
+IDS_TITLE_TXT_0091	Caçador de Naga
+IDS_TITLE_TXT_0092	Caçador de Atrox
+IDS_TITLE_TXT_0093	Caçador de Okean
+IDS_TITLE_TXT_0094	Caçador de Tigar
+IDS_TITLE_TXT_0095	Caçador de Hunter
+IDS_TITLE_TXT_0096	Caçador de Meral
+IDS_TITLE_TXT_0097	Matador de Clockworks
+IDS_TITLE_TXT_0098	Caçador de Dragão Vermelho
+IDS_TITLE_TXT_0099	Mestre do Pulo
+IDS_TITLEMEU_TXT_0099   Eu Sou o Super Exterminador de Ankou

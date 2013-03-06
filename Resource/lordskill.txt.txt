@@ -1,0 +1,18 @@
+IDS_LORDSKILL_TXT_0000	Animação do Lorde
+IDS_LORDSKILL_TXT_0001	Aumenta EXP e a taxa de drops até 110%
+IDS_LORDSKILL_TXT_0002	Benção do Lorde
+IDS_LORDSKILL_TXT_0003	Aumenta o poder de ataque e defesa nos personagens até 110%
+IDS_LORDSKILL_TXT_0004	Amor do Lorde
+IDS_LORDSKILL_TXT_0005	Aumenta todos os status do personagem por 15
+IDS_LORDSKILL_TXT_0006	Grito do Lorde
+IDS_LORDSKILL_TXT_0007	Permite o uso de Gritos coloridos
+IDS_LORDSKILL_TXT_0008	Fúria do Lorde
+IDS_LORDSKILL_TXT_0009	Impossibilita que o personagem use o chat
+IDS_LORDSKILL_TXT_0010	
+IDS_LORDSKILL_TXT_0011	
+IDS_LORDSKILL_TXT_0012	Chamado do Lorde
+IDS_LORDSKILL_TXT_0013	Invoca o personagem para onde o Lorde se encontra
+IDS_LORDSKILL_TXT_0014	Teleporte do Lorde
+IDS_LORDSKILL_TXT_0015	Teleporta para onde estiver o personagem
+IDS_LORDSKILL_TXT_0016	Grupo do Lorde
+IDS_LORDSKILL_TXT_0017	Aumenta a duração das habilidades do grupo em até 400% (só funciona se o Lorde usar a habilidade quando ele é o líder do grupo)
