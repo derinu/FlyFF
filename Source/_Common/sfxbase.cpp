@@ -423,11 +423,11 @@ void CSfxPartBill::Load(CResFile &file)
 	int i;
 	char strTemp[255];
 	int nStrLen;
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strName = m_strTex=strTemp;
-	file.Read(&m_nTexFrame,sizeof(WORD));
-	file.Read(&m_nTexLoop,sizeof(WORD));
+	file.ReadPart(&m_nTexFrame,sizeof(WORD));
+	file.ReadPart(&m_nTexLoop,sizeof(WORD));
 	m_bUseing = TRUE;
 	
 	if(m_nTexFrame>1) { // 텍스쳐 애니메이션일 경우
@@ -436,20 +436,20 @@ void CSfxPartBill::Load(CResFile &file)
 		}
 	}
 
-	file.Read(&m_nBillType,sizeof(SFXPARTBILLTYPE));
-	file.Read(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
+	file.ReadPart(&m_nBillType,sizeof(SFXPARTBILLTYPE));
+	file.ReadPart(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
 	int nKey;
-	file.Read(&nKey,sizeof(int));
+	file.ReadPart(&nKey,sizeof(int));
 	for(i=0;i<nKey;i++) {
 		WORD nFrame;
-		file.Read(&nFrame,sizeof(WORD));
+		file.ReadPart(&nFrame,sizeof(WORD));
 		AddKeyFrame(nFrame);
 		SfxKeyFrame Key;
-		file.Read(&(Key.vPos),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vScale),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.nAlpha),sizeof(int));
+		file.ReadPart(&(Key.vPos),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vScale),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.nAlpha),sizeof(int));
 		AdjustKeyFrame(nFrame,Key);
 	}
 }
@@ -459,16 +459,16 @@ void CSfxPartBill::Load2(CResFile &file)
 	char strTemp[255];
 	int nStrLen;
 
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strName=strTemp;
 
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strTex=strTemp;
-	file.Read(&m_nTexFrame,sizeof(WORD));
-	file.Read(&m_nTexLoop,sizeof(WORD));
-	file.Read(&m_bUseing,sizeof(BOOL));
+	file.ReadPart(&m_nTexFrame,sizeof(WORD));
+	file.ReadPart(&m_nTexLoop,sizeof(WORD));
+	file.ReadPart(&m_bUseing,sizeof(BOOL));
 	
 	if(m_nTexFrame>1) { // 텍스쳐 애니메이션일 경우
 		for(i=0;i<m_nTexFrame;i++) { // 전부 로딩
@@ -476,20 +476,20 @@ void CSfxPartBill::Load2(CResFile &file)
 		}
 	}
 	
-	file.Read(&m_nBillType,sizeof(SFXPARTBILLTYPE));
-	file.Read(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
+	file.ReadPart(&m_nBillType,sizeof(SFXPARTBILLTYPE));
+	file.ReadPart(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
 	int nKey;
-	file.Read(&nKey,sizeof(int));
+	file.ReadPart(&nKey,sizeof(int));
 	for(i=0;i<nKey;i++) {
 		WORD nFrame;
-		file.Read(&nFrame,sizeof(WORD));
+		file.ReadPart(&nFrame,sizeof(WORD));
 		AddKeyFrame(nFrame);
 		SfxKeyFrame Key;
-		file.Read(&(Key.vPos),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vScale),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.nAlpha),sizeof(int));
+		file.ReadPart(&(Key.vPos),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vScale),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.nAlpha),sizeof(int));
 		AdjustKeyFrame(nFrame,Key);
 	}
 }
@@ -499,27 +499,27 @@ void CSfxPartBill::OldLoad(CResFile &file)
 	char strTemp[255];
 	int nStrLen;
 
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strName = m_strTex=strTemp;
 	m_nTexFrame=1;
 	m_nTexLoop=1;
 	m_bUseing = TRUE;
 	
-	file.Read(&m_nBillType,sizeof(SFXPARTBILLTYPE));
-	file.Read(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
+	file.ReadPart(&m_nBillType,sizeof(SFXPARTBILLTYPE));
+	file.ReadPart(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
 	int nKey;
-	file.Read(&nKey,sizeof(int));
+	file.ReadPart(&nKey,sizeof(int));
 	for(i=0;i<nKey;i++) {
 		WORD nFrame;
-		file.Read(&nFrame,sizeof(WORD));
+		file.ReadPart(&nFrame,sizeof(WORD));
 		AddKeyFrame(nFrame);
 		SfxKeyFrame Key;
-		file.Read(&(Key.vPos),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vScale),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.nAlpha),sizeof(int));
+		file.ReadPart(&(Key.vPos),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vScale),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.nAlpha),sizeof(int));
 		AdjustKeyFrame(nFrame,Key);
 	}
 }
@@ -672,11 +672,11 @@ void CSfxPartParticle::Load(CResFile &file)
 	int i;
 	char strTemp[255];
 	int nStrLen;
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strName = m_strTex=strTemp;
-	file.Read(&m_nTexFrame,sizeof(WORD));
-	file.Read(&m_nTexLoop,sizeof(WORD));
+	file.ReadPart(&m_nTexFrame,sizeof(WORD));
+	file.ReadPart(&m_nTexLoop,sizeof(WORD));
 	m_bUseing = TRUE;
 	if(m_nTexFrame>1) { // 텍스쳐 애니메이션일 경우
 		for(i=0;i<m_nTexFrame;i++) { // 전부 로딩
@@ -684,28 +684,28 @@ void CSfxPartParticle::Load(CResFile &file)
 		}
 	}
 
-	file.Read(&m_nBillType,sizeof(SFXPARTBILLTYPE));
-	file.Read(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
+	file.ReadPart(&m_nBillType,sizeof(SFXPARTBILLTYPE));
+	file.ReadPart(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
 
-	file.Read(&m_nParticleCreate,sizeof(WORD));
-	file.Read(&m_nParticleCreateNum,sizeof(WORD));
+	file.ReadPart(&m_nParticleCreate,sizeof(WORD));
+	file.ReadPart(&m_nParticleCreateNum,sizeof(WORD));
 
-	file.Read(&m_nParticleFrameAppear,sizeof(WORD));
-	file.Read(&m_nParticleFrameKeep,sizeof(WORD));
-	file.Read(&m_nParticleFrameDisappear,sizeof(WORD));
+	file.ReadPart(&m_nParticleFrameAppear,sizeof(WORD));
+	file.ReadPart(&m_nParticleFrameKeep,sizeof(WORD));
+	file.ReadPart(&m_nParticleFrameDisappear,sizeof(WORD));
 
-	file.Read(&m_fParticleStartPosVar,sizeof(FLOAT));
-	file.Read(&m_fParticleStartPosVarY,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleStartPosVar,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleStartPosVarY,sizeof(FLOAT));
 
-	file.Read(&m_fParticleYLow,sizeof(FLOAT));
-	file.Read(&m_fParticleYHigh,sizeof(FLOAT));
-	file.Read(&m_fParticleXZLow,sizeof(FLOAT));
-	file.Read(&m_fParticleXZHigh,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleYLow,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleYHigh,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleXZLow,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleXZHigh,sizeof(FLOAT));
 
-	file.Read(&m_vParticleAccel,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vParticleAccel,sizeof(D3DXVECTOR3));
 
-	file.Read(&m_vScale,sizeof(D3DXVECTOR3));
-	file.Read(&m_vScaleSpeed,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vScale,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vScaleSpeed,sizeof(D3DXVECTOR3));
 	m_vRotation = D3DXVECTOR3( 0.0f, 0.0f, 0.0f );
 	m_vRotationLow = D3DXVECTOR3( 0.0f, 0.0f, 0.0f );
 	m_vRotationHigh = D3DXVECTOR3( 0.0f, 0.0f, 0.0f );
@@ -722,17 +722,17 @@ void CSfxPartParticle::Load(CResFile &file)
 	m_vScaleEnd    = D3DXVECTOR3( 0.0f, 0.0f, 0.0f );
 	
 	int nKey=m_apKeyFrames.GetSize();
-	file.Read(&nKey,sizeof(int));
+	file.ReadPart(&nKey,sizeof(int));
 	for(i=0;i<nKey;i++) {
 		int nFrame;
-		file.Read(&nFrame,sizeof(WORD));
+		file.ReadPart(&nFrame,sizeof(WORD));
 		AddKeyFrame(nFrame);
 		SfxKeyFrame Key;
-		file.Read(&(Key.vPos),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vScale),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.nAlpha),sizeof(int));
+		file.ReadPart(&(Key.vPos),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vScale),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.nAlpha),sizeof(int));
 		AdjustKeyFrame(nFrame,Key);
 	}
 }
@@ -742,71 +742,71 @@ void CSfxPartParticle::Load2(CResFile &file)
 	char strTemp[255];
 	int nStrLen;
 
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strName=strTemp;
 
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strTex=strTemp;
-	file.Read(&m_nTexFrame,sizeof(WORD));
-	file.Read(&m_nTexLoop,sizeof(WORD));
-	file.Read(&m_bUseing,sizeof(BOOL));
+	file.ReadPart(&m_nTexFrame,sizeof(WORD));
+	file.ReadPart(&m_nTexLoop,sizeof(WORD));
+	file.ReadPart(&m_bUseing,sizeof(BOOL));
 	if(m_nTexFrame>1) { // 텍스쳐 애니메이션일 경우
 		for(i=0;i<m_nTexFrame;i++) { // 전부 로딩
 			g_SfxTex.Tex(GetTextureName(strTemp,i));
 		}
 	}
 	
-	file.Read(&m_nBillType,sizeof(SFXPARTBILLTYPE));
-	file.Read(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
+	file.ReadPart(&m_nBillType,sizeof(SFXPARTBILLTYPE));
+	file.ReadPart(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
 	
-	file.Read(&m_nParticleCreate,sizeof(WORD));
-	file.Read(&m_nParticleCreateNum,sizeof(WORD));
+	file.ReadPart(&m_nParticleCreate,sizeof(WORD));
+	file.ReadPart(&m_nParticleCreateNum,sizeof(WORD));
 	
-	file.Read(&m_nParticleFrameAppear,sizeof(WORD));
-	file.Read(&m_nParticleFrameKeep,sizeof(WORD));
-	file.Read(&m_nParticleFrameDisappear,sizeof(WORD));
+	file.ReadPart(&m_nParticleFrameAppear,sizeof(WORD));
+	file.ReadPart(&m_nParticleFrameKeep,sizeof(WORD));
+	file.ReadPart(&m_nParticleFrameDisappear,sizeof(WORD));
 	
-	file.Read(&m_fParticleStartPosVar,sizeof(FLOAT));
-	file.Read(&m_fParticleStartPosVarY,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleStartPosVar,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleStartPosVarY,sizeof(FLOAT));
 	
-	file.Read(&m_fParticleYLow,sizeof(FLOAT));
-	file.Read(&m_fParticleYHigh,sizeof(FLOAT));
-	file.Read(&m_fParticleXZLow,sizeof(FLOAT));
-	file.Read(&m_fParticleXZHigh,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleYLow,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleYHigh,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleXZLow,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleXZHigh,sizeof(FLOAT));
 	
-	file.Read(&m_vParticleAccel,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vParticleAccel,sizeof(D3DXVECTOR3));
 	
-	file.Read(&m_vScale,sizeof(D3DXVECTOR3));
-	file.Read(&m_vScaleSpeed,sizeof(D3DXVECTOR3));
-	file.Read(&m_vRotation,sizeof(D3DXVECTOR3));
-	file.Read(&m_vRotationLow,sizeof(D3DXVECTOR3));
-	file.Read(&m_vRotationHigh,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vScale,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vScaleSpeed,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vRotation,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vRotationLow,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vRotationHigh,sizeof(D3DXVECTOR3));
 	
-	file.Read(&m_bRepeatScal,sizeof(BOOL));
+	file.ReadPart(&m_bRepeatScal,sizeof(BOOL));
 	m_bRepeat = FALSE;
-	file.Read(&m_fScalSpeedXLow,sizeof(FLOAT));
-	file.Read(&m_fScalSpeedXHigh,sizeof(FLOAT));
-	file.Read(&m_fScalSpeedYLow,sizeof(FLOAT));
-	file.Read(&m_fScalSpeedYHigh,sizeof(FLOAT));
-	file.Read(&m_fScalSpeedZLow,sizeof(FLOAT));
-	file.Read(&m_fScalSpeedZHigh,sizeof(FLOAT));
-	file.Read(&m_vScaleSpeed2,sizeof(D3DXVECTOR3));
-	file.Read(&m_vScaleEnd,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_fScalSpeedXLow,sizeof(FLOAT));
+	file.ReadPart(&m_fScalSpeedXHigh,sizeof(FLOAT));
+	file.ReadPart(&m_fScalSpeedYLow,sizeof(FLOAT));
+	file.ReadPart(&m_fScalSpeedYHigh,sizeof(FLOAT));
+	file.ReadPart(&m_fScalSpeedZLow,sizeof(FLOAT));
+	file.ReadPart(&m_fScalSpeedZHigh,sizeof(FLOAT));
+	file.ReadPart(&m_vScaleSpeed2,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vScaleEnd,sizeof(D3DXVECTOR3));
 
 	int nKey=m_apKeyFrames.GetSize();
-	file.Read(&nKey,sizeof(int));
+	file.ReadPart(&nKey,sizeof(int));
 	for(i=0;i<nKey;i++) {
 		int nFrame;
-		file.Read(&nFrame,sizeof(WORD));
+		file.ReadPart(&nFrame,sizeof(WORD));
 		AddKeyFrame(nFrame);
 		SfxKeyFrame Key;
-		file.Read(&(Key.vPos),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vScale),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.nAlpha),sizeof(int));
+		file.ReadPart(&(Key.vPos),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vScale),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.nAlpha),sizeof(int));
 		AdjustKeyFrame(nFrame,Key);
 	}
 }
@@ -816,71 +816,71 @@ void CSfxPartParticle::Load3(CResFile &file)
 	char strTemp[255];
 	int nStrLen;
 	
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strName=strTemp;
 	
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strTex=strTemp;
-	file.Read(&m_nTexFrame,sizeof(WORD));
-	file.Read(&m_nTexLoop,sizeof(WORD));
-	file.Read(&m_bUseing,sizeof(BOOL));
+	file.ReadPart(&m_nTexFrame,sizeof(WORD));
+	file.ReadPart(&m_nTexLoop,sizeof(WORD));
+	file.ReadPart(&m_bUseing,sizeof(BOOL));
 	if(m_nTexFrame>1) { // 텍스쳐 애니메이션일 경우
 		for(i=0;i<m_nTexFrame;i++) { // 전부 로딩
 			g_SfxTex.Tex(GetTextureName(strTemp,i));
 		}
 	}
 	
-	file.Read(&m_nBillType,sizeof(SFXPARTBILLTYPE));
-	file.Read(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
+	file.ReadPart(&m_nBillType,sizeof(SFXPARTBILLTYPE));
+	file.ReadPart(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
 	
-	file.Read(&m_nParticleCreate,sizeof(WORD));
-	file.Read(&m_nParticleCreateNum,sizeof(WORD));
+	file.ReadPart(&m_nParticleCreate,sizeof(WORD));
+	file.ReadPart(&m_nParticleCreateNum,sizeof(WORD));
 	
-	file.Read(&m_nParticleFrameAppear,sizeof(WORD));
-	file.Read(&m_nParticleFrameKeep,sizeof(WORD));
-	file.Read(&m_nParticleFrameDisappear,sizeof(WORD));
+	file.ReadPart(&m_nParticleFrameAppear,sizeof(WORD));
+	file.ReadPart(&m_nParticleFrameKeep,sizeof(WORD));
+	file.ReadPart(&m_nParticleFrameDisappear,sizeof(WORD));
 	
-	file.Read(&m_fParticleStartPosVar,sizeof(FLOAT));
-	file.Read(&m_fParticleStartPosVarY,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleStartPosVar,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleStartPosVarY,sizeof(FLOAT));
 	
-	file.Read(&m_fParticleYLow,sizeof(FLOAT));
-	file.Read(&m_fParticleYHigh,sizeof(FLOAT));
-	file.Read(&m_fParticleXZLow,sizeof(FLOAT));
-	file.Read(&m_fParticleXZHigh,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleYLow,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleYHigh,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleXZLow,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleXZHigh,sizeof(FLOAT));
 	
-	file.Read(&m_vParticleAccel,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vParticleAccel,sizeof(D3DXVECTOR3));
 	
-	file.Read(&m_vScale,sizeof(D3DXVECTOR3));
-	file.Read(&m_vScaleSpeed,sizeof(D3DXVECTOR3));
-	file.Read(&m_vRotation,sizeof(D3DXVECTOR3));
-	file.Read(&m_vRotationLow,sizeof(D3DXVECTOR3));
-	file.Read(&m_vRotationHigh,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vScale,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vScaleSpeed,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vRotation,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vRotationLow,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vRotationHigh,sizeof(D3DXVECTOR3));
 	
-	file.Read(&m_bRepeatScal,sizeof(BOOL));
-	file.Read(&m_bRepeat,sizeof(BOOL));
-	file.Read(&m_fScalSpeedXLow,sizeof(FLOAT));
-	file.Read(&m_fScalSpeedXHigh,sizeof(FLOAT));
-	file.Read(&m_fScalSpeedYLow,sizeof(FLOAT));
-	file.Read(&m_fScalSpeedYHigh,sizeof(FLOAT));
-	file.Read(&m_fScalSpeedZLow,sizeof(FLOAT));
-	file.Read(&m_fScalSpeedZHigh,sizeof(FLOAT));
-	file.Read(&m_vScaleSpeed2,sizeof(D3DXVECTOR3));
-	file.Read(&m_vScaleEnd,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_bRepeatScal,sizeof(BOOL));
+	file.ReadPart(&m_bRepeat,sizeof(BOOL));
+	file.ReadPart(&m_fScalSpeedXLow,sizeof(FLOAT));
+	file.ReadPart(&m_fScalSpeedXHigh,sizeof(FLOAT));
+	file.ReadPart(&m_fScalSpeedYLow,sizeof(FLOAT));
+	file.ReadPart(&m_fScalSpeedYHigh,sizeof(FLOAT));
+	file.ReadPart(&m_fScalSpeedZLow,sizeof(FLOAT));
+	file.ReadPart(&m_fScalSpeedZHigh,sizeof(FLOAT));
+	file.ReadPart(&m_vScaleSpeed2,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vScaleEnd,sizeof(D3DXVECTOR3));
 	
 	int nKey=m_apKeyFrames.GetSize();
-	file.Read(&nKey,sizeof(int));
+	file.ReadPart(&nKey,sizeof(int));
 	for(i=0;i<nKey;i++) {
 		int nFrame;
-		file.Read(&nFrame,sizeof(WORD));
+		file.ReadPart(&nFrame,sizeof(WORD));
 		AddKeyFrame(nFrame);
 		SfxKeyFrame Key;
-		file.Read(&(Key.vPos),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vScale),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.nAlpha),sizeof(int));
+		file.ReadPart(&(Key.vPos),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vScale),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.nAlpha),sizeof(int));
 		AdjustKeyFrame(nFrame,Key);
 	}
 }
@@ -890,35 +890,35 @@ void CSfxPartParticle::OldLoad(CResFile &file)
 	char strTemp[255];
 	int nStrLen;
 
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strName = m_strTex=strTemp;
 	m_nTexFrame=1;
 	m_nTexLoop=1;
 	m_bUseing = TRUE;
 	
-	file.Read(&m_nBillType,sizeof(SFXPARTBILLTYPE));
-	file.Read(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
+	file.ReadPart(&m_nBillType,sizeof(SFXPARTBILLTYPE));
+	file.ReadPart(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
 
-	file.Read(&m_nParticleCreate,sizeof(WORD));
-	file.Read(&m_nParticleCreateNum,sizeof(WORD));
+	file.ReadPart(&m_nParticleCreate,sizeof(WORD));
+	file.ReadPart(&m_nParticleCreateNum,sizeof(WORD));
 
-	file.Read(&m_nParticleFrameAppear,sizeof(WORD));
-	file.Read(&m_nParticleFrameKeep,sizeof(WORD));
-	file.Read(&m_nParticleFrameDisappear,sizeof(WORD));
+	file.ReadPart(&m_nParticleFrameAppear,sizeof(WORD));
+	file.ReadPart(&m_nParticleFrameKeep,sizeof(WORD));
+	file.ReadPart(&m_nParticleFrameDisappear,sizeof(WORD));
 
-	file.Read(&m_fParticleStartPosVar,sizeof(FLOAT));
-	file.Read(&m_fParticleStartPosVarY,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleStartPosVar,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleStartPosVarY,sizeof(FLOAT));
 
-	file.Read(&m_fParticleYLow,sizeof(FLOAT));
-	file.Read(&m_fParticleYHigh,sizeof(FLOAT));
-	file.Read(&m_fParticleXZLow,sizeof(FLOAT));
-	file.Read(&m_fParticleXZHigh,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleYLow,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleYHigh,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleXZLow,sizeof(FLOAT));
+	file.ReadPart(&m_fParticleXZHigh,sizeof(FLOAT));
 
-	file.Read(&m_vParticleAccel,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vParticleAccel,sizeof(D3DXVECTOR3));
 
-	file.Read(&m_vScale,sizeof(D3DXVECTOR3));
-	file.Read(&m_vScaleSpeed,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vScale,sizeof(D3DXVECTOR3));
+	file.ReadPart(&m_vScaleSpeed,sizeof(D3DXVECTOR3));
 	m_vRotation = D3DXVECTOR3( 0.0f, 0.0f, 0.0f );
 	m_vRotationLow = D3DXVECTOR3( 0.0f, 0.0f, 0.0f );
 	m_vRotationHigh = D3DXVECTOR3( 0.0f, 0.0f, 0.0f );
@@ -935,17 +935,17 @@ void CSfxPartParticle::OldLoad(CResFile &file)
 	m_vScaleEnd    = D3DXVECTOR3( 0.0f, 0.0f, 0.0f );
 	
 	int nKey=m_apKeyFrames.GetSize();
-	file.Read(&nKey,sizeof(int));
+	file.ReadPart(&nKey,sizeof(int));
 	for(i=0;i<nKey;i++) {
 		int nFrame;
-		file.Read(&nFrame,sizeof(WORD));
+		file.ReadPart(&nFrame,sizeof(WORD));
 		AddKeyFrame(nFrame);
 		SfxKeyFrame Key;
-		file.Read(&(Key.vPos),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vScale),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.nAlpha),sizeof(int));
+		file.ReadPart(&(Key.vPos),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vScale),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.nAlpha),sizeof(int));
 		AdjustKeyFrame(nFrame,Key);
 	}
 }
@@ -965,11 +965,11 @@ void CSfxPartMesh::Load(CResFile &file)
 	int i;
 	char strTemp[255];
 	int nStrLen;
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strName = m_strTex=strTemp;
-	file.Read(&m_nTexFrame,sizeof(WORD));
-	file.Read(&m_nTexLoop,sizeof(WORD));
+	file.ReadPart(&m_nTexFrame,sizeof(WORD));
+	file.ReadPart(&m_nTexLoop,sizeof(WORD));
 	m_bUseing = TRUE;
 /* 메쉬는 이런거 없다!
 	if(m_nTexFrame>1) { // 텍스쳐 애니메이션일 경우
@@ -978,20 +978,20 @@ void CSfxPartMesh::Load(CResFile &file)
 		}
 	}
 */
-	file.Read(&m_nBillType,sizeof(SFXPARTBILLTYPE));
-	file.Read(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
+	file.ReadPart(&m_nBillType,sizeof(SFXPARTBILLTYPE));
+	file.ReadPart(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
 	int nKey;
-	file.Read(&nKey,sizeof(int));
+	file.ReadPart(&nKey,sizeof(int));
 	for(i=0;i<nKey;i++) {
 		WORD nFrame;
-		file.Read(&nFrame,sizeof(WORD));
+		file.ReadPart(&nFrame,sizeof(WORD));
 		AddKeyFrame(nFrame);
 		SfxKeyFrame Key;
-		file.Read(&(Key.vPos),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vScale),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.nAlpha),sizeof(int));
+		file.ReadPart(&(Key.vPos),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vScale),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.nAlpha),sizeof(int));
 		AdjustKeyFrame(nFrame,Key);
 	}
 }
@@ -1001,16 +1001,16 @@ void CSfxPartMesh::Load2(CResFile &file)
 	char strTemp[255];
 	int nStrLen;
 
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strName=strTemp;
 
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strTex=strTemp;
-	file.Read(&m_nTexFrame,sizeof(WORD));
-	file.Read(&m_nTexLoop,sizeof(WORD));
-	file.Read(&m_bUseing,sizeof(BOOL));
+	file.ReadPart(&m_nTexFrame,sizeof(WORD));
+	file.ReadPart(&m_nTexLoop,sizeof(WORD));
+	file.ReadPart(&m_bUseing,sizeof(BOOL));
 /* 메쉬는 이런거 없다!
 	if(m_nTexFrame>1) { // 텍스쳐 애니메이션일 경우
 		for(i=0;i<m_nTexFrame;i++) { // 전부 로딩
@@ -1018,20 +1018,20 @@ void CSfxPartMesh::Load2(CResFile &file)
 		}
 	}
 */
-	file.Read(&m_nBillType,sizeof(SFXPARTBILLTYPE));
-	file.Read(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
+	file.ReadPart(&m_nBillType,sizeof(SFXPARTBILLTYPE));
+	file.ReadPart(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
 	int nKey;
-	file.Read(&nKey,sizeof(int));
+	file.ReadPart(&nKey,sizeof(int));
 	for(i=0;i<nKey;i++) {
 		WORD nFrame;
-		file.Read(&nFrame,sizeof(WORD));
+		file.ReadPart(&nFrame,sizeof(WORD));
 		AddKeyFrame(nFrame);
 		SfxKeyFrame Key;
-		file.Read(&(Key.vPos),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vScale),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.nAlpha),sizeof(int));
+		file.ReadPart(&(Key.vPos),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vScale),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.nAlpha),sizeof(int));
 		AdjustKeyFrame(nFrame,Key);
 	}
 }
@@ -1043,27 +1043,27 @@ void CSfxPartMesh::OldLoad(CResFile &file)
 	char strTemp[255];
 	int nStrLen;
 
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strName = m_strTex=strTemp;
 	m_nTexFrame=1;
 	m_nTexLoop=1;
 	m_bUseing = TRUE;
 	
-	file.Read(&m_nBillType,sizeof(SFXPARTBILLTYPE));
-	file.Read(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
+	file.ReadPart(&m_nBillType,sizeof(SFXPARTBILLTYPE));
+	file.ReadPart(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
 	int nKey;
-	file.Read(&nKey,sizeof(int));
+	file.ReadPart(&nKey,sizeof(int));
 	for(i=0;i<nKey;i++) {
 		WORD nFrame;
-		file.Read(&nFrame,sizeof(WORD));
+		file.ReadPart(&nFrame,sizeof(WORD));
 		AddKeyFrame(nFrame);
 		SfxKeyFrame Key;
-		file.Read(&(Key.vPos),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vScale),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.nAlpha),sizeof(int));
+		file.ReadPart(&(Key.vPos),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vScale),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.nAlpha),sizeof(int));
 		AdjustKeyFrame(nFrame,Key);
 	}
 }
@@ -1194,11 +1194,11 @@ void CSfxPartCustomMesh::Load(CResFile &file)
 	int i;
 	char strTemp[255];
 	int nStrLen;
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strName = m_strTex=strTemp;
-	file.Read(&m_nTexFrame,sizeof(WORD));
-	file.Read(&m_nTexLoop,sizeof(WORD));
+	file.ReadPart(&m_nTexFrame,sizeof(WORD));
+	file.ReadPart(&m_nTexLoop,sizeof(WORD));
 	m_bUseing = TRUE;
 
 	if(m_nTexFrame>1) { // 텍스쳐 애니메이션일 경우
@@ -1207,23 +1207,23 @@ void CSfxPartCustomMesh::Load(CResFile &file)
 		}
 	}
 
-	file.Read(&m_nBillType,sizeof(SFXPARTBILLTYPE));
-	file.Read(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
+	file.ReadPart(&m_nBillType,sizeof(SFXPARTBILLTYPE));
+	file.ReadPart(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
 	int nKey;
-	file.Read(&nKey,sizeof(int));
+	file.ReadPart(&nKey,sizeof(int));
 	for(i=0;i<nKey;i++) {
 		WORD nFrame;
-		file.Read(&nFrame,sizeof(WORD));
+		file.ReadPart(&nFrame,sizeof(WORD));
 		AddKeyFrame(nFrame);
 		SfxKeyFrame Key;
-		file.Read(&(Key.vPos),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vScale),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.nAlpha),sizeof(int));
+		file.ReadPart(&(Key.vPos),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vScale),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.nAlpha),sizeof(int));
 		AdjustKeyFrame(nFrame,Key);
 	}
-	file.Read(&m_nPoints,sizeof(int));
+	file.ReadPart(&m_nPoints,sizeof(int));
 }
 void CSfxPartCustomMesh::Load2(CResFile &file)
 {
@@ -1231,39 +1231,39 @@ void CSfxPartCustomMesh::Load2(CResFile &file)
 	char strTemp[255];
 	int nStrLen;
 
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strName=strTemp;
 
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strTex=strTemp;
-	file.Read(&m_nTexFrame,sizeof(WORD));
-	file.Read(&m_nTexLoop,sizeof(WORD));
-	file.Read(&m_bUseing,sizeof(BOOL));
+	file.ReadPart(&m_nTexFrame,sizeof(WORD));
+	file.ReadPart(&m_nTexLoop,sizeof(WORD));
+	file.ReadPart(&m_bUseing,sizeof(BOOL));
 	if(m_nTexFrame>1) { // 텍스쳐 애니메이션일 경우
 		for(i=0;i<m_nTexFrame;i++) { // 전부 로딩
 			g_SfxTex.Tex(GetTextureName(strTemp,i));
 		}
 	}
 	
-	file.Read(&m_nBillType,sizeof(SFXPARTBILLTYPE));
-	file.Read(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
+	file.ReadPart(&m_nBillType,sizeof(SFXPARTBILLTYPE));
+	file.ReadPart(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
 	int nKey;
-	file.Read(&nKey,sizeof(int));
+	file.ReadPart(&nKey,sizeof(int));
 	for(i=0;i<nKey;i++) {
 		WORD nFrame;
-		file.Read(&nFrame,sizeof(WORD));
+		file.ReadPart(&nFrame,sizeof(WORD));
 		AddKeyFrame(nFrame);
 		SfxKeyFrame Key;
-		file.Read(&(Key.vPos),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vScale),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.nAlpha),sizeof(int));
+		file.ReadPart(&(Key.vPos),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vScale),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.nAlpha),sizeof(int));
 		AdjustKeyFrame(nFrame,Key);
 	}
-	file.Read(&m_nPoints,sizeof(int));
+	file.ReadPart(&m_nPoints,sizeof(int));
 }
 void CSfxPartCustomMesh::OldLoad(CResFile &file)
 {
@@ -1271,30 +1271,30 @@ void CSfxPartCustomMesh::OldLoad(CResFile &file)
 	char strTemp[255];
 	int nStrLen;
 	
-	file.Read(&nStrLen,sizeof(int));
-	file.Read(strTemp,nStrLen); strTemp[nStrLen]=0;
+	file.ReadPart(&nStrLen,sizeof(int));
+	file.ReadPart(strTemp,nStrLen); strTemp[nStrLen]=0;
 	m_strName = m_strTex=strTemp;
 	m_nTexFrame=1;
 	m_nTexLoop=1;
 	m_bUseing = TRUE;
 	
-	file.Read(&m_nBillType,sizeof(SFXPARTBILLTYPE));
-	file.Read(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
+	file.ReadPart(&m_nBillType,sizeof(SFXPARTBILLTYPE));
+	file.ReadPart(&m_nAlphaType,sizeof(SFXPARTALPHATYPE));
 	int nKey;
-	file.Read(&nKey,sizeof(int));
+	file.ReadPart(&nKey,sizeof(int));
 	for(i=0;i<nKey;i++) {
 		WORD nFrame;
-		file.Read(&nFrame,sizeof(WORD));
+		file.ReadPart(&nFrame,sizeof(WORD));
 		AddKeyFrame(nFrame);
 		SfxKeyFrame Key;
-		file.Read(&(Key.vPos),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vScale),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.vRotate),sizeof(D3DXVECTOR3));
-		file.Read(&(Key.nAlpha),sizeof(int));
+		file.ReadPart(&(Key.vPos),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vPosRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vScale),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.vRotate),sizeof(D3DXVECTOR3));
+		file.ReadPart(&(Key.nAlpha),sizeof(int));
 		AdjustKeyFrame(nFrame,Key);
 	}
-	file.Read(&m_nPoints,sizeof(int));
+	file.ReadPart(&m_nPoints,sizeof(int));
 }
 
 
@@ -1645,18 +1645,19 @@ BOOL CSfxBase::LoadMerge()
 	CResFile file;
 	if(file.Open(strFilename,"rb")) 
 	{
+		file.ReadAll();
 		char strTemp[9];
-		file.Read(strTemp,8);
+		file.ReadPart(strTemp,8);
 		strTemp[8]=0;
 		CString strTemp2(strTemp);
 		if(strTemp2.Left(6)=="SFX0.1") { // 버젼체크. 현재는 구버젼인지 신버젼인지만 체크해서 버젼에 맞게 로딩.
 			int nPart;
-			file.Read(&nPart,sizeof(int));
+			file.ReadPart(&nPart,sizeof(int));
 			for(i=0;i<nPart;i++) 
 			{
 				CSfxPart* pPart;
 				SFXPARTTYPE nType;
-				file.Read(&nType,sizeof(SFXPARTTYPE));
+				file.ReadPart(&nType,sizeof(SFXPARTTYPE));
 				pPart=AddPart(nType);
 				pPart->Load(file);
 			}
@@ -1665,12 +1666,12 @@ BOOL CSfxBase::LoadMerge()
 			if(strTemp2.Left(6)=="SFX0.2") { // 버젼체크. 현재는 구버젼인지 신버젼인지만 체크해서 버젼에 맞게 로딩.
 				// 신버젼. 현재 SFX0.2
 				int nPart;
-				file.Read(&nPart,sizeof(int));
+				file.ReadPart(&nPart,sizeof(int));
 				for(i=0;i<nPart;i++) 
 				{
 					CSfxPart* pPart;
 					SFXPARTTYPE nType;
-					file.Read(&nType,sizeof(SFXPARTTYPE));
+					file.ReadPart(&nType,sizeof(SFXPARTTYPE));
 					pPart=AddPart(nType);
 					pPart->Load2(file);
 				}
@@ -1679,12 +1680,12 @@ BOOL CSfxBase::LoadMerge()
 			if(strTemp2.Left(6)=="SFX0.3") { // 버젼체크. 현재는 구버젼인지 신버젼인지만 체크해서 버젼에 맞게 로딩.
 				// 신버젼. 현재 SFX0.3
 				int nPart;
-				file.Read(&nPart,sizeof(int));
+				file.ReadPart(&nPart,sizeof(int));
 				for(i=0;i<nPart;i++) 
 				{
 					CSfxPart* pPart;
 					SFXPARTTYPE nType;
-					file.Read(&nType,sizeof(SFXPARTTYPE));
+					file.ReadPart(&nType,sizeof(SFXPARTTYPE));
 					pPart=AddPart(nType);
 					if( nType == SFXPARTTYPE_PARTICLE )
 						pPart->Load3(file);
@@ -1697,12 +1698,12 @@ BOOL CSfxBase::LoadMerge()
 				// 버젼 정보 없으면 구버젼
 				file.Seek(0,SEEK_SET); // 위치 다시 돌려놓고 로딩
 				int nPart;
-				file.Read(&nPart,sizeof(int));
+				file.ReadPart(&nPart,sizeof(int));
 				for(i=0;i<nPart;i++) 
 				{
 					CSfxPart* pPart;
 					SFXPARTTYPE nType;
-					file.Read(&nType,sizeof(SFXPARTTYPE));
+					file.ReadPart(&nType,sizeof(SFXPARTTYPE));
 					pPart=AddPart(nType);
 					pPart->OldLoad(file);
 				}
@@ -1725,18 +1726,19 @@ BOOL CSfxBase::Load(void)
 	CResFile file;
 	if(file.Open(strFilename,"rb")) 
 	{
+		file.ReadAll();
 		char strTemp[9];
-		file.Read(strTemp,8);
+		file.ReadPart(strTemp,8);
 		strTemp[8]=0;
 		CString strTemp2(strTemp);
 		if(strTemp2.Left(6)=="SFX0.1") { // 버젼체크. 현재는 구버젼인지 신버젼인지만 체크해서 버젼에 맞게 로딩.
 			int nPart;
-			file.Read(&nPart,sizeof(int));
+			file.ReadPart(&nPart,sizeof(int));
 			for(i=0;i<nPart;i++) 
 			{
 				CSfxPart* pPart;
 				SFXPARTTYPE nType;
-				file.Read(&nType,sizeof(SFXPARTTYPE));
+				file.ReadPart(&nType,sizeof(SFXPARTTYPE));
 				pPart=AddPart(nType);
 				pPart->Load(file);
 			}
@@ -1745,12 +1747,12 @@ BOOL CSfxBase::Load(void)
 		if(strTemp2.Left(6)=="SFX0.2") { // 버젼체크. 현재는 구버젼인지 신버젼인지만 체크해서 버젼에 맞게 로딩.
 			// 신버젼. 현재 SFX0.2
 			int nPart;
-			file.Read(&nPart,sizeof(int));
+			file.ReadPart(&nPart,sizeof(int));
 			for(i=0;i<nPart;i++) 
 			{
 				CSfxPart* pPart;
 				SFXPARTTYPE nType;
-				file.Read(&nType,sizeof(SFXPARTTYPE));
+				file.ReadPart(&nType,sizeof(SFXPARTTYPE));
 				pPart=AddPart(nType);
 				pPart->Load2(file);
 			}
@@ -1759,12 +1761,12 @@ BOOL CSfxBase::Load(void)
 		if(strTemp2.Left(6)=="SFX0.3") { // 버젼체크. 현재는 구버젼인지 신버젼인지만 체크해서 버젼에 맞게 로딩.
 			// 신버젼. 현재 SFX0.3
 			int nPart;
-			file.Read(&nPart,sizeof(int));
+			file.ReadPart(&nPart,sizeof(int));
 			for(i=0;i<nPart;i++) 
 			{
 				CSfxPart* pPart;
 				SFXPARTTYPE nType;
-				file.Read(&nType,sizeof(SFXPARTTYPE));
+				file.ReadPart(&nType,sizeof(SFXPARTTYPE));
 				pPart=AddPart(nType);
 				if( nType == SFXPARTTYPE_PARTICLE )
 					pPart->Load3(file);
@@ -1777,12 +1779,12 @@ BOOL CSfxBase::Load(void)
 			// 버젼 정보 없으면 구버젼
 			file.Seek(0,SEEK_SET); // 위치 다시 돌려놓고 로딩
 			int nPart;
-			file.Read(&nPart,sizeof(int));
+			file.ReadPart(&nPart,sizeof(int));
 			for(i=0;i<nPart;i++) 
 			{
 				CSfxPart* pPart;
 				SFXPARTTYPE nType;
-				file.Read(&nType,sizeof(SFXPARTTYPE));
+				file.ReadPart(&nType,sizeof(SFXPARTTYPE));
 				pPart=AddPart(nType);
 				pPart->OldLoad(file);
 			}

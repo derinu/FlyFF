@@ -71,6 +71,11 @@ public:
 			static void FreeResource();
 			bool m_bResouceInFile;
 
+			#ifdef __BSXPACK_OBJ
+			virtual void ReadAll();
+			virtual void ReadPart(void *ptr, size_t size, size_t n = 1);
+			#endif
+
 		private:
 			CFile m_File;
 			char m_szFileName[_MAX_FNAME];
@@ -79,6 +84,11 @@ public:
 			DWORD m_nFileCurrentPosition; 
 			DWORD m_nFileEndPosition; 
 			static void AddResource( TCHAR* lpResName );
+
+			#ifdef __BSXPACK_OBJ
+			char* TmpPtr;
+			int TmpPtrPosition;
+			#endif
 
 	};
 

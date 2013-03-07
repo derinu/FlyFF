@@ -881,21 +881,23 @@ int CObject3D::IsAnimateFile( LPCTSTR szFileName )
 	D3DXVECTOR3 v;
 	float f0;
 
-	resFp.Read( &c0, 1, 1 );		// 파일명 스트링 길이 일음.
-	resFp.Read( buff, c0, 1 );	// 파일명 읽음.
-	resFp.Read( &d0, 4, 1 );		// 버전
+	resFp.ReadAll();
+
+	resFp.ReadPart( &c0, 1, 1 );		// 파일명 스트링 길이 일음.
+	resFp.ReadPart( buff, c0, 1 );	// 파일명 읽음.
+	resFp.ReadPart( &d0, 4, 1 );		// 버전
 	
-	resFp.Read( &d0, 4, 1 );		// Serial ID
-	resFp.Read( &v, sizeof(D3DXVECTOR3), 1 );		// 검광1,2의 좌표인데 일단 이렇게 하자.
-	resFp.Read( &v, sizeof(D3DXVECTOR3), 1 );
-	resFp.Read( &f0, sizeof(float), 1 );
-	resFp.Read( &f0, sizeof(float), 1 );
+	resFp.ReadPart( &d0, 4, 1 );		// Serial ID
+	resFp.ReadPart( &v, sizeof(D3DXVECTOR3), 1 );		// 검광1,2의 좌표인데 일단 이렇게 하자.
+	resFp.ReadPart( &v, sizeof(D3DXVECTOR3), 1 );
+	resFp.ReadPart( &f0, sizeof(float), 1 );
+	resFp.ReadPart( &f0, sizeof(float), 1 );
 	resFp.Seek( 16, SEEK_CUR );		// reserved
 	
-	resFp.Read( &v, sizeof(D3DXVECTOR3), 1 );		// 대표 바운딩 박스
-	resFp.Read( &v, sizeof(D3DXVECTOR3), 1 );
-	resFp.Read( &f0, sizeof(float), 1 );		// per slerp
-	resFp.Read( &d0, 4, 1 );					// ani frame 수.  애니가 없으면 0이되도록 저장할것.
+	resFp.ReadPart( &v, sizeof(D3DXVECTOR3), 1 );		// 대표 바운딩 박스
+	resFp.ReadPart( &v, sizeof(D3DXVECTOR3), 1 );
+	resFp.ReadPart( &f0, sizeof(float), 1 );		// per slerp
+	resFp.ReadPart( &d0, 4, 1 );					// ani frame 수.  애니가 없으면 0이되도록 저장할것.
 
 	BOOL bAnimate = FALSE;
 	if( d0 > 0 )			// MaxFrame이 있냐?
@@ -928,6 +930,8 @@ int		CObject3D :: LoadObject( LPCTSTR szFileName )
 	}
 	Init();
 
+	resFp.ReadAll();
+
 	// 파일명 카피
 	char szName[MAX_PATH];
 	strcpy( m_szFileName, szFileName );
@@ -937,10 +941,12 @@ int		CObject3D :: LoadObject( LPCTSTR szFileName )
 
 	char buff[MAX_PATH];
 	char cLen;
-	resFp.Read( &cLen, 1, 1 );		// 파일명 스트링 길이 일음.
-	resFp.Read( buff, cLen, 1 );	// 파일명 읽음.
+	resFp.ReadPart( &cLen, 1, 1 );		// 파일명 스트링 길이 일음.
+	resFp.ReadPart( buff, cLen, 1 );	// 파일명 읽음.
 	for( j = 0; j < cLen; j ++ )
 		buff[j] = buff[j] ^ (char)0xcd;	// 암호화 해제
+
+	::OUTPUTDEBUGSTRING("3d obj %s [%d]: %s\n", szName, cLen, buff);
 
 	if( cLen >= 64 )
 	{
@@ -956,7 +962,7 @@ int		CObject3D :: LoadObject( LPCTSTR szFileName )
 	}
 
 	//--- 공통 헤더부
-	resFp.Read( &nVer, 4, 1 );		// 버전
+	resFp.ReadPart( &nVer, 4, 1 );		// 버전
 	if( nVer < VER_MESH )
 	{
 		Error( "%s의 버전은 %d.  최신버전은 %d", szFileName, nVer, VER_MESH );
@@ -964,58 +970,58 @@ int		CObject3D :: LoadObject( LPCTSTR szFileName )
 		return FAIL;
 	}
 		
-	resFp.Read( &m_nID, 4, 1 );		// Serial ID
-	resFp.Read( &m_vForce1, sizeof(D3DXVECTOR3), 1 );		// 검광1,2의 좌표인데 일단 이렇게 하자.
-	resFp.Read( &m_vForce2, sizeof(D3DXVECTOR3), 1 );
+	resFp.ReadPart( &m_nID, 4, 1 );		// Serial ID
+	resFp.ReadPart( &m_vForce1, sizeof(D3DXVECTOR3), 1 );		// 검광1,2의 좌표인데 일단 이렇게 하자.
+	resFp.ReadPart( &m_vForce2, sizeof(D3DXVECTOR3), 1 );
 #if __VER >= 9 // __CSC_VER9_5
 	if(nVer >= 22)
 	{
-		resFp.Read( &m_vForce3, sizeof(D3DXVECTOR3), 1 );		// 검광3,4의 좌표인데 일단 이렇게 하자.
-		resFp.Read( &m_vForce4, sizeof(D3DXVECTOR3), 1 );
+		resFp.ReadPart( &m_vForce3, sizeof(D3DXVECTOR3), 1 );		// 검광3,4의 좌표인데 일단 이렇게 하자.
+		resFp.ReadPart( &m_vForce4, sizeof(D3DXVECTOR3), 1 );
 	}
 #endif //__CSC_VER9_5
-	resFp.Read( &m_fScrlU, sizeof(float), 1 );
-	resFp.Read( &m_fScrlV, sizeof(float), 1 );
+	resFp.ReadPart( &m_fScrlU, sizeof(float), 1 );
+	resFp.ReadPart( &m_fScrlV, sizeof(float), 1 );
 	resFp.Seek( 16, SEEK_CUR );		// reserved
 
-	resFp.Read( &m_vBBMin, sizeof(D3DXVECTOR3), 1 );		// 대표 바운딩 박스
-	resFp.Read( &m_vBBMax, sizeof(D3DXVECTOR3), 1 );
-	resFp.Read( &m_fPerSlerp, sizeof(float), 1 );		// per slerp
-	resFp.Read( &m_nMaxFrame, 4, 1 );					// ani frame 수.  애니가 없으면 0이되도록 저장할것.
+	resFp.ReadPart( &m_vBBMin, sizeof(D3DXVECTOR3), 1 );		// 대표 바운딩 박스
+	resFp.ReadPart( &m_vBBMax, sizeof(D3DXVECTOR3), 1 );
+	resFp.ReadPart( &m_fPerSlerp, sizeof(float), 1 );		// per slerp
+	resFp.ReadPart( &m_nMaxFrame, 4, 1 );					// ani frame 수.  애니가 없으면 0이되도록 저장할것.
 
-	resFp.Read( &m_nMaxEvent, 4, 1 );	// 이벤트 좌표
+	resFp.ReadPart( &m_nMaxEvent, 4, 1 );	// 이벤트 좌표
 	if( m_nMaxEvent > 0 )
-		resFp.Read( m_vEvent, sizeof(D3DXVECTOR3) * m_nMaxEvent, 1 );
+		resFp.ReadPart( m_vEvent, sizeof(D3DXVECTOR3) * m_nMaxEvent, 1 );
 
-	resFp.Read( &nTemp, 4, 1 );
+	resFp.ReadPart( &nTemp, 4, 1 );
 	if( nTemp )
 	{
 		m_CollObject.m_Type = GMT_NORMAL;
 		LoadGMObject( &resFp, &m_CollObject );		// 충돌용 메시
 	}
-	resFp.Read( &m_bLOD, 4, 1 );					// LOD가 있는가?
+	resFp.ReadPart( &m_bLOD, 4, 1 );					// LOD가 있는가?
 
 	//--- 자체내장 본 애니메이션이 있다면 본 개수가 있을것이다.  ex) Obj_풍선.o3d    parts_female.o3d, mvr_타조.o3d는 본파일이 따로 있음.
-	resFp.Read( &m_nMaxBone, 4, 1 );
+	resFp.ReadPart( &m_nMaxBone, 4, 1 );
 
 	if( m_nMaxBone > 0 )
 	{
 		m_pBaseBone = new D3DXMATRIX[ m_nMaxBone * 2 ];
 		m_pBaseBoneInv = m_pBaseBone + m_nMaxBone;		// InverseTM은 뒤쪽에 붙는다.
-		resFp.Read( m_pBaseBone,	   sizeof(D3DXMATRIX) * m_nMaxBone, 1 );		// 디폴트 뼈대 셋트 
-		resFp.Read( m_pBaseBoneInv, sizeof(D3DXMATRIX) * m_nMaxBone, 1 );		// InverseTM 세트
+		resFp.ReadPart( m_pBaseBone,	   sizeof(D3DXMATRIX) * m_nMaxBone, 1 );		// 디폴트 뼈대 셋트 
+		resFp.ReadPart( m_pBaseBoneInv, sizeof(D3DXMATRIX) * m_nMaxBone, 1 );		// InverseTM 세트
 		if( m_nMaxFrame > 0 )	// 본이 있고 MaxFrame이 있으면 애니메이션이 있다는걸로 간주.
 		{
 			m_pMotion = new CMotion;
 			m_pMotion->ReadTM( &resFp, m_nMaxBone, m_nMaxFrame );		// 본 애니메이션 읽음.
 		}
-		resFp.Read( &m_bSendVS, 4, 1 );		// 본개수가 MAX_VS_BONE보다 적어 VS로 한번에 전송가능한 것인가?
+		resFp.ReadPart( &m_bSendVS, 4, 1 );		// 본개수가 MAX_VS_BONE보다 적어 VS로 한번에 전송가능한 것인가?
 	}
 
 	int nMaxGroup = (m_bLOD) ? MAX_GROUP : 1;	// LOD가 있으면 3개다 읽음. 없으면 1개만 읽음.
 	LOD_GROUP *pGroup;
 	int nPoolSize, nDebugSize = 0;
-	resFp.Read( &nPoolSize, 4, 1 );		// 메모리 풀 사이즈.
+	resFp.ReadPart( &nPoolSize, 4, 1 );		// 메모리 풀 사이즈.
 	GMOBJECT *pPool = new GMOBJECT[ nPoolSize ];	// 메모리 풀.
 	if( pPool == NULL )
 		Error( "메모리 할당 실패:CObject3D::LoadObject( %s ) %d", m_szFileName, nPoolSize );
@@ -1023,7 +1029,7 @@ int		CObject3D :: LoadObject( LPCTSTR szFileName )
 	for( int i = 0; i < nMaxGroup; i ++ )
 	{
 		pGroup = &m_Group[i];
-		resFp.Read( &pGroup->m_nMaxObject, 4, 1 );		// geometry 갯수
+		resFp.ReadPart( &pGroup->m_nMaxObject, 4, 1 );		// geometry 갯수
 
 		pGroup->m_pObject = pPool;		// 메모리 포인터 할당.
 		pPool += pGroup->m_nMaxObject;
@@ -1044,14 +1050,14 @@ int		CObject3D :: LoadObject( LPCTSTR szFileName )
 		{
 			pObject = &pGroup->m_pObject[j];
 
-			resFp.Read( &nType, 4, 1 );	// Type
+			resFp.ReadPart( &nType, 4, 1 );	// Type
 			pObject->m_Type = (GMTYPE)(nType & 0xffff);
 			if( nType & 0x80000000 )
 				pObject->m_bLight = TRUE;
 
-			resFp.Read( &pObject->m_nMaxUseBone, 4, 1 );
+			resFp.ReadPart( &pObject->m_nMaxUseBone, 4, 1 );
 			if( pObject->m_nMaxUseBone > 0 )
-				resFp.Read( pObject->m_UseBone, sizeof(int) * pObject->m_nMaxUseBone, 1 );	// 오브젝트가 사용하는 본리스트
+				resFp.ReadPart( pObject->m_UseBone, sizeof(int) * pObject->m_nMaxUseBone, 1 );	// 오브젝트가 사용하는 본리스트
 			
 #if !defined(__YENV)
 			if( pObject->m_Type == GMT_SKIN )
@@ -1065,14 +1071,14 @@ int		CObject3D :: LoadObject( LPCTSTR szFileName )
 			}
 #endif //__YENV
 
-			resFp.Read( &pObject->m_nID, 4, 1 );	// Object ID
-			resFp.Read( &nParentIdx, 4, 1 );			// parent idx
+			resFp.ReadPart( &pObject->m_nID, 4, 1 );	// Object ID
+			resFp.ReadPart( &nParentIdx, 4, 1 );			// parent idx
 			pObject->m_nParentIdx = nParentIdx;		// save를 위해 백업 받아둠
 			
 			// 부모가 있다면 부모 포인터 지정
 			if( nParentIdx != -1 )
 			{
-				resFp.Read( &pObject->m_ParentType, 4, 1 );		// 부모의 타입 읽음.
+				resFp.ReadPart( &pObject->m_ParentType, 4, 1 );		// 부모의 타입 읽음.
 				// 부모의 포인터를 세팅
 				switch( pObject->m_ParentType )
 				{
@@ -1083,7 +1089,7 @@ int		CObject3D :: LoadObject( LPCTSTR szFileName )
 			}
 
 			// 원점기준의 LocalTM.  부모가 있다면 원점은 부모가 된다.
-			resFp.Read( &pObject->m_mLocalTM, sizeof(D3DXMATRIX), 1 );
+			resFp.ReadPart( &pObject->m_mLocalTM, sizeof(D3DXMATRIX), 1 );
 
 			// load geometry
 			LoadGMObject( &resFp, pObject );			// Mesh부 읽음
@@ -1167,7 +1173,7 @@ int		CObject3D :: LoadObject( LPCTSTR szFileName )
 	{
 		int nAttr = 0;
 		
-		resFp.Read( &nAttr, 4, 1 );
+		resFp.ReadPart( &nAttr, 4, 1 );
 		if( nAttr == m_nMaxFrame )		// 프레임 속성 있는지 검사
 		{
 			// 프레임 속성 읽음.
@@ -1176,7 +1182,7 @@ int		CObject3D :: LoadObject( LPCTSTR szFileName )
 			else
 				m_pAttr = NULL;
 
-			resFp.Read( m_pAttr, sizeof(MOTION_ATTR) * m_nMaxFrame, 1 );
+			resFp.ReadPart( m_pAttr, sizeof(MOTION_ATTR) * m_nMaxFrame, 1 );
 		}
 	}
 	
@@ -1268,13 +1274,13 @@ int		CObject3D::LoadGMObject( CResFile *file, GMOBJECT *pObject )
 {
 	DWORD	dwTemp;
 	int		i;
+
+	file->ReadPart( &pObject->m_vBBMin, sizeof(D3DXVECTOR3), 1 );
+	file->ReadPart( &pObject->m_vBBMax, sizeof(D3DXVECTOR3), 1 );
 	
-	file->Read( &pObject->m_vBBMin, sizeof(D3DXVECTOR3), 1 );
-	file->Read( &pObject->m_vBBMax, sizeof(D3DXVECTOR3), 1 );
-	
-	file->Read( &pObject->m_bOpacity,    4, 1 );
-	file->Read( &pObject->m_bBump, 4, 1 );
-	file->Read( &pObject->m_bRigid,		4, 1 );
+	file->ReadPart( &pObject->m_bOpacity,    4, 1 );
+	file->ReadPart( &pObject->m_bBump, 4, 1 );
+	file->ReadPart( &pObject->m_bRigid,		4, 1 );
 	file->Seek( 28, SEEK_CUR );		// reserved
 	
 #ifdef __YENV_WITHOUT_BUMP
@@ -1282,10 +1288,10 @@ int		CObject3D::LoadGMObject( CResFile *file, GMOBJECT *pObject )
 #endif //__YENV_WITHOUT_BUMP
 
 	// size of list
-	file->Read( &pObject->m_nMaxVertexList,	4, 1 );		// 버텍스 개수
-	file->Read( &pObject->m_nMaxVB,			4, 1 );		// 버텍스 버퍼 크기
-	file->Read( &pObject->m_nMaxFaceList,	4, 1 );		// 페이스 개수
-	file->Read( &pObject->m_nMaxIB,		4, 1 );		// indexed 인덱스 버퍼개수
+	file->ReadPart( &pObject->m_nMaxVertexList,	4, 1 );		// 버텍스 개수
+	file->ReadPart( &pObject->m_nMaxVB,			4, 1 );		// 버텍스 버퍼 크기
+	file->ReadPart( &pObject->m_nMaxFaceList,	4, 1 );		// 페이스 개수
+	file->ReadPart( &pObject->m_nMaxIB,		4, 1 );		// indexed 인덱스 버퍼개수
 
 	m_nMaxFace += pObject->m_nMaxFaceList;
 
@@ -1307,22 +1313,22 @@ int		CObject3D::LoadGMObject( CResFile *file, GMOBJECT *pObject )
 	pObject->m_pIB  = new WORD[ pObject->m_nMaxIB + pObject->m_nMaxVB ];		// m_pIIB도 WORD형을  쓰므로 같이 할당해서 씀.
 	pObject->m_pIIB = pObject->m_pIB + pObject->m_nMaxIB;
 
-	file->Read( pObject->m_pVertexList, sizeof(D3DXVECTOR3) * pObject->m_nMaxVertexList, 1 );
+	file->ReadPart( pObject->m_pVertexList, sizeof(D3DXVECTOR3) * pObject->m_nMaxVertexList, 1 );
 	if( pObject->m_Type == GMT_SKIN )
-		file->Read( pObject->m_pVB,  sizeof(SKINVERTEX) * pObject->m_nMaxVB, 1 );		// 버텍스 버퍼 읽음
+		file->ReadPart( pObject->m_pVB,  sizeof(SKINVERTEX) * pObject->m_nMaxVB, 1 );		// 버텍스 버퍼 읽음
 	else
-		file->Read( pObject->m_pVB,  sizeof(NORMALVERTEX) * pObject->m_nMaxVB, 1 );		// 버텍스 버퍼 읽음
+		file->ReadPart( pObject->m_pVB,  sizeof(NORMALVERTEX) * pObject->m_nMaxVB, 1 );		// 버텍스 버퍼 읽음
 
 
-	file->Read( pObject->m_pIB,  sizeof(WORD) * pObject->m_nMaxIB, 1 );			// 인덱스 버퍼 읽음
-	file->Read( pObject->m_pIIB, sizeof(WORD) * pObject->m_nMaxVB, 1 );
+	file->ReadPart( pObject->m_pIB,  sizeof(WORD) * pObject->m_nMaxIB, 1 );			// 인덱스 버퍼 읽음
+	file->ReadPart( pObject->m_pIIB, sizeof(WORD) * pObject->m_nMaxVB, 1 );
 
-	file->Read( &dwTemp, 4, 1 );			// 피지크가 있는가 없는가
+	file->ReadPart( &dwTemp, 4, 1 );			// 피지크가 있는가 없는가
 	if( dwTemp )
 	{
 		// Physique
 		pObject->m_pPhysiqueVertex = new int[ pObject->m_nMaxVertexList ];
-		file->Read( pObject->m_pPhysiqueVertex, sizeof(int) * pObject->m_nMaxVertexList, 1 );	// 버텍스개수와 같은 피지크데이타 읽음
+		file->ReadPart( pObject->m_pPhysiqueVertex, sizeof(int) * pObject->m_nMaxVertexList, 1 );	// 버텍스개수와 같은 피지크데이타 읽음
 
 		// m_pVB에는 world로 변환된 버텍스들이 들어가있게 되고
 		// _pVB에는 뼈대 기준 로컬로 들어있게 된다.
@@ -1338,24 +1344,24 @@ int		CObject3D::LoadGMObject( CResFile *file, GMOBJECT *pObject )
 //nt				nIdx = 0;
 	int				bIsMaterial;
 
-	file->Read( &bIsMaterial, 4, 1 );		// ASE의 Main MaxMaterial을 저장했다.  이게 0이면 매터리얼이 없다는 것.
+	file->ReadPart( &bIsMaterial, 4, 1 );		// ASE의 Main MaxMaterial을 저장했다.  이게 0이면 매터리얼이 없다는 것.
 	pObject->m_bMaterial = bIsMaterial;				// 나중에 저장을 위해서 백업받아둔다.
 	if( bIsMaterial )
 	{
 		memset( mMaterialAry, 0, sizeof(mMaterialAry) );
 //		for( i = 0; i < 16; i ++ )	mMaterialAry[i] = NULL;
 		
-		file->Read( &pObject->m_nMaxMaterial, 4, 1 );				// 사용하는 매트리얼 개수 읽음
+		file->ReadPart( &pObject->m_nMaxMaterial, 4, 1 );				// 사용하는 매트리얼 개수 읽음
 
 		if( pObject->m_nMaxMaterial == 0 )	pObject->m_nMaxMaterial = 1;	// CASEMesh의 Save부분을 참고할것.
 
 		for( i = 0; i < pObject->m_nMaxMaterial; i ++ )
 		{
-			file->Read( &mMaterial, sizeof(D3DMATERIAL9), 1 );
-			file->Read( &nLen, 4, 1 );		// bitmap filename length;  null 포함
+			file->ReadPart( &mMaterial, sizeof(D3DMATERIAL9), 1 );
+			file->ReadPart( &nLen, 4, 1 );		// bitmap filename length;  null 포함
 			if( nLen > sizeof(szBitmap) )		
 				Error( "CObject3D::LoadGMObject : %s 텍스쳐 파일명이 너무길다 : 길이 = %d", m_szFileName, nLen );
-			file->Read( szBitmap, nLen, 1 );
+			file->ReadPart( szBitmap, nLen, 1 );
 			strlwr( szBitmap );		// 소문자로 변환
 			
 			pObject->m_MaterialAry[i].m_Material = mMaterial;
@@ -1372,7 +1378,7 @@ int		CObject3D::LoadGMObject( CResFile *file, GMOBJECT *pObject )
 	}
 
 	// vertex buffer Material block
-	file->Read( &pObject->m_nMaxMtrlBlk, 4, 1 );
+	file->ReadPart( &pObject->m_nMaxMtrlBlk, 4, 1 );
 
 	if( pObject->m_nMaxMtrlBlk >= 32 )
 	{
@@ -1385,7 +1391,7 @@ int		CObject3D::LoadGMObject( CResFile *file, GMOBJECT *pObject )
 		pObject->m_pMtrlBlkTexture = new LPDIRECT3DTEXTURE9[ pObject->m_nMaxMtrlBlk * 8 ];	// 확장텍스쳐(최대8개)랑 같이 쓴다. 없으면 걍 널이다.
 		memset( pObject->m_pMtrlBlkTexture, 0, sizeof(LPDIRECT3DTEXTURE9) * (pObject->m_nMaxMtrlBlk * 8) );
 
-		file->Read( pObject->m_pMtrlBlk, sizeof(MATERIAL_BLOCK) * pObject->m_nMaxMtrlBlk, 1 );
+		file->ReadPart( pObject->m_pMtrlBlk, sizeof(MATERIAL_BLOCK) * pObject->m_nMaxMtrlBlk, 1 );
 #ifndef __WORLDSERVER
 
 #ifdef __YENV
@@ -1495,11 +1501,11 @@ int		CObject3D::LoadGMObject( CResFile *file, GMOBJECT *pObject )
 int		CObject3D::LoadTMAni( CResFile *file, GMOBJECT *pObject )
 {
 	int	bFrame;
-	file->Read( &bFrame, 4, 1 );
+	file->ReadPart( &bFrame, 4, 1 );
 	if( bFrame == 0 )	return FAIL;	// 프레임 없으면 읽지 않음.
 
 	pObject->m_pFrame = new TM_ANIMATION[ m_nMaxFrame ];
-	file->Read( pObject->m_pFrame, sizeof(TM_ANIMATION) * m_nMaxFrame, 1 );
+	file->ReadPart( pObject->m_pFrame, sizeof(TM_ANIMATION) * m_nMaxFrame, 1 );
 
 	return SUCCESS;
 } 

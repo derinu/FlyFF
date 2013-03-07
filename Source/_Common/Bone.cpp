@@ -85,7 +85,9 @@ int		CBones :: LoadBone( LPCTSTR szFileName )
 	if( bRet == FALSE )		
 		return	FAIL;
 
-	resFp.Read( &nVer, 4, 1 );		// version
+	resFp.ReadAll();
+
+	resFp.ReadPart( &nVer, 4, 1 );		// version
 	if( nVer < VER_BONE )
 	{
 		Error( "%s의 버전은 %d.  최신버전은 %d", szFileName, nVer, VER_BONE );
@@ -94,7 +96,7 @@ int		CBones :: LoadBone( LPCTSTR szFileName )
 	}
 
 	// ID읽기를 넣음.
-	resFp.Read( &m_nID, 4, 1 );
+	resFp.ReadPart( &m_nID, 4, 1 );
 
 	if( strlen( szFileName ) > sizeof(m_szName) )
 	{
@@ -106,19 +108,19 @@ int		CBones :: LoadBone( LPCTSTR szFileName )
 	// 파일명 카피
 	strcpy( m_szName, szFileName );
 
-	resFp.Read( &nNumBone, 4, 1 );			// 본 개수 읽음
+	resFp.ReadPart( &nNumBone, 4, 1 );			// 본 개수 읽음
 	m_nMaxBone = nNumBone;
 	m_pBones = new BONE[ nNumBone ];			// 본 개수 만큼 할당
 	memset( m_pBones, 0, sizeof(BONE) * nNumBone );		// zero clear
 
 	for( i = 0; i < nNumBone; i ++ )
 	{
-		resFp.Read( &nLen, 4, 1 );		// 널 포함길이
-		resFp.Read( m_pBones[i].m_szName,		nLen, 1 );		// bone node 이름 저장
-		resFp.Read( &m_pBones[i].m_mTM,			sizeof(D3DXMATRIX), 1 );			// World(Object) TM
-		resFp.Read( &m_pBones[i].m_mInverseTM,	sizeof(D3DXMATRIX), 1 );			// Inv NODE TM
-		resFp.Read( &m_pBones[i].m_mLocalTM,		sizeof(D3DXMATRIX), 1 );			// LocalTM
-		resFp.Read( &m_pBones[i].m_nParentIdx,	4, 1 );								// parent bone index
+		resFp.ReadPart( &nLen, 4, 1 );		// 널 포함길이
+		resFp.ReadPart( m_pBones[i].m_szName,		nLen, 1 );		// bone node 이름 저장
+		resFp.ReadPart( &m_pBones[i].m_mTM,			sizeof(D3DXMATRIX), 1 );			// World(Object) TM
+		resFp.ReadPart( &m_pBones[i].m_mInverseTM,	sizeof(D3DXMATRIX), 1 );			// Inv NODE TM
+		resFp.ReadPart( &m_pBones[i].m_mLocalTM,		sizeof(D3DXMATRIX), 1 );			// LocalTM
+		resFp.ReadPart( &m_pBones[i].m_nParentIdx,	4, 1 );								// parent bone index
 		if( strcmpi( m_pBones[i].m_szName + 6, "r hand") == 0 )	// 부모이름이 R Hand면...
 			m_nRHandIdx = i;
 		if( strcmpi( m_pBones[i].m_szName + 6, "l hand") == 0 )	// 부모이름이 L Hand면...
@@ -129,29 +131,29 @@ int		CBones :: LoadBone( LPCTSTR szFileName )
 			m_nRArmIdx = i;
 	}
 
-	resFp.Read( &m_bSendVS, 4, 1 );
+	resFp.ReadPart( &m_bSendVS, 4, 1 );
 	
 	// 오른손 무기쥐는 위치의 행렬
-	resFp.Read( &m_mLocalRH, sizeof(D3DXMATRIX), 1 );
-	resFp.Read( &m_mLocalShield, sizeof(D3DXMATRIX), 1 );
-	resFp.Read( &m_mLocalKnuckle, sizeof(D3DXMATRIX), 1 );
+	resFp.ReadPart( &m_mLocalRH, sizeof(D3DXMATRIX), 1 );
+	resFp.ReadPart( &m_mLocalShield, sizeof(D3DXMATRIX), 1 );
+	resFp.ReadPart( &m_mLocalKnuckle, sizeof(D3DXMATRIX), 1 );
 	
 	// m_vEvent가 추가된 버전.
 //	int		nParentIdx[4];
 	if( nVer == 5 )
 	{
-		resFp.Read( m_vEvent, sizeof(D3DXVECTOR3) * 4, 1 );
-		resFp.Read( m_nEventParentIdx, sizeof(int) * 4, 1 );
+		resFp.ReadPart( m_vEvent, sizeof(D3DXVECTOR3) * 4, 1 );
+		resFp.ReadPart( m_nEventParentIdx, sizeof(int) * 4, 1 );
 	} else
 	if( nVer >= 6 )
 	{
-		resFp.Read( m_vEvent, sizeof(D3DXVECTOR3) * MAX_MDL_EVENT, 1 );
-		resFp.Read( m_nEventParentIdx, sizeof(int) * MAX_MDL_EVENT, 1 );
+		resFp.ReadPart( m_vEvent, sizeof(D3DXVECTOR3) * MAX_MDL_EVENT, 1 );
+		resFp.ReadPart( m_nEventParentIdx, sizeof(int) * MAX_MDL_EVENT, 1 );
 	}
 
 	if( nVer == 7 )
 	{
-		resFp.Read( &m_mLocalLH, sizeof(D3DXMATRIX), 1 );
+		resFp.ReadPart( &m_mLocalLH, sizeof(D3DXMATRIX), 1 );
 	}
 
 	// 포인터로 할당.
@@ -505,8 +507,10 @@ int		CMotion :: LoadMotion( LPCTSTR szFileName )
 		resFp.Close();
 		return FAIL;
 	}
+	
+	resFp.ReadAll();
 
-	resFp.Read( &nVer, 4, 1 );		// version
+	resFp.ReadPart( &nVer, 4, 1 );		// version
 	if( nVer != VER_MOTION )
 	{
 		Error( "%s의 버전은 %d.  최신버전은 %d", szFileName, nVer, VER_MOTION );
@@ -515,7 +519,7 @@ int		CMotion :: LoadMotion( LPCTSTR szFileName )
 	}
 
 	// ID읽기를 넣음.
-	resFp.Read( &m_nID, 4, 1 );
+	resFp.ReadPart( &m_nID, 4, 1 );
 
 	if( strlen( szFileName ) > sizeof(m_szName) )
 	{
@@ -527,11 +531,11 @@ int		CMotion :: LoadMotion( LPCTSTR szFileName )
 	// 파일명 카피
 	strcpy( m_szName, szFileName );
 	
-	resFp.Read( &m_fPerSlerp, sizeof(float), 1 );		// 
+	resFp.ReadPart( &m_fPerSlerp, sizeof(float), 1 );		// 
 	resFp.Seek( 32, SEEK_CUR );		// reserved
 
-	resFp.Read( &nNumBone, 4, 1 );			// 뼈대 갯수 읽음
-	resFp.Read( &nNumFrame, 4, 1 );		// 애니메이션 프레임 개수 읽음
+	resFp.ReadPart( &nNumBone, 4, 1 );			// 뼈대 갯수 읽음
+	resFp.ReadPart( &nNumFrame, 4, 1 );		// 애니메이션 프레임 개수 읽음
 	m_nMaxFrame = nNumFrame;
 	m_nMaxBone = nNumBone;
 
@@ -544,11 +548,11 @@ int		CMotion :: LoadMotion( LPCTSTR szFileName )
 
 	// path 
 	int nTemp;
-	resFp.Read( &nTemp, 4, 1 );	// path정보가 있는가?
+	resFp.ReadPart( &nTemp, 4, 1 );	// path정보가 있는가?
 	if( nTemp )
 	{
 		m_pPath = new D3DXVECTOR3[ nNumFrame ];
-		resFp.Read( m_pPath, sizeof(D3DXVECTOR3) * nNumFrame, 1 );		// nNumFrame만큼 한방에 읽어버리기.
+		resFp.ReadPart( m_pPath, sizeof(D3DXVECTOR3) * nNumFrame, 1 );		// nNumFrame만큼 한방에 읽어버리기.
 	}
 
 	//
@@ -556,11 +560,11 @@ int		CMotion :: LoadMotion( LPCTSTR szFileName )
 	ReadTM( &resFp, nNumBone, nNumFrame );
 	
 	// 프레임 속성 읽음.
-	resFp.Read( m_pAttr, sizeof(MOTION_ATTR) * nNumFrame, 1 );
+	resFp.ReadPart( m_pAttr, sizeof(MOTION_ATTR) * nNumFrame, 1 );
 
-	resFp.Read( &m_nMaxEvent, 4, 1 );	// 이벤트 좌표 저장
+	resFp.ReadPart( &m_nMaxEvent, 4, 1 );	// 이벤트 좌표 저장
 	if( m_nMaxEvent > 0 )
-		resFp.Read( m_vEvent, sizeof(D3DXVECTOR3) * m_nMaxEvent, 1 );
+		resFp.ReadPart( m_vEvent, sizeof(D3DXVECTOR3) * m_nMaxEvent, 1 );
 	
 
 	resFp.Close();
@@ -589,14 +593,14 @@ void	CMotion :: ReadTM( CResFile *file, int nNumBone, int nNumFrame )
 	int		nLen;
 	for( i = 0; i < nNumBone; i ++ )
 	{
-		file->Read( &nLen, 4, 1 );
+		file->ReadPart( &nLen, 4, 1 );
 		if( nLen > 32 )		
 			Error("CMotion::ReadTM - %s bonename is too long", m_szName );
 
-		file->Read( m_pBoneInfo[i].m_szName,	nLen, 1 );		// bone node 이름
-		file->Read( &m_pBoneInfo[i].m_mInverseTM,	sizeof(D3DXMATRIX), 1 );			// Inv NODE TM
-		file->Read( &m_pBoneInfo[i].m_mLocalTM,		sizeof(D3DXMATRIX), 1 );			// LocalTM
-		file->Read( &m_pBoneInfo[i].m_nParentIdx,	4, 1 );								// parent bone index
+		file->ReadPart( m_pBoneInfo[i].m_szName,	nLen, 1 );		// bone node 이름
+		file->ReadPart( &m_pBoneInfo[i].m_mInverseTM,	sizeof(D3DXMATRIX), 1 );			// Inv NODE TM
+		file->ReadPart( &m_pBoneInfo[i].m_mLocalTM,		sizeof(D3DXMATRIX), 1 );			// LocalTM
+		file->ReadPart( &m_pBoneInfo[i].m_nParentIdx,	4, 1 );								// parent bone index
 	}
 	
 	// 부모 포인터를 셋팅
@@ -609,7 +613,7 @@ void	CMotion :: ReadTM( CResFile *file, int nNumBone, int nNumFrame )
 	}
 	
 
-	file->Read( &nNumSize, 4, 1 );			// 프레임 사이즈 읽음 - 메모리 풀 사이즈
+	file->ReadPart( &nNumSize, 4, 1 );			// 프레임 사이즈 읽음 - 메모리 풀 사이즈
 	//--- 모션 읽음.
 	m_pMotion		= new TM_ANIMATION[ nNumSize ];		// 메모리 풀
 	m_pBoneFrame	= new BONE_FRAME[ nNumBone ];
@@ -621,11 +625,11 @@ void	CMotion :: ReadTM( CResFile *file, int nNumBone, int nNumFrame )
 	// 뼈대 수 만큼 루프
 	for( i = 0; i < nNumBone; i ++ )
 	{
-		file->Read( &nFrame, 4, 1 );
+		file->ReadPart( &nFrame, 4, 1 );
 		if( nFrame == 1 )		// 1이면 현재 뼈대에 프레임 있음
 		{
 			m_pBoneFrame[i].m_pFrame = p;
-			file->Read( m_pBoneFrame[i].m_pFrame, sizeof(TM_ANIMATION) * nNumFrame, 1 );		// 한방에 읽어버리기.
+			file->ReadPart( m_pBoneFrame[i].m_pFrame, sizeof(TM_ANIMATION) * nNumFrame, 1 );		// 한방에 읽어버리기.
 			p += nNumFrame;
 			nCnt += nNumFrame;
 //			for( j = 0; j < nNumFrame; j ++ )
@@ -638,7 +642,7 @@ void	CMotion :: ReadTM( CResFile *file, int nNumBone, int nNumFrame )
 //			}
 		} else			// 현재 뼈대에 프레임 없음
 		{
-			file->Read( &(m_pBoneFrame[i].m_mLocalTM), sizeof(D3DXMATRIX), 1 );			// 프레임이 없으면 LocalTM만 읽고
+			file->ReadPart( &(m_pBoneFrame[i].m_mLocalTM), sizeof(D3DXMATRIX), 1 );			// 프레임이 없으면 LocalTM만 읽고
 			m_pBoneFrame[i].m_pFrame = NULL;
 			// m_mLocalTM에 넣었으므로 메모리 풀에는 넣을필요 없다.
 		}

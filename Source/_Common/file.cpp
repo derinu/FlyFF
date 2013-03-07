@@ -116,6 +116,32 @@ BOOL CResFile::Close( void )
 	}
 }
 
+#ifdef __BSXPACK_OBJ
+void CResFile::ReadAll()
+{
+	if(this->m_bResouceInFile)
+	{
+		this->TmpPtr = (char*)this->Read();
+		this->TmpPtrPosition = 0;
+	}
+}
+
+void CResFile::ReadPart(void *ptr, size_t size, size_t n)
+{
+	if(this->m_bResouceInFile)
+	{
+		char* ctptr = (char*)ptr;
+		copy(&this->TmpPtr[this->TmpPtrPosition], &this->TmpPtr[this->TmpPtrPosition + size], ctptr);
+		ptr = (void*)ctptr;
+		ctptr = 0;
+		safe_delete_array(ctptr);
+		this->TmpPtrPosition += size;
+	}
+	else
+		this->Read(ptr, size, n);
+}
+#endif
+
 #ifdef __BSXPACK
 void CResFile::AddResource( TCHAR* lpszResName )
 {
@@ -786,6 +812,9 @@ int CResFile::Seek( long offset, int whence )
 		if( whence == SEEK_SET )
 		{
 			m_nFileCurrentPosition = m_nFileBeginPosition + offset;
+			#ifdef __BSXPACK_OBJ
+			this->TmpPtrPosition = offset;
+			#endif
 			m_File.Seek( m_nFileCurrentPosition, CFile::begin );
 		}
 		else 
@@ -798,6 +827,9 @@ int CResFile::Seek( long offset, int whence )
 		if( whence == SEEK_CUR )
 		{
 			m_nFileCurrentPosition += offset;
+			#ifdef __BSXPACK_OBJ
+			this->TmpPtrPosition += offset;
+			#endif
 			//m_File.GetPosition() + offset
 			int n = (int)( m_File.GetPosition() );
 			m_File.Seek( offset, CFile::current );
