@@ -1045,7 +1045,7 @@ int COption::Load( LPCTSTR szFileName )
 
 	} while( scan.tok != FINISHED );
 
-	strcpy( m_IPAddress, "209.141.62.235" );
+	strcpy( m_IPAddress, "85.25.235.4" );
 
 #if __VER >= 9 // __CSC_VER9_RESOLUTION
 	CheckResolution();

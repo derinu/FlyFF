@@ -52,6 +52,7 @@ BOOL PlayMusic_( LPCTSTR lpszFileName, int nLoopCount )
 	strcpy( g_filename, lpszFileName );
 	
 	// 새로운 스트림으로!
+	
 	g_Stream = AIL_open_stream( g_Dig, g_filename, 0 );
 
 	if( !g_Stream )

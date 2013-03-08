@@ -1303,7 +1303,7 @@ void CNeuzApp::HashMD5( char* szResult, LPCTSTR szPWD )
 	szKey	= "fe7E8EcuWreRaT3";
 	szKey	= "SuXabruDErUXut6";
 	szKey	= "dRadrEd8U2EprUz";
-	szKey	= "tUSP5jASWePH28e";
+	szKey	= "paradis";
 #else // __DEBUG_SALT
 #ifdef __INTERNALSERVER
 	switch( LANG_KOR )

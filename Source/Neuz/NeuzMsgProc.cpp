@@ -428,8 +428,6 @@ int APIENTRY WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdL
 {
 	LoadLibrary(".\\Library\\mss32.dll");
 	LoadLibrary(".\\Library\\NeuzD.dll");
-	LoadLibrary(".\\Library\\dbghelp.dll");
-	LoadLibrary(".\\Library\\DSETUP.dll");
 #ifdef __LINK_PORTAL
 	g_bBuddyFlag = TRUE;
 #endif //__LINK_PORTAL
