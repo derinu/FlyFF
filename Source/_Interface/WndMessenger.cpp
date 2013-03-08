@@ -245,7 +245,7 @@ void CWndMessenger::OnInitialUpdate()
 	m_menuState.AppendMenu( 0, FRS_REST     , prj.GetText( TID_FRS_REST     ) );
 	m_menuState.AppendMenu( 0, FRS_MOVE     , prj.GetText( TID_FRS_MOVE     ) );
 	
-	m_TexMail.LoadTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\Default\\", "WndMail.dds" ), 0xffff00ff );
+	m_TexMail.LoadTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\Default\\", "WndMail.dds" ), 0xffff00ff );
 	m_nFlashCounter = 0;
 	m_nSwitch       = 1;
 
@@ -733,7 +733,7 @@ void CWndMessengerEx::OnInitialUpdate()
 	m_menuState.AppendMenu( 0, FRS_MOVE     , prj.GetText( TID_FRS_MOVE     ) );
 	m_menuState.AppendMenu( 0, FRS_OFFLINE  , prj.GetText( TID_FRS_OFFLINE_STATUS  ) );
 	
-	m_TexMail.LoadTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\Default\\", "WndMail.dds" ), 0xffff00ff );
+	m_TexMail.LoadTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\Default\\", "WndMail.dds" ), 0xffff00ff );
 	m_nFlashCounter = 0;
 	m_nSwitch       = 1;
 	
@@ -749,7 +749,7 @@ void CWndMessengerEx::OnInitialUpdate()
 #endif // __NO_SUB_LANG
 			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "ButtNormal05.tga" ), 0xffff00ff );
 		else
-			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), "ButtNormal05.tga" ), 0xffff00ff );
+			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), "ButtNormal05.tga" ), 0xffff00ff );
 	}
 
 	pWndButton = (CWndButton*)GetDlgItem(WIDC_STATE);
@@ -763,7 +763,7 @@ void CWndMessengerEx::OnInitialUpdate()
 #endif // __NO_SUB_LANG
 			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "ButtNormal05.tga" ), 0xffff00ff );
 		else
-			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), "ButtNormal05.tga" ), 0xffff00ff );
+			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), "ButtNormal05.tga" ), 0xffff00ff );
 	}
 
 	pWndButton = (CWndButton*)GetDlgItem(WIDC_LEVEL);
@@ -777,7 +777,7 @@ void CWndMessengerEx::OnInitialUpdate()
 #endif // __NO_SUB_LANG
 			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "ButtNormal05.tga" ), 0xffff00ff );
 		else
-			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), "ButtNormal05.tga" ), 0xffff00ff );
+			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), "ButtNormal05.tga" ), 0xffff00ff );
 	}
 
 	pWndButton = (CWndButton*)GetDlgItem(WIDC_JOB);
@@ -791,7 +791,7 @@ void CWndMessengerEx::OnInitialUpdate()
 #endif // __NO_SUB_LANG
 			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "ButtNormal05.tga" ), 0xffff00ff );
 		else
-			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), "ButtNormal05.tga" ), 0xffff00ff );
+			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), "ButtNormal05.tga" ), 0xffff00ff );
 	}
 
 	pWndButton = (CWndButton*)GetDlgItem(WIDC_NAME);
@@ -805,7 +805,7 @@ void CWndMessengerEx::OnInitialUpdate()
 #endif // __NO_SUB_LANG
 			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "ButtNormal00.tga" ), 0xffff00ff );
 		else
-			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), "ButtNormal00.tga" ), 0xffff00ff );
+			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), "ButtNormal00.tga" ), 0xffff00ff );
 	}
 
 	// 윈도를 중앙으로 옮기는 부분.

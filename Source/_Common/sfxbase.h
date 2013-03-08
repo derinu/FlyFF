@@ -41,7 +41,7 @@ enum SFXPARTALPHATYPE {
 
 #define D3DFVF_D3DSFXVERTEX (D3DFVF_XYZ|D3DFVF_TEX1)
 #ifndef DIR_SFX
-	#define DIR_SFX     _T( "SFX\\"  )
+	#define DIR_SFX     _T( "Data\\"  )
 #endif 
 
 struct D3DSFXVERTEX // SFX에 사용되는 버텍스 포맷

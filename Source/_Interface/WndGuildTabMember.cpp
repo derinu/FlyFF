@@ -489,7 +489,7 @@ void CWndGuildTabMember::OnInitialUpdate()
 #endif // __NO_SUB_LANG
 			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "ButtNormal05.tga" ), 0xffff00ff );
 		else
-			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), "ButtNormal05.tga" ), 0xffff00ff );
+			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), "ButtNormal05.tga" ), 0xffff00ff );
 	}
 
 	pWndButton = (CWndButton*)GetDlgItem(WIDC_JOB);
@@ -504,7 +504,7 @@ void CWndGuildTabMember::OnInitialUpdate()
 #endif // __NO_SUB_LANG
 			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "ButtNormal05.tga" ), 0xffff00ff );
 		else
-			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), "ButtNormal05.tga" ), 0xffff00ff );
+			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), "ButtNormal05.tga" ), 0xffff00ff );
 	}
 
 	pWndButton = (CWndButton*)GetDlgItem(WIDC_LEVEL);
@@ -519,7 +519,7 @@ void CWndGuildTabMember::OnInitialUpdate()
 #endif // __NO_SUB_LANG
 			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "ButtNormal05.tga" ), 0xffff00ff );
 		else
-			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), "ButtNormal05.tga" ), 0xffff00ff );
+			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), "ButtNormal05.tga" ), 0xffff00ff );
 	}
 
 	pWndButton = (CWndButton*)GetDlgItem(WIDC_NAME);
@@ -534,7 +534,7 @@ void CWndGuildTabMember::OnInitialUpdate()
 #endif // __NO_SUB_LANG
 			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "ButtNormal00.tga" ), 0xffff00ff );
 		else
-			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), "ButtNormal00.tga" ), 0xffff00ff );
+			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), "ButtNormal00.tga" ), 0xffff00ff );
 	}
 
 	pWndButton = (CWndButton*)GetDlgItem(WIDC_ALIAS);
@@ -549,7 +549,7 @@ void CWndGuildTabMember::OnInitialUpdate()
 #endif // __NO_SUB_LANG
 			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "ButtNormal00.tga" ), 0xffff00ff );
 		else
-			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), "ButtNormal00.tga" ), 0xffff00ff );
+			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), "ButtNormal00.tga" ), 0xffff00ff );
 	}
 #endif //__CSC_VER12_2
 

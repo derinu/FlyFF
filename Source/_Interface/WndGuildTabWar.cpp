@@ -110,7 +110,7 @@ void CWndGuildTabWar::OnInitialUpdate()
 #else // __NO_SUB_LANG
 		if(::GetLanguage() == LANG_USA || ::GetLanguage() == LANG_VTN)
 #endif // __NO_SUB_LANG
-			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), "ButtNormal01.tga" ), 0xffff00ff );
+			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), "ButtNormal01.tga" ), 0xffff00ff );
 	}
 
 	// 윈도를 중앙으로 옮기는 부분.

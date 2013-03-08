@@ -354,7 +354,7 @@ BOOL CMapInformationManager::LoadPropMapComboBoxData( void )
 		pMapComboBoxData->SetPictureFileName( strMapPictureFileName );
 		/*if( strMapPictureFileName != _T( "" ) )
 		{
-			CTexture* pMapTexture = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( _T( "Theme\\" ), ::GetLanguage(), strMapPictureFileName ), 0xffffffff );
+			CTexture* pMapTexture = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( _T( "Data\\Theme\\" ), ::GetLanguage(), strMapPictureFileName ), 0xffffffff );
 			pMapComboBoxData->SetMapTexture( pMapTexture );
 		}*/
 		if( eMapComboBoxCategory == MCC_MAP_NAME )

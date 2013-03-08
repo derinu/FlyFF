@@ -97,7 +97,7 @@ void CWndQuizEventQuestionOX::OnInitialUpdate( void )
 		pWndBase->Destroy();
 	
 	m_texChar.DeleteDeviceObjects();
-	m_texChar.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( "char\\", "char_Juria_JAP.tga" ), 0xffff00ff, TRUE );
+	m_texChar.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( "Data\\", "char_Juria_JAP.tga" ), 0xffff00ff, TRUE );
 	
 	MoveParentCenter();
 }
@@ -179,7 +179,7 @@ void CWndQuizEventQuestion4C::OnInitialUpdate( void )
 		pWndBase->Destroy();
 	
 	m_texChar.DeleteDeviceObjects();
-	m_texChar.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( "char\\", "char_Juria_JAP.tga" ), 0xffff00ff, TRUE );
+	m_texChar.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( "Data\\", "char_Juria_JAP.tga" ), 0xffff00ff, TRUE );
 	
 	MoveParentCenter();
 }

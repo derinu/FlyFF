@@ -81,7 +81,7 @@ CCommonCtrl::~CCommonCtrl()
 #endif
 }
 
-BOOL CCommonCtrl::Read( CFileIO* pFile )
+BOOL CCommonCtrl::Read( CResFile* pFile )
 {
 	CObj::Read( pFile );
 

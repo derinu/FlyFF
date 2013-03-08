@@ -43,7 +43,7 @@ void CWndPetAwakCancel::OnInitialUpdate()
 	CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_BUTTON1);
 
 	if(::GetLanguage() == LANG_FRE)
-		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
+		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
 
 	pButton->EnableWindow(FALSE);
 	m_pText = (CWndText*)GetDlgItem( WIDC_TEXT1 );
@@ -1371,7 +1371,7 @@ void CWndPetMiracle::OnInitialUpdate()
 #else // __NO_SUB_LANG
 		if(::GetLanguage() == LANG_USA || ::GetLanguage() == LANG_VTN)
 #endif // __NO_SUB_LANG
-			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), "ButChance.bmp" ), 0xffff00ff );
+			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), "ButChance.bmp" ), 0xffff00ff );
 	}
 
 	//B/A/S 급 펫만 해당 기능을 이용할 수 있다.

@@ -976,7 +976,7 @@ public:
 	static	int		GetItemEnduranceWeight( int nEndurance );	
 
 	virtual	BOOL	SetIndex( LPDIRECT3DDEVICE9 pd3dDevice, DWORD dwIndex, BOOL bInitProp = FALSE, BOOL bDestParam = TRUE );
-	virtual BOOL	Read( CFileIO* pFile );
+	virtual BOOL	Read( CResFile* pFile );
 	virtual void	Process();
 	virtual	void	Serialize( CAr & ar ); // 시리얼라이즈 ; 네트웍 상태에서 서버와 클라이언트, 클라이언트 서버가 주고받을 패킷 내용 
 	virtual	CModel* LoadModel( LPDIRECT3DDEVICE9 pd3dDevice, DWORD dwType, DWORD dwIndex );

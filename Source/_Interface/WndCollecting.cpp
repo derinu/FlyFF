@@ -424,7 +424,7 @@ BOOL CCollectingWnd::SetButtonCaption(bool bIsStart)
 	else
 	{
 		if(::GetLanguage() == LANG_FRE)
-			pWndButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
+			pWndButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
 		else
 			pWndButton->SetTexture(m_pParentWnd->m_pApp->m_pd3dDevice, MakePath( DIR_THEME, _T( "ButtNormal00.tga" )), TRUE );
 	}

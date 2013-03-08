@@ -1270,21 +1270,23 @@ BOOL CLandscape::LoadLandscape( LPCTSTR lpszFileName, int xx, int yy )
 		return FALSE;
 	ResetTerrain( INIT_HEIGHT );
 
+	file.ReadAll();
+
 	int xLand, yLand;
-	file.Read( &m_dwVersion, sizeof( DWORD) );
+	file.ReadPart( &m_dwVersion, sizeof( DWORD) );
 	// 1 버젼일 때는 사이즈 읽어야함
 	if( m_dwVersion >= 1 )
 	{
-		file.Read( &xLand, sizeof( xLand ) );
-		file.Read( &yLand, sizeof( yLand ) );
+		file.ReadPart( &xLand, sizeof( xLand ) );
+		file.ReadPart( &yLand, sizeof( yLand ) );
 	}
-	file.Read( m_pHeightMap, sizeof( FLOAT ), ( MAP_SIZE + 1 ) * ( MAP_SIZE + 1 ) );
+	file.ReadPart( m_pHeightMap, sizeof( FLOAT ), ( MAP_SIZE + 1 ) * ( MAP_SIZE + 1 ) );
 
-	file.Read( m_aWaterHeight, sizeof( WATERHEIGHT ), NUM_PATCHES_PER_SIDE * NUM_PATCHES_PER_SIDE );
+	file.ReadPart( m_aWaterHeight, sizeof( WATERHEIGHT ), NUM_PATCHES_PER_SIDE * NUM_PATCHES_PER_SIDE );
 	// 2 버젼일 때는 지역맵 읽어야함
 	if( m_dwVersion >= 2 )
 	{
-		file.Read( m_aLandAttr, sizeof( BYTE ), NUM_PATCHES_PER_SIDE * NUM_PATCHES_PER_SIDE );
+		file.ReadPart( m_aLandAttr, sizeof( BYTE ), NUM_PATCHES_PER_SIDE * NUM_PATCHES_PER_SIDE );
 		if( m_dwVersion == 2 )
 			ZeroMemory( m_aLandAttr, sizeof( NUM_PATCHES_PER_SIDE * NUM_PATCHES_PER_SIDE ) );
 	}
@@ -1293,20 +1295,20 @@ BOOL CLandscape::LoadLandscape( LPCTSTR lpszFileName, int xx, int yy )
 		ZeroMemory( m_aLandAttr, sizeof( NUM_PATCHES_PER_SIDE * NUM_PATCHES_PER_SIDE ) );
 	}
 	BYTE nLayer;
-	file.Read( &nLayer, sizeof(BYTE) , 1 );
+	file.ReadPart( &nLayer, sizeof(BYTE) , 1 );
 	CLandLayer* pLayer;
 	WORD nTex;
 	for(int j = 0; j < nLayer; j++ )  
 	{
-		file.Read( &( nTex ), sizeof(WORD), 1 );
+		file.ReadPart( &( nTex ), sizeof(WORD), 1 );
 
 		pLayer = NewLayer( nTex );
-		file.Read( pLayer->m_aPatchEnable, sizeof( BOOL ), NUM_PATCHES_PER_SIDE * NUM_PATCHES_PER_SIDE );
+		file.ReadPart( pLayer->m_aPatchEnable, sizeof( BOOL ), NUM_PATCHES_PER_SIDE * NUM_PATCHES_PER_SIDE );
 		D3DLOCKED_RECT rectLock;
 		pLayer->m_pLightMap->LockRect( 0, &rectLock, 0, 0 );
 #ifdef __16BITLIGHT
 		DWORD dwLightMap[ MAP_SIZE*MAP_SIZE ];
-		file.Read( dwLightMap, sizeof( DWORD ), MAP_SIZE * MAP_SIZE );
+		file.ReadPart( dwLightMap, sizeof( DWORD ), MAP_SIZE * MAP_SIZE );
 		for( int i = 0; i < MAP_SIZE * MAP_SIZE; i++ )
 		{
 			((WORD *)rectLock.pBits)[i] = 
@@ -1319,7 +1321,7 @@ BOOL CLandscape::LoadLandscape( LPCTSTR lpszFileName, int xx, int yy )
 			);
 		}
 #else	//!__16BITLIGHT
-		file.Read(((DWORD *)rectLock.pBits),sizeof(DWORD),MAP_SIZE*MAP_SIZE);
+		file.ReadPart(((DWORD *)rectLock.pBits),sizeof(DWORD),MAP_SIZE*MAP_SIZE);
 #endif	//!__16BITLIGHT
 		pLayer->m_pLightMap->UnlockRect(0);
 	}
@@ -1348,7 +1350,7 @@ BOOL CLandscape::LoadLandscape( LPCTSTR lpszFileName, int xx, int yy )
 	// Read Objects
 	CObj** apObject = m_apObject[ OT_OBJ ];
 	DWORD dwObjNum;
-	file.Read( &dwObjNum, sizeof( DWORD ), 1 );
+	file.ReadPart( &dwObjNum, sizeof( DWORD ), 1 );
 	TRACE( "Load Object Num = %d\n", dwObjNum );
 	for( int i = 0; i < (int)( dwObjNum ); i++ )
 	{
@@ -1395,7 +1397,16 @@ BOOL CLandscape::LoadLandscape( LPCTSTR lpszFileName, int xx, int yy )
 			dwObjNum--;
 		}
 	}
-	size_t size = file.Read( &dwObjNum, sizeof( DWORD ), 1 );
+	size_t size = 1;
+	try
+	{
+		file.ReadPart( &dwObjNum, sizeof( DWORD ), 1 );
+	}
+	catch(...)
+	{
+		size = 0;
+	}
+
 	if( size )
 	{
 		for( i = 0; i < (int)( dwObjNum ); i++ )

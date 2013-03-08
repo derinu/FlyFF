@@ -212,7 +212,7 @@ CNeuzApp::CNeuzApp()
 
 BOOL CNeuzApp::LoadOption()
 {
-	g_Option.Load( "neuz.ini" );
+	g_Option.Load( "Data\\neuz.ini" );
 	
 #ifdef _DEBUG
 	g_Option.LoadToolTip( "ToolTip.ini" );
@@ -686,7 +686,7 @@ HRESULT CNeuzApp::FinalCleanup()
 	CResFile::FreeResource();
 	UnInitCustomSound();
 
-	g_Option.Save( "neuz.ini" );
+	g_Option.Save( "Data\\neuz.ini" );
  	return S_OK;
 }
 

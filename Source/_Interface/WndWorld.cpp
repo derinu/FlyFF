@@ -3732,12 +3732,12 @@ void CWndWorld::OnInitialUpdate()
 	}
 #endif
 	
-	m_texMsgIcon.LoadScript( m_pApp->m_pd3dDevice, "icon\\icon_IconMessenger.inc" );
+	m_texMsgIcon.LoadScript( m_pApp->m_pd3dDevice, "Data\\icon_IconMessenger.inc" );
 	
-	m_texAttrIcon.LoadScript( m_pApp->m_pd3dDevice, "icon\\Icon_MonElemantkind.inc" );
+	m_texAttrIcon.LoadScript( m_pApp->m_pd3dDevice, "Data\\Icon_MonElemantkind.inc" );
 	
 #if __VER >= 11 // __CSC_VER11_4
-	m_texPlayerDataIcon.LoadScript( m_pApp->m_pd3dDevice, "icon\\icon_PlayerData.inc" );
+	m_texPlayerDataIcon.LoadScript( m_pApp->m_pd3dDevice, "Data\\icon_PlayerData.inc" );
 #endif //__CSC_VER11_4
 	for( int j = 0 ; j < SM_MAX ; ++j )
 	{

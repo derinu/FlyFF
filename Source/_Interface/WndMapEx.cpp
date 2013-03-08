@@ -655,7 +655,7 @@ void CWndMapEx::ResetMapInformation( void )
 			/*m_pMapTexture = pMapComboBoxData->GetMapTexture();
 			if(!m_pMapTexture && pMapComboBoxData->GetPictureFileName() != _T(""))
 			{
-				m_pMapTexture = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( _T( "Theme\\" ), ::GetLanguage(), pMapComboBoxData->GetPictureFileName() ), 0xffffffff );
+				m_pMapTexture = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( _T( "Data\\Theme\\" ), ::GetLanguage(), pMapComboBoxData->GetPictureFileName() ), 0xffffffff );
 				pMapComboBoxData->SetMapTexture(m_pMapTexture);
 			}*/
 			m_dwSelectedMapID = pMapComboBoxData->GetID();
@@ -663,7 +663,7 @@ void CWndMapEx::ResetMapInformation( void )
 			m_pMapTexture = pMapComboBoxData->GetMapTexture();
 			if(!m_pMapTexture && pMapComboBoxData->GetPictureFileName() != _T(""))
 			{
-				m_pMapTexture = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( _T( "Theme\\" ), ::GetLanguage(), pMapComboBoxData->GetPictureFileName() ), 0xffffffff );
+				m_pMapTexture = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( _T( "Data\\Theme\\" ), ::GetLanguage(), pMapComboBoxData->GetPictureFileName() ), 0xffffffff );
 				pMapComboBoxData->SetMapTexture(m_pMapTexture);
 			}
 			break;

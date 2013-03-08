@@ -289,8 +289,7 @@ public:
 		{
 			LPCTSTR szErr = Error( "CTexturePack::Render : 범위를 벗어남 %d", (int)dwIndex );
 			ADDERRORMSG( szErr );
-			int *p = NULL;
-			*p = 1;
+			return;
 		}
 		p2DRender->RenderTexture( pt, &m_ap2DTexture[ dwIndex ], dwBlendFactorAlhpa, fScaleX , fScaleY ); 
 	}

@@ -56,14 +56,14 @@ CNetwork::~CNetwork()
 
 void CNetwork::StartLog()
 {
-	FILE *fp = fopen( MakeFileNameDate( "network.log" ), "w" );
+	/*FILE *fp = fopen( MakeFileNameDate( "network.log" ), "w" );
 	if( fp )
-		fclose( fp );
+		fclose( fp );*/
 }
 
 void CNetwork::Log( LPCTSTR lpszFormat, ... )
 {
-	TCHAR szBuffer[1024];
+	/*TCHAR szBuffer[1024];
 
 	va_list args;
 	va_start( args, lpszFormat );
@@ -78,12 +78,12 @@ void CNetwork::Log( LPCTSTR lpszFormat, ... )
 	{
 		fprintf( fp, "%s", szBuffer );
 		fclose( fp );
-	}
+	}*/
 }
 
 void CNetwork::OnEvent( NETWORK_EVENT event )
 {
-	time_t	tmCur = time_null();
+	/*time_t	tmCur = time_null();
 	Log( "%s%d - %s\n", ctime(&tmCur), event, g_szText[event] );
 
 	LONG lError = 0;
@@ -125,5 +125,5 @@ void CNetwork::OnEvent( NETWORK_EVENT event )
 		lError = g_DPlay.GetNetError();
 		Log( "network error:%d\n", lError );
 		break;
-	}
+	}*/
 }

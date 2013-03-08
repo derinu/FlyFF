@@ -692,10 +692,10 @@ CObj* CreateObj( LPDIRECT3DDEVICE9 pd3dDevice, DWORD dwObjType, DWORD dwObjIndex
 }
 
 
-CObj* ReadObj( CFileIO* pFile )
+CObj* ReadObj( CResFile* pFile )
 {
 	DWORD dwObjType;
-	pFile->Read( &dwObjType, sizeof( DWORD ), 1 );
+	pFile->ReadPart( &dwObjType, sizeof( DWORD ), 1 );
 
 	CObj* pObj = NULL;
 	switch( dwObjType )

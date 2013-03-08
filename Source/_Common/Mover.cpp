@@ -3279,7 +3279,7 @@ void CMover::ProcessRegion()
 #endif	// __WORLDSERVER
 }
 
-BOOL CMover::Read( CFileIO* pFile )
+BOOL CMover::Read( CResFile* pFile )
 {
 	CObj::Read( pFile );
 

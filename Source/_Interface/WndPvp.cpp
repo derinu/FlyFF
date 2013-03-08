@@ -190,9 +190,9 @@ void CWndPvpBase::OnInitialUpdate()
 		m_wndChangeJob.Create( ">", 0, CRect( 135, y, 135+40, y + 13 ), this, 10  ); 
 
 #if __VER >= 9 // __CSC_VER9_2
-	SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "WndPvP2.tga" ) ), TRUE );
+	SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "WndPvP2.tga" ) ), TRUE );
 #else //__CSC_VER9_2
-	SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "wndPvP.tga" ) ), TRUE );
+	SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "wndPvP.tga" ) ), TRUE );
 #endif //__CSC_VER9_2
 	
 	FitTextureSize();

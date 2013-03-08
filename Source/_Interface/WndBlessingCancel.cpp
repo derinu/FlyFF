@@ -44,7 +44,7 @@ void CWndBlessingCancel::OnInitialUpdate()
 	CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_START);
 
 	if(::GetLanguage() == LANG_FRE)
-		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
+		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
 
 	pButton->EnableWindow(FALSE);
 	m_pText = (CWndText*)GetDlgItem( WIDC_DESC );

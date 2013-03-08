@@ -165,7 +165,7 @@ public:
 	virtual void	InitProp( BOOL bInitAI = TRUE );
 	virtual	LPCTSTR GetName() { return _T( "hello" ); }
 	virtual void	Process();
-	virtual BOOL	Read( CFileIO* pFile );
+	virtual BOOL	Read( CResFile* pFile );
 	virtual void	Serialize( CAr & ar );
 	virtual void	Render( LPDIRECT3DDEVICE9 pd3dDevice );
 	virtual void	RenderName( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dwColor = 0xffffffff );//adeilson

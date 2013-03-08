@@ -514,7 +514,7 @@ CItem::~CItem()
 	}
 }
 
-BOOL CItem::Read( CFileIO* pFile )
+BOOL CItem::Read( CResFile* pFile )
 {
 	CObj::Read( pFile );
 	return TRUE;

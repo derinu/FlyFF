@@ -44,10 +44,11 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="d3dx9dt.lib d3d9.lib d3dxof.lib dxerr9.lib dsound.lib winmm.lib dxguid.lib imm32.lib ws2_32.lib VERSION.LIB libboost_zlib-vc71-mt-s-1_50.lib libboost_iostreams-vc71-mt-s-1_50.lib"
-				OutputFile=".\..\..\Output/Neuz.exe"
+				OutputFile=".\..\..\Output\Client.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\Lib"
+				DelayLoadDLLs="mss32.dll;NeuzD.dll;DSETUP.dll;dbghelp.dll"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile=".\..\..\Output\Neuz\NoGameguard/Neuz.pdb"
 				GenerateMapFile="TRUE"
@@ -10145,7 +10146,7 @@
 				RelativePath="resource.h">
 			</File>
 			<File
-				RelativePath="WinMain.rc">
+				RelativePath=".\WinMain.rc">
 			</File>
 		</Filter>
 		<Filter
@@ -10281,6 +10282,9 @@
 		</File>
 		<File
 			RelativePath=".\DPCollectClient.h">
+		</File>
+		<File
+			RelativePath=".\res\FruitIconNeuz.ico">
 		</File>
 		<File
 			RelativePath="..\_Common\langman.h">

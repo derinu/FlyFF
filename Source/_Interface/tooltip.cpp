@@ -96,7 +96,7 @@ void CToolTip::InitTexture()
 	CString strPath;
 	
 	if(::GetLanguage() == LANG_FRE)
-		strPath = MakePath( "Theme\\", ::GetLanguage(), "Icon_Ultimate.dds");
+		strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "Icon_Ultimate.dds");
 	else
 		strPath = MakePath( DIR_ICON, "Icon_Ultimate.dds");
 
@@ -794,7 +794,7 @@ void CToolTip::Paint(C2DRender* p2DRender)
 			CTexture* pTexture;
 			
 			if(::GetLanguage() == LANG_FRE)
-				strPath = MakePath( "Theme\\", ::GetLanguage(), "Icon_Ultimate.dds");
+				strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "Icon_Ultimate.dds");
 			else
 				strPath = MakePath( DIR_ICON, "Icon_Ultimate.dds");
 

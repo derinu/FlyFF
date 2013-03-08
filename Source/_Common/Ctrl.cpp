@@ -82,7 +82,7 @@ void CCtrl::Render( LPDIRECT3DDEVICE9 pd3dDevice )
 	CObj::Render( pd3dDevice );
 }
 
-BOOL CCtrl::Read( CFileIO* pFile )
+BOOL CCtrl::Read( CResFile* pFile )
 {
 	return CObj::Read( pFile );
 }

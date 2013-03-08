@@ -946,8 +946,6 @@ int		CObject3D :: LoadObject( LPCTSTR szFileName )
 	for( j = 0; j < cLen; j ++ )
 		buff[j] = buff[j] ^ (char)0xcd;	// 암호화 해제
 
-	::OUTPUTDEBUGSTRING("3d obj %s [%d]: %s\n", szName, cLen, buff);
-
 	if( cLen >= 64 )
 	{
 		Error( "LoadObject3D : %s 파일명이 너무 길다 %d", szFileName, (int)cLen );

@@ -789,7 +789,7 @@ CWndOptVideo::CWndOptVideo()
 } 
 CWndOptVideo::~CWndOptVideo() 
 { 
-	g_Option.Save( "neuz.ini" );	
+	g_Option.Save( "Data\\neuz.ini" );	
 } 
 HRESULT CWndOptVideo::InvalidateDeviceObjects()
 {

@@ -70,7 +70,7 @@ BOOL CTheme::LoadTheme( LPDIRECT3DDEVICE9 pd3dDevice, LPCTSTR lpszFileName)
 			scanner.GetToken();
 			scanner.GetToken();
 
-			m_texWallPaper.LoadTexture( m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), scanner.token ), 0xff0000 );
+			m_texWallPaper.LoadTexture( m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), scanner.token ), 0xff0000 );
 			m_texWndPaper.LoadTexture( m_pd3dDevice, MakePath( DIR_THEME, "WindField.bmp" ), 0xff0000 );
 		}	
 		else
@@ -83,8 +83,8 @@ BOOL CTheme::LoadTheme( LPDIRECT3DDEVICE9 pd3dDevice, LPCTSTR lpszFileName)
 	}
 
 #ifdef __GAME_GRADE_SYSTEM
-	m_GameGradeScreenTexture.LoadTexture( m_pd3dDevice, MakePath( _T( "Theme\\" ), ::GetLanguage(), _T( "GameGradeWarningScreen.tga" ) ), 0xff0000 );
-	m_pGameGradeTexture = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( _T( "Theme\\" ), ::GetLanguage(), _T( "GameGradeMark.bmp" ) ), 0xffff00ff );
+	m_GameGradeScreenTexture.LoadTexture( m_pd3dDevice, MakePath( _T( "Data\\Theme\\" ), ::GetLanguage(), _T( "GameGradeWarningScreen.tga" ) ), 0xff0000 );
+	m_pGameGradeTexture = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( _T( "Data\\Theme\\" ), ::GetLanguage(), _T( "GameGradeMark.bmp" ) ), 0xffff00ff );
 #endif // __GAME_GRADE_SYSTEM
 
 #ifdef __LANG_1013
@@ -578,10 +578,10 @@ void CTheme::ReadTitleWorld()
 						camera.m_vLookAt = vecLookat;
 						m_pTitleWorld->SetCamera(&camera);
 
-						m_pFlyffLogo = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "flyfftitletest.bmp" ) ), 0xffff00ff );
-						m_pGameGrade = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "gamegradetest.bmp" ) ), 0xffff00ff );
-						m_pAeonLogo = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "aeonsoftlogotest.bmp" ) ), 0xffff00ff );
-						m_pGalaLogo = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "galalogotest.bmp" ) ), 0xffff00ff );
+						m_pFlyffLogo = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "flyfftitletest.bmp" ) ), 0xffff00ff );
+						m_pGameGrade = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "gamegradetest.bmp" ) ), 0xffff00ff );
+						m_pAeonLogo = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "aeonsoftlogotest.bmp" ) ), 0xffff00ff );
+						m_pGalaLogo = CWndBase::m_textureMng.AddTexture( m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "galalogotest.bmp" ) ), 0xffff00ff );
 						
 						m_bRenderTitleWorld = TRUE;
 					}

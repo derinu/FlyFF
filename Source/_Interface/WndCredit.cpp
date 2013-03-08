@@ -289,10 +289,10 @@ void CWndCredit::OnInitialUpdate()
 		CString strfile;
 #ifdef __FOR_PROLOGUE_UPDATE
 		if( ::GetLanguage() != LANG_KOR )
-			strfile = MakePath( "Theme\\", ::GetLanguage(), _T( "Openning.inc" ) );
+			strfile = MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "Openning.inc" ) );
 #else //__FOR_PROLOGUE_UPDATE		
 		if( ::GetLanguage() == LANG_JAP )
-			strfile = "Theme\\Japanese\\Openning.inc";
+			strfile = "Data\\Theme\\Japanese\\Openning.inc";
 #endif //__FOR_PROLOGUE_UPDATE
 		else
 			strfile = "credit.txt";
@@ -343,7 +343,7 @@ void CWndCredit::OnInitialUpdate()
 			string.Format( "shotCredit%02d.dds", i );
 			//string = "shotCredit20.dds";
 			
-			m_aTexScreenShot[ i ].LoadTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\Japanese\\", string ), 0xffff00ff );
+			m_aTexScreenShot[ i ].LoadTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\Japanese\\", string ), 0xffff00ff );
 			
 			m_aTexScreenShot[ i ].m_size = CSize( 598 + 76, 337 );
 		}
@@ -356,7 +356,7 @@ void CWndCredit::OnInitialUpdate()
 			string.Format( "shotCredit%02d.dds", i );
 			//string = "shotCredit20.dds";
 			
-			m_aTexScreenShot[ i ].LoadTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", string ), 0xffff00ff );
+			m_aTexScreenShot[ i ].LoadTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", string ), 0xffff00ff );
 			
 			m_aTexScreenShot[ i ].m_size = CSize( 598 + 76, 337 );
 		}
@@ -479,7 +479,7 @@ void CWndAbout::OnInitialUpdate()
 	
 	if( lpWndApplet )
 	{
-		SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), strName ), TRUE );
+		SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), strName ), TRUE );
 	}
 	
 

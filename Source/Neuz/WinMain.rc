@@ -1906,7 +1906,7 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_MAIN_ICON           ICON                    "res\\main_ico.ico"
+IDI_MAIN_ICON           ICON                    "res\\FruitIconNeuz.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -1980,4 +1980,3 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
-

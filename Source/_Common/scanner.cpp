@@ -518,7 +518,7 @@ BOOL CScanner::Read( CFileIO* pFile, BOOL )
 	m_bMemFlag = 0;
 	m_nProgSize = pFile->GetLength();
 
-	pFile->Seek((-sizeof(int)), CFile::current);
+	pFile->Seek((-4), CFile::current);
 	int DecompressedSize = pFile->GetDW();
 
 	int nSize = DecompressedSize + 2;

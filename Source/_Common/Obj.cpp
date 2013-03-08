@@ -471,18 +471,18 @@ enum FD_OBJ_ATTR	 // data의 저장 읽기에서 관여하는 속성들
 };
 #endif
 
-BOOL CObj::Read( CFileIO* pFile )
+BOOL CObj::Read( CResFile* pFile )
 {
 	D3DXVECTOR3		vAxis;  // 사용하지 않는다.
 	DWORD			dwMotion;			
 	DWORD			dwAIIntreface;
 	DWORD			dwAI2;
 
-	pFile->Read( &m_fAngle,      sizeof( m_fAngle ) );
-	pFile->Read( &vAxis,         sizeof( vAxis ) );
-	pFile->Read( &m_vPos,        sizeof( m_vPos ) );
-	pFile->Read( &m_vScale,      sizeof( m_vScale ) );
-	pFile->Read( &m_dwType,      sizeof( m_dwType ) ); 
+	pFile->ReadPart( &m_fAngle,      sizeof( m_fAngle ) );
+	pFile->ReadPart( &vAxis,         sizeof( vAxis ) );
+	pFile->ReadPart( &m_vPos,        sizeof( m_vPos ) );
+	pFile->ReadPart( &m_vScale,      sizeof( m_vScale ) );
+	pFile->ReadPart( &m_dwType,      sizeof( m_dwType ) ); 
 
 	//gmpbigsun: m_dwType에 추가적으로 Invisible collision 속성이 추가됐다 ( since 2009_08_13 ), 기존데이터와 호환 
 
@@ -500,10 +500,10 @@ BOOL CObj::Read( CFileIO* pFile )
 	}
 #endif
 
-	pFile->Read( &m_dwIndex,     sizeof( m_dwIndex ) );
-	pFile->Read( &dwMotion,      sizeof( dwMotion ) );
-	pFile->Read( &dwAIIntreface, sizeof( dwAIIntreface ) );
-	pFile->Read( &dwAI2,         sizeof( dwAI2 ) );
+	pFile->ReadPart( &m_dwIndex,     sizeof( m_dwIndex ) );
+	pFile->ReadPart( &dwMotion,      sizeof( dwMotion ) );
+	pFile->ReadPart( &dwAIIntreface, sizeof( dwAIIntreface ) );
+	pFile->ReadPart( &dwAI2,         sizeof( dwAI2 ) );
 
 	m_fAngX = vAxis.x;
 	m_fAngZ = vAxis.z;

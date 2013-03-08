@@ -3629,10 +3629,10 @@ void CWndCharInfo::OnInitialUpdate()
 {
 	
 	CWndBase::OnInitialUpdate();
-	SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "WndNewCharacter01.tga" ) ), TRUE );
+	SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "WndNewCharacter01.tga" ) ), TRUE );
 	//FitTextureSize();
 /*
-	//SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "WndCharacter2_2.tga" ) ), TRUE );
+	//SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "WndCharacter2_2.tga" ) ), TRUE );
 	//FitTextureSize();
 	
 	int x = m_rectClient.Width() / 2;
@@ -3684,8 +3684,8 @@ void CWndCharInfo::OnInitialUpdate()
 
 	if(::GetLanguage() == LANG_USA)
 	{
-		m_wndApply.SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "ButtNormal05.tga" ) ), TRUE );
-		m_wndReset.SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "ButtNormal05.tga" ) ), TRUE );
+		m_wndApply.SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "ButtNormal05.tga" ) ), TRUE );
+		m_wndReset.SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "ButtNormal05.tga" ) ), TRUE );
 	}
 	else
 	{
@@ -4895,9 +4895,9 @@ void CWndCharacterBase::OnInitialUpdate()
 	CWndBase::OnInitialUpdate();
 
 #if __VER >= 9 // __CSC_VER9_2
-	SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "WndCharacter2_1.tga" ) ), TRUE );
+	SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "WndCharacter2_1.tga" ) ), TRUE );
 #else //__CSC_VER9_2
-	SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "wndCharacter1.tga" ) ), TRUE );
+	SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "wndCharacter1.tga" ) ), TRUE );
 #endif //__CSC_VER9_2
 	FitTextureSize();
 	
@@ -5297,7 +5297,7 @@ void CWndCharacterDetail::OnInitialUpdate()
 {
 	CWndBase::OnInitialUpdate();
 
-	SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "wndCharacter2.tga" ) ), TRUE );
+	SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "wndCharacter2.tga" ) ), TRUE );
 	FitTextureSize();
 
 	int x = m_rectClient.Width() / 2;
@@ -5824,7 +5824,7 @@ void CWndCharacterDetail2::OnInitialUpdate()
 {
 	CWndBase::OnInitialUpdate();
 
-	SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "WndCharacter2_2.tga" ) ), TRUE );
+	SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "WndCharacter2_2.tga" ) ), TRUE );
 	FitTextureSize();
 	
 	int x = m_rectClient.Width() / 2;
@@ -5875,8 +5875,8 @@ void CWndCharacterDetail2::OnInitialUpdate()
 
 	if(::GetLanguage() == LANG_USA)
 	{
-		m_wndApply.SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "ButtNormal05.tga" ) ), TRUE );
-		m_wndReset.SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "ButtNormal05.tga" ) ), TRUE );
+		m_wndApply.SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "ButtNormal05.tga" ) ), TRUE );
+		m_wndReset.SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "ButtNormal05.tga" ) ), TRUE );
 	}
 	else
 	{
@@ -17271,8 +17271,8 @@ void CWndPostReceive::OnInitialUpdate()
 	// 윈도를 중앙으로 옮기는 부분.
 	MoveParentCenter();
 	
-	m_Texture[0].LoadTexture(g_Neuz.m_pd3dDevice, MakePath( "Theme\\Default\\", "WndPostTable.tga" ), 0xffff00ff );	
-	m_Texture[1].LoadTexture(g_Neuz.m_pd3dDevice, MakePath( "Theme\\Default\\", "WndNotUse.tga" ), 0xffff00ff );	
+	m_Texture[0].LoadTexture(g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\Default\\", "WndPostTable.tga" ), 0xffff00ff );	
+	m_Texture[1].LoadTexture(g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\Default\\", "WndNotUse.tga" ), 0xffff00ff );	
 	m_Texture[2].LoadTexture(g_Neuz.m_pd3dDevice, MakePath( "item\\", "itm_GolGolSeed.dds" ), 0xffff00ff );	
 	
 } 
@@ -21199,7 +21199,7 @@ void CWndMixJewel::OnInitialUpdate()
 	CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_START);
 
 	if(::GetLanguage() == LANG_FRE)
-		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
+		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
 
 	pButton->EnableWindow(FALSE);
 
@@ -21648,7 +21648,7 @@ void CWndExtraction::OnInitialUpdate()
 	CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_START);
 
 	if(::GetLanguage() == LANG_FRE)
-		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
+		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
 
 	pButton->EnableWindow(FALSE);
 	m_pText = (CWndText*)GetDlgItem( WIDC_TEXT1 );
@@ -21910,7 +21910,7 @@ void CWndSmeltJewel::OnInitialUpdate()
 
 	CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_START);
 	if(::GetLanguage() == LANG_FRE)
-		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
+		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
 
 	pButton->EnableWindow(FALSE);
 
@@ -22606,7 +22606,7 @@ void CWndChangeWeapon::OnInitialUpdate()
 	CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_START);
 
 	if(::GetLanguage() == LANG_FRE)
-		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
+		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
 
 	pButton->EnableWindow(FALSE);
 	m_pText1 = (CWndText*)GetDlgItem( WIDC_TEXT1 );
@@ -23929,7 +23929,7 @@ void CWndRemoveAttribute::OnInitialUpdate()
 	CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_START);
 
 	if(::GetLanguage() == LANG_FRE)
-		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
+		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
 
 	pButton->EnableWindow(FALSE);
 	m_pText = (CWndText*)GetDlgItem( WIDC_TEXT1 );
@@ -24262,7 +24262,7 @@ void CWndRemovePiercing::OnInitialUpdate()
 	CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_START);
 
 	if(::GetLanguage() == LANG_FRE)
-		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
+		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
 
 	pButton->EnableWindow(FALSE);
 	m_pText = (CWndText*)GetDlgItem( WIDC_TEXT1 );
@@ -24591,7 +24591,7 @@ void CWndRemoveJewel::OnInitialUpdate()
 	CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_START);
 
 	if(::GetLanguage() == LANG_FRE)
-		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
+		pButton->SetTexture(g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), _T( "ButtNormal00.tga" ) ), TRUE);
 
 	pButton->EnableWindow(FALSE);
 	m_pText = (CWndText*)GetDlgItem( WIDC_TEXT1 );
@@ -25240,7 +25240,7 @@ void CWndCoupleTabInfo::OnInitialUpdate()
 #endif // __NO_SUB_LANG
 			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "ButtNormal02.tga" ), 0xffff00ff );
 		else
-			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), "ButtNormal02.tga" ), 0xffff00ff );
+			pWndButton->SetTexture( m_pApp->m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), "ButtNormal02.tga" ), 0xffff00ff );
 	}
 
 	MoveParentCenter();

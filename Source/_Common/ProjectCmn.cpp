@@ -940,76 +940,76 @@ void CProject::LoadStrings()
 		"textClient.txt.txt",
 		"textEmotion.txt.txt",
 		"world.txt.txt",
-		"Client\\treeHelp.txt.txt",
-		"Client\\tip.txt.txt",
-		"Client\\PatchClient.txt.txt",
-		"Client\\InstantHelp.txt.txt",
-		"Client\\help.txt.txt",
-		"Client\\Guide.txt.txt",
+		"Data\\Client\\treeHelp.txt.txt",
+		"Data\\Client\\tip.txt.txt",
+		"Data\\Client\\PatchClient.txt.txt",
+		"Data\\Client\\InstantHelp.txt.txt",
+		"Data\\Client\\help.txt.txt",
+		"Data\\Client\\Guide.txt.txt",
 #if __VER >= 12 // __MOD_TUTORIAL
-		"Client\\tutorial.txt.txt",
+		"Data\\Client\\tutorial.txt.txt",
 #endif
 //		"Client\\GameGuard.txt.txt",
-		"Client\\faq.txt.txt",
-		"World\\WdVolcane\\WdVolcane.txt.txt",
-		"World\\WdMadrigal\\wdMadrigal.txt.txt",
-		"World\\WdKebaras\\WdKebaras.txt.txt",
-		"World\\WdGuildWar\\WdGuildWar.txt.txt",
-		"World\\WdEvent01\\WdEvent01.txt.txt",
-		"World\\DuMuscle\\DuMuscle.txt.txt",
-		"World\\DuKrr\\DuKrr.txt.txt",
-		"World\\DuFlMas\\DuFlMas.txt.txt",
-		"World\\DuDaDk\\DuDaDk.txt.txt",
-		"World\\DuBear\\DuBear.txt.txt",
-		"World\\DuSaTemple\\DuSaTemple.txt.txt",
-		"World\\DuSaTempleBoss\\DuSaTempleBoss.txt.txt"
+		"Data\\Client\\faq.txt.txt",
+		"Data\\World\\WdVolcane\\WdVolcane.txt.txt",
+		"Data\\World\\WdMadrigal\\wdMadrigal.txt.txt",
+		"Data\\World\\WdKebaras\\WdKebaras.txt.txt",
+		"Data\\World\\WdGuildWar\\WdGuildWar.txt.txt",
+		"Data\\World\\WdEvent01\\WdEvent01.txt.txt",
+		"Data\\World\\DuMuscle\\DuMuscle.txt.txt",
+		"Data\\World\\DuKrr\\DuKrr.txt.txt",
+		"Data\\World\\DuFlMas\\DuFlMas.txt.txt",
+		"Data\\World\\DuDaDk\\DuDaDk.txt.txt",
+		"Data\\World\\DuBear\\DuBear.txt.txt",
+		"Data\\World\\DuSaTemple\\DuSaTemple.txt.txt",
+		"Data\\World\\DuSaTempleBoss\\DuSaTempleBoss.txt.txt"
 #if __VER >= 9	// __JEFF_9
-		,"World\\WdVolcane\\WdVolcane.txt.txt"
-		,"World\\WdVolcaneRed\\WdVolcaneRed.txt.txt"
-		,"World\\WdVolcaneYellow\\WdVolcaneYellow.txt.txt"
+		,"Data\\World\\WdVolcane\\WdVolcane.txt.txt"
+		,"Data\\World\\WdVolcaneRed\\WdVolcaneRed.txt.txt"
+		,"Data\\World\\WdVolcaneYellow\\WdVolcaneYellow.txt.txt"
 #endif	// __JEFF_9
 #ifdef __JEFF_11_4
-		,"World\\WdArena\\WdArena.txt.txt"
+		,"Data\\World\\WdArena\\WdArena.txt.txt"
 #endif	// __JEFF_11_4
 #if __VER >= 12 // __LORD
 		,"lordskill.txt.txt"
 #endif	// __LORD
 #if __VER >= 12 // __SECRET_ROOM
-		,"World\\WdHeaven01\\wdheaven01.txt.txt"
-		,"World\\WdHeaven02\\wdheaven02.txt.txt"
-		,"World\\WdHeaven03\\wdheaven03.txt.txt"
-		,"World\\WdHeaven04\\wdheaven04.txt.txt"
-		,"World\\WdHeaven05\\wdheaven05.txt.txt"
-		,"World\\WdHeaven06\\wdheaven06.txt.txt"
-		,"World\\WdHeaven06_1\\wdheaven06_1.txt.txt"
+		,"Data\\World\\WdHeaven01\\wdheaven01.txt.txt"
+		,"Data\\World\\WdHeaven02\\wdheaven02.txt.txt"
+		,"Data\\World\\WdHeaven03\\wdheaven03.txt.txt"
+		,"Data\\World\\WdHeaven04\\wdheaven04.txt.txt"
+		,"Data\\World\\WdHeaven05\\wdheaven05.txt.txt"
+		,"Data\\World\\WdHeaven06\\wdheaven06.txt.txt"
+		,"Data\\World\\WdHeaven06_1\\wdheaven06_1.txt.txt"
 #endif // __SECRET_ROOM
 #if __VER >= 13 // __HONORABLE_TITLE
 		, "honorList.txt.txt"
 #endif	// __HONORABLE_TITLE
 #ifdef __AZRIA_1023
-		, "World\\WdCisland\\WdCisland.txt.txt"
+		, "Data\\World\\WdCisland\\WdCisland.txt.txt"
 #endif // __AZRIA_1023
 #if __VER >= 14 // __INSTANCE_DUNGEON
-		, "World\\DuOminous\\duominous.txt.txt"
-		, "World\\DuOminous_1\\duominous_1.txt.txt"
+		, "Data\\World\\DuOminous\\duominous.txt.txt"
+		, "Data\\World\\DuOminous_1\\duominous_1.txt.txt"
 #endif // __INSTANCE_DUNGEON
 #if __VER >= 15 // __GUILD_HOUSE
-		, "World\\WdGuildhousesmall\\WdGuildhousesmall.txt.txt"		// 소형 길드하우스
-		, "World\\WdGuildhousemiddle\\WdGuildhousemiddle.txt.txt"	// 중형 길드하우스
-		, "World\\WdGuildhouselarge\\WdGuildhouselarge.txt.txt"		// 대형 길드하우스
-		, "World\\DuDreadfulCave\\DuDreadfulCave.txt.txt"			// 추가 인던(드래드풀 케이브)
-		, "World\\DuRustia\\DuRustia.txt.txt"						// 추가 인던(러스티아 일반)
-		, "World\\DuRustia_1\\DuRustia_1.txt.txt"					// 추가 인던(러스티아 마스터)
+		, "Data\\World\\WdGuildhousesmall\\WdGuildhousesmall.txt.txt"		// 소형 길드하우스
+		, "Data\\World\\WdGuildhousemiddle\\WdGuildhousemiddle.txt.txt"	// 중형 길드하우스
+		, "Data\\World\\WdGuildhouselarge\\WdGuildhouselarge.txt.txt"		// 대형 길드하우스
+		, "Data\\World\\DuDreadfulCave\\DuDreadfulCave.txt.txt"			// 추가 인던(드래드풀 케이브)
+		, "Data\\World\\DuRustia\\DuRustia.txt.txt"						// 추가 인던(러스티아 일반)
+		, "Data\\World\\DuRustia_1\\DuRustia_1.txt.txt"					// 추가 인던(러스티아 마스터)
 #endif // __GUILD_HOUSE
 #ifdef __IMPROVE_MAP_SYSTEM
 		, "propMapComboBoxData.txt.txt"
 #endif // __IMPROVE_MAP_SYSTEM
 #if __VER >= 16
-		, "World\\DuBehamah\\DuBehamah.txt.txt"
+		, "Data\\World\\DuBehamah\\DuBehamah.txt.txt"
 #endif // __VER 16
 #if __VER >= 17
-		, "World\\WdColosseum\\WdColosseum.txt.txt"
-		, "World\\DuKalgas\\DuKalgas.txt.txt"
+		, "Data\\World\\WdColosseum\\WdColosseum.txt.txt"
+		, "Data\\World\\DuKalgas\\DuKalgas.txt.txt"
 //		, "World\\WdArena_1\\WdArena_1.txt.txt"
 #endif // __VER 17
 	};

@@ -963,7 +963,7 @@ BOOL CWorldMap::LoadWorldMap()
 	if( nMap != 100 )
 	{
 		m_strViewMapString = m_strMapStringList[nMap];
-		m_pTexWorldMap = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), m_strViewMapString ), 0xff000000 );
+		m_pTexWorldMap = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), m_strViewMapString ), 0xff000000 );
 
 #if __VER >= 13 // __CSC_VER13_1
 #if __VER >= 14 // __NEW_CONTINENT
@@ -1165,7 +1165,7 @@ void CWorldMap::OnLButtonDown( )
 			UpdateDestinationPosition( pWndWorld->m_vDestinationArrow );
 #endif // __IMPROVE_QUEST_INTERFACE
 			m_strViewMapString = m_strMapStringList[nowMapNum];
-			m_pTexWorldMap = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), m_strViewMapString ), 0xff000000 );
+			m_pTexWorldMap = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), m_strViewMapString ), 0xff000000 );
 
 			if(nowMapNum > 0 && m_MonsterInfo.m_nMap != nowMapNum)
 			{
@@ -1208,7 +1208,7 @@ void CWorldMap::OnLButtonDown( )
 					UpdateDestinationPosition( pWndWorld->m_vDestinationArrow );
 #endif // __IMPROVE_QUEST_INTERFACE
 					m_strViewMapString = m_strMapStringList[m_nMap];
-					m_pTexWorldMap = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), m_strViewMapString ), 0xff000000 );
+					m_pTexWorldMap = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), m_strViewMapString ), 0xff000000 );
 
 					if(m_nMap > 0 && m_MonsterInfo.m_nMap != m_nMap)
 					{
@@ -1225,7 +1225,7 @@ void CWorldMap::OnLButtonDown( )
 #else //__CSC_VER13_1
 				m_nMap = i;
 				m_strViewMapString = m_strMapStringList[m_nMap];
-				m_pTexWorldMap = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), m_strViewMapString ), 0xff000000 );
+				m_pTexWorldMap = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), m_strViewMapString ), 0xff000000 );
 #endif //__CSC_VER13_1
 
 				break;
@@ -1549,7 +1549,7 @@ BOOL CMonsterInfoPack::LoadScript( LPDIRECT3DDEVICE9 pd3dDevice, LPCTSTR pszFile
 
 			if( bMultiLang )
 			{
-				LoadTextureFromRes( pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), strFileName ), 
+				LoadTextureFromRes( pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), strFileName ), 
 										D3DX_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, //D3DFMT_A4R4G4B4, 
 										D3DPOOL_MANAGED, D3DX_FILTER_TRIANGLE|D3DX_FILTER_MIRROR, 
 										D3DX_FILTER_TRIANGLE|D3DX_FILTER_MIRROR, d3dKeyColor, &imageInfo, NULL, &m_pTexture );
@@ -1690,7 +1690,7 @@ BOOL CRainbowNPCPack::LoadScript( LPDIRECT3DDEVICE9 pd3dDevice, LPCTSTR pszFileN
 
 			if( bMultiLang )
 			{
-				LoadTextureFromRes( pd3dDevice, MakePath( "Theme\\", ::GetLanguage(), strFileName ), 
+				LoadTextureFromRes( pd3dDevice, MakePath( "Data\\Theme\\", ::GetLanguage(), strFileName ), 
 										D3DX_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, //D3DFMT_A4R4G4B4, 
 										D3DPOOL_MANAGED, D3DX_FILTER_TRIANGLE|D3DX_FILTER_MIRROR, 
 										D3DX_FILTER_TRIANGLE|D3DX_FILTER_MIRROR, d3dKeyColor, &imageInfo, NULL, &m_pTexture );

@@ -51,7 +51,7 @@ public:
 	virtual	void	RemoveItFromGlobalId();
 	virtual void	Process();
 	virtual void	Render(LPDIRECT3DDEVICE9 pd3dDevice);
-	virtual BOOL	Read( CFileIO* pFile );
+	virtual BOOL	Read( CResFile* pFile );
 	virtual	void	Serialize( CAr & ar );
 
 	void			SetId( OBJID objid )	{ m_objid = objid;  }

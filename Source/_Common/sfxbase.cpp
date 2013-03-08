@@ -3735,7 +3735,7 @@ void close_lua_sfx()
 
 void run_lua_sfx( int nState, OBJID caller, const char* szMoverName )
 {
-	static const CString strPATH( "SFX\\Scripts\\" );
+	static const CString strPATH( "Data\\" );
 	static const CString strFORMAT(".lua");
 
 	// setup 

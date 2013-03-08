@@ -53,7 +53,7 @@ BOOL CRainbowNPCInformationPack::LoadScript( const CString& strFileName )
 			{
 				LoadTextureFromRes( 
 					D3DDEVICE, 
-					MakePath( _T( "Theme\\" ), ::GetLanguage(), strTexturePackFileName ), 
+					MakePath( _T( "Data\\Theme\\" ), ::GetLanguage(), strTexturePackFileName ), 
 					D3DX_DEFAULT, 
 					D3DX_DEFAULT, 
 					D3DX_DEFAULT, 

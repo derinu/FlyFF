@@ -1072,7 +1072,7 @@ void CWndMgr::DestroyApplet()
 	}
 	// 파괴할 때 인터페이스 정보가 저장된다. 따라서 파괴 이후 save하기.
 	if( m_bTitle == FALSE )
-		SaveRegInfo( "regInfo.dat" );
+		SaveRegInfo( "Data\\regInfo.dat" );
 	m_mapWndApplet.RemoveAll();
 }
 
@@ -2301,7 +2301,7 @@ void CWndMgr::OpenTitle( BOOL bFirstTime )
 	// 처음 실행하는게 아니라면 게임 중 로그아웃한 것이다. 그렇다면 현재 열려 있는 필드를 삭제한다.
 	if( bFirstTime == FALSE )
 	{
-		g_Option.Save( "neuz.ini" );
+		g_Option.Save( "Data\\neuz.ini" );
 		DestroyApplet();
 		Free();
 		g_WorldMng.DestroyCurrentWorld();
@@ -2396,7 +2396,7 @@ void CWndMgr::OpenField()
 	m_aChatColor.RemoveAll();
 	m_aChatStyle.RemoveAll();
 
-	LoadRegInfo( "regInfo.dat" );
+	LoadRegInfo( "Data\\regInfo.dat" );
 	ObjectExecutor( SHORTCUT_APPLET, APP_COMMUNICATION_CHAT );
 	ObjectExecutor( SHORTCUT_APPLET, APP_NAVIGATOR );
 	ObjectExecutor( SHORTCUT_APPLET, APP_STATUS1 );
@@ -7539,6 +7539,7 @@ BOOL CWndMgr::PutRegInfo( LPWNDREGINFO lpRegInfo )
 }
 BOOL CWndMgr::SaveRegInfo( LPCTSTR lpszFileName )
 {
+	return TRUE;
 	CFileIO file;
 	if( file.Open( lpszFileName, "wb" ) == FALSE )
 		return FALSE;
@@ -7562,15 +7563,17 @@ BOOL CWndMgr::SaveRegInfo( LPCTSTR lpszFileName )
 	}
 	file.Close();
 	// resolution 파일 만들기. 현재 사이즈로 저장
-	if( file.Open( "resolution", "wb" ) == FALSE )
+	/*if( file.Open( "resolution", "wb" ) == FALSE )
 		return FALSE;
 	file.PutDW( g_Option.m_nResWidth );
 	file.PutDW( g_Option.m_nResHeight );
-	file.Close();
+	file.Close();*/
 	return TRUE;
 }
 BOOL CWndMgr::LoadRegInfo( LPCTSTR lpszFileName )
 {
+	return FALSE;
+
 	CFileIO file;
 	BOOL bResult = FALSE;
 	if( file.Open( "resolution", "rb" ) )

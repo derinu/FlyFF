@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by WinMain.rc
 //
 #define IDS_SERVER_IP                   1
@@ -52,6 +52,7 @@
 #define IDD_CONSOLE_DLG                 204
 #define IDD_DIALOG4                     205
 #define IDD_DIALOG5                     206
+#define IDI_ICON2                       208
 #define IDC_DEVICE_COMBO                1000
 #define IDC_MODE_COMBO                  1001
 #define IDC_ADAPTER_COMBO               1002
@@ -86,7 +87,7 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        207
+#define _APS_NEXT_RESOURCE_VALUE        209
 #define _APS_NEXT_COMMAND_VALUE         40014
 #define _APS_NEXT_CONTROL_VALUE         1038
 #define _APS_NEXT_SYMED_VALUE           102

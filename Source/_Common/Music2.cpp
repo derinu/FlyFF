@@ -56,7 +56,7 @@ BOOL PlayMusic_( LPCTSTR lpszFileName, int nLoopCount )
 
 	if( !g_Stream )
 	{
-		Error( "oh my god... AIL_open_stream error" );
+		Error( "Unable to open music: %s", lpszFileName );
 		return FALSE;
 	}
 	

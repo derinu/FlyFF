@@ -26,7 +26,7 @@ CMover *CreateMover( CWorld *pWorld, DWORD dwID, const D3DXVECTOR3 &vPos, int nL
 CMover *CreateMover( CWorld *pWorld, DWORD dwID, D3DXVECTOR3 vPos );
 #endif	// __LAYER_1015
 CObj* CreateObj( LPDIRECT3DDEVICE9 pd3dDevice, DWORD dwObjType, DWORD dwObjIndex, BOOL bInitProp = TRUE );
-CObj* ReadObj( CFileIO* pFile );
+CObj* ReadObj( CResFile* pFile );
 
 BOOL CheckVersion( FILE* fp, LPCTSTR lpszName, LPCTSTR lpszVersion );
 BOOL WriteVersion( FILE* fp, LPCTSTR lpszName, LPCTSTR lpszVersion );

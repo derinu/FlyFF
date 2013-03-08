@@ -131,11 +131,11 @@ void CResFile::ReadPart(void *ptr, size_t size, size_t n)
 	if(this->m_bResouceInFile)
 	{
 		char* ctptr = (char*)ptr;
-		copy(&this->TmpPtr[this->TmpPtrPosition], &this->TmpPtr[this->TmpPtrPosition + size], ctptr);
+		copy(&this->TmpPtr[this->TmpPtrPosition], &this->TmpPtr[this->TmpPtrPosition + (size * n)], ctptr);
 		ptr = (void*)ctptr;
 		ctptr = 0;
 		safe_delete_array(ctptr);
-		this->TmpPtrPosition += size;
+		this->TmpPtrPosition += (size * n);
 	}
 	else
 		this->Read(ptr, size, n);

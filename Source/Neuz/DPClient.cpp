@@ -2285,7 +2285,7 @@ void CDPClient::OnReplace( CAr & ar )
 #endif
 	char* szMapFile[] = { "MapLoading2.tga", "MapLoading3.tga", "MapLoading4.tga" };
 
-	CString strPath = MakePath( "Theme\\", ::GetLanguage(), szMapFile[xRandom( 0, 3 )] );
+	CString strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), szMapFile[xRandom( 0, 3 )] );
 	// 맵(던전) 로딩시 이미지 출력
 	CWorld::m_nZoomLevel = 0;
 	CWndWorld* pWndWorld = (CWndWorld*)g_WndMng.GetWndBase( APP_WORLD );
@@ -2296,47 +2296,47 @@ void CDPClient::OnReplace( CAr & ar )
  	if( dwWorldID == WI_WORLD_GUILDWAR )
 #endif // __GUILD_COMBAT_1TO1
 	{
-		strPath = MakePath( "Theme\\Default\\", "MapLoading_GuildWar.tga" );
+		strPath = MakePath( "Data\\Theme\\Default\\", "MapLoading_GuildWar.tga" );
 	}
 #if __VER >= 14 // __INSTANCE_DUNGEON
 	else if( dwWorldID == WI_INSTANCE_OMINOUS )
-		strPath = MakePath( "Theme\\Default\\", "MapLoading_Ominous.tga" );
+		strPath = MakePath( "Data\\Theme\\Default\\", "MapLoading_Ominous.tga" );
 	else if( dwWorldID == WI_INSTANCE_OMINOUS_1 )
-		strPath = MakePath( "Theme\\Default\\", "MapLoading_Ominous_1.tga" );
+		strPath = MakePath( "Data\\Theme\\Default\\", "MapLoading_Ominous_1.tga" );
 #endif // __INSTANCE_DUNGEON
 #if __VER >= 15 // __15TH_INSTANCE_DUNGEON
 	else if( dwWorldID == WI_INSTANCE_DREADFULCAVE )
-		strPath = MakePath( "Theme\\Default\\", "MapLoading_DreadfulCave.tga" );
+		strPath = MakePath( "Data\\Theme\\Default\\", "MapLoading_DreadfulCave.tga" );
 #endif // __15TH_INSTANCE_DUNGEON
 #if __VER >= 15 // __GUILD_HOUSE
 	else if( GuildHouse->IsMyGuildHouse( dwWorldID ) )
-		strPath = MakePath( "Theme\\", ::GetLanguage(), "MapLoading_Guildhouse.tga" );
+		strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "MapLoading_Guildhouse.tga" );
 #endif // __GUILD_HOUSE
 #ifdef __LOADING_SCREEN_UPDATE
 	else if( dwWorldID == WI_WORLD_ARENA )
-		strPath = MakePath( "Theme\\", ::GetLanguage(), "MapLoading_Arena.tga" );
+		strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "MapLoading_Arena.tga" );
 	else if( dwWorldID == WI_WORLD_KEBARAS )
-		strPath = MakePath( "Theme\\", ::GetLanguage(), "MapLoading_Azria.tga" );
+		strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "MapLoading_Azria.tga" );
 	else if( dwWorldID == WI_WORLD_CISLAND )
-		strPath = MakePath( "Theme\\", ::GetLanguage(), "MapLoading_Cisland.tga" );
+		strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "MapLoading_Cisland.tga" );
 	else if( dwWorldID == WI_WORLD_COLOSSEUM )
-		strPath = MakePath( "Theme\\", ::GetLanguage(), "MapLoading_Colosseum.tga" );
+		strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "MapLoading_Colosseum.tga" );
 	else if( dwWorldID == WI_INSTANCE_BEHAMAH )
-		strPath = MakePath( "Theme\\", ::GetLanguage(), "MapLoading_Behemoth" );
+		strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "MapLoading_Behemoth" );
 	else if( dwWorldID >= WI_WORLD_HEAVEN01 && dwWorldID <= WI_WORLD_HEAVEN05 )
-		strPath = MakePath( "Theme\\", ::GetLanguage(), "MapLoading_Heaven.tga" );
+		strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "MapLoading_Heaven.tga" );
 	else if( dwWorldID == WI_DUNGEON_SA_TA )
-		strPath = MakePath( "Theme\\", ::GetLanguage(), "MapLoading_Ibless.tga" );
+		strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "MapLoading_Ibless.tga" );
 	else if( dwWorldID == WI_INSTANCE_KALGAS )
-		strPath = MakePath( "Theme\\", ::GetLanguage(), "MapLoading_kalgas.tga" );
+		strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "MapLoading_kalgas.tga" );
 	else if( dwWorldID == WI_DUNGEON_FL_MAS )
-		strPath = MakePath( "Theme\\", ::GetLanguage(), "MapLoading_Mas.tga" );
+		strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "MapLoading_Mas.tga" );
 	else if( dwWorldID == WI_WORLD_RARTESIA )
-		strPath = MakePath( "Theme\\", ::GetLanguage(), "MapLoading_Rartesia.tga" );
+		strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "MapLoading_Rartesia.tga" );
 	else if( dwWorldID >= WI_INSTANCE_RUSTIA && dwWorldID <= WI_INSTANCE_RUSTIA_1 )
-		strPath = MakePath( "Theme\\", ::GetLanguage(), "MapLoading_Rustia.tga" );
+		strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "MapLoading_Rustia.tga" );
 	else if( dwWorldID == WI_DUNGEON_VOLCANE || dwWorldID == WI_DUNGEON_VOLCANERED )
-		strPath = MakePath( "Theme\\", ::GetLanguage(), "MapLoading_Volcane.tga" );
+		strPath = MakePath( "Data\\Theme\\", ::GetLanguage(), "MapLoading_Volcane.tga" );
 #endif // __LOADING_SCREEN_UPDATE
 	else
 	{

@@ -116,7 +116,7 @@ public:
 	virtual void Process();
 	virtual void Render( LPDIRECT3DDEVICE9 pd3dDevice );
 	virtual void RenderName( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dwColor = 0xffffffff );//adeilson
-	virtual BOOL Read( CFileIO* pFile );
+	virtual BOOL Read( CResFile* pFile );
 };
 
 #endif //__COMMONCTRL_H__
