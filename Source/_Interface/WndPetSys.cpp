@@ -2478,6 +2478,8 @@ void CWndBuffPetStatus::UpdateVisState( )
 
 BOOL CWndBuffPetStatus::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 {
+	return FALSE;
+
 	CWndBase* pWndFrame	= pShortcut->m_pFromWnd->GetFrameWnd();
 	if( !pWndFrame )
 	{
@@ -2672,7 +2674,7 @@ void CWndBuffPetStatus::DrawSlotItems( C2DRender* p2DRender )
 	LPWNDCTRL wndCtrl = NULL;
 	for( int i=0; i<MAX_VIS; ++i )
 	{
-		if( i < nAvailableSlot )
+		/*if( i < nAvailableSlot )
 		{
 			DWORD dwItemIndex = pItem->GetPiercingItem( i );
 	
@@ -2696,20 +2698,21 @@ void CWndBuffPetStatus::DrawSlotItems( C2DRender* p2DRender )
 			}
 		}
 		else
-		{
+		{*/
 			//사용불가능 슬롯 
 			wndCtrl = GetWndCtrl( m_nCtrlId[i] );
 			CTexture* pTexClosed = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_ICON, "Icon_Lock.dds" ), 0xffff00ff );
 			if( pTexClosed )
 				pTexClosed->Render( p2DRender, CPoint( wndCtrl->rect.left, wndCtrl->rect.top ) );
 
-		}
+		//}
 	}
 }
 
 
 BOOL CWndBuffPetStatus::DoModal_ConfirmQuestion( DWORD dwItemId, OBJID dwObjid, DWORD dwIndex, int nSlot, CWndConfirmVis::ConfirmVisSection eSection )
 {
+	return FALSE;
 	SAFE_DELETE( m_pWndConfirmVis );
 	m_pWndConfirmVis = new CWndConfirmVis;
 	m_pWndConfirmVis->m_dwItemId = dwItemId;
@@ -2799,6 +2802,8 @@ BOOL CWndBuffPetStatus::IsVisItem( DWORD index )
 
 BOOL CWndBuffPetStatus::IsFreeSlot( const int index )
 {
+	return FALSE;
+
 	CItemElem* pItem = g_pPlayer->GetVisPetItem();
 	if( !pItem )
 		return FALSE;

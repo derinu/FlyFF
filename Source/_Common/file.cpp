@@ -139,8 +139,10 @@ void CResFile::ReadPart(void *ptr, size_t size, size_t n)
 		char* ctptr = (char*)ptr;
 		copy(&this->TmpPtr[this->TmpPtrPosition], &this->TmpPtr[this->TmpPtrPosition + (size * n)], ctptr);
 		ptr = (void*)ctptr;
+
 		ctptr = 0;
 		safe_delete_array(ctptr);
+
 		this->TmpPtrPosition += (size * n);
 	}
 	else
@@ -741,6 +743,10 @@ size_t CResFile::Read( void *ptr, size_t size, size_t n /* = 1  */ )
 		DecompressedFileData.clear();
 
 		ptr = (void*)ctptr;
+		
+
+		tmpptr = 0;
+		safe_delete_array(tmpptr);
 		ctptr = 0;
 		safe_delete_array(ctptr);
 		

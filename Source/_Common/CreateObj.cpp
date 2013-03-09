@@ -680,7 +680,7 @@ CObj* CreateObj( LPDIRECT3DDEVICE9 pd3dDevice, DWORD dwObjType, DWORD dwObjIndex
 //					pMover->m_pActMover->m_fSpeed	*= 1.5F;
 			}
 			if( pProp->dwAI == AII_PET )
-                pMover->m_pActMover->m_fSpeed *= 5;
+                pMover->m_pActMover->m_fSpeed *= 2;
 #endif	// __AI_0509
 		}
 		return pObj;
