@@ -953,6 +953,7 @@ int		CObject3D :: LoadObject( LPCTSTR szFileName )
 	}
 
 	buff[cLen] = 0;	// 끝에 널 붙임.
+
 	if( strcmpi( szName, buff ) != 0 )	// 헤더의 파일명과 비교해보고 틀리면 에러.
 	{
 		Error( "잘못된 파일 : %s, %s, %s", szFileName, szName, buff );

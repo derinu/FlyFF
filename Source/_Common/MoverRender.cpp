@@ -1365,14 +1365,6 @@ void CMover::RenderName( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dw
 		{
 			dwColor = prj.m_PKSetting.dwReadyColor;
 		}
-		else if( m_dwAuthorization >= AUTH_ADMINISTRATOR )
-		{
-			dwColor = COLOR_ADMINISTRATOR;
-		}
-		else if( m_dwAuthorization >= AUTH_GAMEMASTER )
-		{
-			dwColor = COLOR_GAMEMASTER;
-		}
 		else
 		{
 			dwColor = COLOR_PLAYER;
@@ -1389,22 +1381,31 @@ void CMover::RenderName( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dw
 			strcpy( szName, (LPCTSTR)strName );
 		}		
 
-		// GM / Admin tag
-		if(m_dwAuthorization >= AUTH_GAMEMASTER)
+		CString strName;
+		strName = "";
+
+		if(m_dwAuthorization >= AUTH_EXECUTIVE)
 		{
-			CString strName;
-			strName = "";
-			if(m_dwAuthorization >= AUTH_ADMINISTRATOR)
-			{
-				strName = "[Admin] ";
-			}
-			else
-			{
-				strName = "[GM] ";
-			}
-			strName += szName;
-			strcpy( szName, (LPCTSTR)strName );
+			strName = "[Executive] ";
+			dwColor = 0xFF6600FF;
 		}
+		else if(m_dwAuthorization >= AUTH_ADMINISTRATOR)
+		{
+			strName = "[Admin] ";
+			dwColor = 0xFFBE0000;
+		}
+		else if(m_dwAuthorization >= AUTH_GAMEMASTER)
+		{
+			strName = "[GM] ";
+			dwColor = 0xFFEE9A00;
+		}
+		else
+		{
+			strName = "";
+		}
+
+		strName += szName;
+		strcpy( szName, (LPCTSTR)strName );
 #else
 #if __VER >= 8 // __S8_PK
 		if( IsChaotic() )

@@ -302,7 +302,7 @@ void CWndInfoPang::OnInitialUpdate()
 	CWndGuideSystem* pWndGuide = (CWndGuideSystem*)GetWndBase( APP_GUIDE );
 	if(pWndGuide->m_dwGuideLevel == 0)
 	{
-		pWndGuide->m_bVisible = true;
+		pWndGuide->m_bVisible = false;
 		pWndGuide->ChangeModel( g_pPlayer->GetJob() );
 		pWndGuide->SetAni( g_pPlayer->GetJob(), 0 );
 	}

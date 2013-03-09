@@ -594,7 +594,7 @@ LRESULT CD3DApplication::MsgProc( HWND hWnd, UINT uMsg, WPARAM wParam,
 
         case WM_ENTERSIZEMOVE:
             // Halt frame movement while the app is sizing or moving
-            Pause( true );
+            //Pause( true );
             break;
 
         case WM_SIZE:
@@ -615,7 +615,7 @@ LRESULT CD3DApplication::MsgProc( HWND hWnd, UINT uMsg, WPARAM wParam,
                   //  ClipCursor( NULL );
 //                Pause( true ); // Pause while we're minimized - xuzhu가 고침
 #ifdef __WINDOW_STYLE
-				Pause( true ); // Pause while we're minimized - xuzhu가 고침
+				//Pause( true ); // Pause while we're minimized - xuzhu가 고침
 #endif //__WINDOW_STYLE
 
                 m_bMinimized = true;
@@ -623,8 +623,8 @@ LRESULT CD3DApplication::MsgProc( HWND hWnd, UINT uMsg, WPARAM wParam,
             }
             else if( SIZE_MAXIMIZED == wParam )
             {
-                if( m_bMinimized )
-                    Pause( false ); // Unpause since we're no longer minimized
+                //if( m_bMinimized )
+                //    Pause( false ); // Unpause since we're no longer minimized
                 m_bMinimized = false;
                 m_bMaximized = true;
                 HandlePossibleSizeChange();
@@ -638,7 +638,7 @@ LRESULT CD3DApplication::MsgProc( HWND hWnd, UINT uMsg, WPARAM wParam,
                 }
                 else if( m_bMinimized)
                 {
-                    Pause( false ); // Unpause since we're no longer minimized
+                    //Pause( false ); // Unpause since we're no longer minimized
                     m_bMinimized = false;
                     HandlePossibleSizeChange();
                 }
@@ -652,7 +652,7 @@ LRESULT CD3DApplication::MsgProc( HWND hWnd, UINT uMsg, WPARAM wParam,
             }
             break;
         case WM_EXITSIZEMOVE:
-            Pause( false );
+            //Pause( false );
 	        HandlePossibleSizeChange();
             break;
         case WM_SETCURSOR:

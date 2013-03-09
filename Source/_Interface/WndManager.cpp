@@ -3656,7 +3656,7 @@ BOOL CWndMgr::Process()
 							g_WndMng.OpenMenu();
 							CRect rect = g_Neuz.GetDeviceRect();
 							if( g_WndMng.m_pWndMenu )
-								g_WndMng.m_pWndMenu->Move( CPoint( 0, rect.bottom - 48 - g_WndMng.m_pWndMenu->GetWndRect().Height() ) ); //48->TaskBar Height
+								g_WndMng.m_pWndMenu->Move( CPoint( 0, rect.bottom - g_WndMng.m_pWndMenu->GetWndRect().Height() ) ); //48->TaskBar Height
 						}
 					}
 #if __VER >= 12 // __ITEMCREATEMON_S0602

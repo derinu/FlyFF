@@ -81,7 +81,7 @@ int CWndWorld::ControlPlayer( DWORD dwMessage, CPoint point )
 	if( bGlare && !bGlare2 )
 	{
 		g_Option.m_nBloom ^= 1;
-		g_Glare.Create( D3DDEVICE, D3DFMT_R5G6B5, g_Option.m_nResWidth, g_Option.m_nResHeight - 48 );
+		g_Glare.Create( D3DDEVICE, D3DFMT_R5G6B5, g_Option.m_nResWidth, g_Option.m_nResHeight );
 	}
 	bGlare2 = bGlare;
 #endif

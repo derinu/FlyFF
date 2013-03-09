@@ -275,7 +275,7 @@ void CCaption::AddCaption( LPCTSTR lpszCaption, CD3DFontAPI* pFont, BOOL bChatLo
 	viewport.X      = 0;
 	viewport.Y      = 0;
 	viewport.Width  = size.cx;
-	viewport.Height = size.cy;
+	viewport.Height = size.cy + 48;
 	viewport.MinZ   = 0.0f;
 	viewport.MaxZ   = 1.0f;
 	pd3dDevice->SetViewport(&viewport);
@@ -3700,6 +3700,7 @@ void CWndWorld::OnInitialUpdate()
 		m_nLimitBuffCount = 17;
 		break;
 	case 1680:
+	case 1920:
 		m_nLimitBuffCount = 18;
 		break;
 #endif //__CSC_VER9_RESOLUTION

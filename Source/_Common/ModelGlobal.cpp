@@ -2229,7 +2229,7 @@ void CGlareLevel::RenderGlareEffect( LPDIRECT3DDEVICE9 pd3dDevice )
 	pd3dDevice->SetRenderState( D3DRS_SRCBLEND,  D3DBLEND_ONE );
 	pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_ONE );
 	int nWidth = g_Option.m_nResWidth;
-	int nHeight = g_Option.m_nResHeight - 48;
+	int nHeight = g_Option.m_nResHeight;
 	float vertex2D[4][4+2] = 
 	{
 //		{   -0.0f,  -0.0f,0,1, 0,0 },

@@ -315,6 +315,7 @@ void CWorldMap::Init()
 		m_cOffset.y = (g_Option.m_nResHeight-m_cpScreen.y) / 2;
 		break;
 	case 1680:
+	case 1920:
 		m_fRate = (FLOAT)1680 / (FLOAT)1280;
 		m_cpScreen.x = 1400;
 		m_cpScreen.y = 1050;

@@ -1296,7 +1296,7 @@ BOOL CWndTaskBar::Initialize(CWndBase* pWndParent,DWORD dwWndId)
 		m_nMaxSlotApplet = MAX_SLOT_APPLET;
 		bResult = CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_TASKBAR1600, WBS_MANAGER | WBS_SOUND, CPoint( 0, 0 ), pWndParent );
 	}
-	else if( g_Option.m_nResWidth == 1680 )
+	else if( g_Option.m_nResWidth == 1680 || g_Option.m_nResWidth == 1920 )
 	{
 		m_nMaxSlotApplet = MAX_SLOT_APPLET;
 		bResult = CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_TASKBAR1680W, WBS_MANAGER | WBS_SOUND, CPoint( 0, 0 ), pWndParent );

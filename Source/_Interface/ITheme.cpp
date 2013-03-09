@@ -809,6 +809,7 @@ void CTheme::RenderDesktop( C2DRender* p2DRender )
 				isWide = TRUE;
 				break;
 			case 1680:
+			case 1920:
 				rectWidth = 1400;
 				isWide = TRUE;
 			    break;
@@ -920,6 +921,7 @@ void CTheme::RenderGameGradeScreen( C2DRender* p2DRender )
 				isWide = TRUE;
 				break;
 			case 1680:
+			case 1920:
 				rectWidth = 1400;
 				isWide = TRUE;
 				break;

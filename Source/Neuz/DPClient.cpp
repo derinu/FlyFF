@@ -991,6 +991,8 @@ void CDPClient::OnUpdatePlayerData( CAr & ar )
 
 void	CDPClient::OnLogout( CAr & ar )
 {
+	prj.m_objmap.m_map.clear();
+
 	u_long idPlayer;
 	ar >> idPlayer;
 	PlayerData* pPlayerData		= CPlayerDataCenter::GetInstance()->GetPlayerData( idPlayer );
@@ -1008,11 +1010,6 @@ void	CDPClient::OnLogout( CAr & ar )
 	}
 #endif //__CSC_VER11_4
 	UpdateGuildWnd();
-
-#ifdef __FASTJOBCHANGE
-	if(g_WndMng.m_pJobChangeEx != NULL)
-		g_WndMng.m_pJobChangeEx->Destroy(TRUE);
-#endif
 }
 #endif	// __SYS_PLAYER_DATA
 
@@ -2378,7 +2375,7 @@ void CDPClient::OnReplace( CAr & ar )
 			wideOffsetX = (g_Option.m_nResWidth - 1200) / 2;
 			g_Neuz.m_2DRender.RenderFillRect( CRect( 0, 0, g_Option.m_nResWidth, g_Option.m_nResHeight ), 0xff000000 );
 		}		
-		else if(g_Option.m_nResWidth == 1680 && g_Option.m_nResHeight == 1050)
+		else if((g_Option.m_nResWidth == 1680 && g_Option.m_nResHeight == 1050) || (g_Option.m_nResWidth == 1920 && g_Option.m_nResHeight == 1080))
 		{
 			g_Neuz.m_TexLoading.m_size = CSize(1400, FULLSCREEN_HEIGHT);
 			wideOffsetX = (g_Option.m_nResWidth - 1400) / 2;

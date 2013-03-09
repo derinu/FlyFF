@@ -450,7 +450,7 @@ HRESULT CNeuzApp::RestoreDeviceObjects()
 	if( g_Option.m_nBloom == 1 )
 	{
 		if( m_d3dCaps.PixelShaderVersion >= D3DPS_VERSION(1,1) )
-			g_Glare.Create( m_pd3dDevice, D3DFMT_R5G6B5, g_Option.m_nResWidth, g_Option.m_nResHeight - 48 );
+			g_Glare.Create( m_pd3dDevice, D3DFMT_R5G6B5, g_Option.m_nResWidth, g_Option.m_nResHeight );
 		else
 			g_Option.m_nBloom = 0;
 	}
@@ -968,6 +968,12 @@ HRESULT CNeuzApp::Render()
 					m_2DRender.RenderFillRect( CRect( 0, 0, g_Option.m_nResWidth, g_Option.m_nResHeight ), 0xff000000 );
 				}
 				else if(g_Option.m_nResWidth == 1680 && g_Option.m_nResHeight == 1050)
+				{
+					m_TexLoading.m_size = CSize(1400, FULLSCREEN_HEIGHT);
+					wideOffsetX = (g_Option.m_nResWidth - 1400) / 2;
+					m_2DRender.RenderFillRect( CRect( 0, 0, g_Option.m_nResWidth, g_Option.m_nResHeight ), 0xff000000 );
+				}
+				else if(g_Option.m_nResWidth == 1920 && g_Option.m_nResHeight == 1080)
 				{
 					m_TexLoading.m_size = CSize(1400, FULLSCREEN_HEIGHT);
 					wideOffsetX = (g_Option.m_nResWidth - 1400) / 2;

@@ -1415,7 +1415,7 @@ void CWndMapEx::CalculateMaximumWindowTileLength( void )
 	m_nMaximumWindowTileWidth = WINDOW_TILE_TEXTURE_SIZE_XY * nMaximumWindowTileNumberX;
 
 	int nMaximumWindowTileNumberY = MINIMUM_WINDOW_TILE_NUMBER_Y;
-	while( ( WINDOW_TILE_TEXTURE_SIZE_XY * ( nMaximumWindowTileNumberY + 1 ) ) < ( g_Option.m_nResHeight - nWndTaskBarHeight ) )
+	while( ( WINDOW_TILE_TEXTURE_SIZE_XY * ( nMaximumWindowTileNumberY + 1 ) ) < ( g_Option.m_nResHeight ) )
 	{
 		++nMaximumWindowTileNumberY;
 	}

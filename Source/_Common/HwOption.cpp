@@ -681,6 +681,13 @@ void COption::CheckResolution()
 				m_nResHeight = 1050;
 			}
 			break;
+		case 1920:
+			if(m_nResHeight != 1080)
+			{
+				Error( "We Can't Support this Resolution!! - Width : %d, Height : %d", m_nResWidth, m_nResHeight );
+				m_nResHeight = 1080;
+			}
+			break;
 		default:
 			Error( "We Can't Support this Resolution!! - Width : %d, Height : %d", m_nResWidth, m_nResHeight );
 			m_nResWidth = 800;

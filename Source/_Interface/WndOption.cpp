@@ -1323,7 +1323,7 @@ BOOL CWndOptVideo::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 		if( g_Neuz.m_d3dCaps.PixelShaderVersion >= D3DPS_VERSION(1,1) )
 		{
 			g_Option.m_nBloom = 1; 
-			g_Glare.Create( D3DDEVICE, D3DFMT_R5G6B5, g_Option.m_nResWidth, g_Option.m_nResHeight - 48 );
+			g_Glare.Create( D3DDEVICE, D3DFMT_R5G6B5, g_Option.m_nResWidth, g_Option.m_nResHeight );
 		}
 		break;
 	case WIDC_GLOWOFF:

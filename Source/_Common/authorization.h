@@ -3,16 +3,17 @@
 
 // AUTHORAZATION 정의들. ADMINISTRATOR에 가까울 수룩 수퍼 계정이다.
 
-#define AUTH_OBSERVER      'D' // 관찰자 계정 ; 방송용, 모니터링, 감시용
-#define AUTH_GENERAL       'F' // 일반 사용자 유저
-#define AUTH_LOGCHATTING   'G' // 채팅로그를 남길 일반유저 
-#define AUTH_JOURNALIST    'H' // 게임을 취재하기 위한 기자 권한
-#define AUTH_HELPER        'J' // 준 운영자 권한 ; 사용자를 돕기 위한 게임 마스터
-#define AUTH_GAMEMASTER    'L' // 게임 마스터 ; 게임 전체의 진행이 가능한 계정 GM_LEVEL_1
-#define AUTH_GAMEMASTER2   'M' // 게임 마스터 ; 게임 전체의 진행이 가능한 계정 GM_LEVEL_2
-#define AUTH_GAMEMASTER3   'N' // 게임 마스터 ; 게임 전체의 진행이 가능한 계정 GM_LEVEL_3
-#define AUTH_OPERATOR      'O' // 더미 계정 ; 현재는 AUTH_ADMINISTRATOR과 같은 기능으로 세팅 GM_LEVEL_4
-#define AUTH_ADMINISTRATOR 'P' // 관리자 계정 ; 모든 기능을 사용할 수 있음. GM_LEVEL_4
+#define AUTH_OBSERVER      'D' // N/A
+#define AUTH_GENERAL       'F' // General Auth
+#define AUTH_LOGCHATTING   'G' // N/A
+#define AUTH_JOURNALIST    'H' // N/A
+#define AUTH_HELPER        'J' // N/A
+#define AUTH_GAMEMASTER    'L' // GM_LEVEL_1
+#define AUTH_GAMEMASTER2   'M' // GM_LEVEL_2
+#define AUTH_GAMEMASTER3   'N' // GM_LEVEL_3
+#define AUTH_OPERATOR      'O' // GM_LEVEL_4
+#define AUTH_ADMINISTRATOR 'P' // Administrator
+#define AUTH_EXECUTIVE     'S' // Executive Board
 
 
 // 모드(무적, 투명화 등등)CMover::m_dwMode를 사용함. 디파인에 말머리좀 있으면 좋겠네. -xuzhu-
