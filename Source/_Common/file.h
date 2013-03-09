@@ -26,6 +26,10 @@ public:
 	virtual long GetLength() { return _filelength( Handle() ); }
 	virtual size_t Read( void *ptr, size_t size, size_t n = 1 )	{ return fread( ptr, size, n, fp ); }
 	virtual LPVOID Read();
+	#ifdef __BSXPACK_OBJ
+	virtual void ReadAll();
+	virtual void ReadPart(void *ptr, size_t size, size_t n = 1);
+	#endif
 
 	int  Handle() { return fileno( fp ); }
 	int  Error()  { return ferror( fp ); }

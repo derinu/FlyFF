@@ -69,6 +69,18 @@ int CFileIO::PutWideString( LPCTSTR lpszString )
 	return Write( wszBuff, wcslen( wszBuff ) * 2 );
 }
 
+#ifdef __BSXPACK_OBJ
+void CFileIO::ReadAll()
+{
+	
+}
+
+void CFileIO::ReadPart(void *ptr, size_t size, size_t n)
+{
+	this->Read(ptr, size, n);
+}
+#endif
+
 #if defined( __CLIENT )
 /////////////////////////////////////////////////////////////////////////////
 // CResFile

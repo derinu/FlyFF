@@ -16,6 +16,8 @@
 #define		__VER 19//15//16//17//18
 
 #define __DEBUG_SALT
+#define __BSXPACK
+#define __BSXPACK_OBJ
 
 #define __NO_SWAP
 

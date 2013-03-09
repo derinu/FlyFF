@@ -562,11 +562,15 @@ BOOL CScanner::Load( LPCTSTR lpszFileName, BOOL bMultiByte )
 		return 0;
 	m_strFileName = lpszFileName;
 
+#if defined( __CLIENT )
 #ifdef __BSXPACK
 	if(file.m_bResouceInFile)
 		return Read(&file, bMultiByte);
 	else
 		return ReadIO(&file, bMultiByte);
+#else
+	return ReadIO(&file, bMultiByte);
+#endif
 #else
 	return ReadIO(&file, bMultiByte);
 #endif

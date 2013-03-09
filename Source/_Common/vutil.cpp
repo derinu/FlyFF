@@ -228,12 +228,14 @@ HRESULT LoadTextureFromRes(
 	}
 #ifdef __BSXPACK
 	int nSrcDataSize = file.GetLength();
-
+	
+#if defined( __CLIENT )
 	if(file.m_bResouceInFile)
 	{
 		file.Seek((-4), CFile::current);
 		nSrcDataSize = file.GetDW();
 	}
+#endif
 
 	LPBYTE pSrcData = new BYTE[ nSrcDataSize ];
 #else

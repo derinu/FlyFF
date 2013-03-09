@@ -21,4 +21,9 @@
 *.map
 *.res
 *.cod
+*.rsp
+*.tmp
+*.tlh
+*.tlb
+*.ilk
 BuildLog.htm
