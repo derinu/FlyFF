@@ -24,7 +24,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\boost_1_50_0;.;..\DX_SDK;..\BOOST_SDK;..\..\Resource;..\_Multimedia;..\_DirectX;..\_Common;..\_Interface;..\_network\misc\include;..\_network;..\_network\mcl\include;..\_network\net\include"
+				AdditionalIncludeDirectories=".;..\DX_SDK;..\boost_1_50_0;..\..\Resource;..\_Multimedia;..\_DirectX;..\_Common;..\_Interface;..\_network\misc\include;..\_network;..\_network\mcl\include;..\_network\net\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;NO_GAMEGUARD"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="3"
@@ -37,7 +37,7 @@
 				BrowseInformationFile=".\..\..\Output\Neuz\NoGameguard/"
 				WarningLevel="3"
 				SuppressStartupBanner="TRUE"
-				DebugInformationFormat="3"
+				DebugInformationFormat="4"
 				CompileAs="0"/>
 			<Tool
 				Name="VCCustomBuildTool"/>
@@ -48,7 +48,7 @@
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				AdditionalLibraryDirectories="..\Lib"
-				DelayLoadDLLs=""
+				DelayLoadDLLs="mss32.dll;NeuzD.dll"
 				GenerateDebugInformation="TRUE"
 				ProgramDatabaseFile=".\..\..\Output\Neuz\NoGameguard/Neuz.pdb"
 				GenerateMapFile="TRUE"

@@ -19,6 +19,7 @@
 
 using namespace boost;
 using namespace boost::iostreams;
+namespace io = boost::iostreams;
 #endif
 
 /////////////////////////////////////////////////////////////////////////////
@@ -110,6 +111,11 @@ BOOL CResFile::Close( void )
 		return CFileIO::Close();
 	else
 	{
+		if(this->TmpPtr)
+		{
+			this->TmpPtr = 0;
+			safe_delete_array(this->TmpPtr);
+		}
 		if( INVALID_HANDLE_VALUE != ( HANDLE )m_File.m_hFile )
 			m_File.Close();
 		return TRUE;
@@ -717,18 +723,18 @@ size_t CResFile::Read( void *ptr, size_t size, size_t n /* = 1  */ )
 		return CFileIO::Read( ptr, size, n );
 	else
 	{
-		size_t size_  = m_File.Read( ptr, size * n );
+		char* tmpptr = new char[size * n];
+		
+		size_t size_  = m_File.Read( tmpptr, size * n );
 		m_nFileCurrentPosition += size_;
 
-
-		char* ctptr = (char*)ptr;
-			
 		std::vector<char> DecompressedFileData;
 		filtering_istream in;
 		in.push(gzip_decompressor());
-		in.push(array_source(&ctptr[0], size_));
+		in.push(array_source(&tmpptr[0], size_));
 		iostreams::copy(in, iostreams::back_inserter(DecompressedFileData));
 
+		char* ctptr = (char*)ptr;
 		copy(DecompressedFileData.begin(), DecompressedFileData.end(), ctptr);
 		size_ = DecompressedFileData.size();
 

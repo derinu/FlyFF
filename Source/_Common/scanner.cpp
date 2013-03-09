@@ -467,8 +467,8 @@ CScanner::~CScanner()
 void CScanner::Free()
 {
 	//strlen(this->m_pBuf) > 80 prevents negative compression error,
-	//quick fix, possiblely fix later.
-	if(!m_bMemFlag && m_pBuf && strlen(this->m_pBuf) > 80) 
+	//Should be fixed now
+	if(!m_bMemFlag && m_pBuf /*&& strlen(this->m_pBuf) > 80*/) 
 		safe_delete_array( m_pBuf );
 
 	m_pProg = m_pBuf = 0;
