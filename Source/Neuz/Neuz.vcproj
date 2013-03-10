@@ -10135,6 +10135,28 @@
 					RelativePath="..\_UnhandledException\neuzd.lib">
 				</File>
 			</Filter>
+			<Filter
+				Name="DOM"
+				Filter="">
+				<File
+					RelativePath=".\DomScore.cpp">
+				</File>
+				<File
+					RelativePath=".\DomScore.h">
+				</File>
+				<File
+					RelativePath=".\DomWidget.cpp">
+				</File>
+				<File
+					RelativePath=".\DomWidget.h">
+				</File>
+				<File
+					RelativePath=".\DomWidgetA.cpp">
+				</File>
+				<File
+					RelativePath=".\DomWidgetA.h">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"

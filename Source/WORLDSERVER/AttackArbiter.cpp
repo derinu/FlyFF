@@ -162,6 +162,8 @@ int CAttackArbiter::OnDamageMsgW()
 	info.nParam     = m_nParam;
 	info.nParts     = PARTS_RWEAPON;
 
+	CWorld* pWorld = m_pAttacker->GetWorld();
+
 	int nDamage = 0;
 	BYTE cbHandFlag	= GetHandFlag();
 	for( BYTE cbFlag = 0x01; cbFlag <= 0x02; ++cbFlag )	
@@ -208,6 +210,34 @@ int CAttackArbiter::OnDamageMsgW()
 #endif // __CHAO_DMGDEC
 	}
 #endif // __VER >= 8
+
+#ifdef __DDOM
+/*	if( m_pAttacker && m_pDefender )
+	{
+		if( m_pAttacker->GetWorld() && m_pAttacker->GetWorld()->GetID() == WI_WORLD_DOMINATION )
+		{
+			if( m_pDefender->IsNPC() == TRUE ) //gab kill
+				return 0;
+		}
+	} */
+#endif
+
+#ifdef __DDOM
+	if( m_pAttacker && m_pDefender ) //Gabranth!!
+	{
+		if( m_pAttacker->IsPlayer() == FALSE )
+		{
+			if( pWorld )
+			{
+				if( pWorld->GetID() == WI_WORLD_DOMINATION )
+				{
+					nDamage = m_pDefender->GetMaxHitPoint() / 2;
+					nDamage = max( nDamage, 20000 );
+				}
+			}
+		}
+	}
+#endif
 
 	nDamage = max( nDamage, 1 );
 	int nHP = MinusHP( &nDamage );							// HP ∞®º“ Ω√≈¥ 

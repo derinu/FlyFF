@@ -25,6 +25,10 @@
 #define	theClass	CDPClient
 #undef theParameters
 #define theParameters	CAr & ar
+
+#ifdef __DDOM
+#include "DomWidgetA.h"
+#endif
    
 typedef	struct	tagPLAYERPOS
 {
@@ -131,6 +135,9 @@ public:
 	void	SendJoin( BYTE nSlot, DWORD dwWorldID, CMover* pMover, CMessenger* pMessenger, u_long uIdofMulti );
 #endif	// __RT_1025
 
+#ifdef __DDOM
+	void	OnTextD3D( CAr & ar );
+#endif
 	void	PostPlayerAngle( BOOL f );
 	void	FlushPlayerAngle( void );
 	void	SendBlock( BYTE Gu, const char *szName, const char *szFrom );
@@ -1271,6 +1278,17 @@ public:
 	
 	void    OnDisguise( OBJID objid, CAr & ar );
 	void    OnNoDisguise( OBJID objid, CAr & ar );
+
+#ifdef __DDOM
+	void	SendGetKicked( int nBase );
+	void	OnDDomCanKickAgain( CAr & ar );
+	void	OnDDomScore( CAr & ar );
+	void	SendDDomCap( DDOM_BASE base );
+	void	OnDDomCap( CAr & ar );
+	void	SendDDomJoin( void );
+	void	OnDDomQueueList( CAr & ar );
+	void	OnAdditionalMover( CAr & ar );
+#endif
 private:
 	BOOL	m_bEventTextColor;
 };

@@ -463,6 +463,75 @@ private:
 };
 #endif	// __CLIENT
 
+enum FONT_MSG
+{
+	FONT_MIDMED,
+	FONT_BUXTON_SKETCH
+};
+
+#ifdef __DDOM
+enum DDOM_TEAM
+{
+	TEAM_A,
+	TEAM_B,
+	MAX_TEAM
+};
+
+enum DDOM_BASE
+{
+	BASE_A,
+	BASE_B,
+	MAX_BASE
+};
+namespace DoubleDom
+{
+	namespace Name
+	{
+		static const CString strTeamA = "Red";
+		static const CString strTeamB = "Blue";
+	};
+};
+
+typedef struct _tagDOMTEAM
+{
+	u_int nKill;
+	u_int nDeath;
+	u_int nTouch;
+	u_int nCaptureS;
+	CString strName;
+	_tagDOMTEAM()
+	{
+		strName = _T("");
+		nKill = nDeath = nTouch = nCaptureS = 0;
+	};
+} DOMTEAM, *LPDOMTEAM;
+
+typedef struct _tagDOMPLAYER
+{
+	OBJID idObj;
+	CString strName;
+	u_int nKill;
+	u_int nDeath;
+	u_int nTouch;
+	u_int nCaptureS;
+	u_int nPoint;
+	int nTeam;
+	int nJob;
+	_tagDOMPLAYER()
+	{
+		nTeam = nJob = 0;
+		idObj = 0;
+		strName = _T("");
+		nPoint = nKill = nDeath = nTouch = nCaptureS = 0;
+	}
+	bool operator==( const u_long& ttDOM )
+	{
+		return this->idObj == ttDOM;
+	}
+} DOMPLAYER, *LPDOMPLAYER;
+
+#endif
+
 
 /// 플레이어와 NPC
 class CMover : public CCtrl
@@ -475,6 +544,10 @@ public:
 	enum			{ PLAYER, NPC };			/// CMover의 타입 
 
 public:
+#ifdef __DDOM
+	 CString GetDDomName( DDOM_TEAM team );
+	 DDOM_TEAM	m_ddomTeam;
+#endif
 	BOOL			m_bPlayer;					/// Player인가, 아니라면 NPC
 	u_long			m_idPlayer;					/// player의 db번호, NPC는 0xffffffff
 	CActionMover*	m_pActMover;				/// 무버를 움직이는 객체. 여기서 무버의 움직임을 컨트롤한다.

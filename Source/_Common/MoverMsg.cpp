@@ -25,6 +25,11 @@ extern	CDPCoreClient	g_DPCoreClient;
 
 #include "ship.h"
 
+#ifdef __WORLDSERVER
+#ifdef __DDOM
+#include "defineObj.h"
+#endif
+#endif
 
 /*--------------------------------------------------------------------------------------------------------
 
@@ -101,6 +106,36 @@ void CMover::SetDestPos( const D3DXVECTOR3 & vDestPos, bool bForward, BOOL fTran
 	m_bPositiveZ = ( vDir.z > 0.0f );
 	
 	ClearDestObj();
+
+#ifdef __WORLDSERVER
+#ifdef __DDOM
+	CWorld* pWorld = GetWorld();
+	if( pWorld )
+	{
+		if( pWorld->GetID() == WI_WORLD_DOMINATION )
+		{
+			if( vDestPos.x >= 1376 && vDestPos.x <= 1409 && vDestPos.z >= 1118 && vDestPos.z <= 1161  )
+			{
+				CMover* pMover = pWorld->FindMover( "Gabranth" ); 
+				if( pMover )
+				{
+					DWORD dwDamage = xRandom( 12, 19 ) * GetMaxHitPoint() / 100;
+					DWORD dwMaxCalc = xRandom( 6453, 7219 );
+					dwDamage = max( dwDamage, dwMaxCalc );
+					g_UserMng.AddDamage( this, pMover->GetId(), dwDamage , 0x000000c0 );
+					if( dwDamage >= GetHitPoint() )
+					{
+						DoDie( pMover );
+					}
+					else
+						SetPointParam( DST_HP, GetHitPoint() - dwDamage , TRUE ); 	 
+				}
+			}
+		}
+	}
+#endif
+#endif
+
 
 #ifdef __CLIENT
 	if( IsActiveMover() && fTransfer ) 

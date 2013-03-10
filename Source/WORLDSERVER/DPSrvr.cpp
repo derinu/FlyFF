@@ -80,6 +80,11 @@
 #include "Colosseum.h"
 #endif // __COLOSSEUM
 
+#ifdef __DDOM
+#include "DDom.h"
+#include "DDomQueue.h"
+#endif
+
 #ifdef __SHOPPING_CART
 #include "ShoppingCart.h"
 #endif //__SHOPPING_CART
@@ -577,6 +582,12 @@ CDPSrvr::CDPSrvr()
 #ifdef __SHOPPING_CART
 	ON_MSG( PACKETTYPE_BUYITEMCART, OnBuyItemCart );
 #endif //__SHOPPING_CART
+
+#ifdef __DDOM
+	ON_MSG( PACKETTYPE_DDOM_JOIN, OnDDomJoin );
+	ON_MSG( PACKETTYPE_DDOM_CAP, OnDDomCap );
+	ON_MSG( PACKETTYPE_DDOM_KICKAT, OnDDomKickAt );
+#endif
 }
 
 CDPSrvr::~CDPSrvr()
@@ -1173,6 +1184,14 @@ void CDPSrvr::OnRevivalLodestar( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE
 
 		if( pWorld->GetID() == WI_WORLD_GUILDWAR )
 			return;
+
+#ifdef __DDOM
+			if( pWorld && pWorld->GetID() == WI_WORLD_DOMINATION )
+			{ 
+				CDDom::GetInstance().Safe( pUser );//			
+				return; 
+			}
+#endif
 
 #if __VER >= 12 // __SECRET_ROOM
 		if( CSecretRoomMng::GetInstance()->IsInTheSecretRoom( pUser ) )
@@ -2738,6 +2757,70 @@ void CDPSrvr::OnPlayerCorr( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBu
 		}
 	}
 }
+
+#ifdef __DDOM
+
+void CDPSrvr::OnDDomCap( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
+{
+	u_int nBase;
+	ar >> nBase;
+
+	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+	if( IsValidObj( pUser ) )
+	{
+		CDDom::GetInstance().Touch( pUser, static_cast<DDOM_BASE>( nBase ) );
+	}
+}
+void CDPSrvr::OnDDomJoin( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
+{
+	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+	if( IsValidObj( pUser ) )
+	{
+		CDDomQueue::GetInstance().Add( pUser );
+	}
+}
+D3DXVECTOR3 GetRandomPosToKickAt( DDOM_BASE base );
+
+void CDPSrvr::OnDDomKickAt( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
+{
+	int nBase;
+	ar >> nBase;
+	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+	if( IsValidObj( pUser ) )
+	{
+		if( IsValidBase( static_cast<DDOM_BASE>( nBase ) ) == TRUE )
+		{
+			D3DXVECTOR3 vPos = GetRandomPosToKickAt( static_cast<DDOM_BASE>( nBase ) );
+			pUser->Replace( g_uIdofMulti, WI_WORLD_DOMINATION, vPos, REPLACE_FORCE, nDefaultLayer );
+			pUser->SendDDomCanKickAgain(); 
+		}
+	}
+}
+
+D3DXVECTOR3 GetRandomPosToKickAt( DDOM_BASE base )
+{
+	DWORD nRandomKick = xRandom( 0, 3 );
+	if( base == BASE_A )
+	{
+		switch( nRandomKick )
+		{
+			case 0: return D3DXVECTOR3( 1226.178711f, 80.736908f, 1122.076538f ); break;
+			case 1: return D3DXVECTOR3( 1254.383423f, 80.736923f, 1142.052490f ); break;
+			case 2: return D3DXVECTOR3( 1231.766772f, 80.736931f, 1159.427856f ); break;
+		}
+	}
+	else if( base == BASE_B )
+	{
+		switch( nRandomKick )
+		{
+			case 0: return D3DXVECTOR3( 1580.363281f, 80.736931f, 1174.185059f ); break;
+			case 1: return D3DXVECTOR3( 1577.017944f, 80.736931f, 1130.923462f ); break;
+			case 2: return D3DXVECTOR3( 1551.286621f, 80.236313f, 1151.939453f ); break;
+		}
+	}
+	return D3DXVECTOR3( 0.0f, 0.0f, 0.0f ); //C++ ISO
+}
+#endif
 
 void CDPSrvr::OnPlayerCorr2( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
 {

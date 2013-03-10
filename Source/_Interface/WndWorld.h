@@ -211,6 +211,19 @@ public:
 	CTexture m_TexColosseumStart;
 	DWORD dwColosseumStartSplashTick;
 #endif //__COLOSSEUM
+
+#ifdef __DDOM
+	//DWORD		m_dwJoinWelcome;
+	BOOL		m_bDomRender;
+	CTexture	m_TextDomination;
+	CTexture	m_TexQBackground;
+	CTexture	m_TexDomScore;
+	CTexture	m_TexDomNumber;
+	CTexture	m_TexDomBase;
+	CTexture	m_TexBoard;
+	bool		m_bDomBoardPaint;
+	DWORD		m_dwDomBoardTick;
+#endif
 	CAdvMgr		m_AdvMgr;
 	CObj*		m_pSelectRenderObj;
 

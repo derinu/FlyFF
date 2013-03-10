@@ -17,6 +17,11 @@
 #include "WorldMap.h"
 #include "Commonctrl.h"
 
+#ifdef __DDOM
+#include "DomScore.h"
+#include "DomWidget.h"
+#endif
+
 #if __VER >= 12 // __SECRET_ROOM
 #include "SecretRoom.h"
 #endif // __SECRET_ROOM
@@ -880,6 +885,10 @@ void CWndWorld::Projection( LPDIRECT3DDEVICE9 pd3dDevice )
 	g_WorldMng.Get()->Projection( pd3dDevice, viewport.Width, viewport.Height );
 }
 
+#ifdef __DDOM
+#include "DomWidgetA.h"
+#endif
+
 BOOL CWndWorld::OnEraseBkgnd(C2DRender* p2DRender)
 {
 	_PROFILE("CWndWorld::OnEraseBkgnd()");
@@ -934,6 +943,128 @@ BOOL CWndWorld::OnEraseBkgnd(C2DRender* p2DRender)
 		m_TexColosseumStart.Render( &g_Neuz.m_2DRender, CPoint(x, y) , nAlpha );
 	}
 #endif //__COLOSSEUM
+
+#ifdef __DDOM
+
+#ifndef _DEBUG
+#ifdef __CHEATENGINE_PROTECT
+	/*if( IsDebuggerPresent() )
+	{
+		MessageBoxA( g_Neuz.GetSafeHwnd(), "A Malicious process is attached", "Paradise Flyff", MB_OK | MB_ICONSTOP );
+		exit( 239 );
+	} */
+#endif  
+#endif
+
+#ifdef __MASAMUNE
+	CMasamune::GetInstance().Paint( p2DRender );
+#endif
+
+	
+	if( g_pPlayer && g_pPlayer->GetWorld() && g_pPlayer->GetWorld()->GetID() == WI_WORLD_DOMINATION )
+	{
+		//    depth queue -> button - > mainboard -> button -> trianglebase x2
+
+		if( GetAsyncKeyState( VK_TAB ) & 0x8000 )
+		{
+			if( m_dwDomBoardTick < GetTickCount() )
+			{
+				m_bDomBoardPaint = !m_bDomBoardPaint;
+				m_dwDomBoardTick = GetTickCount() + 1000;
+			}
+		}
+
+		if( m_bDomBoardPaint )
+		{
+			
+			int x = ( GetClientRect().Width() / 2) - ( m_TexBoard.m_size.cx / 2);
+			int y = ( GetClientRect().Height() / 2) - ( m_TexBoard.m_size.cy / 2);
+			m_TexBoard.Render( &g_Neuz.m_2DRender, CPoint(x, y) , 174 );
+			CDDomScore::GetInstance().Render( p2DRender, x, y );
+		}
+		else
+		{
+			int x = g_Option.m_nResWidth;
+			int y = g_Option.m_nResHeight;
+			CRect rect;
+			rect.left = x - 96;
+			rect.right = x;
+			rect.top =  y / 2 - 30;
+			rect.bottom = y / 2 - 10;
+			p2DRender->RenderFillRect( rect, D3DCOLOR_ARGB( 30, 0, 0, 0 ) );
+			p2DRender->TextOut( rect.left + 4, rect.top + 2, "Press Tab", 0xFFFFFFFF, 0xFF000000 );
+		}
+
+
+		{ //middle circle depth queue <- main score
+			
+			int nAlpha = 51;
+			int x = (GetClientRect().Width() / 2) - (m_TexDomNumber.m_size.cx / 2);
+			int y = 25;// (GetClientRect().Height() / 2) - (m_TexQBackground.m_size.cy  / 2);
+			m_TexDomNumber.Render( &g_Neuz.m_2DRender, CPoint(x, y) , nAlpha );
+		}
+
+		{
+			int nAlpha = 93; 
+			int x = (GetClientRect().Width() / 2) - (m_TexDomScore.m_size.cx / 2);
+			int y = 25;// (GetClientRect().Height() / 2) - (m_TexQBackground.m_size.cy  / 2);
+			m_TexDomScore.Render( &g_Neuz.m_2DRender, CPoint(x, y) , nAlpha );
+		}
+
+		DWORD dwTimeDom = CDDomWidgetA::GetInstance().GetTimeNumber();
+		if( dwTimeDom > 0 && dwTimeDom < 9 )
+		{
+			
+			int nAlpha = 247;
+			int x = (GetClientRect().Width() / 2) - (m_TexDomNumber.m_size.cx / 2);
+			int y = 25;// (GetClientRect().Height() / 2) - (m_TexQBackground.m_size.cy  / 2);
+			m_TexDomNumber.Render( &g_Neuz.m_2DRender, CPoint(x, y) , nAlpha );
+		}
+
+
+
+		CDDomWidgetA::GetInstance().Paint( p2DRender );
+		
+		//two triangles
+		/*{
+			
+			int nAlpha = 237;
+			int x = (GetClientRect().Width() / 2) - (m_TexDomScore.m_size.cx / 2 - 15 );
+			int y = 25;// (GetClientRect().Height() / 2) - (m_TexQBackground.m_size.cy  / 2);
+			m_TexDomBase.Render( &g_Neuz.m_2DRender, CPoint(x, y) , nAlpha );
+		}
+		{
+			
+			int nAlpha = 237;
+			int x = (GetClientRect().Width() / 2) + (m_TexDomScore.m_size.cx / 2 + 15 );
+			int y = 25;// (GetClientRect().Height() / 2) - (m_TexQBackground.m_size.cy  / 2);
+			m_TexDomBase.Render( &g_Neuz.m_2DRender, CPoint(x, y) , nAlpha );
+		} */
+	}
+		
+	if( m_bDomRender )
+	{
+		CDDomWidget::GetInstance().PaintWidget( p2DRender );
+	}
+
+		
+
+/*
+	if( false )
+	{
+		CDDomWidget::GetInstance().PaintWidget( p2DRender );
+
+		if( m_bDomRender )
+		{
+			int nAlpha = 197; 
+			int x = (GetClientRect().Width() / 2) - (m_TexQBackground.m_size.cx / 2);
+			int y = 0;// (GetClientRect().Height() / 2) - (m_TexQBackground.m_size.cy  / 2);
+			m_TexQBackground.Render( &g_Neuz.m_2DRender, CPoint(x, y) , nAlpha );
+		}
+
+		CDDomWidget::GetInstance().PaintFont( p2DRender );
+	} */
+#endif
 	
 	CObj *pFocus = pWorld->GetObjFocus();
 
@@ -3861,6 +3992,18 @@ void CWndWorld::OnInitialUpdate()
 	dwColosseumStartSplashTick = 0;
 	m_TexColosseumStart.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "WndColoCountDesign.tga" ), D3DCOLOR_ARGB( 0, 0, 0, 0 ) );
 #endif //__COLOSSEUM
+
+#ifdef __DDOM
+	m_bDomBoardPaint = false;
+	m_dwDomBoardTick = 0;
+	m_bDomRender = FALSE;
+	m_TexBoard.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "domScoreboard.tga" ), D3DCOLOR_ARGB( 0, 0, 0, 0 ) );
+	m_TextDomination.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "domsplash.dds" ), D3DCOLOR_ARGB( 0, 0, 0, 0 ) );
+	m_TexQBackground.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "domqueuebg.dds" ), D3DCOLOR_ARGB( 0, 0, 0, 0 ) );
+	m_TexDomScore.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "domscore.png" ), D3DCOLOR_ARGB( 0, 0, 0, 0 ) );
+	m_TexDomNumber.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "domcircle.png" ), D3DCOLOR_ARGB( 0, 0, 0, 0 ) );
+	m_TexDomBase.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "dombase.png" ), D3DCOLOR_ARGB( 0, 0, 0, 0 ) );
+#endif
 	
 	InitEyeFlash();
 
@@ -3984,6 +4127,13 @@ BOOL CWndWorld::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase )
 	{
 		switch( nID )
 		{
+#ifdef __DDOM
+		case MMI_CHRISTMASFAIRY04:
+		{
+			::OUTPUTDEBUGSTRING("Join DDOM\n");
+			g_DPlay.SendDDomJoin();
+		}break;
+#endif
 #ifdef __COLOSSEUM
 		case MMI_COLOSSEUM_COLOENTER01:
 			{
@@ -9240,7 +9390,12 @@ HRESULT CWndWorld::InvalidateDeviceObjects()
 #ifdef __COLOSSEUM
 	m_TexColosseumStart.Invalidate();
 #endif //__COLOSSEUM
-
+#ifdef __DDOM
+	m_TexBoard.Invalidate();
+	m_TexQBackground.Invalidate();
+	m_TextDomination.Invalidate();
+	m_TexDomScore.Invalidate();
+#endif
 	return S_OK;
 }
 HRESULT CWndWorld::DeleteDeviceObjects()
@@ -9293,7 +9448,12 @@ HRESULT CWndWorld::DeleteDeviceObjects()
 #ifdef __COLOSSEUM
 	m_TexColosseumStart.DeleteDeviceObjects();
 #endif //__COLOSSEUM
-
+#ifdef __DDOM
+	m_TexBoard.DeleteDeviceObjects();
+	m_TexQBackground.DeleteDeviceObjects();
+	m_TextDomination.DeleteDeviceObjects();
+	m_TexDomScore.DeleteDeviceObjects();
+#endif
 	return S_OK;
 }
 

@@ -13,6 +13,12 @@
 #include "CreateObj.h"
 #include "eveschool.h"
 
+#ifdef __DDOM
+#ifdef __WORLDSERVER
+#include "DDom.h"
+#endif
+#endif
+
 #ifdef	__COLOSSEUM
 #include "Colosseum.h"
 #endif // __COLOSSEUM
@@ -554,8 +560,23 @@ void CMover::Init()
 #ifdef __NEW_ITEM_VARUNA
 	m_idBarunaPetOwner = NULL_ID;
 #endif // __NEW_ITEM_VARUNA
+
+#ifdef __DDOM
+	m_ddomTeam = MAX_TEAM;
+#endif
 }
 
+#ifdef __DDOM
+CString CMover::GetDDomName( DDOM_TEAM team )
+{
+	switch( team )
+	{
+		case TEAM_A: return DoubleDom::Name::strTeamA; break;
+		case TEAM_B: return DoubleDom::Name::strTeamB; break;
+	}
+	return _T("");
+}
+#endif
 
 #ifdef __INSTANCE_AGGRO_SYSTEM
 void CMover::SendAIMsg( DWORD dwMsg, DWORD dwParam1, DWORD dwParam2, DWORD dwParam3 )
@@ -5598,6 +5619,32 @@ int CMover::DoDie( CCtrl *pAttackCtrl, DWORD dwMsg )
 	
 	SendActMsg( OBJMSG_STOP );
 	SendActMsg( OBJMSG_DIE, dwMsg, (int)pAttacker );
+
+	#ifdef __WORLDSERVER
+		if( fValid && pAttacker && IsPlayer() && pAttacker->IsPlayer() ) 
+		{
+			CUser* pUser = static_cast<CUser*>( pAttacker );
+			CUser* pDead = static_cast<CUser*>( this );
+			if( IsValidObj( pUser ) && IsValidObj( pDead ) )
+			{
+				CWorld* pWorld = pAttacker->GetWorld();
+				CWorld* pDieWorld = GetWorld();
+				if( pWorld && pDieWorld )
+				{
+					DWORD dwWorldId = pWorld->GetID();
+					DWORD dwDieWorldId = pDieWorld->GetID();
+
+				#ifdef __DDOM
+				if( dwWorldId == WI_WORLD_DOMINATION && dwDieWorldId == WI_WORLD_DOMINATION )
+				{
+					CDDom::GetInstance().Kill( pUser, pDead );
+				}
+				#endif
+				}
+			}
+		}
+#endif
+
 	
 	// 플레이어인 내가 죽었으면 내가 타겟으로 잡고있던넘을 풀어줌. 로그아웃 같은거 할때도 마찬가지 처리를 해야함.
 	if( IsPlayer() )
@@ -5946,6 +5993,11 @@ void CMover::UpgradeKarma()
 
 int	CMover::SubPK( CMover *pAttacker, int nReflect )
 {
+#ifdef __DDOM
+	if( GetWorld()->GetID() == WI_WORLD_DOMINATION )
+		return 1; 
+#endif
+
 	if( !g_eLocal.GetState( EVE_PK )
 #ifdef __JEFF_11_4
 		|| GetWorld()->IsArena()
@@ -6897,6 +6949,12 @@ BOOL CMover::IsAttackAble( CObj *pObj )
 		#ifdef __CLIENT
 			CMover *pMover = (CMover *)pObj;
 
+			if( IsValidObj( pMover ) == FALSE ) 
+							return FALSE;
+#ifdef __DDOM
+	if( pWorld && pWorld->GetID() == WI_WORLD_DOMINATION && pMover && pMover->m_ddomTeam != g_pPlayer->m_ddomTeam )
+		return TRUE;
+#endif
 				if( pMover->IsPlayer() )
 				{
 					if( g_eLocal.GetState( EVE_18 ) )
@@ -7034,6 +7092,10 @@ BOOL CMover::IsPKAttackAble( CMover* pMover )
 	if( IsArenaTarget( pMover ) )
 		return TRUE;
 #endif	// __JEFF_11_4
+#ifdef __DDOM
+	if( GetWorld() && GetWorld()->GetID() == WI_WORLD_DOMINATION && pMover && pMover->m_ddomTeam != g_pPlayer->m_ddomTeam )
+		return TRUE;
+#endif
 	if( !g_eLocal.GetState( EVE_PK ) )
 		return FALSE;
 	return IsPKInspection( pMover );
@@ -7048,6 +7110,12 @@ BOOL CMover::IsPKInspection( CMover* pOther )
 	if( m_idGuild > 0 && m_idGuild == pOther->m_idGuild )
 		return FALSE;
 #endif // __VER >= 8 // __S8_PK
+
+#ifdef __DDOM
+	CWorld* pWorld = GetWorld();
+	if( pWorld && pWorld->GetID() == WI_WORLD_DOMINATION )
+		return FALSE;
+#endif
 
 	DWORD dwRegionAttr	= GetPKPVPRegionAttr();
 	BOOL bAble = TRUE;
@@ -10852,11 +10920,23 @@ int __IsNextLevelQuest( CMover* pMover, int nQuestId )
 #if __VER >= 8 // __S8_PK
 void CMover::SetPKValue( int nValue )
 {
+#ifdef __DDOM
+	CWorld* pWorld = GetWorld();
+	if( pWorld && pWorld->GetID() == WI_WORLD_DOMINATION )
+		return;
+#endif
+
 	if( nValue >= 0 )	// overflow!!
 		m_nPKValue = nValue;
 }
 void CMover::SetPKPropensity( DWORD dwValue )
 {
+#ifdef __DDOM
+	CWorld* pWorld = GetWorld();
+	if( pWorld && pWorld->GetID() == WI_WORLD_DOMINATION )
+		return;
+#endif
+
 	int nValue = dwValue;
 	
 	if( nValue >= 0 )	// overflow!!

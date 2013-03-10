@@ -400,6 +400,12 @@ void CLinkMap::ModifyView( CCtrl* pCtrl )
 						pUsertmp	= (CUser*)apObj[nPos];
 						while( pUsertmp )
 						{
+#ifdef __DDOM
+							CString strObjName;
+							strObjName = pUsertmp->GetName();
+							auto int at = 0;
+#endif
+
 							if( !pUsertmp->IsDelete() && pUsertmp != pUser )
 							{
 								pUser->PCSetAt( pUsertmp->GetId(), (CCtrl*)pUsertmp );

@@ -146,6 +146,10 @@ m_cbRunnableObject( 0 )
 	m_bViewHeightAttribute = FALSE;
 	m_bViewLODObj = TRUE;
 
+#ifdef __DDOM
+	m_dwTickToTouch = 0;
+#endif
+
 	m_nObjCullSize = 0;
 	m_nSfxCullSize = 0;
 	m_bViewIdState = FALSE;

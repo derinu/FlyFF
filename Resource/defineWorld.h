@@ -97,5 +97,7 @@
 
 #define WI_WORLD_GUILDWAR1TO1_L	244	// 마지막 1:1길드대전장 ID
 
+#define WI_WORLD_DOMINATION 247
+
 #endif  
   

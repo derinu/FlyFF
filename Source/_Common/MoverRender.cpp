@@ -1386,7 +1386,7 @@ void CMover::RenderName( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dw
 
 		if(m_dwAuthorization >= AUTH_EXECUTIVE)
 		{
-			strName = "[Executive] ";
+			strName = "[GagesBitches] ";
 			dwColor = 0xFF6600FF;
 		}
 		else if(m_dwAuthorization >= AUTH_ADMINISTRATOR)
@@ -1444,6 +1444,22 @@ void CMover::RenderName( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dw
 #endif // __VER >= 8 // __S8_PK
 #endif
 	}
+
+#ifdef __DDOM
+		if( IsPlayer() && GetWorld() && GetWorld()->GetID() == WI_WORLD_DOMINATION )
+		{
+			CString strDDom = "[";
+			strDDom += GetDDomName( m_ddomTeam );
+			strDDom += "] ";
+			strDDom += szName;
+			strcpy( szName, LPCTSTR( strDDom ) );
+			if( m_ddomTeam == TEAM_A )
+				dwColor = 0xFFFF0000;
+			else if( m_ddomTeam == TEAM_B )
+				dwColor = 0xFF374FBD;
+		} 
+#endif
+
 
 	// 월드 좌표를 스크린 좌표로 프로젝션 한다.
 	D3DXVECTOR3 vOut, vPos, vPosHeight;
@@ -1572,7 +1588,12 @@ void CMover::RenderName( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dw
 				{
 					pFont->DrawText( (FLOAT)( point.x ), (FLOAT)( point.y ), 0xffff0000, szName );						
 				} else
-				{
+				{					
+#ifdef __DDOM
+					if( szName && lstrcmp( szName, "Gabranth" ) == 0 )
+						pFont->DrawText( (FLOAT)( point.x ), (FLOAT)( point.y ), 0xFF38B4D6 , szName );
+					else
+#endif
 					pFont->DrawText( (FLOAT)( point.x ), (FLOAT)( point.y ), COLOR_MONSTER, szName );
 				}
 			}

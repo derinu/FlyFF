@@ -669,6 +669,10 @@ void CUser::AddAddObj( CCtrl * pCtrl )
 	m_Snapshot.ar << pCtrl->GetId() << SNAPSHOTTYPE_ADD_OBJ << (BYTE)pCtrl->GetType() << pCtrl->GetIndex();
 	CObj::SetMethod( pCtrl == this ? METHOD_NONE : METHOD_EXCLUDE_ITEM );
 	pCtrl->Serialize( m_Snapshot.ar );
+
+	#ifdef __DDOM
+	SendAdditionalMover( static_cast<CMover*>( pCtrl ) );
+	#endif
 }
 
 void CUser::AddText( LPCSTR lpsz )
@@ -3857,6 +3861,11 @@ CUser* CUserMng::AddUser( DPID dpidCache, DPID dpidUser, DPID dpidSocket )
 	return pUser;
 }
 
+#ifdef __DDOM
+#include "DDom.h"
+#include "DDomQueue.h"
+#endif
+
 extern CCommonCtrl* CreateExpBox( CUser* pUser );
 
 void CUserMng::RemoveUser( DWORD dwSerial )
@@ -3869,6 +3878,11 @@ void CUserMng::RemoveUser( DWORD dwSerial )
 
 	if( IsValidObj( pUser ) ) 
 	{
+
+#ifdef __DDOM
+		CDDom::GetInstance().Kick( pUser );
+		CDDomQueue::GetInstance().Remove( pUser );
+#endif
 		pUser->OnTradeRemoveUser();
 
 		m_users.erase( it );
@@ -8756,6 +8770,48 @@ BOOL CUserMng::HasUserSameWorldnLayer( CUser* pUserSrc )
 }
 #endif // __GUILD_HOUSE
 
+#ifdef __DDOM 
+void CUser::SendLeaWireframe( void )
+{
+	if( IsDelete() ) return;
+
+	m_Snapshot.cb++;
+	m_Snapshot.ar << NULL_ID;
+	m_Snapshot.ar << SNAPSHOTTYPE_MBS_WIREFRAME;
+}
+
+void CUser::AddTextD3D( LPCTSTR szText, D3DCOLOR color )
+{
+	if( IsDelete() ) return;
+
+
+	m_Snapshot.cb++;
+	m_Snapshot.ar << NULL_ID;
+	m_Snapshot.ar << SNAPSHOTTYPE_TEXT_COLOR;
+	m_Snapshot.ar << color;
+	m_Snapshot.ar.WriteString( szText );
+}
+
+void CUserMng::AddDominationWireframe( void )
+{
+	for( map<DWORD, CUser*>::iterator it = m_users.begin(); it != m_users.end(); ++it )
+	{
+		CUser*	pUser =	( it->second );
+		if( IsValidObj( pUser ) )
+		{
+			CWorld* pWorld = pUser->GetWorld();
+			if( pWorld )
+			{
+				if( pWorld->GetID() == WI_WORLD_DOMINATION )
+				{
+					pUser->SendLeaWireframe();
+				}
+			}
+		}
+	}
+}
+#endif
+
 #if __VER >= 15 // __IMPROVE_QUEST_INTERFACE
 void CUser::AddCheckedQuest()
 {
@@ -9040,3 +9096,61 @@ void CUser::AddActivateBarunaPet( DWORD dwItemId, DWORD dwBarunaPetID, BOOL bAct
 	m_Snapshot.ar << dwItemId << dwBarunaPetID <<bActivate;
 }
 #endif// __NEW_ITEM_VARUNA
+
+#ifdef __DDOM
+#include "DDomQueue.h"
+void CUser::SendDDomTouch( DDOM_TEAM team, DDOM_BASE base, BOOL bCaptured )
+{
+	if( IsDelete() ) return;
+
+	m_Snapshot.cb++;
+	m_Snapshot.ar << NULL_ID;
+	m_Snapshot.ar << SNAPSHOTTYPE_DDOM_CAP ;
+	m_Snapshot.ar << static_cast<int>( team );
+	m_Snapshot.ar << static_cast<int>( base );
+	m_Snapshot.ar << bCaptured;
+}
+void CUser::SendAdditionalMover( CMover* pMover )
+{
+	if( IsDelete() ) return;
+	if( pMover == NULL ) return;
+
+	m_Snapshot.cb++;
+	m_Snapshot.ar << GetId();
+	m_Snapshot.ar << SNAPSHOTTYPE_ADDITIONAL_MOVER;
+	m_Snapshot.ar << pMover->GetId();
+	m_Snapshot.ar << static_cast<int>( pMover->m_ddomTeam );
+}
+
+void CUser::SendDDomCanKickAgain( void )
+{
+	if( IsDelete() ) return;
+
+	m_Snapshot.cb++;
+	m_Snapshot.ar << NULL_ID;
+	m_Snapshot.ar << SNAPSHOTTYPE_DDOM_CAN_KICK_AGAIN;
+}
+
+void CUser::SendDDomScore( void )
+{
+	
+	if( IsDelete() ) return;
+
+	m_Snapshot.cb++;
+	m_Snapshot.ar << NULL_ID;
+	m_Snapshot.ar << SNAPSHOTTYPE_DDOM_SCORE;
+	CDDom::GetInstance().Serialize( m_Snapshot.ar );
+}
+
+
+void CUser::SendDDomQueue( void )
+{
+	
+	if( IsDelete() ) return;
+
+	m_Snapshot.cb++;
+	m_Snapshot.ar << NULL_ID;
+	m_Snapshot.ar << SNAPSHOTTYPE_DDOM_QUEUE;
+	CDDomQueue::GetInstance().Serialize( m_Snapshot.ar );
+}
+#endif

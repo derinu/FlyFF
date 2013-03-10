@@ -20,6 +20,7 @@
 #define __NO_SWAP
 #define __BSXPACK // BlazeSoft Archive Files
 #define __BSXPACK_OBJ // BlazeSoft Archive Files for loading obj
+#define	__DDOM
 
 /*===============================================*/
 #if __VER >= 19

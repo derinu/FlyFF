@@ -162,6 +162,18 @@ struct WORLD_ENVIR_INFO
 #endif
 
 
+#ifdef __DDOM
+#ifdef __CLIENT
+namespace DoubleDom
+{
+	namespace World
+	{
+		static bool m_bGetKicked = true;
+	};
+};
+#endif
+#endif
+
 ////////////////////////////////////////////////////////////////////////////////////////////
 // class foward선언 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -327,6 +339,14 @@ public:
 	BOOL				m_bViewHeightAttribute;
 	BOOL				m_bViewIdState;
 	// 디버그 정보 관련 끝 
+
+#ifdef __DDOM
+#ifdef __CLIENT
+	DWORD				m_dwTickToTouch;
+	BOOL	  IsOnBase( DDOM_BASE base, D3DXVECTOR3 pos );
+	DDOM_BASE GetBaseDominatedBasedOnD3DXVECTOR3SfxObjectPosition( D3DXVECTOR3 pos );
+#endif
+#endif
 
 
 	void			Process();

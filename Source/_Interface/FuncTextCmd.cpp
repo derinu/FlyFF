@@ -1084,10 +1084,28 @@ BOOL TextCmd_QuerySetGuildName( CScanner & scanner )
 	return FALSE;
 }
 
+#ifdef __WORLDSERVER
+#ifdef __DDOM
+#include "DDom.h"
+#endif
+#endif
+
 BOOL TextCmd_CreateGuild( CScanner & scanner )
 {
 #ifdef __WORLDSERVER
 	CUser* pUser	= (CUser*)scanner.dwValue;
+
+	if( IsValidObj( pUser ) == FALSE  ) 
+		return FALSE;
+
+#ifdef __DDOM
+	int nAmount = scanner.GetNumber();
+	CString n;
+	n.Format( "max :%d", nAmount );
+	pUser->AddText( n );
+	DoubleDom::Queue::nAmount = nAmount;
+#endif
+
 	scanner.GetToken();
 	GUILD_MEMBER_INFO	info;
 	info.idPlayer	= pUser->m_idPlayer;

@@ -495,6 +495,12 @@ private:
 	void	OnBuyItemCart( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize );
 #endif __SHOPPING_CART
 
+#ifdef __DDOM
+	void	OnDDomJoin( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long );
+	void	OnDDomCap( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long );
+	void	OnDDomKickAt( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long );
+#endif
+
 private:
 	DPID	m_dpidCache;		// 캐쉬서버 DPID
 };

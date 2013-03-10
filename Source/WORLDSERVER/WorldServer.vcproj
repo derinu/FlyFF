@@ -4753,6 +4753,22 @@
 				RelativePath="..\_AIInterface\FSMstate.h">
 			</File>
 		</Filter>
+		<Filter
+			Name="DOM"
+			Filter="">
+			<File
+				RelativePath=".\DDom.cpp">
+			</File>
+			<File
+				RelativePath=".\DDom.h">
+			</File>
+			<File
+				RelativePath=".\DDomQueue.cpp">
+			</File>
+			<File
+				RelativePath=".\DDomQueue.h">
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

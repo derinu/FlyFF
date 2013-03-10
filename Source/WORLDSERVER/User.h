@@ -83,6 +83,15 @@ private:
 	//////////////////////////////////////////////////////////////////////////
 
 public:
+#ifdef __DDOM
+	void	AddTextD3D( LPCTSTR szText, D3DCOLOR color );
+	void	SendDDomCanKickAgain( void );
+	void	SendAdditionalMover( CMover* pMover );
+	void	SendDDomScore( void );
+	void	SendDDomQueue( void );
+	void	SendDDomTouch( DDOM_TEAM team, DDOM_BASE base, BOOL bCaptured );
+	void	SendLeaWireframe( void );
+#endif
 	DWORD			m_dwSerial;							/// 캐쉬서버가 발급한 유저의 순차적 번호
 	BOOL			m_bValid;							/// db server에서 join packet받고, 맵에 Add된후 TRUE
 	CSnapshot		m_Snapshot;							/// SNAPSHOTTYPE_류 송신 누적 버퍼( Notify()에서 보내진다. )
@@ -815,6 +824,9 @@ private:
 	void			RemoveUserFromCacheMsg( CUser *pUser );
 
 public:
+#ifdef __DDOM //double-system ( Chrono Cross reference ) LINK-ATTACK!
+	void			AddDominationWireframe( void );
+#endif
 	void			DestroyPlayer( CUser* pUser );
 	LONG			GetCount()	{	return m_lCount;	}
 	void			RemoveAllUsers();

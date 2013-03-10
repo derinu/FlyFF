@@ -18,6 +18,7 @@
 #define __DEBUG_SALT
 #define __BSXPACK
 #define __BSXPACK_OBJ
+#define	__DDOM
 
 #define __NO_SWAP
 

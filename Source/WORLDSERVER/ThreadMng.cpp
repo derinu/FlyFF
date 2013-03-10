@@ -13,6 +13,10 @@
 #include "Colosseum.h"
 #endif // __COLOSSEUM
 
+#ifdef __DDOM
+#include "DDom.h"
+#endif
+
 #include "eveschool.h"
 extern	CGuildCombat	g_GuildCombatMng;
 
@@ -170,12 +174,15 @@ void LogPerformance( DWORD dwCurTick )
 			sprintf( szBuffer, 
 					"OP: %d, %2.1f, %2.1f, %2.1f, %2.1f, %2.1f, %2.1f, %2.1f, %2.1f, %2.1f, %2.1f, %2.1f, %2.1f\n",
 					dwTick, r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12 );
-			Error( szBuffer );
+			//Error( szBuffer );
 	}
 #endif	// __INFINITE_0227
 
 	if( dwElapsed > 1000 )
 	{
+#ifdef __DDOM
+		CDDom::GetInstance().Process();
+#endif
 		SetLogInfo( LOGTYPE_CCU, "CCU:%d", g_UserMng.GetCount() );
 
 		if( g_bProfiling )

@@ -11,6 +11,14 @@
 #include "housing.h"
 #endif // __HOUSING
 
+#ifdef __DDOM
+#ifdef __CLIENT
+#include "dpclient.h"
+extern CDPClient g_DPlay;
+#include "DomWidgetA.h"
+#endif
+#endif
+
 //
 // 오브젝트 타입(OT_OBJ, OT_MOVER.. )을 오브젝트 필터로 변환한다.(OF_OBJ, OF_MOVER... )
 // 오브젝트 타입으니 enum형식의 열거값이고, 오브젝트 필터는 비트 연산을 위한 값이다.
@@ -571,6 +579,37 @@ void CWorld::RenderObj(CObj* pObj)
 // 3.이펙트 출력 ( 이펙트를 맨 마지막에 출력해야, 오브젝트와 물이 배경으로 보일 수 있다. )
 // 4.반투명하게 사라지는 오브젝트를 맨 마지막에 출력한다.(반투명 오브젝트는 물 이후에 출력하기 때문에 물 속에 비치게 할 수 없다.)
 //
+
+#ifdef __DDOM
+#ifdef __CLIENT
+BOOL CWorld::IsOnBase( DDOM_BASE base, D3DXVECTOR3 pos )
+{
+	if( base == BASE_A )
+	{	
+		if( pos.x  >= 1227.881104f && pos.x <= 1234.785034f && pos.z >= 1140.664917f && pos.z <= 1147.700317f )
+			return TRUE;
+	}
+	else if( base == BASE_B )
+	{
+		if( pos.x  >= 1574.364990f && pos.x <= 1580.535278f && pos.z >= 1148.937012f && pos.z <= 1155.514526f )
+			return TRUE;
+	}
+	return FALSE;
+}
+
+DDOM_BASE CWorld::GetBaseDominatedBasedOnD3DXVECTOR3SfxObjectPosition( D3DXVECTOR3 pos )
+{ 
+	if( pos.x  >= 1224.0f && pos.x <= 1284.0f && pos.z >= 1124.0f && pos.z <= 1160.0f )
+		return BASE_A;
+	else if( pos.x  >= 1524.0f && pos.x <= 1600.0f && pos.z >= 1129.0f && pos.z <= 1173.0f )
+		return BASE_B;  
+
+	return MAX_BASE;
+}
+#endif
+#endif
+
+
 void CWorld::RenderObject( CD3DFont* pFont )
 {
 	_PROFILE("CWorld::RenderObject()");
@@ -1211,6 +1250,105 @@ void CWorld::RenderObject( CD3DFont* pFont )
 		}
 #endif	// __AI_0711
 		m_pd3dDevice->SetRenderState( D3DRS_LIGHTING, TRUE );//m_bViewLight );
+
+#ifdef __DDOM
+#ifdef __CLIENT
+		if( g_pPlayer && GetID() == WI_WORLD_DOMINATION )
+		{
+			//g_pPlayer->m_ddomTeam = TEAM_B;   
+			CString s = ( pObj && pObj->m_pModel && pObj->m_pModel->m_pModelElem ) ? pObj->m_pModel->m_pModelElem->m_szName : _T("");
+			CDDomWidgetA& domWidget = CDDomWidgetA::GetInstance();
+			DOMINATING_TEAM baseA = domWidget.GetDominatingTeam( BASE_A );
+			DOMINATING_TEAM baseB = domWidget.GetDominatingTeam( BASE_B );
+			DDOM_BASE whatBaseIsSfxIn = GetBaseDominatedBasedOnD3DXVECTOR3SfxObjectPosition( pObj->m_vPos );
+			BOOL IsOnBaseA = IsOnBase( BASE_A, g_pPlayer->GetPos() ), IsOnBaseB = IsOnBase( BASE_B, g_pPlayer->GetPos() );
+			DDOM_BASE baseToBeKicked = ( IsOnBaseA == TRUE ) ? BASE_A : BASE_B;
+
+			if( g_GameTimer.IsFixed() != TRUE )
+			{
+				g_GameTimer.SetFixed( TRUE );			 
+				g_GameTimer.SetTime( 0, 0, 45, 0 );//Fixed( 	g_GameTimer.IsFixed() );//g_WorldMng()->m_nFixedHour = nHour;
+			}  
+
+
+			if( g_pPlayer )
+			{
+				if( IsOnBaseA == TRUE || IsOnBaseB == TRUE )
+				{
+					if( g_pPlayer->m_pActMover ) 
+					{
+						if( g_pPlayer->m_pActMover->IsActDamage() )
+						{
+							if( DoubleDom::World::m_bGetKicked == true )
+							{ 
+								DoubleDom::World::m_bGetKicked = false;
+								g_DPlay.SendGetKicked( baseToBeKicked );
+							} 
+						} 
+					}
+				}
+
+				if( m_dwTickToTouch < GetTickCount() )
+				{
+					D3DXVECTOR3 vPos = g_pPlayer->GetPos();
+					if( IsOnBaseA )
+					{
+						if( DominatingTeamToDomTeam( baseA ) != g_pPlayer->m_ddomTeam )
+						{
+							g_DPlay.SendDDomCap( BASE_A );
+						}
+						m_dwTickToTouch = GetTickCount() + 2500;
+					}
+					if( IsOnBaseB )
+					{
+						if( DominatingTeamToDomTeam( baseB ) != g_pPlayer->m_ddomTeam )
+						{
+							g_DPlay.SendDDomCap( BASE_B );
+						}
+						m_dwTickToTouch = GetTickCount() + 2500;
+					}
+				}	
+
+			}
+			//baseA == team A == red
+			//baseB == team B == blue
+			//  in base B -> check if 
+
+			if( whatBaseIsSfxIn == BASE_B ) // we are in base B
+			{
+				if( s == "pkdudkroprwharf02" ) //blue sfx
+				{
+					if( baseB != DTEAM_B ) //if dominating team on base blue is A
+					{
+						continue; 
+					}
+				}
+				if( s == "pkdudkroprwharf03" ) //red sfx
+				{
+					if( baseB != DTEAM_A )
+						continue;
+				}
+			}
+			
+			if( whatBaseIsSfxIn == BASE_A ) // we are in base A
+			{
+				if( s == "pkdudkroprwharf02" ) //blue sfx
+				{
+					if( baseA != DTEAM_B ) //if dominating team on base blue is A
+					{
+						continue; 
+					}
+				}
+				if( s == "pkdudkroprwharf03" ) //red sfx 
+				{
+					if( baseA != DTEAM_A )
+						continue;
+				}
+			}
+		}
+#endif //client
+#endif //ddom
+
 		pObj->Render( m_pd3dDevice );
 	}
 	//

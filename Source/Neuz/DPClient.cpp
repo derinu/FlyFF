@@ -865,9 +865,20 @@ void CDPClient::OnSnapshot( CAr & ar )
 			case SNAPSHOTTYPE_COLOSSEUM_ENDMATCH: OnColosseumEndMatch( ar ); break;
 #endif // __ COLOSSEUM
 
+#ifdef __DDOM
+			case SNAPSHOTTYPE_ADDITIONAL_MOVER: OnAdditionalMover( ar ); break;
+			case SNAPSHOTTYPE_DDOM_QUEUE: OnDDomQueueList( ar ); break;
+			case SNAPSHOTTYPE_DDOM_CAP: OnDDomCap( ar ); break;
+			case SNAPSHOTTYPE_DDOM_SCORE: OnDDomScore( ar ); break;
+			case SNAPSHOTTYPE_DDOM_CAN_KICK_AGAIN: OnDDomCanKickAgain( ar ); break;
+#endif
+
 #ifdef __NEW_ITEM_VARUNA
 			case SNAPSHOTTYPE_ADDBARUNAPET:		OnActivateBarunaPet( ar ); break;
 #endif// __NEW_ITEM_VARUNA
+#ifdef __DDOM
+			case SNAPSHOTTYPE_TEXT_COLOR: OnTextD3D( ar ); break;
+#endif
 			default:
 				{
 					ASSERT( 0 );
@@ -878,6 +889,168 @@ void CDPClient::OnSnapshot( CAr & ar )
 		g_Prev	= (BYTE)( prev );
 	}
 }
+
+#ifdef __DDOM
+#include "DomScore.h"
+#include "DomWidget.h"
+
+void CDPClient::OnTextD3D( CAr & ar )
+{
+	DWORD dwColor;
+	ar >> dwColor;
+	static TCHAR szTextD3D[512]; // 260
+	ar.ReadString( szTextD3D );
+
+	g_WndMng.PutString( szTextD3D, NULL, dwColor );
+}
+
+void CDPClient::OnAdditionalMover( CAr & ar )
+{
+	OBJID objid;
+	ar >> objid;
+	int nTeam;
+	ar >> nTeam;
+	
+	CMover* pMover = prj.GetMover( objid );
+	if( IsValidObj( pMover ) )
+	{
+		pMover->m_ddomTeam = static_cast<DDOM_TEAM>( nTeam );
+	}
+}
+
+
+void CDPClient::SendDDomCap( DDOM_BASE base )
+{
+	BEFORESENDSOLE( ar, PACKETTYPE_DDOM_CAP, DPID_UNKNOWN );
+	ar << static_cast<u_int>( base );
+	SEND( ar, this, DPID_SERVERPLAYER );
+}
+
+void CDPClient::SendGetKicked( int nBase )
+{
+	BEFORESENDSOLE( ar, PACKETTYPE_DDOM_KICKAT, DPID_UNKNOWN );
+	ar << nBase;
+	SEND( ar, this, DPID_SERVERPLAYER );
+}
+
+void CDPClient::OnDDomCanKickAgain( CAr & ar )
+{
+	DoubleDom::World::m_bGetKicked = true;
+}
+
+void CDPClient::OnDDomScore( CAr & ar )
+{
+	size_t size;
+	ar >> size;
+
+	vector<DOMTEAM> dataTeam;
+	vector<DOMPLAYER> dataPlayer;
+	for( size_t i = 0; i<size; i++ )
+	{
+		DOMPLAYER player;
+		ar >> player.nKill;
+		ar >> player.nDeath;
+		ar >> player.nCaptureS;
+		ar >> player.nTouch;
+		ar >> player.nTeam;
+		ar >> player.nJob;
+		ar >> player.nPoint;
+
+		static TCHAR szDDomScore[MAX_NAME];
+		ar.ReadString( szDDomScore );
+		
+		player.strName = CString( szDDomScore );
+
+		dataPlayer.push_back( player );
+	}
+
+	DOMTEAM team;
+	ar >> team.nKill;
+	ar >> team.nDeath;
+	ar >> team.nTouch;
+	ar >> team.nCaptureS;
+	team.strName = DoubleDom::Name::strTeamA;
+	dataTeam.push_back( team );
+
+	size_t bsize;
+	ar >> bsize;
+	for( size_t i = 0; i<bsize; i++ )
+	{
+		DOMPLAYER player;
+		ar >> player.nKill;
+		ar >> player.nDeath;
+		ar >> player.nCaptureS;
+		ar >> player.nTouch;
+		ar >> player.nTeam;
+		ar >> player.nJob;
+		ar >> player.nPoint;
+
+		static TCHAR szDDomScore[MAX_NAME];
+		ar.ReadString( szDDomScore );
+		
+		player.strName = CString( szDDomScore );
+
+		dataPlayer.push_back( player );
+	}
+
+	DOMTEAM team2;
+	ar >> team2.nKill;
+	ar >> team2.nDeath;
+	ar >> team2.nTouch;
+	ar >> team2.nCaptureS;
+	team2.strName = DoubleDom::Name::strTeamA;
+	dataTeam.push_back( team2 );
+
+	CDDomScore::GetInstance().SetData( dataPlayer, dataTeam );
+}
+
+void CDPClient::OnDDomCap( CAr & ar )
+{
+	int team;
+	int base;
+	BOOL bCaptured;
+	ar >> team;
+	ar >> base;
+	ar >> bCaptured;
+
+	
+	CDDomWidgetA::GetInstance().SetDominatingTeam( static_cast<DDOM_BASE>( base ), DomTeamToDominatingTeam( static_cast<DDOM_TEAM>( team ) ) );
+	if( bCaptured )
+		CDDomWidgetA::GetInstance().SetCapTeam( DomTeamToDominatingTeam( static_cast<DDOM_TEAM>( team ) ) );
+}
+
+void CDPClient::OnDDomQueueList( CAr & ar )
+{
+	size_t size;
+	ar >> size;
+
+	vector<DOMQPL> receiveList;
+	static TCHAR szDDomQueue[MAX_NAME+1];
+	for( size_t i=0; i<size; i++ )
+	{
+		DOMQPL domPlayer;
+		ar >> domPlayer.nJob;
+		ar >> domPlayer.nLevel;
+		ar >> domPlayer.nRebirth;
+		ar >> domPlayer.WorldId;
+		ar.ReadString( szDDomQueue );
+		domPlayer.szName = CString( szDDomQueue );
+		receiveList.push_back( domPlayer );
+	}
+	CDDomWidget::GetInstance().SetData( receiveList );
+	CWndWorld* pWndWorld = (CWndWorld*)g_WndMng.GetWndBase( APP_WORLD );
+	if( pWndWorld )
+	{
+		pWndWorld->m_bDomRender = TRUE;
+	}
+}
+		
+
+void CDPClient::SendDDomJoin( void )
+{
+	SendHdr( PACKETTYPE_DDOM_JOIN );
+}
+#endif
 
 void CDPClient::OnWorldMsg( OBJID objid, CAr & ar )
 {
@@ -945,6 +1118,15 @@ void CDPClient::OnJoin( CAr & ar )
 			}
 		}
 	}
+
+#ifdef __DDOM
+	CWndWorld* pWndWorld = (CWndWorld*)g_WndMng.GetWndBase( APP_WORLD );
+	if( pWndWorld )
+	{
+		pWndWorld->m_bDomRender = FALSE;
+		//pWndWorld->m_dwJoinWelcome = GetTickCount() + SEC( 6  );
+	}
+#endif
 
 #ifdef __GAME_GRADE_SYSTEM
 	g_Neuz.m_dwTimeGameGradeMarkRendering = g_tmCurrent + SEC( CNeuzApp::GAME_GRADE_MARK_RENDERING_INTERVAL_SECOND );
@@ -2439,6 +2621,17 @@ void CDPClient::OnReplace( CAr & ar )
 	D3DXVECTOR3& rDestinationArrow = g_WndMng.m_pWndWorld->m_vDestinationArrow;
 	rDestinationArrow = D3DXVECTOR3( -1.0F, 0.0F, -1.0F );
 #endif // __IMPROVE_QUEST_INTERFACE
+
+#ifdef __DDOM
+	if( dwWorldID == WI_WORLD_DOMINATION )
+	{
+		CWndWorld* pWndWorld = (CWndWorld*)g_WndMng.GetWndBase( APP_WORLD );
+		if( pWndWorld ) 
+		{
+			pWndWorld->m_bDomRender = FALSE;
+		}
+	}
+#endif
 
 	//GMPBIGSUN : check world loading 
 	//Error( "DPClient::OnReplace END OK" );
