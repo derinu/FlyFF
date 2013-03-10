@@ -1255,6 +1255,8 @@ void CWndInventory::OnDraw(C2DRender* p2DRender)
 
 	CString strGoldNum;
 	CWndStatic* pGoldNum = (CWndStatic*) GetDlgItem( WIDC_GOLD_NUM );
+	CWndStatic* pPerinNum = (CWndStatic*) GetDlgItem( WIDC_PERIN_NUM );
+	CWndStatic* pDonorNum = (CWndStatic*) GetDlgItem( WIDC_DONOR_NUM );
 	CWndTrade * pWndTrade = (CWndTrade *)g_WndMng.GetWndBase( APP_TRADE );
 	strGoldNum.Format( _T( "%d" ), g_pPlayer->GetGold() );
 
@@ -1277,6 +1279,8 @@ void CWndInventory::OnDraw(C2DRender* p2DRender)
 	}
 
 	pGoldNum->SetTitle( strGoldNum );
+	pPerinNum->SetTitle( _T("69") );
+	pDonorNum->SetTitle( _T("6969") );
 
 	DWORD dwColor1 = D3DCOLOR_ARGB( 100, 0, 0,  0 );//D3DCOLOR_TEMP( 255,   0,   0,  50 );//
 	DWORD dwColor2 = D3DCOLOR_ARGB( 255, 240, 240,  240 );//D3DCOLOR_TEMP( 255,  80,  80, 120 );//
@@ -1615,6 +1619,14 @@ void CWndInventory::OnInitialUpdate()
 	CWndStatic* pGoldNum = (CWndStatic*) GetDlgItem( WIDC_GOLD_NUM );
 	pGoldNum->m_dwColor = D3DCOLOR_ARGB( 255, 238, 221, 130 );
 	pGoldNum->AddWndStyle(WSS_MONEY);
+
+	CWndStatic* pPerinNum = (CWndStatic*) GetDlgItem( WIDC_PERIN_NUM );
+	pPerinNum->m_dwColor = D3DCOLOR_ARGB( 255, 238, 221, 130 );
+	pPerinNum->AddWndStyle(WSS_MONEY);
+
+	CWndStatic* pDonorNum = (CWndStatic*) GetDlgItem( WIDC_DONOR_NUM );
+	pDonorNum->m_dwColor = D3DCOLOR_ARGB( 255, 238, 221, 130 );
+	pDonorNum->AddWndStyle(WSS_MONEY);
 
 	m_pUpgradeItem = NULL;
 	m_pUpgradeMaterialItem = NULL;
@@ -15381,7 +15393,7 @@ void CWndInventory::RunUpgrade( CItemBase* pItem )
 				if( ( static_cast<CItemElem*>( pItem ) )->IsCollector( TRUE ) || pItem->GetProp()->dwItemKind2 == IK2_JEWELRY )
 				{
 					m_pUpgradeItem = pItem;
-					m_dwEnchantWaitTime = g_tmCurrent + SEC(4);
+					m_dwEnchantWaitTime = g_tmCurrent + SEC(1);
 					return;
 				}
 #endif	// __SYS_COLLECTING
@@ -15452,7 +15464,7 @@ void CWndInventory::RunUpgrade( CItemBase* pItem )
 #endif // __CSC_VER9_1 
 		// 인첸트가 되는 아이템 - 방어구 등등
 		m_pUpgradeItem = pItem;
-		m_dwEnchantWaitTime = g_tmCurrent + SEC(4);
+		m_dwEnchantWaitTime = g_tmCurrent + SEC(1);
 	}
 }
 
@@ -23014,7 +23026,7 @@ BOOL CWndRemoveJewelConfirm::OnChildNotify( UINT message, UINT nID, LRESULT* pLR
 		{
 			// 인첸트가 되는 아이템 - 방어구 등등
 			m_pInventory->m_pUpgradeItem = m_pUpgradeItem;
-			m_pInventory->m_dwEnchantWaitTime = g_tmCurrent + SEC(4);
+			m_pInventory->m_dwEnchantWaitTime = g_tmCurrent + SEC(1);
 		}
 		Destroy();
 	}
@@ -25972,7 +25984,7 @@ BOOL CWndSmeltSafety::Process()
 				}
 			}
 			m_dwEnchantTimeStart = g_tmCurrent;
-			m_dwEnchantTimeEnd = g_tmCurrent + SEC(ENCHANT_TIME);
+			m_dwEnchantTimeEnd = g_tmCurrent + 500;
 		}
 	}
 	else
@@ -26101,7 +26113,7 @@ BOOL CWndSmeltSafety::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 				m_bStart = TRUE;
 				m_bResultSwitch = true;
 				m_dwEnchantTimeStart = g_tmCurrent;
-				m_dwEnchantTimeEnd = g_tmCurrent + SEC(ENCHANT_TIME);
+				m_dwEnchantTimeEnd = g_tmCurrent + 500;
 				CWndEdit* pWndEdit = (CWndEdit*)GetDlgItem(WIDC_EDIT_MAX_GRADE);
 				assert(pWndEdit != NULL);
 				pWndEdit->EnableWindow(FALSE);
