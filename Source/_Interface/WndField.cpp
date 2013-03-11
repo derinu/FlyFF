@@ -1254,11 +1254,20 @@ void CWndInventory::OnDraw(C2DRender* p2DRender)
 	viewport.MaxZ   = 1.0f;
 
 	CString strGoldNum;
+	CString strPerinNum;
+	CString strDonorNum;
+
 	CWndStatic* pGoldNum = (CWndStatic*) GetDlgItem( WIDC_GOLD_NUM );
 	CWndStatic* pPerinNum = (CWndStatic*) GetDlgItem( WIDC_PERIN_NUM );
 	CWndStatic* pDonorNum = (CWndStatic*) GetDlgItem( WIDC_DONOR_NUM );
+
 	CWndTrade * pWndTrade = (CWndTrade *)g_WndMng.GetWndBase( APP_TRADE );
-	strGoldNum.Format( _T( "%d" ), g_pPlayer->GetGold() );
+
+	strGoldNum.Format(_T( "%d" ), g_pPlayer->GetGold());
+	strPerinNum.Format(_T( "%d" ), g_pPlayer->GetPerin());
+	strDonorNum.Format(_T( "%d" ), g_pPlayer->GetDonor());
+
+	//::OUTPUTDEBUGSTRING("Money: %s %s %s\n", strGoldNum, strPerinNum, strDonorNum);
 
 	LPWNDCTRL lpWndCtrl1 = GetWndCtrl( WIDC_CUSTOM21 );
 	if( lpWndCtrl1 && m_TexRemoveItem )
@@ -1279,8 +1288,8 @@ void CWndInventory::OnDraw(C2DRender* p2DRender)
 	}
 
 	pGoldNum->SetTitle( strGoldNum );
-	pPerinNum->SetTitle( _T("69") );
-	pDonorNum->SetTitle( _T("6969") );
+	pPerinNum->SetTitle( strPerinNum );
+	pDonorNum->SetTitle( strDonorNum );
 
 	DWORD dwColor1 = D3DCOLOR_ARGB( 100, 0, 0,  0 );//D3DCOLOR_TEMP( 255,   0,   0,  50 );//
 	DWORD dwColor2 = D3DCOLOR_ARGB( 255, 240, 240,  240 );//D3DCOLOR_TEMP( 255,  80,  80, 120 );//

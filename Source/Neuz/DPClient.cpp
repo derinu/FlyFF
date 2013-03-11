@@ -1062,6 +1062,8 @@ void CDPClient::OnWorldMsg( OBJID objid, CAr & ar )
 
 void CDPClient::OnJoin( CAr & ar )
 {
+	::OUTPUTDEBUGSTRING("OnJoin()");
+
 	CNetwork::GetInstance().OnEvent( CACHE_ACK_JOIN );
 	
 	// ata2k - (2)시간 해제

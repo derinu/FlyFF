@@ -1024,7 +1024,7 @@ public:
 		int nPlayerslot = 0, DWORD dwWorldID = 0, DWORD dwIndex = 0, float vPos_x = 0.0f, float vPos_y = 0.0f,
 		float vPos_z = 0.0f, char* szCharacterKey = '\0', DWORD dwSkinSet = 0, DWORD dwHairMesh = 0, DWORD dwHairColor = 0,
 		DWORD dwHeadMesh = 0, DWORD dwSex = 0, float vScale_x = 0.0f, DWORD dwMotion = 0, float fAngle = 0.0f,
-		int nHitPoint = 0, int nManaPoint = 0, int nFatiguePoint = 0, DWORD dwRideItemIdx = 0, DWORD dwGold = 0,
+		int nHitPoint = 0, int nManaPoint = 0, int nFatiguePoint = 0, DWORD dwRideItemIdx = 0, DWORD dwGold = 0, int dwPerin = 0, int dwDonor = 0,
 		int nJob = 0, char* szActMover = '\0', int nStr = 0, int nSta = 0, int nDex = 0,
 		int nInt = 0, int nLevel = 0, EXPINTEGER nExp1 = 0, EXPINTEGER nExp2 = 0, char* szJobSkill = '\0',
 		char* szLicenseSkill = '\0', char* aJobLv = '\0', DWORD dwExpertLv = 0, int nidMarkingWorld = 0, float vMarkingPos_x = 0.0f,

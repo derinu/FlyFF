@@ -438,6 +438,8 @@ void CMover::Init()
 	m_bRegenItem		= TRUE;
 	m_bActiveAttack		= FALSE;
 	m_dwGold			= 0;		// 0으로 할것.  -xuzhu-
+	m_dwPerin			= 0;
+	m_dwDonor			= 0;
 
 	for( int i = 0; i < MAX_VENDOR_INVENTORY_TAB; i++ )
 		m_ShopInventory[ i ] = 0;
@@ -609,12 +611,6 @@ BOOL CMover::AddGold( int nGold, BOOL bSend )
 	if( nGold == 0 )
 		return TRUE;
 
-//#ifdef __WORLDSERVER
-//	if( m_vtInfo.TradeGetGold() != 0 )
-//		return FALSE;
-//#endif	// __WORLDSERVER
-
-#ifdef __PERIN_BUY_BUG
 	__int64 i64Total = static_cast<__int64>( GetGold() ) + static_cast<__int64>( nGold );
 	
 	if( i64Total > static_cast<__int64>( INT_MAX ) )
@@ -622,40 +618,70 @@ BOOL CMover::AddGold( int nGold, BOOL bSend )
 	else if( i64Total < 0 )
 		i64Total = 0;
 
-	SetGold( static_cast<int>( i64Total ) );
-#else // __PERIN_BUY_BUG
-	int nTotal = GetGold() + nGold;
+	if(i64Total >= PERIN_VALUE)
+	{
+		double PerinNum = static_cast<double>((double)i64Total / (double)PERIN_VALUE);
 
-	if( nGold > 0 )
-	{
-		if( nTotal < 0 )		// overflow?
-			nTotal = INT_MAX;
-	}
-	else	// nGold < 0
-	{
-		if( nTotal < 0 )		// underflow?
+		if(PerinNum >= 1)
 		{
-//#ifdef __WORLDSERVER
-//			Error( "AddGold: nTotal < 0" );
-//#endif	// __WORLDSERVER
-			nTotal	= 0;
-//			return FALSE;
+			SetGold(((int)i64Total) - ((int)PerinNum * PERIN_VALUE));
+			AddPerin(static_cast<int>(PerinNum));
 		}
 	}
-
-	SetGold( nTotal );
-#endif // __PERIN_BUY_BUG
-	
-	if( bSend )
+	else
 	{
-	#ifdef __WORLDSERVER
-#ifdef __PERIN_BUY_BUG
-		g_UserMng.AddSetPointParam( this, DST_GOLD, static_cast<int>( i64Total ) );
-#else // __PERIN_BUY_BUG
-		g_UserMng.AddSetPointParam( this, DST_GOLD, nTotal );
-#endif // __PERIN_BUY_BUG
-	#endif	// __WORLDSERVER
+		SetGold(static_cast<int>(i64Total));
 	}
+#ifdef __WORLDSERVER
+	if(bSend)
+		g_UserMng.AddSetPointParam( this, DST_GOLD, static_cast<int>( i64Total ) );
+#endif
+
+	return TRUE;
+}
+
+BOOL CMover::AddPerin(int nPerin, BOOL bSend)
+{
+
+	if(nPerin == 0)
+		return TRUE;
+
+	__int64 i64Total = static_cast<__int64>( GetPerin() ) + static_cast<__int64>( nPerin );
+	
+	if( i64Total > static_cast<__int64>( INT_MAX ) )
+		i64Total = static_cast<__int64>( INT_MAX );
+	else if( i64Total < 0 )
+		i64Total = 0;
+
+	SetPerin(static_cast<int>(i64Total));
+
+#ifdef __WORLDSERVER
+	if(bSend)
+		g_UserMng.AddSetPointParam( this, DST_PERIN, static_cast<int>( i64Total ) );
+#endif
+
+	return TRUE;
+}
+
+BOOL CMover::AddDonor(int nDonor, BOOL bSend)
+{
+
+	if(nDonor == 0)
+		return TRUE;
+
+	__int64 i64Total = static_cast<__int64>( GetDonor() ) + static_cast<__int64>( nDonor );
+	
+	if( i64Total > static_cast<__int64>( INT_MAX ) )
+		i64Total = static_cast<__int64>( INT_MAX );
+	else if( i64Total < 0 )
+		i64Total = 0;
+
+	SetDonor(static_cast<int>(i64Total));
+
+#ifdef __WORLDSERVER
+	if(bSend)
+		g_UserMng.AddSetPointParam( this, DST_DONOR, static_cast<int>( i64Total ) );
+#endif
 
 	return TRUE;
 }
@@ -12294,14 +12320,14 @@ int CMover::GetPerinNum( void )
 // 소유하고있는 페린과 페냐의 합을 반환한다.
 __int64 CMover::GetTotalGold( void )
 {
-	return static_cast<__int64>( GetPerinNum() ) * PERIN_VALUE + static_cast<__int64>( GetGold() );
+	return static_cast<__int64>( GetPerin() ) * PERIN_VALUE + static_cast<__int64>( GetGold() );
 }
 
 #ifdef __WORLDSERVER
 int CMover::RemovePerin( int nPerin )
 {
-	int nRest	= nPerin;
-	for( int i = 0; i < m_Inventory.GetMax() && nRest > 0; i++ )
+	//int nRest	= nPerin;
+	/*for( int i = 0; i < m_Inventory.GetMax() && nRest > 0; i++ )
 	{
 		CItemElem* pItem	= static_cast<CItemElem*>( GetItemId( i ) );
 		if( pItem && pItem->IsPerin() && ::IsUsableItem( pItem ) )
@@ -12310,8 +12336,12 @@ int CMover::RemovePerin( int nPerin )
 			UpdateItem( i, UI_NUM, pItem->m_nItemNum - nRemove );
 			nRest	-= nRemove;
 		}
-	}
-	return nPerin - nRest;
+	}*/
+	//return nPerin - nRest;
+
+	int nRemaining = GetPerin() - nPerin;
+	SetPerin(nRemaining);
+	return nRemaining;
 }
 
 // iGold만큼의 페린과 페냐를 소모하고 이를 클라이언트 통보한다.

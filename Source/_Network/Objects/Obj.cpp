@@ -159,6 +159,8 @@ CMover::CMover()
 	m_dwRideItemIdx		= 0;
 
   	m_dwGold	= 0;
+	m_dwPerin = 0;
+	m_dwDonor = 0;
 
 	m_nJob	= -1;
 	
@@ -776,6 +778,8 @@ void CMover::Copy( CMover * pMover, BOOL bAll )
 		SetSex( pMover->GetSex() );
 		m_dwRideItemIdx	= pMover->m_dwRideItemIdx;
 		SetGold( pMover->GetGold() );
+		SetPerin( pMover->GetPerin());
+		SetDonor ( pMover->GetDonor());
 		m_nJob	= pMover->m_nJob;
 		m_idparty	= pMover->m_idparty;
 #if __VER >= 8 // __S8_PK

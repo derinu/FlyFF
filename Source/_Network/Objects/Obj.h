@@ -939,6 +939,8 @@ class CMover: public CCtrl
 {
 private:
 	DWORD			m_dwGold;
+	DWORD			m_dwPerin;
+	DWORD			m_dwDonor;
 
 public:
 /// 몬스터에 해당되는 것 
@@ -1196,6 +1198,14 @@ public:
 	void	SetGold( int nGold );
 	BOOL	AddGold( int nGold, BOOL bSend = TRUE );
 
+	int		GetPerin();
+	void	SetPerin( int nPerin );
+	BOOL	AddPerin( int nPerin, BOOL bSend = TRUE );
+
+	int		GetDonor();
+	void	SetDonor( int nDonor );
+	BOOL	AddDonor( int nDonor, BOOL bSend = TRUE );
+
 	void	Copy( CMover* pMover, BOOL bCopyAll );
 	void	PeriodTick();
 
@@ -1224,6 +1234,7 @@ public:
 inline int CMover::GetGold()
 {
 	ASSERT( m_dwGold <= INT_MAX );
+	::Error("Obj.h CMover::GetGold() %d\n", m_dwGold);
 	return m_dwGold;
 }
 
@@ -1231,6 +1242,32 @@ inline void CMover::SetGold( int nGold )
 {
 	ASSERT( nGold >= 0 );
 	m_dwGold = (DWORD)nGold;
+	::Error("Obj.h Set Gold to %d\n", nGold);
+}
+
+inline int CMover::GetPerin()
+{
+	ASSERT( m_dwPerin <= INT_MAX );
+	::Error("Obj.h CMover::GetPerin() %d\n", m_dwPerin);
+	return m_dwPerin;
+}
+
+inline void CMover::SetPerin( int nPerin )
+{
+	ASSERT( nPerin >= 0 );
+	m_dwPerin = (DWORD)nPerin;
+}
+
+inline int CMover::GetDonor()
+{
+	ASSERT( m_dwDonor <= INT_MAX );
+	return m_dwDonor;
+}
+
+inline void CMover::SetDonor( int nDonor )
+{
+	ASSERT( nDonor >= 0 );
+	m_dwDonor = (DWORD)nDonor;
 }
 
 inline BOOL CMover::AddGold( int nGold, BOOL bSend )
@@ -1238,36 +1275,79 @@ inline BOOL CMover::AddGold( int nGold, BOOL bSend )
 	if( nGold == 0 )
 		return TRUE;
 
-#ifdef __PERIN_BUY_BUG
-	float fTotal = static_cast<float>( GetGold() ) + static_cast<float>( nGold );
-	if( fTotal > static_cast<float>( INT_MAX ) )
-		fTotal = static_cast<float>( INT_MAX );
-	else if( fTotal < 0.0f )
-		return FALSE;
+	__int64 i64Total = static_cast<__int64>( GetGold() ) + static_cast<__int64>( nGold );
+	
+	if( i64Total > static_cast<__int64>( INT_MAX ) )
+		i64Total = static_cast<__int64>( INT_MAX );
+	else if( i64Total < 0 )
+		i64Total = 0;
 
-	SetGold( static_cast<int>( fTotal ) );
-#else // __PERIN_BUY_BUG
-	int nTotal = GetGold() + nGold;
-
-	if( nGold > 0 )
+	if(i64Total >= PERIN_VALUE)
 	{
-		if( nTotal < 0 )		// overflow?
-			nTotal = INT_MAX;
+		float PerinNum = static_cast<float>(i64Total / PERIN_VALUE);
+
+		if(PerinNum >= 1)
+		{
+			AddPerin((int)PerinNum);
+			SetGold((int)i64Total - ((int)PerinNum * PERIN_VALUE));
+		}
 	}
 	else
 	{
-		if( nTotal < 0 )		// underflow?
-			return FALSE;
+		::Error("Obj.h Attempting to set gold: %d\n", (int)i64Total);
+		SetGold((int)i64Total);
 	}
 
-	SetGold( nTotal );
-#endif // __PERIN_BUY_BUG
-	if( bSend )
-	{
-	#ifdef __WORLDSERVER
-		g_UserMng.AddSetPointParam( this, DST_GOLD, nTotal );
-	#endif	// __WORLDSERVER
-	}
+#ifdef __WORLDSERVER
+	if(bSend)
+		g_UserMng.AddSetPointParam( this, DST_GOLD, static_cast<int>( i64Total ) );
+#endif
+
+	return TRUE;
+}
+
+inline BOOL CMover::AddPerin(int nPerin, BOOL bSend)
+{
+
+	if(nPerin == 0)
+		return TRUE;
+
+	__int64 i64Total = static_cast<__int64>( GetPerin() ) + static_cast<__int64>( nPerin );
+	
+	if( i64Total > static_cast<__int64>( INT_MAX ) )
+		i64Total = static_cast<__int64>( INT_MAX );
+	else if( i64Total < 0 )
+		i64Total = 0;
+
+	SetPerin(static_cast<int>(i64Total));
+
+#ifdef __WORLDSERVER
+	if(bSend)
+		g_UserMng.AddSetPointParam( this, DST_PERIN, static_cast<int>( i64Total ) );
+#endif
+
+	return TRUE;
+}
+
+inline BOOL CMover::AddDonor(int nDonor, BOOL bSend)
+{
+
+	if(nDonor == 0)
+		return TRUE;
+
+	__int64 i64Total = static_cast<__int64>( GetDonor() ) + static_cast<__int64>( nDonor );
+	
+	if( i64Total > static_cast<__int64>( INT_MAX ) )
+		i64Total = static_cast<__int64>( INT_MAX );
+	else if( i64Total < 0 )
+		i64Total = 0;
+
+	SetDonor(static_cast<int>(i64Total));
+
+#ifdef __WORLDSERVER
+	if(bSend)
+		g_UserMng.AddSetPointParam( this, DST_DONOR, static_cast<int>( i64Total ) );
+#endif
 
 	return TRUE;
 }

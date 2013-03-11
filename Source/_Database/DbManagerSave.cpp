@@ -105,7 +105,7 @@ void CDbManager::SavePlayer( CQuery *qry, CQuery* pQueryLog, CMover* pMover, cha
 	//	mulcom	100218	유럽 페냐 관련 CHARACTER_STR U1 변경 ( U1 -> C1 )
 	sprintf( szQuery, "{call CHARACTER_STR('U1','%07d','%02d','',"
 					  "?,?,?,?,?,?,?,?,?,?,?,"		// 1
-					  "?,?,?,?,?,?,?,?,?,?,?,"		// 2
+					  "?,?,?,?,?,?,?,?,?,?,?,?,?,"		// 2
 					  "?,?,?,?,?,?,?,?,?,?,?,"		// 3
 					  "?,?,?,?,?,?,?,?,?,?,?,"		// 4
 					  "?,?,?,?,?,?,?,?,?,?,?,"		// 5
@@ -155,6 +155,11 @@ void CDbManager::SavePlayer( CQuery *qry, CQuery* pQueryLog, CMover* pMover, cha
 	int nRemainLP = 0;
 	int nTotalPlayTime = 0;
 	DWORD dwGold = pMover->GetGold();
+	int dwPerin = pMover->GetPerin();
+	int dwDonor = pMover->GetDonor();
+
+	::Error("Gold: %d\nPerin: %d\nSeeds: %d\n", dwGold, dwPerin, dwDonor);
+
 	int i=0;
 	int j=-1;
 	__int64 nExp2 = 0;
@@ -228,6 +233,8 @@ int MAX_SAVEPARAM = 88;
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &pMover->m_nFatiguePoint, 0, 0 );
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &pMover->m_dwRideItemIdx, 0, 0 );
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &dwGold, 0, 0 );
+	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &dwPerin, 0, 0 );
+	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &dwDonor, 0, 0 );
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_LONG, SQL_INTEGER,   0, 0, &pMover->m_nJob, 0, 0 );
 	// 2
 	bOK[++j] = qry->BindParameter( ++i, SQL_PARAM_INPUT, SQL_C_CHAR,  SQL_VARCHAR,  50, 0, cActMover, 0, &cbLen );
@@ -395,6 +402,8 @@ int MAX_SAVEPARAM = 88;
 			return;
 		}
 	}
+
+	::Error("DbManagerSave.cpp SavePlayer() \n%s\n %d %d %d \n%s\n\n", szQuery, pMover->GetGold(), pMover->GetPerin(), pMover->GetDonor(), pMover->m_szName);
 
 	if( qry->Exec( szQuery ) == FALSE )
 	{

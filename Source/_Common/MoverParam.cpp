@@ -927,10 +927,12 @@ int CMover::GetPointParam(int nDestParameter )
 {
 	switch( nDestParameter )
 	{
-		case DST_HP:	return( GetHitPoint() );
-		case DST_MP:	return( GetManaPoint() );
-		case DST_FP:	return( GetFatiguePoint() );
-		case DST_GOLD:	return( GetGold() );
+		case DST_HP:	return(GetHitPoint());
+		case DST_MP:	return(GetManaPoint());
+		case DST_FP:	return(GetFatiguePoint());
+		case DST_GOLD:	return(GetGold());
+		case DST_PERIN:	return(GetPerin());
+		case DST_DONOR: return(GetDonor());
 	}
 	return( 0 );
 }
@@ -997,6 +999,22 @@ void CMover::SetPointParam( int nDstParameter, int nValue, BOOL bTrans )	// bTra
 			bTransfer	= TRUE;
 			SetGold( nValue );
 			break;
+
+		case DST_PERIN:
+#ifdef __WORLDSERVER
+			return;
+#endif
+			bTransfer	= TRUE;
+			SetPerin(nValue);
+		break;
+
+		case DST_DONOR:
+#ifdef __WORLDSERVER
+			return;
+#endif
+			bTransfer	= TRUE;
+			SetDonor(nValue);
+		break;
 	}
 #ifdef __WORLDSERVER
 	if( bTransfer )

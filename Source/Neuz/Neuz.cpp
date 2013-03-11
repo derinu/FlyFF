@@ -380,7 +380,6 @@ void CNeuzApp::InitNProtect()
 			break;
 		}
 		if( lpszMsg )
-			::Error( "nProtect GameGuard : %s", lpszMsg );
 //			MessageBox( GetSafeHwnd(), lpszMsg, "nProtect GameGuard", MB_OK );
 
 		ExitProcess( -1 );

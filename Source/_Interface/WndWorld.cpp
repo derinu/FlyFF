@@ -3089,7 +3089,7 @@ void CWndWorld::RenderSelectObj( C2DRender* p2DRender, CObj* pObj )
 						CString string;
 						if( pMover->IsPlayer() )
 #if __VER >= 8 // __S8_PK
-							string.Format( prj.GetText( TID_GAME_SELECT_OBJECT_INFORMATION_PLAYER ), pMover->GetHitPoint(), pMover->GetMaxHitPoint(), pMover->GetGold(), (float)pMover->GetExpPercent()/100.0f, pMover->GetExp1(), pMover->GetMaxExp1() );
+							string.Format( prj.GetText( TID_GAME_SELECT_OBJECT_INFORMATION_PLAYER ), pMover->GetHitPoint(), pMover->GetMaxHitPoint(), pMover->GetTotalGold(), (float)pMover->GetExpPercent()/100.0f, pMover->GetExp1(), pMover->GetMaxExp1() );
 #else // __VER >= 8 // __S8_PK
 							string.Format( "HP(%d/%d),Gold(%d),Karma(%d)", pMover->GetHitPoint(), pMover->GetMaxHitPoint(), pMover->GetGold(), pMover->GetKarma() );
 #endif // __VER >= 8 // __S8_PK

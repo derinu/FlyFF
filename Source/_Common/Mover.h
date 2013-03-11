@@ -1036,6 +1036,8 @@ public:
 protected:
 	int				m_nCount;					/// 무버가 범용으로 쓰는 순차적 카운터. 생성자 외엔 0으로 초기화 하지 말것.
 	DWORD			m_dwGold;					/// 페냐 
+	DWORD			m_dwPerin;
+	DWORD			m_dwDonor;
 	DWORD			m_dwRideItemIdx;			/// 비행체의 아이템 인덱스
 	CModelObject*	m_pRide;					/// 비행체 객체 포인터 
 	TCHAR			m_szName[MAX_NAME];			/// 이름 
@@ -1268,6 +1270,8 @@ public:
 	int				GetSta();
 	FLOAT			GetSpeed(FLOAT fSrcSpeed);    
 	int				GetGold();
+	int				GetPerin();
+	int				GetDonor();
 #if __VER >= 12 // __LORD
 	int		GetPerinNum( void );
 	__int64		GetTotalGold( void );
@@ -1278,6 +1282,10 @@ public:
 #endif	// __LORD
 	void			SetGold( int nGold );
 	BOOL			AddGold( int nGold, BOOL bSend = TRUE );
+	void			SetPerin( int nPerin );
+	BOOL			AddPerin ( int nPerin, BOOL bSend = TRUE );
+	void			SetDonor( int nDonor );
+	BOOL			AddDonor ( int nDonor, BOOL bSend = TRUE );
 	int				GetHitPointPercent( int nPercent = 100 );
 	int				GetManaPointPercent( int nPercent = 100 );
 	int				GetFatiguePointPercent( int nPercent = 100 );
@@ -1887,6 +1895,32 @@ inline void CMover::SetGold( int nGold )
 {
 	ASSERT( nGold >= 0 );
 	m_dwGold = (DWORD)nGold;
+}
+
+inline int CMover::GetPerin()
+{
+	int nPerin = m_dwPerin;
+	ASSERT( nPerin >= 0 );
+	return nPerin;
+}
+
+inline void CMover::SetPerin( int nPerin )
+{
+	ASSERT( nPerin >= 0 );
+	m_dwPerin = (DWORD)nPerin;
+}
+
+inline int CMover::GetDonor()
+{
+	int nDonor = m_dwDonor;
+	ASSERT( nDonor >= 0 );
+	return nDonor;
+}
+
+inline void CMover::SetDonor( int nDonor )
+{
+	ASSERT( nDonor >= 0 );
+	m_dwDonor = (DWORD)nDonor;
 }
 
 inline void CMover::ClearCmd() 

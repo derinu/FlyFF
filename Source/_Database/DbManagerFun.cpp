@@ -1042,6 +1042,12 @@ void CDbManager::GetBaseCharacter( CMover* pMover, CQuery *qry, LPDB_OVERLAPPED_
 	pMover->SetSex( (BYTE)qry->GetInt( "m_dwSex" ) );
 	pMover->m_dwRideItemIdx		= (DWORD)qry->GetInt( "m_dwRideItemIdx" );
 	pMover->SetGold( qry->GetInt("m_dwGold") );
+	pMover->SetPerin( qry->GetInt("m_dwPerin") );
+	pMover->SetDonor( qry->GetInt("m_dwDonor") );
+
+	::Error("bdmanagefun getbasecharacter(): gold %d perin %d donor %d\n", qry->GetInt("m_dwGold"), qry->GetInt("m_dwPerin"), qry->GetInt("m_dwDonor"));
+
+
 	pMover->m_nJob			= (LONG)qry->GetInt( "m_nJob" );
 	pMover->m_idparty		= (u_long)qry->GetInt( "m_idparty" );
 #if __VER >= 8 // __S8_PK

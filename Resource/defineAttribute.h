@@ -396,5 +396,7 @@
 #define DST_HEAL_MP_VALUE					10034		// MP 절대치 회복 AdjParam
 #define DST_HEAL_FP_VALUE					10035		// FP 절대치 회복 AdjParam
 
+#define	DST_PERIN				10036
+#define	DST_DONOR				10037
 
 #endif

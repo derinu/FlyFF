@@ -5344,7 +5344,7 @@ void CDbManager::DBQryCharacter( char* qryCharacter, char* Gu, u_long idPlaeyr, 
 								int nPlayerslot, DWORD dwWorldID, DWORD dwIndex, float vPos_x, float vPos_y,
 								float vPos_z, char* szCharacterKey, DWORD dwSkinSet, DWORD dwHairMesh, DWORD dwHairColor,
 								DWORD dwHeadMesh, DWORD dwSex, float vScale_x, DWORD dwMotion, float fAngle,
-								int nHitPoint, int nManaPoint, int nFatiguePoint, DWORD dwRideItemIdx, DWORD dwGold,
+								int nHitPoint, int nManaPoint, int nFatiguePoint, DWORD dwRideItemIdx, DWORD dwGold, int dwPerin, int dwDonor,
 								int nJob, char* szActMover, int nStr, int nSta, int nDex,
 								int nInt, int nLevel, EXPINTEGER nExp1, EXPINTEGER nExp2, char* szJobSkill,
 								char* szLicenseSkill, char* aJobLv, DWORD dwExpertLv, int nidMarkingWorld, float vMarkingPos_x,
@@ -5409,8 +5409,8 @@ void CDbManager::DBQryCharacter( char* qryCharacter, char* Gu, u_long idPlaeyr, 
 		vPos_z,szCharacterKey, dwSkinSet, dwHairMesh, dwHairColor, dwHeadMesh, dwSex, vScale_x, dwMotion, fAngle );
 	strncat( qryCharacter, strCharacter, sizeof(strCharacter) );
 
-	sprintf( strCharacter, ",@im_nHitPoint=%d,@im_nManaPoint=%d,@im_nFatiguePoint=%d,@im_dwRideItemIdx=%d,@im_dwGold=%d,@im_nJob=%d,@im_pActMover='%s',@im_nStr=%d,@im_nSta=%d,@im_nDex=%d",
-		nHitPoint, nManaPoint, nFatiguePoint, dwRideItemIdx, dwGold, nJob, szActMover, nStr, nSta, nDex );
+	sprintf( strCharacter, ",@im_nHitPoint=%d,@im_nManaPoint=%d,@im_nFatiguePoint=%d,@im_dwRideItemIdx=%d,@im_dwGold=%d,@m_dwPerin=%d,@m_dwDonor=%d,@im_nJob=%d,@im_pActMover='%s',@im_nStr=%d,@im_nSta=%d,@im_nDex=%d",
+		nHitPoint, nManaPoint, nFatiguePoint, dwRideItemIdx, dwGold, dwPerin, dwDonor, nJob, szActMover, nStr, nSta, nDex );
 	strncat( qryCharacter, strCharacter, sizeof(strCharacter) );
 
 	sprintf( strCharacter, ",@im_nInt=%d,@im_nLevel=%d,@im_nExp1=%I64d,@im_nExp2=%I64d,@im_aJobSkill='%s',@im_aLicenseSkill='%s',@im_aJobLv='%s',@im_dwExpertLv=%d,@im_idMarkingWorld=%d,@im_vMarkingPos_x=%f",
@@ -5505,10 +5505,18 @@ void CDbManager::DBQryCharacter( char* qryCharacter, char* Gu, u_long idPlaeyr, 
 	strncat( qryCharacter, strCharacter, sizeof(strCharacter) );
 #endif // __IMPROVE_QUEST_INTERFACE
 
+	//sprintf( strCharacter, ",@m_dwPerin=%d", dwPerin );
+	//strncat( qryCharacter, strCharacter, sizeof(strCharacter) );
+
+	//sprintf( strCharacter, ",@m_dwDonor=%d", dwDonor );
+	//strncat( qryCharacter, strCharacter, sizeof(strCharacter) );
+
 	if( strlen(qryCharacter) > 40960 )
 	{
 		ASSERT(0);
 	}
+
+	//::Error("%s\n%s\n%d\n%d\n%d\n", strCharacter, qryCharacter, dwGold, dwPerin, dwDonor);
 }
 
 BOOL CDbManager::BankToItemSendTbl( LPCSTR lpFileName )
@@ -5694,8 +5702,14 @@ BOOL CDbManager::InventoryToItemSendTbl( LPCSTR lpFileName )
 			}
 			CMover* pMover	= new CMover;
 			pMover->m_idPlayer	= pQueryLoad->GetInt( "m_idPlayer" );
+
 			DWORD dwGold	= pQueryLoad->GetInt( "m_dwGold" );
+			//DWORD dwPerin	= pQueryLoad->GetInt( "m_dwPerin" );
+			//DWORD dwDonor	= pQueryLoad->GetInt( "m_dwDonor" );
+
 			pMover->SetGold( dwGold );
+			//pMover->SetPerin( dwPerin );
+			//pMover->SetDonor( dwDonor );
 //			GetBankMover( pMover, pQueryLoad, 0 );
 
 			sprintf( szSql, "insert ITEM_SEND_TBL (m_idPlayer, serverindex, Item_Name, Item_count ) VALUES ('%07d','%02d','penya', %d)",

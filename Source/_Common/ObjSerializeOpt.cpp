@@ -98,6 +98,8 @@ void CMover::Serialize( CAr & ar )
 {
 	CCtrl::Serialize( ar );	//	25
 	DWORD dwGold;
+	DWORD dwPerin;
+	DWORD dwDonor;
 
 	if( ar.IsStoring() )	// STORING
 	{
@@ -208,6 +210,11 @@ void CMover::Serialize( CAr & ar )
 				
 				dwGold = GetGold();
 				ar << dwGold;
+
+				dwPerin = GetPerin();
+				ar << dwPerin;
+				dwDonor = GetDonor();
+				ar << dwDonor;
 				ar << m_nExp1;
 				ar << m_nSkillLevel;
 				ar << m_nSkillPoint;
@@ -529,6 +536,12 @@ void CMover::Serialize( CAr & ar )
 
 				ar >> dwGold;
 				SetGold( dwGold );
+				
+				ar >> dwPerin;
+				SetPerin( dwPerin );
+
+				ar >> dwDonor;
+				SetDonor( dwDonor );
 
 				ar >> m_nExp1;
 				ar >> m_nSkillLevel;
