@@ -621,21 +621,27 @@ BOOL CMover::AddGold( int nGold, BOOL bSend )
 	if(i64Total >= PERIN_VALUE)
 	{
 		double PerinNum = static_cast<double>((double)i64Total / (double)PERIN_VALUE);
+		int rGold = ((int)i64Total) - ((int)PerinNum * PERIN_VALUE);
 
 		if(PerinNum >= 1)
 		{
-			SetGold(((int)i64Total) - ((int)PerinNum * PERIN_VALUE));
+			SetGold(rGold);
 			AddPerin(static_cast<int>(PerinNum));
 		}
+
+		#ifdef __WORLDSERVER
+		if(bSend)
+			g_UserMng.AddSetPointParam( this, DST_GOLD, static_cast<int>(rGold) );
+		#endif
 	}
 	else
 	{
 		SetGold(static_cast<int>(i64Total));
+		#ifdef __WORLDSERVER
+		if(bSend)
+			g_UserMng.AddSetPointParam( this, DST_GOLD, static_cast<int>( i64Total ) );
+		#endif
 	}
-#ifdef __WORLDSERVER
-	if(bSend)
-		g_UserMng.AddSetPointParam( this, DST_GOLD, static_cast<int>( i64Total ) );
-#endif
 
 	return TRUE;
 }
