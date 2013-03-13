@@ -1045,10 +1045,14 @@ void CDPClient::OnDDomQueueList( CAr & ar )
 	}
 }
 		
-
 void CDPClient::SendDDomJoin( void )
 {
 	SendHdr( PACKETTYPE_DDOM_JOIN );
+}
+
+void CDPClient::SendMarketJoin( void )
+{
+	SendHdr( PACKETTYPE_MARKET_JOIN );
 }
 #endif
 

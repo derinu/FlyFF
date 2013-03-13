@@ -587,6 +587,7 @@ CDPSrvr::CDPSrvr()
 	ON_MSG( PACKETTYPE_DDOM_JOIN, OnDDomJoin );
 	ON_MSG( PACKETTYPE_DDOM_CAP, OnDDomCap );
 	ON_MSG( PACKETTYPE_DDOM_KICKAT, OnDDomKickAt );
+	ON_MSG( PACKETTYPE_MARKET_JOIN, OnMarketJoin );
 #endif
 }
 
@@ -2779,6 +2780,20 @@ void CDPSrvr::OnDDomJoin( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf,
 		CDDomQueue::GetInstance().Add( pUser );
 	}
 }
+
+void CDPSrvr::OnMarketJoin( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
+{
+	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+
+	if( IsValidObj( pUser ) )
+	{
+		if( !CNpcChecker::GetInstance()->IsCloseNpc(MMI_CHRISTMASFAIRY03, pUser->GetWorld(), pUser->GetPos() ) )
+			return;
+
+		pUser->Replace( g_uIdofMulti, WI_WORLD_MARKET, D3DXVECTOR3( 735.0F, 100.0F, 825.0F ), REPLACE_FORCE, nDefaultLayer );
+	}
+}
+
 D3DXVECTOR3 GetRandomPosToKickAt( DDOM_BASE base );
 
 void CDPSrvr::OnDDomKickAt( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
@@ -9066,7 +9081,6 @@ void CDPSrvr::OnPVendorOpen( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 		}
 #endif //__Y_BEAUTY_SHOP_CHARGE
 */
-
 #ifdef __RULE_0615
 		if( prj.IsInvalidName( szPVendor ) || prj.IsAllowedLetter( szPVendor, TRUE ) == FALSE )
 			pUser->AddDiagText( prj.GetText( TID_DIAG_0020 ) ); 
@@ -9077,9 +9091,9 @@ void CDPSrvr::OnPVendorOpen( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 		
 		// 대전장에서는 개인상점을 열수 없습니다.
 		CWorld* pWorld = pUser->GetWorld();
-		if( pWorld && pWorld->GetID() == WI_WORLD_GUILDWAR )
+		if( pWorld && pWorld->GetID() != WI_WORLD_MARKET )
 		{			
-			pUser->AddText( prj.GetText(TID_GAME_GUILDCOMBAT_CANNOT_TRADE) ); //길드대전장 에서는 거래에 관한 모든것들을 이용 할 수 없습니다.
+			//pUser->AddText(); //길드대전장 에서는 거래에 관한 모든것들을 이용 할 수 없습니다.
 			return;
 		}
 #if __VER >= 11 // __GUILD_COMBAT_1TO1
@@ -11335,8 +11349,8 @@ void	CDPSrvr::OnNPCBuff( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 		
 		if( lpChar )
 		{
-			if( !CNpcChecker::GetInstance()->IsCloseNpc(MMI_NPC_BUFF, pUser->GetWorld(), pUser->GetPos() ) )
-				return;
+			//if( !CNpcChecker::GetInstance()->IsCloseNpc(MMI_NPC_BUFF, pUser->GetWorld(), pUser->GetPos() ) )
+				//return;
 
 			vector<NPC_BUFF_SKILL> vecNPCBuff = lpChar->m_vecNPCBuffSkill;
 			for( int i=0; i<(int)( vecNPCBuff.size() ); i++ )

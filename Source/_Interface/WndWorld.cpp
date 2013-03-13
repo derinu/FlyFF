@@ -4128,9 +4128,13 @@ BOOL CWndWorld::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase )
 		switch( nID )
 		{
 #ifdef __DDOM
+		case MMI_CHRISTMASFAIRY03:
+		{
+			g_DPlay.SendMarketJoin();
+		}break;
 		case MMI_CHRISTMASFAIRY04:
 		{
-			::OUTPUTDEBUGSTRING("Join DDOM\n");
+			//::OUTPUTDEBUGSTRING("Join DDOM\n");
 			g_DPlay.SendDDomJoin();
 		}break;
 #endif

@@ -32,7 +32,7 @@ void CDDomWidget::PaintWidget( C2DRender* p2DRender )
 	rect.bottom = y / 2 - 10;
 	p2DRender->RenderFillRect( rect, D3DCOLOR_ARGB( 30, 0, 0, 0 ) );
 	CString strList;
-	strList.Format( "Queued: %u/12", m_vecDomPlayer.size() );
+	strList.Format( "Queued: %u/16", m_vecDomPlayer.size() );
 	p2DRender->TextOut( rect.left + 4, rect.top + 2, strList, 0xFFFFFFFF, 0xFF000000 );
 
 /*	int x = g_Option.m_nResWidth;

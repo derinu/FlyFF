@@ -1286,6 +1286,7 @@ public:
 	void	SendDDomCap( DDOM_BASE base );
 	void	OnDDomCap( CAr & ar );
 	void	SendDDomJoin( void );
+	void	SendMarketJoin( void );
 	void	OnDDomQueueList( CAr & ar );
 	void	OnAdditionalMover( CAr & ar );
 #endif

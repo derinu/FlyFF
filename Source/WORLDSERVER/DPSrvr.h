@@ -497,6 +497,7 @@ private:
 
 #ifdef __DDOM
 	void	OnDDomJoin( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long );
+	void	OnMarketJoin( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long );
 	void	OnDDomCap( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long );
 	void	OnDDomKickAt( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long );
 #endif
