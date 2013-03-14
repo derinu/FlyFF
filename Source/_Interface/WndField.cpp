@@ -1821,12 +1821,12 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					else if(lpCharacter->m_nVenderType == 0)
 					{
 #ifdef __SHOP_COST_RATE
-						if( g_pPlayer->GetGold() - ( ( ( CItemElem* )lpShortcut->m_dwData )->GetCost() * prj.m_fShopBuyRate ) >= 0 )
+						if( g_pPlayer->GetTotalGold() - ( ( ( CItemElem* )lpShortcut->m_dwData )->GetCost() * prj.m_fShopBuyRate ) >= 0 )
 #else // __SHOP_COST_RATE
-						if( g_pPlayer->GetGold() - ((CItemElem*)lpShortcut->m_dwData)->GetCost() >= 0 )
+						if( g_pPlayer->GetTotalGold() - ((CItemElem*)lpShortcut->m_dwData)->GetCost() >= 0 )
 #endif // __SHOP_COST_RATE
 #else //__CSC_VER11_3
-						if( g_pPlayer->GetGold() - ((CItemElem*)lpShortcut->m_dwData)->GetCost() >= 0)
+						if( g_pPlayer->GetTotalGold() - ((CItemElem*)lpShortcut->m_dwData)->GetCost() >= 0)
 #endif //__CSC_VER11_3
 						{
 							SAFE_DELETE( m_pWndConfirmBuy );
@@ -10314,8 +10314,8 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 			nCost = 1;
 		if( m_nIdWndTo == APP_INVENTORY )
 		{
-			if( nCost > g_pPlayer->GetGold() )
-				nCost = g_pPlayer->GetGold();
+			if( nCost > g_pPlayer->GetTotalGold() )
+				nCost = (int)g_pPlayer->GetTotalGold();
 
 			g_DPlay.SendDropGold( nCost, g_pPlayer->GetPos(), m_vPos );
 		}
@@ -10324,8 +10324,8 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 		{
 			if( m_Shortcut.m_dwData == 0 ) // 돈
 			{
-				if( nCost > g_pPlayer->GetGold() )
-					nCost = g_pPlayer->GetGold();
+				if( nCost > g_pPlayer->GetTotalGold() )
+					nCost = (int)g_pPlayer->GetTotalGold();
 
 				if( nCost > 0 )
 				{
@@ -10544,8 +10544,8 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 		{
 			if( m_Shortcut.m_dwData == 0 ) // 돈
 			{
-				if( nCost > g_pPlayer->GetGold()  )
-					nCost = g_pPlayer->GetGold();
+				if( nCost > g_pPlayer->GetTotalGold()  )
+					nCost = (int)g_pPlayer->GetTotalGold();
 				
 				if( nCost > 0 ) 
 				{
@@ -10882,7 +10882,7 @@ BOOL CWndTrade::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 		if( g_WndMng.m_pWndTradeGold->m_Shortcut.m_dwData == 0 ) // 돈
 		{
 			TradeGold = TRUE;
- 			g_WndMng.m_pWndTradeGold->m_dwGold = g_pPlayer->GetGold();
+ 			g_WndMng.m_pWndTradeGold->m_dwGold = (int)g_pPlayer->GetTotalGold();
 		}
 		else // 아이템
 		{
@@ -14406,7 +14406,7 @@ BOOL CWndReWanted::CheckWantedInfo( int nGold, LPCTSTR szMsg )
 	}
 
 	int nTax = MulDiv( nGold, 10, 100 );					// 건 현상금의 10%는 수수료로 지급된다. 
-	if( g_pPlayer->GetGold() < (nGold + nTax) ) 
+	if( g_pPlayer->GetTotalGold() < (nGold + nTax) ) 
 	{
 		g_WndMng.OpenMessageBoxUpper( prj.GetText(TID_GAME_LACKMONEY) );	// 인벤에 돈이부족
 		return FALSE;

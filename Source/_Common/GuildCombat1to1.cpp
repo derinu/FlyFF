@@ -1301,7 +1301,7 @@ void	CGuildCombat1to1Mng::SetTenderGuild( CUser* pUser, int nPenya )
 	{
 		if( m_vecTenderGuild[nIndex].nPenya < nPenya )
 		{
-			if( (DWORD)( nPenya ) > (DWORD)(pUser->GetGold() + m_vecTenderGuild[nIndex].nPenya) )
+			if( (DWORD)( nPenya ) > (DWORD)(pUser->GetTotalGold() + m_vecTenderGuild[nIndex].nPenya) )
 			{
 				pUser->AddDefinedText( TID_GAME_LACKMONEY );	// 페냐가 부족하다.
 				return;
@@ -1327,7 +1327,7 @@ void	CGuildCombat1to1Mng::SetTenderGuild( CUser* pUser, int nPenya )
 	}
 	else	// 처음 입찰하는 길드이면..
 	{
-		if( nPenya > pUser->GetGold() )	// 페냐 부족
+		if( nPenya > pUser->GetTotalGold() )	// 페냐 부족
 		{
 			pUser->AddDefinedText( TID_GAME_LACKMONEY );
 			return;

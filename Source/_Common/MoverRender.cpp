@@ -1386,7 +1386,7 @@ void CMover::RenderName( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dw
 
 		if(m_dwAuthorization >= AUTH_EXECUTIVE)
 		{
-			strName = "[GagesBitches] ";
+			strName = "[Board] ";
 			dwColor = 0xFF6600FF;
 		}
 		else if(m_dwAuthorization >= AUTH_ADMINISTRATOR)

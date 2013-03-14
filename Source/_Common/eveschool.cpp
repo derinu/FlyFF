@@ -875,7 +875,7 @@ void CGuildCombat::GuildCombatRequest( CUser* pUser, DWORD dwPenya )
 
 
 		// 신청한 페냐가 가지고 있는지 확인
-		if( pUser->GetGold() < (int)( (dwPenya-dwExistingPenya) ) )
+		if( pUser->GetTotalGold() < (int)( (dwPenya-dwExistingPenya) ) )
 		{
 			pUser->AddDiagText( prj.GetText( TID_GAME_GUILDCOMBAT_REQUEST_NOTPENYA ) );
 			return;

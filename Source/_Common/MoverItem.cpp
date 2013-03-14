@@ -652,13 +652,13 @@ BOOL CVTInfo::VendorSellItem( CMover* pBuyer, BYTE i, DWORD dwItemId, short nNum
 		nNum = (short)pItemBase->GetExtra();
 
 //	06.10.26
-	if( pItemBase->m_nCost > 0 && (float)pBuyer->GetGold() < (float)nNum * (float)pItemBase->m_nCost )
+	if( pItemBase->m_nCost > 0 && (float)pBuyer->GetTotalGold() < (float)nNum * (float)pItemBase->m_nCost )
 	{
 #if __VER >= 8 // __S8_VENDOR_REVISION
 		result.nErrorCode = TID_GAME_LACKMONEY;
 		return FALSE;
 #else // __VER >= 8 // __S8_VENDOR_REVISION
-		nNum = (short)( pBuyer->GetGold() / pItemBase->m_nCost );
+		nNum = (short)( pBuyer->GetTotalGold() / pItemBase->m_nCost );
 #endif // __VER >= 8 // __S8_VENDOR_REVISION
 	}
 	

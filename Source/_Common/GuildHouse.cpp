@@ -504,7 +504,7 @@ BOOL CGuildHouseBase::PreCheckPacket( CUser* pUser, int nPacketType, GH_Fntr_Inf
 				}
 				
 				int nPayPenya = gfi.dwItemId * GetUpkeepPenya();
-				if( pUser->GetGold() >= nPayPenya )
+				if( pUser->GetTotalGold() >= nPayPenya )
 				{
 					pUser->AddGold( -nPayPenya );
 					g_DPSrvr.PutPenyaLog( pUser, "f", "GUILDHOUSE_UPKEEP", nPayPenya );

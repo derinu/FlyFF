@@ -1195,6 +1195,7 @@ public:
 	BYTE	GetSex() { return m_bySex; }
 	void	SetSex( BYTE bySex ) { m_bySex = bySex; }
 	int		GetGold();
+	__int64	GetTotalGold();
 	void	SetGold( int nGold );
 	BOOL	AddGold( int nGold, BOOL bSend = TRUE );
 
@@ -1234,7 +1235,7 @@ public:
 inline int CMover::GetGold()
 {
 	ASSERT( m_dwGold <= INT_MAX );
-	::Error("Obj.h CMover::GetGold() %d\n", m_dwGold);
+	//::Error("Obj.h CMover::GetGold() %d\n", m_dwGold);
 	return m_dwGold;
 }
 
@@ -1242,13 +1243,13 @@ inline void CMover::SetGold( int nGold )
 {
 	ASSERT( nGold >= 0 );
 	m_dwGold = (DWORD)nGold;
-	::Error("Obj.h Set Gold to %d\n", nGold);
+	//::Error("Obj.h Set Gold to %d\n", nGold);
 }
 
 inline int CMover::GetPerin()
 {
 	ASSERT( m_dwPerin <= INT_MAX );
-	::Error("Obj.h CMover::GetPerin() %d\n", m_dwPerin);
+	//::Error("Obj.h CMover::GetPerin() %d\n", m_dwPerin);
 	return m_dwPerin;
 }
 
@@ -1270,49 +1271,56 @@ inline void CMover::SetDonor( int nDonor )
 	m_dwDonor = (DWORD)nDonor;
 }
 
+inline __int64 CMover::GetTotalGold( void )
+{
+	//return static_cast<__int64>( GetPerin() ) * PERIN_VALUE + static_cast<__int64>( GetGold() );
+	return (__int64)GetPerin() * PERIN_VALUE + GetGold();
+}
+
 inline BOOL CMover::AddGold( int nGold, BOOL bSend )
 {
-	if( nGold == 0 )
+	if(nGold == 0)
 		return TRUE;
 
-	__int64 i64Total = static_cast<__int64>( GetGold() ) + static_cast<__int64>( nGold );
-	
-	if( i64Total > static_cast<__int64>( INT_MAX ) )
-		i64Total = static_cast<__int64>( INT_MAX );
-	else if( i64Total < 0 )
-		i64Total = 0;
+	__int64 nTotalPenya = GetTotalGold() + nGold;
 
-	if(i64Total >= PERIN_VALUE)
+	if (nTotalPenya < 0)
+		return FALSE;
+
+	int nPerin = 0;
+
+	if (nTotalPenya >= PERIN_VALUE)
 	{
-		float PerinNum = static_cast<float>(i64Total / PERIN_VALUE);
+		nPerin = (int)(nTotalPenya/PERIN_VALUE);
+		
+		if(nPerin > 0)
+			SetPerin(nPerin);
 
-		if(PerinNum >= 1)
-		{
-			AddPerin((int)PerinNum);
-			SetGold((int)i64Total - ((int)PerinNum * PERIN_VALUE));
-		}
+		nTotalPenya %= PERIN_VALUE;
 	}
 	else
-	{
-		::Error("Obj.h Attempting to set gold: %d\n", (int)i64Total);
-		SetGold((int)i64Total);
-	}
+		SetPerin(0);
 
-#ifdef __WORLDSERVER
-	if(bSend)
-		g_UserMng.AddSetPointParam( this, DST_GOLD, static_cast<int>( i64Total ) );
-#endif
+	SetGold((int)(nTotalPenya & 0x7FFFFFF));
+
+	#ifdef __WORLDSERVER
+	if (bSend)
+	{
+		g_UserMng.AddSetPointParam( this, DST_GOLD, (int)(nTotalPenya) );
+		g_UserMng.AddSetPointParam( this, DST_PERIN, nPerin );
+	}
+	#endif
 
 	return TRUE;
 }
 
 inline BOOL CMover::AddPerin(int nPerin, BOOL bSend)
 {
-
-	if(nPerin == 0)
+	/*if(nPerin == 0)
 		return TRUE;
 
-	__int64 i64Total = static_cast<__int64>( GetPerin() ) + static_cast<__int64>( nPerin );
+	//__int64 i64Total = static_cast<__int64>( GetPerin() ) + static_cast<__int64>( nPerin );
+	__int64 i64Total = static_cast<__int64>(nPerin);
 	
 	if( i64Total > static_cast<__int64>( INT_MAX ) )
 		i64Total = static_cast<__int64>( INT_MAX );
@@ -1326,6 +1334,7 @@ inline BOOL CMover::AddPerin(int nPerin, BOOL bSend)
 		g_UserMng.AddSetPointParam( this, DST_PERIN, static_cast<int>( i64Total ) );
 #endif
 
+	return TRUE;*/
 	return TRUE;
 }
 

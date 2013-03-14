@@ -874,6 +874,9 @@ void CDPSrvr::OnDropItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf,
 	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj(pUser) )
 	{
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+			return;
+
 		if( g_eLocal.GetState( EVE_DROPITEMREMOVE ) )
 		{
 			CItemElem* pItemElem	= (CItemElem*)pUser->GetItemId( dwItemId );
@@ -1882,7 +1885,7 @@ void CDPSrvr::OnGuildContribution( CAr & ar, DPID dpidCache, DPID dpidUser, LPBY
 
 	if( nGold > 0 )
 	{
-		if( pUser->GetGold() >= nGold ) 
+		if( pUser->GetTotalGold() >= nGold ) 
 		{
 			if( g_DPCoreClient.SendGuildStat( pUser, GUILD_STAT_PENYA, nGold ) )
 			{
@@ -3018,7 +3021,7 @@ void CDPSrvr::OnBuyItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 		if( nCost < 1 )
 			nCost = 1;
 		
-		int nPracticable = pUser->GetGold() / nCost;
+		int nPracticable = (int)pUser->GetTotalGold() / nCost;
 		if( nNum > nPracticable )
 			nNum = (short)nPracticable;
 
@@ -3039,7 +3042,7 @@ void CDPSrvr::OnBuyItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 		if( nGold <= 0 )
 			return;
 
-		if( pUser->GetGold() >= nGold )
+		if( pUser->GetTotalGold() >= nGold )
 		{
 #ifdef __PERIN_BUY_BUG
 			if( pUser->m_dwLastBuyItemTick + 500 > GetTickCount() ) // 아이템 구입시도 후 0.5초이내에 다시 구입시도한 경우
@@ -3587,6 +3590,9 @@ void CDPSrvr::OnPutItemBank( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+			return;
+
 		if( !pUser->m_bInstantBank )
 		{
 			if( !CNpcChecker::GetInstance()->IsCloseNpc( MMI_BANKING, pUser->GetWorld(), pUser->GetPos() ) )
@@ -3688,6 +3694,9 @@ void CDPSrvr::OnPutItemGuildBank( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYT
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );	
 	if( IsValidObj( pUser ) )
 	{
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+			return;
+
 #if __VER >= 15 // __GUILD_HOUSE
 		if( !pUser->GetWorld() || !GuildHouseMng->IsGuildHouse( pUser->GetWorld()->GetID() ) )
 #endif // __GUILD_HOUSE
@@ -4009,6 +4018,9 @@ void CDPSrvr::OnPutGoldBank( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpb
 
 	if( IsValidObj( pUser ) )
 	{
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+			return;
+
 		if( !pUser->m_bInstantBank )
 		{
 			if( !CNpcChecker::GetInstance()->IsCloseNpc( MMI_BANKING, pUser->GetWorld(), pUser->GetPos() ) )
@@ -4291,6 +4303,9 @@ void CDPSrvr::OnMeleeAttack( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+			return;
+
 		if( pUser->GetIndex() == 0 )
 		{
 			WriteError( "PACKETTYPE_MELEE_ATTACK" );
@@ -4335,6 +4350,9 @@ void CDPSrvr::OnMeleeAttack2( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lp
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+			return; 
+
 		if( pUser->GetIndex() == 0 )
 		{
 			WriteError( "PACKETTYPE_MELEE_ATTACK2" );
@@ -4371,6 +4389,9 @@ void CDPSrvr::OnMagicAttack( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+			return;
+
 		CMover* pTargetObj	= prj.GetMover( objid );
 
 		if( IsValidObj( pTargetObj ) ) 
@@ -4399,6 +4420,9 @@ void CDPSrvr::OnRangeAttack( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+			return;
+
 		CMover* pTargetObj	= prj.GetMover( objid );
 
 		if( IsValidObj( pTargetObj ) ) 
@@ -4703,7 +4727,7 @@ void CDPSrvr::OnChangeFace( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBu
 #ifdef __NEWYEARDAY_EVENT_COUPON
 		if(!bUseCoupon)
 		{
-			if( pUser->GetGold() < cost )
+			if( pUser->GetTotalGold() < cost )
 			{
 				pUser->AddDefinedText( TID_GAME_LACKMONEY, "" );
 				return;
@@ -4723,7 +4747,7 @@ void CDPSrvr::OnChangeFace( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBu
 		}
 		pUser->SetHead(dwFaceNum);
 #else //__NEWYEARDAY_EVENT_COUPON
-		if( pUser->GetGold() < cost )
+		if( pUser->GetTotalGold() < cost )
 		{
 			pUser->AddDefinedText( TID_GAME_LACKMONEY, "" );
 			return;
@@ -5059,7 +5083,7 @@ void CDPSrvr::OnRepairItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBu
 			}
 		}
 
-		if( pUser->GetGold() < nCost )
+		if( pUser->GetTotalGold() < nCost )
 			return;
 
 		for( i = 0; i < c; i++ )
@@ -5096,9 +5120,9 @@ void CDPSrvr::OnSetHair( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 		nCost	= CMover::GetHairCost( (CMover*)pUser, nR, nG, nB, nHair );
 
 #ifdef __NEWYEARDAY_EVENT_COUPON
-		if( pUser->GetGold() < nCost  && !bUseCoupon)
+		if( pUser->GetTotalGold() < nCost  && !bUseCoupon)
 #else //__NEWYEARDAY_EVENT_COUPON
-		if( pUser->GetGold() < nCost )
+		if( pUser->GetTotalGold() < nCost )
 #endif //__NEWYEARDAY_EVENT_COUPON
 		{
 			pUser->AddDefinedText( TID_GAME_LACKMONEY, "" );
@@ -5242,7 +5266,7 @@ void CDPSrvr::OnPiercingSize( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lp
 
 		if( 0 < nCost )
 		{
-			if( pUser->GetGold() < nCost )
+			if( pUser->GetTotalGold() < nCost )
 			{
 				pUser->AddDefinedText( TID_GAME_LACKMONEY , "" );
 				return;
@@ -5539,7 +5563,7 @@ void CDPSrvr::OnPiercingRemove( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE 
 	}
 
 	int nPayPenya = 1000000; // 지불할 페냐
-	if( pUser->GetGold() < nPayPenya )	// 페냐가 부족하다.
+	if( pUser->GetTotalGold() < nPayPenya )	// 페냐가 부족하다.
 	{
 		pUser->AddDefinedText( TID_GAME_LACKMONEY );
 		return;
@@ -6204,7 +6228,7 @@ void CDPSrvr::OnRemoveAttribute( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE
 		return;
 	}
 	// 10만 페냐 이상을 소지해야만 속성 제거 가능.
-	if( pUser->GetGold() < nPayPenya )
+	if( pUser->GetTotalGold() < nPayPenya )
 	{
 		pUser->AddRemoveAttribute( FALSE );
 		pUser->AddDefinedText( TID_GAME_LACKMONEY , "" );
@@ -7357,6 +7381,9 @@ void CDPSrvr::OnQueryPostMail( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE l
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+			return;
+
 		//raiders.2006.11.27
 		if( pUser->m_vtInfo.GetOther() )	// 거래중인 대상이 있으면?
 			return;
@@ -7454,7 +7481,7 @@ void CDPSrvr::OnQueryPostMail( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE l
 				}
 			}
 #ifdef __SECURITY_FIXES
-			if( pUser->GetGold() < (UINT)( ( nPostGold + nGold ) ) )
+			if( pUser->GetTotalGold() < (UINT)( ( nPostGold + nGold ) ) )
 			{
 				pUser->AddDiagText( prj.GetText( TID_GAME_LACKMONEY ) );
 				return;
@@ -7462,7 +7489,7 @@ void CDPSrvr::OnQueryPostMail( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE l
 
 			pUser->AddGold( (int)( (UINT)( nPostGold + nGold ) * (-1) ), TRUE );	// 사용료 지급
 #else // __SECURITY_FIXES
-			if( pUser->GetGold() < (int)( ( nPostGold + nGold ) ) )
+			if( pUser->GetTotalGold() < (int)( ( nPostGold + nGold ) ) )
 			{
 				pUser->AddDiagText( prj.GetText( TID_GAME_LACKMONEY ) );
 				return;
@@ -7567,7 +7594,7 @@ void CDPSrvr::OnQueryGetMailItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYT
 					if( fPay < 0.0f )
 						fPay = 0.0f;
 
-					if( (int)fPay > pUser->GetGold() )
+					if( (int)fPay > pUser->GetTotalGold() )
 					{
 						pUser->AddDiagText( prj.GetText( TID_GAME_LACKMONEY ) );
 						return;
@@ -7952,7 +7979,7 @@ void CDPSrvr::OnGCGetPenyaGuild( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE
 
 			if( bFind )
 			{
-				__int64 nTotal = (__int64)pUser->GetGold() + nGetPenya;
+				__int64 nTotal = (__int64)pUser->GetTotalGold() + nGetPenya;
 				if( nGetPenya > INT_MAX || nTotal > INT_MAX )
 					pUser->AddGCGetPenyaGuild( 3, nGetPenya );
 				else
@@ -7988,7 +8015,7 @@ void CDPSrvr::OnGCGetPenyaPlayer( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYT
 
 		if( bFind )
 		{
-			__int64 nTotal = (__int64)pUser->GetGold() + nGetPenya;
+			__int64 nTotal = (__int64)pUser->GetTotalGold() + nGetPenya;
 			if( nGetPenya > INT_MAX || nTotal > INT_MAX )
 				pUser->AddGCGetPenyaPlayer( 2, nGetPenya );
 			else
@@ -8013,7 +8040,7 @@ void CDPSrvr::OnGCGetItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf
 			if( pGuild->GetGuildId() != g_GuildCombatMng.m_uWinGuildId )
 				return;
 
-			if( g_GuildCombatMng.m_nItemPenya > pUser->GetGold() )
+			if( g_GuildCombatMng.m_nItemPenya > pUser->GetTotalGold() )
 			{
 				pUser->AddText( prj.GetText(TID_GAME_LACKMONEY) ); //페냐(돈)가 부족합니다.
 				return;
@@ -8740,11 +8767,19 @@ void CDPSrvr::OnTrade( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_
 
 	CWorld* pWorld;
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
+
+	if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+		return;
+
 	if( IsValidObj( pUser ) && ( pWorld = pUser->GetWorld() ) && pUser->m_vtInfo.GetOther() == NULL )
 	{
 		CMover* pTrader		= prj.GetMover( objidTrader );
+
 		if( IsValidObj( pTrader ) && pTrader->GetWorld() && pTrader->m_vtInfo.GetOther() == NULL )
 		{
+			if(pTrader->m_dwAuthorization >= AUTH_GAMEMASTER)
+				return;
+
 			if( pTrader->IsPlayer() )	// pc
 			{
 
@@ -8933,7 +8968,7 @@ void CDPSrvr::OnTradePutGold( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lp
 	{
 		if( pUser->m_vtInfo.TradeGetState() == TRADE_STEP_ITEM && pTrader->m_vtInfo.TradeGetState() == TRADE_STEP_ITEM )
 		{
-			if( nGold > pUser->GetGold() )
+			if( nGold > pUser->GetTotalGold() )
 				nGold = pUser->GetGold();
 			
 			pUser->m_vtInfo.TradeSetGold( nGold );
@@ -9070,6 +9105,8 @@ void CDPSrvr::OnPVendorOpen( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+			return;
 /*		
 #ifdef __Y_BEAUTY_SHOP_CHARGE
 		if( ::GetLanguage() == LANG_TWN )
@@ -9255,6 +9292,9 @@ void CDPSrvr::OnBuyPVendorItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE 
 
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) == FALSE )
+		return;
+
+	if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
 		return;
 
 	CUser* pPVendor	= prj.GetUser( objidVendor );
@@ -11295,7 +11335,7 @@ void	CDPSrvr::OnAwakening( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf
 			return;
 
 		const int	nCost	= 100000;
-		if( pUser->GetGold() < nCost )
+		if( pUser->GetTotalGold() < nCost )
 		{
 			pUser->AddDefinedText( TID_GAME_LACKMONEY, "" );
 			return;
@@ -11812,7 +11852,7 @@ void CDPSrvr::OnTeleportToHeavenTower( CAr & ar, DPID dpidCache, DPID dpidUser, 
 			return;
 	}
 
-	if( pUser->GetGold() < nCost )
+	if( pUser->GetTotalGold() < nCost )
 	{
 		pUser->AddDefinedText( TID_GAME_LACKMONEY );
 		return;
@@ -12997,7 +13037,7 @@ void CDPSrvr::OnBuyItemCart( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 			if( nCost < 1 )
 				nCost = 1;
 		
-			int nPracticable = pUser->GetGold() / nCost;
+			int nPracticable = (int)pUser->GetTotalGold() / nCost;
 			if( pCartItem.dwNum[i] > (DWORD)nPracticable )
 				pCartItem.dwNum[i] = (short)nPracticable;
 
@@ -13019,7 +13059,7 @@ void CDPSrvr::OnBuyItemCart( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 			if( nGold <= 0 )
 				continue;
 			
-			if( pUser->GetGold() >= nGold )
+			if( pUser->GetTotalGold() >= nGold )
 			{
 				CItemElem itemElem;
 				itemElem	= *pItemElem;

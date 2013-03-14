@@ -615,7 +615,7 @@ void CWndConfirmBuy::OnOK()
 		}
 
 		nBuy = atoi( m_pEdit->GetString() );
-		if( (int)( (nBuy * dwCost) ) > g_pPlayer->GetGold() )
+		if( (int)( (nBuy * dwCost) ) > g_pPlayer->GetTotalGold() )
 		{
 			g_WndMng.OpenMessageBox( _T( prj.GetText(TID_DIAG_0009) ) );	// 돈이 부족합니다.	
 			return;
@@ -630,7 +630,7 @@ void CWndConfirmBuy::OnOK()
 	}
 
 	int nBuy = atoi( m_pEdit->GetString() );
-	if( (nBuy * dwCost) > g_pPlayer->GetGold() )
+	if( (nBuy * dwCost) > g_pPlayer->GetTotalGold() )
 	{
 		g_WndMng.OpenMessageBox( _T( prj.GetText(TID_DIAG_0009) ) );	// 돈이 부족합니다.	
 		return;
@@ -1142,7 +1142,7 @@ void CWndShop::AddCartItem( DWORD dwNum, CItemElem* pItemElem, CHAR cTab )
 			}
 		}
 
-		if( dwTotalCart >= MAX_CART_ITEM || g_pPlayer->GetGold() < (int)dwTotalCost )
+		if( dwTotalCart >= MAX_CART_ITEM || g_pPlayer->GetTotalGold() < (int)dwTotalCost )
 			return;
 		
 		for( int i = 0; i < MAX_CART_ITEM; i++ )
@@ -1233,7 +1233,7 @@ void CWndShop::UpdateCart()
 		pCart->m_dwColor = 0xFF66FF33;
 
 	CWndStatic* pCost1 = (CWndStatic*) GetDlgItem( WIDC_ST_USMOMEY );
-	string.Format( _T( "%d" ), (DWORD)g_pPlayer->GetGold() - dwTotalCost );
+	string.Format( _T( "%d" ), (DWORD)g_pPlayer->GetTotalGold() - dwTotalCost );
 	pCost1->SetTitle( string );
 }
 #endif //__SHOPPING_CART

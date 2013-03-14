@@ -608,51 +608,48 @@ void CMover::PostAIMsg( DWORD dwMsg, DWORD dwParam1, DWORD dwParam2 )
 //raiders.2006.11.28	 trade돈을 계산에 포함하던 것을 제거
 BOOL CMover::AddGold( int nGold, BOOL bSend )
 {
-	if( nGold == 0 )
+	if(nGold == 0)
 		return TRUE;
 
-	__int64 i64Total = static_cast<__int64>( GetGold() ) + static_cast<__int64>( nGold );
-	
-	if( i64Total > static_cast<__int64>( INT_MAX ) )
-		i64Total = static_cast<__int64>( INT_MAX );
-	else if( i64Total < 0 )
-		i64Total = 0;
+	__int64 nTotalPenya = GetTotalGold() + nGold;
 
-	if(i64Total >= PERIN_VALUE)
+	if (nTotalPenya < 0)
+		return FALSE;
+
+	int nPerin = 0;
+
+	if (nTotalPenya >= PERIN_VALUE)
 	{
-		double PerinNum = static_cast<double>((double)i64Total / (double)PERIN_VALUE);
-		int rGold = ((int)i64Total) - ((int)PerinNum * PERIN_VALUE);
+		nPerin = (int)(nTotalPenya/PERIN_VALUE);
+		
+		if(nPerin > 0)
+			SetPerin(nPerin);
 
-		if(PerinNum >= 1)
-		{
-			SetGold(rGold);
-			AddPerin(static_cast<int>(PerinNum));
-		}
-
-		#ifdef __WORLDSERVER
-		if(bSend)
-			g_UserMng.AddSetPointParam( this, DST_GOLD, static_cast<int>(rGold) );
-		#endif
+		nTotalPenya %= PERIN_VALUE;
 	}
 	else
+		SetPerin(0);
+
+	SetGold((int)(nTotalPenya & 0x7FFFFFF));
+
+	#ifdef __WORLDSERVER
+	if (bSend)
 	{
-		SetGold(static_cast<int>(i64Total));
-		#ifdef __WORLDSERVER
-		if(bSend)
-			g_UserMng.AddSetPointParam( this, DST_GOLD, static_cast<int>( i64Total ) );
-		#endif
+		g_UserMng.AddSetPointParam( this, DST_GOLD, (int)(nTotalPenya) );
+		g_UserMng.AddSetPointParam( this, DST_PERIN, nPerin );
 	}
+	#endif
 
 	return TRUE;
 }
 
 BOOL CMover::AddPerin(int nPerin, BOOL bSend)
 {
-
-	if(nPerin == 0)
+	/*if(nPerin == 0)
 		return TRUE;
 
-	__int64 i64Total = static_cast<__int64>( GetPerin() ) + static_cast<__int64>( nPerin );
+	//__int64 i64Total = static_cast<__int64>( GetPerin() ) + static_cast<__int64>( nPerin );
+	__int64 i64Total = static_cast<__int64>(nPerin);
 	
 	if( i64Total > static_cast<__int64>( INT_MAX ) )
 		i64Total = static_cast<__int64>( INT_MAX );
@@ -661,11 +658,7 @@ BOOL CMover::AddPerin(int nPerin, BOOL bSend)
 
 	SetPerin(static_cast<int>(i64Total));
 
-#ifdef __WORLDSERVER
-	if(bSend)
-		g_UserMng.AddSetPointParam( this, DST_PERIN, static_cast<int>( i64Total ) );
-#endif
-
+	return TRUE;*/
 	return TRUE;
 }
 
@@ -12326,7 +12319,8 @@ int CMover::GetPerinNum( void )
 // 소유하고있는 페린과 페냐의 합을 반환한다.
 __int64 CMover::GetTotalGold( void )
 {
-	return static_cast<__int64>( GetPerin() ) * PERIN_VALUE + static_cast<__int64>( GetGold() );
+	//return static_cast<__int64>( GetPerin() ) * PERIN_VALUE + static_cast<__int64>( GetGold() );
+	return (__int64)GetPerin() * PERIN_VALUE + GetGold();
 }
 
 #ifdef __WORLDSERVER

@@ -50,6 +50,9 @@ void CDPSrvr::OnUseSkill( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf,
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( (CObj*)pUser ) )
 	{
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+			return;
+
 		if( pUser->m_vtInfo.VendorIsVendor() )
 			return;
 

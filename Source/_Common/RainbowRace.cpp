@@ -457,7 +457,7 @@ void CRainbowRaceMng::SetApplicationUser( CUser* pUser )
 	}
 	m_Lua.Pop( 0 );
 
-	if( pUser->GetGold() < nPayPenya )
+	if( pUser->GetTotalGold() < nPayPenya )
 	{
 		pUser->AddDefinedText( TID_GAME_LACKMONEY );
 		return;

@@ -138,7 +138,7 @@ BOOL CWndRepairItem::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 								{
 									int nRepair	= 100 - ( ( pItemElem->m_nHitPoint * 100 ) / pItemProp->dwEndurance );
 									DWORD dwSumCost = m_dwCost + nRepair * ( pItemProp->dwCost / 1000 + 1 );
-									if( g_pPlayer->GetGold() >= (int)( dwSumCost ) )
+									if( g_pPlayer->GetTotalGold() >= (int)( dwSumCost ) )
 									{
 										m_dwCost = dwSumCost;
 										char szCost[MAX_PATH] = {0,};

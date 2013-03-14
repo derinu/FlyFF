@@ -245,7 +245,7 @@ void CItemUpgrade::OnPiercingSize( CUser* pUser, DWORD dwId1, DWORD dwId2, DWORD
 
 	if( 0 < nCost )
 	{
-		if( pUser->GetGold() < nCost )
+		if( pUser->GetTotalGold() < nCost )
 		{
 			pUser->AddDefinedText( TID_GAME_LACKMONEY , "" );
 			return;
@@ -446,7 +446,7 @@ void CItemUpgrade::OnPiercingRemove( CUser* pUser, DWORD objId )
 #endif // __NEW_ITEM_VARUNA
 
 	int nPayPenya = 1000000; // 지불할 페냐
-	if( pUser->GetGold() < nPayPenya )	// 페냐가 부족하다.
+	if( pUser->GetTotalGold() < nPayPenya )	// 페냐가 부족하다.
 	{
 		pUser->AddDefinedText( TID_GAME_LACKMONEY );
 		return;
@@ -788,7 +788,7 @@ BYTE	CItemUpgrade::SmeltSafetyPiercingSize(CUser* pUser, CItemElem* pItemMain, C
 
 	if( 0 < nCost )
 	{
-		if( pUser->GetGold() < nCost )
+		if( pUser->GetTotalGold() < nCost )
 		{
 			pUser->AddDefinedText( TID_GAME_LACKMONEY );
 			return 0;
@@ -2128,7 +2128,7 @@ void CItemUpgrade::OnItemTransy( CUser* pUser, OBJID objidTarget, OBJID objidTra
 			else
 				nPayPenya = m_nItemTransyHighLevel;
 
-			if( pUser->GetGold() < nPayPenya || objidTransy != NULL_ID )
+			if( pUser->GetTotalGold() < nPayPenya || objidTransy != NULL_ID )
 			{
 				pUser->AddDefinedText( TID_GAME_LACKMONEY );
 				return;

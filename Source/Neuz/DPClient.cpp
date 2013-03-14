@@ -1179,7 +1179,7 @@ void CDPClient::OnUpdatePlayerData( CAr & ar )
 
 void	CDPClient::OnLogout( CAr & ar )
 {
-	prj.m_objmap.m_map.clear();
+	//prj.m_objmap.m_map.clear();
 
 	u_long idPlayer;
 	ar >> idPlayer;

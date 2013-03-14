@@ -196,7 +196,7 @@ BOOL CWndVendorBuy::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 		int nBufNum = nNum;
 		if( nNum > m_pItemBase->GetExtra() )
 			nBufNum = m_pItemBase->GetExtra();
-		if( g_pPlayer->GetGold() < ((CItemElem*)m_pItemBase)->m_nCost * nBufNum )
+		if( g_pPlayer->GetTotalGold() < ((CItemElem*)m_pItemBase)->m_nCost * nBufNum )
 		{
 			g_WndMng.OpenMessageBox( _T( prj.GetText(TID_GAME_LACKMONEY)), MB_OK, this );
 			return TRUE;			
