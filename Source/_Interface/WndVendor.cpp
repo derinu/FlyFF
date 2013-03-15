@@ -318,7 +318,7 @@ BOOL CWndVendor::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 
 		#if __VER >= 11 // __MOD_VENDOR
 			// 매물 액수 총합 + 현재 소지금이 2억1천이 넘으면 경고띄우고 리턴시킴.
-			int nGold = g_pPlayer->GetTotalGold();
+			int nGold = (int)g_pPlayer->GetTotalGold();
 
 			for( int iv = 0 ; iv < MAX_VENDITEM ; ++iv )
 			{

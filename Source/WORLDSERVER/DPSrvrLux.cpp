@@ -51,7 +51,10 @@ void CDPSrvr::OnUseSkill( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf,
 	if( IsValidObj( (CObj*)pUser ) )
 	{
 		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+		{
+			pUser->AddHdr( GETID( pUser ), SNAPSHOTTYPE_CLEAR_USESKILL );
 			return;
+		}
 
 		if( pUser->m_vtInfo.VendorIsVendor() )
 			return;

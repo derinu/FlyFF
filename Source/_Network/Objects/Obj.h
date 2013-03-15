@@ -986,6 +986,7 @@ public:
 	LONG			m_nFxp;
 	BYTE			m_bySex;
 	DWORD			m_dwRideItemIdx;
+	int*			m_dwPetFilter;
 	int				m_nFuel;
 	LONG			m_nJob;
 	BYTE			m_nSlot;

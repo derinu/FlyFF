@@ -215,6 +215,13 @@ void CMover::Serialize( CAr & ar )
 				ar << dwPerin;
 				dwDonor = GetDonor();
 				ar << dwDonor;
+
+				int FilterSize = 10;
+				ar << FilterSize;
+
+				for(int m = 0; m < FilterSize; m++)
+					ar << m_dwPetFilter[m];
+
 				ar << m_nExp1;
 				ar << m_nSkillLevel;
 				ar << m_nSkillPoint;
@@ -542,6 +549,12 @@ void CMover::Serialize( CAr & ar )
 
 				ar >> dwDonor;
 				SetDonor( dwDonor );
+
+				int FilterSize = 0;
+				ar >> FilterSize;
+
+				for(int m = 0; m < FilterSize; m++)
+					ar >> m_dwPetFilter[m];
 
 				ar >> m_nExp1;
 				ar >> m_nSkillLevel;

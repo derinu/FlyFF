@@ -1038,11 +1038,12 @@ protected:
 	DWORD			m_dwGold;					/// 페냐 
 	DWORD			m_dwPerin;
 	DWORD			m_dwDonor;
-	DWORD			m_dwRideItemIdx;			/// 비행체의 아이템 인덱스
+	DWORD			m_dwRideItemIdx;		/// 비행체의 아이템 인덱스
 	CModelObject*	m_pRide;					/// 비행체 객체 포인터 
 	TCHAR			m_szName[MAX_NAME];			/// 이름 
 	
 public:
+	int*			m_dwPetFilter;// = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 	static CMover*  GetActiveMover() { return (CMover*)m_pObjActive; }	// 주인공 객체 얻기 	
 	static	int		GetHairCost( CMover* pMover, BYTE nR, BYTE nG, BYTE nB, BYTE nHair );
 	static void		UpdateParts( int nSex, int nSkinSet, int nFace, int nHairMesh, int nHeadMesh, PEQUIP_INFO pEquipInfo, CModelObject* pModel, CItemContainer< CItemElem  >* pInventory, BOOL bIfParts = TRUE, CMover* pMover = NULL );

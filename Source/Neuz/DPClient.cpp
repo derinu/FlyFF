@@ -25,6 +25,10 @@
 #include "definequest.h"
 #include "webbox.h"
 
+#ifdef __ARENA_PARADISE
+#include "ArenaClient.h"
+#endif
+
 #ifdef __AZRIA_1023
 #include "ticket.h"
 #endif	// __AZRIA_1023
@@ -865,6 +869,10 @@ void CDPClient::OnSnapshot( CAr & ar )
 			case SNAPSHOTTYPE_COLOSSEUM_ENDMATCH: OnColosseumEndMatch( ar ); break;
 #endif // __ COLOSSEUM
 
+#ifdef __ARENA_PARADISE
+			case SNAPSHOTTYPE_ARENA_STATUS: OnArena( ar );break;
+#endif
+
 #ifdef __DDOM
 			case SNAPSHOTTYPE_ADDITIONAL_MOVER: OnAdditionalMover( ar ); break;
 			case SNAPSHOTTYPE_DDOM_QUEUE: OnDDomQueueList( ar ); break;
@@ -893,6 +901,40 @@ void CDPClient::OnSnapshot( CAr & ar )
 #ifdef __DDOM
 #include "DomScore.h"
 #include "DomWidget.h"
+
+#ifdef __ARENA_PARADISE
+void CDPClient::OnArena( CAr & ar )
+{
+	size_t size;
+	ar >> size;
+	
+	vector<ARENAPLAYER>vArena;
+	for( size_t i=0; i<size; i++ )
+	{
+		ARENAPLAYER player;
+		ar >> player.nKill;
+		ar >> player.nDeath;
+		ar >> player.nRow;
+		ar >> player.nJob;
+		ar >> player.nDeathMatchWin;
+		ar >> player.nDeathMatchLose;
+		ar >> player.nDuelWin;
+		ar >> player.nDuelLose;
+		
+		unsigned long nPoint;
+		ar >> nPoint;
+		player.n64ArenaPoint  = nPoint;
+
+		static TCHAR szArenaName[MAX_NAME];
+		ar.ReadString( szArenaName );
+		player.szName = CString( szArenaName );
+		
+		vArena.push_back( player );
+	}
+
+	CArenaClient::GetInstance().SetScore( vArena );
+}
+#endif
 
 void CDPClient::OnTextD3D( CAr & ar )
 {
@@ -1132,6 +1174,7 @@ void CDPClient::OnJoin( CAr & ar )
 		pWndWorld->m_bDomRender = FALSE;
 		//pWndWorld->m_dwJoinWelcome = GetTickCount() + SEC( 6  );
 	}
+	MasterPacket( MASTER_BYTE_ARENA );  //snippet_221
 #endif
 
 #ifdef __GAME_GRADE_SYSTEM
@@ -16159,7 +16202,7 @@ void CDPClient::SendQueryGetMailItem( u_long nMail )
 	SEND( ar, this, DPID_SERVERPLAYER );
 
 	//MAIL LOG
-	Error( "SendQueryGetMailItem nMail:%d", nMail );
+	//Error( "SendQueryGetMailItem nMail:%d", nMail );
 }
 
 void CDPClient::SendQueryGetMailGold( u_long nMail )
@@ -19815,5 +19858,11 @@ void CDPClient::UpdateJob( int nJob )
 	SEND( ar, this, DPID_SERVERPLAYER );
 }
 #endif//__FASTJOBCHANGE
-
+void CDPClient::MasterPacket( BYTE nByte )
+{
+	//snippet_221
+	BEFORESENDSOLE( ar, MASTER_PACKET_ONJOIN, DPID_UNKNOWN );
+	ar << nByte;
+	SEND( ar, this, DPID_SERVERPLAYER );
+}
 CDPClient	g_DPlay;

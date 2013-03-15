@@ -588,6 +588,7 @@ CDPSrvr::CDPSrvr()
 	ON_MSG( PACKETTYPE_DDOM_CAP, OnDDomCap );
 	ON_MSG( PACKETTYPE_DDOM_KICKAT, OnDDomKickAt );
 	ON_MSG( PACKETTYPE_MARKET_JOIN, OnMarketJoin );
+	ON_MSG( MASTER_PACKET_ONJOIN, MasterPacket );
 #endif
 }
 
@@ -1110,6 +1111,45 @@ void CDPSrvr::OnRevival( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 	}
 }
 
+#ifdef __ARENA_PARADISE
+#include "Arena.h"
+#endif
+void CDPSrvr::MasterPacket( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
+{
+	BYTE nByte;
+	ar >> nByte;
+
+	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+	if( IsValidObj( pUser ) )
+	{
+		switch( nByte )
+		{
+		case MASTER_BYTE_ARENA:
+			{
+				CWorld* pWorld = pUser->GetWorld();
+				if( pWorld )
+				{
+					if(pWorld->GetID() == WI_WORLD_DOMINATION )
+					{
+
+						pUser->REPLACE( g_uIdofMulti, WI_WORLD_MADRIGAL, D3DXVECTOR3( 6970.0F, 140.0F, 3217.0F ), REPLACE_FORCE, nDefaultLayer );
+						return;
+					}
+					if( pWorld->GetID() == WI_WORLD_ARENA )
+					{
+#ifdef __ARENA_PARADISE
+						CArena::GetInstance().AddOnline( pUser );
+#endif
+					}
+				}
+			}break;
+		default:
+			{
+				Error( "MasterPacket: Unlisted Byte: %x", nByte );
+			}
+		}
+	}
+}
 void CDPSrvr::OnRevivalLodestar( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
 {
 	CWorld* pWorld;
@@ -1194,6 +1234,14 @@ void CDPSrvr::OnRevivalLodestar( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE
 			{ 
 				CDDom::GetInstance().Safe( pUser );//			
 				return; 
+			}
+#endif
+
+#ifdef __ARENA_PARADISE
+			if( pWorld && pWorld->GetID() == WI_WORLD_ARENA )
+			{ 
+				pUser->REPLACE( g_uIdofMulti, WI_WORLD_ARENA, D3DXVECTOR3( 540.0F, 140.0F, 485.0F ), REPLACE_NORMAL, nDefaultLayer );
+				return;
 			}
 #endif
 

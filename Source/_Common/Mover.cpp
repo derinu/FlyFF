@@ -13,6 +13,12 @@
 #include "CreateObj.h"
 #include "eveschool.h"
 
+#ifdef __ARENA_PARADISE
+#ifdef __WORLDSERVER
+#include "Arena.h"
+#endif
+#endif
+
 #ifdef __DDOM
 #ifdef __WORLDSERVER
 #include "DDom.h"
@@ -440,6 +446,11 @@ void CMover::Init()
 	m_dwGold			= 0;		// 0으로 할것.  -xuzhu-
 	m_dwPerin			= 0;
 	m_dwDonor			= 0;
+	m_dwPetFilter		= new int[10];// { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+
+	for(int j = 0; j < 10; j++)
+		m_dwPetFilter[ j ] = 1;
+	//m_dwPetFilter = new int[10];
 
 	for( int i = 0; i < MAX_VENDOR_INVENTORY_TAB; i++ )
 		m_ShopInventory[ i ] = 0;
@@ -3207,6 +3218,14 @@ BOOL CMover::IsUseItemReadyTime( ItemProp* pItemProp, OBJID dwObjItemId )
 		CWorld* pWorld = GetWorld();
 		if( pWorld == NULL )
 			return FALSE;
+
+#ifdef __ARENA_PARADISE
+		if( pWorld->GetID() == WI_WORLD_ARENA ) // 비행금지구역입니다.
+		{
+			PrintString( this, TID_ERROR_NOFLY );
+			return FALSE;
+		}
+#endif
 		
 		int nLimitLv = pItemProp->dwFlightLimit;
 		if( nLimitLv == NULL_ID )
@@ -5658,13 +5677,18 @@ int CMover::DoDie( CCtrl *pAttackCtrl, DWORD dwMsg )
 				{
 					DWORD dwWorldId = pWorld->GetID();
 					DWORD dwDieWorldId = pDieWorld->GetID();
-
-				#ifdef __DDOM
-				if( dwWorldId == WI_WORLD_DOMINATION && dwDieWorldId == WI_WORLD_DOMINATION )
-				{
-					CDDom::GetInstance().Kill( pUser, pDead );
-				}
-				#endif
+					#ifdef __ARENA_PARADISE
+					if( dwWorldId == WI_WORLD_ARENA && dwDieWorldId == WI_WORLD_ARENA )
+					{
+						CArena::GetInstance().Kill( pUser, pDead );
+					}
+					#endif
+					#ifdef __DDOM
+					if( dwWorldId == WI_WORLD_DOMINATION && dwDieWorldId == WI_WORLD_DOMINATION )
+					{
+						CDDom::GetInstance().Kill( pUser, pDead );
+					}
+					#endif
 				}
 			}
 		}

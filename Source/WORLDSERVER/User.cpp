@@ -14,6 +14,10 @@
 #endif	// __SYS_TICKET
 #endif
 
+#ifdef __ARENA_PARADISE
+#include "Arena.h"
+#endif
+
 #if __VER >= 11 // __SYS_PLAYER_DATA
 #include "playerdata.h"
 #endif	// __SYS_PLAYER_DATA
@@ -3882,6 +3886,9 @@ void CUserMng::RemoveUser( DWORD dwSerial )
 #ifdef __DDOM
 		CDDom::GetInstance().Kick( pUser );
 		CDDomQueue::GetInstance().Remove( pUser );
+#endif
+#ifdef __ARENA_PARADISE
+		CArena::GetInstance().RemoveOnline( pUser );
 #endif
 		pUser->OnTradeRemoveUser();
 
@@ -8779,6 +8786,19 @@ void CUser::SendLeaWireframe( void )
 	m_Snapshot.ar << NULL_ID;
 	m_Snapshot.ar << SNAPSHOTTYPE_MBS_WIREFRAME;
 }
+
+#ifdef __ARENA_PARADISE
+void CUser::SendArena( void )
+{
+	if( IsDelete() ) return;
+
+
+	m_Snapshot.cb++;
+	m_Snapshot.ar << NULL_ID;
+	m_Snapshot.ar << SNAPSHOTTYPE_ARENA_STATUS;
+	CArena::GetInstance().Serialize( m_Snapshot.ar );
+}
+#endif
 
 void CUser::AddTextD3D( LPCTSTR szText, D3DCOLOR color )
 {

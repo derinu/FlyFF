@@ -305,7 +305,7 @@ BOOL CWndRegVend::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 //			return TRUE;
 //		}
 		
-		int nGold = g_pPlayer->GetTotalGold();
+		int nGold = (int)g_pPlayer->GetTotalGold();
 		for( int iv = 0 ; iv < MAX_VENDITEM ; ++iv )
 		{
 			CItemBase *pItemBase = g_pPlayer->m_vtInfo.GetItem( iv );

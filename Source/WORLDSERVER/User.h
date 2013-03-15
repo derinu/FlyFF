@@ -92,6 +92,9 @@ public:
 	void	SendDDomTouch( DDOM_TEAM team, DDOM_BASE base, BOOL bCaptured );
 	void	SendLeaWireframe( void );
 #endif
+#ifdef __ARENA_PARADISE
+	void			SendArena( void );
+#endif
 	DWORD			m_dwSerial;							/// 캐쉬서버가 발급한 유저의 순차적 번호
 	BOOL			m_bValid;							/// db server에서 join packet받고, 맵에 Add된후 TRUE
 	CSnapshot		m_Snapshot;							/// SNAPSHOTTYPE_류 송신 누적 버퍼( Notify()에서 보내진다. )

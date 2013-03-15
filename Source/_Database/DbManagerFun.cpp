@@ -1044,9 +1044,27 @@ void CDbManager::GetBaseCharacter( CMover* pMover, CQuery *qry, LPDB_OVERLAPPED_
 	pMover->SetGold( qry->GetInt("m_dwGold") );
 	pMover->SetPerin( qry->GetInt("m_dwPerin") );
 	pMover->SetDonor( qry->GetInt("m_dwDonor") );
+	
+	char* tmpStr = new char[255];
+	qry->GetStr("m_szPetFilter", tmpStr);
+	char* tmpChr = strtok(tmpStr, ",");
+	int m = 0;
+	while (tmpChr)
+	{
+		pMover->m_dwPetFilter[m] = atoi(tmpChr);
+		tmpChr = strtok(NULL, ",");
+		m++;
+	}
 
-	::Error("bdmanagefun getbasecharacter(): gold %d perin %d donor %d\n", qry->GetInt("m_dwGold"), qry->GetInt("m_dwPerin"), qry->GetInt("m_dwDonor"));
+	for(int m = 0; m < 10; m++)
+		::Error("%d", pMover->m_dwPetFilter[m]);
 
+	//pMover->m_dwPetFilter = (int*)tmpChr;
+
+	tmpStr = 0;
+	tmpChr = 0;
+	safe_delete_array(tmpStr);
+	safe_delete_array(tmpChr);
 
 	pMover->m_nJob			= (LONG)qry->GetInt( "m_nJob" );
 	pMover->m_idparty		= (u_long)qry->GetInt( "m_idparty" );

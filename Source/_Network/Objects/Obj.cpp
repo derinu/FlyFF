@@ -161,6 +161,7 @@ CMover::CMover()
   	m_dwGold	= 0;
 	m_dwPerin = 0;
 	m_dwDonor = 0;
+	m_dwPetFilter = new int[10];
 
 	m_nJob	= -1;
 	
@@ -780,6 +781,7 @@ void CMover::Copy( CMover * pMover, BOOL bAll )
 		SetGold( pMover->GetGold() );
 		SetPerin( pMover->GetPerin());
 		SetDonor ( pMover->GetDonor());
+		m_dwPetFilter = pMover->m_dwPetFilter;
 		m_nJob	= pMover->m_nJob;
 		m_idparty	= pMover->m_idparty;
 #if __VER >= 8 // __S8_PK

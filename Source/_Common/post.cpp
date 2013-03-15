@@ -202,7 +202,7 @@ void CMailBox::Clear( void )
 	clear();
 
 #ifdef __CLIENT
-	Error( _T( "CMailBox::Clear" ) );
+	//Error( _T( "CMailBox::Clear" ) );
 #endif
 }
 
@@ -437,7 +437,7 @@ BOOL CMailBox::RemoveMailItem( u_long nMail )
 		SAFE_DELETE( pMail->m_pItemElem );
 
 #ifdef __CLIENT
-		Error( _T( "CMailBox::RemoveMailItem nMail:%d" ), nMail );
+		//Error( _T( "CMailBox::RemoveMailItem nMail:%d" ), nMail );
 #endif
 		return TRUE;
 	}

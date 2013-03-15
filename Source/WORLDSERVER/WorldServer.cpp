@@ -24,6 +24,10 @@
 #include "WorldDialog.h"
 #include "WScript.h"
 
+#ifdef __ARENA_PARADISE
+#include "Arena.h"
+#endif
+
 #ifdef __VM_0819
 #include "vmlog.h"
 #endif	// __VM_0819
@@ -173,7 +177,13 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 // 
 // 	md5( szResult, szBuffer );
 
-
+#ifdef __ARENA_PARADISE
+	if( LoadArena() == FALSE )
+	{
+		Error( "Could not load Arena player" );
+		exit( 13 );
+	}
+#endif
 
 	//_CrtSetBreakAlloc( 628278 );	// memory leak Å½Áö
 	// Initialize global strings

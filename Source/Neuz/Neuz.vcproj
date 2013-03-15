@@ -10157,6 +10157,16 @@
 					RelativePath=".\DomWidgetA.h">
 				</File>
 			</Filter>
+			<Filter
+				Name="Arena"
+				Filter="">
+				<File
+					RelativePath=".\ArenaClient.cpp">
+				</File>
+				<File
+					RelativePath=".\ArenaClient.h">
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"

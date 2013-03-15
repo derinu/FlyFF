@@ -36,7 +36,7 @@ CWndParty::~CWndParty()
 } 
 void CWndParty::SerializeRegInfo( CAr& ar, DWORD& dwVersion )
 {
-	Error( "CWndParty::SerializeRegInfo() - IN" );
+	//Error( "CWndParty::SerializeRegInfo() - IN" );
 
 	CWndNeuz::SerializeRegInfo( ar, dwVersion );
 	CWndTabCtrl* lpTabCtrl = (CWndTabCtrl*)GetDlgItem( WIDC_TABCTRL1 );
@@ -59,7 +59,7 @@ void CWndParty::SerializeRegInfo( CAr& ar, DWORD& dwVersion )
 		ar << lpTabCtrl->GetCurSel();
 	}
 
-	Error( "CWndParty::SerializeRegInfo() - OUT" );
+	//Error( "CWndParty::SerializeRegInfo() - OUT" );
 }
 void CWndParty::OnDraw( C2DRender* p2DRender ) 
 { 
@@ -214,7 +214,7 @@ void CWndParty::OnDraw( C2DRender* p2DRender )
 } 
 void CWndParty::OnInitialUpdate() 
 { 
-	Error( "CWndParty::OnInitialUpdate() - IN" );
+	//Error( "CWndParty::OnInitialUpdate() - IN" );
 
 	CWndNeuz::OnInitialUpdate(); 
 	// 여기에 코딩하세요
@@ -266,14 +266,14 @@ void CWndParty::OnInitialUpdate()
 
 	MoveParentCenter();
 
-	Error( "CWndParty::OnInitialUpdate() - OUT" );
+	//Error( "CWndParty::OnInitialUpdate() - OUT" );
 } 
 // 처음 이 함수를 부르면 윈도가 열린다.
 BOOL CWndParty::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	Error( "CWndParty::Initialize() - IN" );
+	//Error( "CWndParty::Initialize() - IN" );
 	BOOL bFlag = CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_PARTY, 0, CPoint( 0, 0 ), pWndParent );
-	Error( "CWndParty::Initialize() - OUT" );
+	//Error( "CWndParty::Initialize() - OUT" );
 
 	// Daisy에서 설정한 리소스로 윈도를 연다.
 	return bFlag;

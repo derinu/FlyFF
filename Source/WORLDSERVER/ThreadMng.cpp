@@ -17,6 +17,10 @@
 #include "DDom.h"
 #endif
 
+#ifdef __ARENA_PARADISE
+#include "Arena.h"
+#endif
+
 #include "eveschool.h"
 extern	CGuildCombat	g_GuildCombatMng;
 
@@ -182,6 +186,9 @@ void LogPerformance( DWORD dwCurTick )
 	{
 #ifdef __DDOM
 		CDDom::GetInstance().Process();
+#endif
+#ifdef __ARENA_PARADISE
+		CArena::GetInstance().Process();
 #endif
 		SetLogInfo( LOGTYPE_CCU, "CCU:%d", g_UserMng.GetCount() );
 

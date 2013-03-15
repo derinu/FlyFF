@@ -19,6 +19,7 @@
 #define __BSXPACK
 #define __BSXPACK_OBJ
 #define	__DDOM
+#define	__ARENA_PARADISE
 
 #define __NO_SWAP
 

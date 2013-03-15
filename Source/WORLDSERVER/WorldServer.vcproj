@@ -4769,6 +4769,26 @@
 				RelativePath=".\DDomQueue.h">
 			</File>
 		</Filter>
+		<Filter
+			Name="Arena"
+			Filter="">
+			<File
+				RelativePath=".\Arena.cpp">
+			</File>
+			<File
+				RelativePath=".\Arena.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Query"
+			Filter="">
+			<File
+				RelativePath=".\CQuery.cpp">
+			</File>
+			<File
+				RelativePath=".\CQuery.h">
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

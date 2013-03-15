@@ -136,6 +136,7 @@ public:
 #endif	// __RT_1025
 
 #ifdef __DDOM
+	void	MasterPacket( BYTE nByte );
 	void	OnTextD3D( CAr & ar );
 #endif
 	void	PostPlayerAngle( BOOL f );
@@ -1278,6 +1279,10 @@ public:
 	
 	void    OnDisguise( OBJID objid, CAr & ar );
 	void    OnNoDisguise( OBJID objid, CAr & ar );
+
+#ifdef __ARENA_PARADISE
+	void	OnArena( CAr & ar );
+#endif
 
 #ifdef __DDOM
 	void	SendGetKicked( int nBase );

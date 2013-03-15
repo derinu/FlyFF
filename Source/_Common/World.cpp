@@ -15,6 +15,12 @@
 #endif	// __CLIENT
 #endif	// __PET_0410
 
+#ifdef __ARENA_PARADISE
+#ifdef __WORLDSERVER
+#include "Arena.h"
+#endif
+#endif
+
 #include "..\_AIInterface\AIInterface.h"
 
 #ifdef __WORLDSERVER
@@ -1621,6 +1627,18 @@ void CWorld::_replace( void )
 			{
 				pUser->RemoveItFromView( TRUE );		// pc
 				pUser->RemoveItFromView2( TRUE );		// npc
+
+#ifdef __ARENA_PARADISE
+				if( GetID() == WI_WORLD_ARENA )
+				{
+					CArena::GetInstance().RemoveOnline( pUser );
+				}
+				else if( dwWorldID == WI_WORLD_ARENA )
+				{
+					CArena::GetInstance().AddOnline( pUser );
+				}
+#endif
+
 #if __VER >= 9	// __PET_0410
 				if( pUser->HasPet() )
 					pUser->RemovePet();

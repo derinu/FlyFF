@@ -123,10 +123,20 @@ BOOL CAIPet::SubItemLoot( void )
 
 	if( pOwner && pOwner->IsFly() )
 		return FALSE;
-		
+	
+	int* itemPriority = pOwner->m_dwPetFilter;
+	
+
+	::Error("Start");
+	for(int jkr = 0; jkr < 10; jkr++)
+		::Error("AIPET: %d", itemPriority[jkr]);
+	::Error("End");
+
 	// 근처의 아이템을 검색함. - 주인님꺼만 검색해야할듯...
 	FOR_LINKMAP( pWorld, vPos, pObj, nRange, CObj::linkDynamic, pMover->GetLayer() )
 	{
+		int HighestPriority = 0;
+
 		if( pObj->GetType() == OT_ITEM )	// 아템만 검색
 		{
 			CItem *pItem = (CItem *)pObj;
@@ -137,19 +147,28 @@ BOOL CAIPet::SubItemLoot( void )
 			if( pItem->IsDelete() == FALSE )
 			{
 				if( pItemProp )
-				{
-					if( pOwner->IsLoot( pItem, TRUE) )// 루팅되는아이템인지 검사함.
+				{			
+					int ItemType = GetItemType(pItemProp);
+
+					if(pOwner->m_dwPetFilter[ItemType] > HighestPriority)
 					{
-						vDist = pObj->GetPos() - pMover->GetPos();
-						fDistSq = D3DXVec3LengthSq( &vDist );		// 거리 구함.
-						if( fDistSq < 15 * 15 && fDistSq < fMinDist )	// 10미터 이내고... 가장 거리가 가까운 아템을 찾음.
-							pMinObj = pObj;
+						HighestPriority = pOwner->m_dwPetFilter[ItemType];
+
+						if( pOwner->IsLoot( pItem, TRUE) )// 루팅되는아이템인지 검사함.
+						{
+							vDist = pObj->GetPos() - pMover->GetPos();
+							fDistSq = D3DXVec3LengthSq( &vDist );		// 거리 구함.
+							if( fDistSq < 15 * 15 && fDistSq < fMinDist )	// 10미터 이내고... 가장 거리가 가까운 아템을 찾음.
+								pMinObj = pObj;
+						}
 					}
 				}
 			}
 		}
 	}
 	END_LINKMAP
+
+//	HighestPriority = 0;
 
 	if( pMinObj )
 	{
@@ -169,6 +188,54 @@ BOOL CAIPet::SubItemLoot( void )
 	}
 		
 	return m_bLootMove;
+}
+
+int CAIPet::GetItemType(ItemProp* pItemProp)
+{
+	if(pItemProp->dwItemKind2 == IK2_FOOD)
+		return 1;
+
+	if(pItemProp->dwID == II_GEN_MAT_ORICHALCUM01)
+		return 2;
+
+	if(pItemProp->dwID == II_GEN_MAT_MOONSTONE)
+		return 3;
+
+	if(pItemProp->dwID == II_GEN_MAT_ELE_SANDATKA ||
+	   pItemProp->dwID == II_GEN_MAT_ELE_SPARKATKA || 
+	   pItemProp->dwID == II_GEN_MAT_ELE_BREEZEATKA || 
+	   pItemProp->dwID == II_GEN_MAT_ELE_RAINATKA || 
+	   pItemProp->dwID == II_GEN_MAT_ELE_CANDLEA )
+	   return 4;
+
+	if(pItemProp->dwID == II_GEN_MAT_ELE_SANDATKB ||
+	   pItemProp->dwID == II_GEN_MAT_ELE_SPARKATKB || 
+	   pItemProp->dwID == II_GEN_MAT_ELE_BREEZEATKB || 
+	   pItemProp->dwID == II_GEN_MAT_ELE_RAINATKB || 
+	   pItemProp->dwID == II_GEN_MAT_ELE_CANDLEB )
+	   return 5;
+
+	if(pItemProp->dwID == II_GEN_MAT_ELE_EARTHQUAKE ||
+		pItemProp->dwID == II_GEN_MAT_ELE_LIGHTING ||
+		pItemProp->dwID == II_GEN_MAT_ELE_VACCUM ||
+		pItemProp->dwID == II_GEN_MAT_ELE_OCEAN ||
+		pItemProp->dwID == II_GEN_MAT_ELE_VOLCANO )
+		return 6;
+
+	if(pItemProp->dwID == II_GEN_MAT_ELE_MAGMA ||
+		pItemProp->dwID == II_GEN_MAT_ELE_FLOOD ||
+		pItemProp->dwID == II_GEN_MAT_ELE_STORM ||
+		pItemProp->dwID == II_GEN_MAT_ELE_THUNDER ||
+		pItemProp->dwID == II_GEN_MAT_ELE_MOUNTAIN )
+		return 7;
+
+	if(pItemProp->dwReferStat1 == WEAPON_GENERAL)
+		return 8;
+
+	if(pItemProp->dwReferStat1 == ARMOR_SET)
+		return 9;
+
+	return 0;
 }
 
 BOOL CAIPet::StateInit( const AIMSG & msg )

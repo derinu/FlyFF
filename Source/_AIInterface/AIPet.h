@@ -36,6 +36,7 @@ public:
 	BOOL	StateInit( const AIMSG & msg );
 	BOOL	StateIdle( const AIMSG & msg );
 	BOOL	StateRage( const AIMSG & msg );
+	int		GetItemType(ItemProp* pItemProp);
 
 	BOOL SubItemLoot( void );
 

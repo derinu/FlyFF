@@ -17,6 +17,10 @@
 #include "WorldMap.h"
 #include "Commonctrl.h"
 
+#ifdef __ARENA_PARADISE
+#include "ArenaClient.h"
+#endif
+
 #ifdef __DDOM
 #include "DomScore.h"
 #include "DomWidget.h"
@@ -1408,6 +1412,11 @@ BOOL CWndWorld::OnEraseBkgnd(C2DRender* p2DRender)
 			DrawSecretRoomInfo(p2DRender);
 	}
 #endif //__SECRET_ROOM
+
+#ifdef __ARENA_PARADISE
+	if( g_pPlayer && g_pPlayer->GetWorld() && g_pPlayer->GetWorld()->GetID() == WI_WORLD_ARENA )
+		CArenaClient::GetInstance().Paint( p2DRender );
+#endif
 
 	if( g_pPlayer && g_pPlayer->GetWorld() && g_pPlayer->GetWorld()->GetID() == WI_WORLD_GUILDWAR )
 	{
