@@ -125,48 +125,43 @@ BOOL CAIPet::SubItemLoot( void )
 		return FALSE;
 	
 	int* itemPriority = pOwner->m_dwPetFilter;
-	
-
-	::Error("Start");
-	for(int jkr = 0; jkr < 10; jkr++)
-		::Error("AIPET: %d", itemPriority[jkr]);
-	::Error("End");
 
 	// 근처의 아이템을 검색함. - 주인님꺼만 검색해야할듯...
-	FOR_LINKMAP( pWorld, vPos, pObj, nRange, CObj::linkDynamic, pMover->GetLayer() )
+	for(int Priority = 1; Priority <= 4; Priority++)
 	{
-		int HighestPriority = 0;
-
-		if( pObj->GetType() == OT_ITEM )	// 아템만 검색
+		FOR_LINKMAP( pWorld, vPos, pObj, nRange, CObj::linkDynamic, pMover->GetLayer() )
 		{
-			CItem *pItem = (CItem *)pObj;
-			ItemProp* pItemProp	= pItem->GetProp();
-			// 이걸 따로 넣은이유는 StateIdle ARRIVAL에서 DoLoot()하고 난직후에 다시 SubItemLoot()을 호출했을때
-			// Loot한 아이템이 아직 안지워져서 여기서 또 검색이 되더라고.. 그래서 중복되는 아이템은 검색 안되게 고쳐봤다.
-//			if( pItem->GetId() != m_idLootItem )		
-			if( pItem->IsDelete() == FALSE )
+			if( pObj->GetType() == OT_ITEM )	// 아템만 검색
 			{
-				if( pItemProp )
-				{			
-					int ItemType = GetItemType(pItemProp);
+				CItem *pItem = (CItem *)pObj;
+				ItemProp* pItemProp	= pItem->GetProp();
+				// 이걸 따로 넣은이유는 StateIdle ARRIVAL에서 DoLoot()하고 난직후에 다시 SubItemLoot()을 호출했을때
+				// Loot한 아이템이 아직 안지워져서 여기서 또 검색이 되더라고.. 그래서 중복되는 아이템은 검색 안되게 고쳐봤다.
+	//			if( pItem->GetId() != m_idLootItem )		
+				if( pItem->IsDelete() == FALSE )
+				{
+					if( pItemProp )
+					{			
+						int ItemType = GetItemType(pItemProp);
 
-					if(pOwner->m_dwPetFilter[ItemType] > HighestPriority)
-					{
-						HighestPriority = pOwner->m_dwPetFilter[ItemType];
-
-						if( pOwner->IsLoot( pItem, TRUE) )// 루팅되는아이템인지 검사함.
+						if(pOwner->m_dwPetFilter[ItemType] == Priority)
 						{
-							vDist = pObj->GetPos() - pMover->GetPos();
-							fDistSq = D3DXVec3LengthSq( &vDist );		// 거리 구함.
-							if( fDistSq < 15 * 15 && fDistSq < fMinDist )	// 10미터 이내고... 가장 거리가 가까운 아템을 찾음.
-								pMinObj = pObj;
+							//HighestPriority = pOwner->m_dwPetFilter[ItemType];
+
+							if( pOwner->IsLoot( pItem, TRUE) )// 루팅되는아이템인지 검사함.
+							{
+								vDist = pObj->GetPos() - pMover->GetPos();
+								fDistSq = D3DXVec3LengthSq( &vDist );		// 거리 구함.
+								if( fDistSq < 15 * 15 && fDistSq < fMinDist )	// 10미터 이내고... 가장 거리가 가까운 아템을 찾음.
+									pMinObj = pObj;
+							}
 						}
 					}
 				}
 			}
 		}
+		END_LINKMAP
 	}
-	END_LINKMAP
 
 //	HighestPriority = 0;
 
