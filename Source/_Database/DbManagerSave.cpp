@@ -159,17 +159,18 @@ void CDbManager::SavePlayer( CQuery *qry, CQuery* pQueryLog, CMover* pMover, cha
 	int dwDonor = pMover->GetDonor();
 	
 	char* szPetFilter = new char[255];
-	
-	for(int m = 0; m < 10; m++)
+	szPetFilter[0] = 0;
+
+	for(int m = 0; m < 12; m++)
 	{
-		char buffer[2];
-		sprintf(buffer, "%d,", pMover->m_dwPetFilter[m]);
+		char buffer[3];
+		sprintf(buffer, "%d,\0", pMover->m_dwPetFilter[m]);
 		strcat(szPetFilter, buffer);
 	}
 
-	szPetFilter[20] = '\0';
+	szPetFilter[24] = 0;
 
-	::Error("Saving: %s", szPetFilter);
+	//::Error("Saving: %s", szPetFilter);
 	int i=0;
 	int j=-1;
 	__int64 nExp2 = 0;

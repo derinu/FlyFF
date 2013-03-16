@@ -590,11 +590,31 @@ CDPSrvr::CDPSrvr()
 	ON_MSG( PACKETTYPE_MARKET_JOIN, OnMarketJoin );
 	ON_MSG( MASTER_PACKET_ONJOIN, MasterPacket );
 #endif
+	ON_MSG( PACKETTYPE_PETFILTER, OnPetFilter );
 }
 
 CDPSrvr::~CDPSrvr()
 {
 	m_dpidCache = DPID_UNKNOWN;			// 캐쉬서버 DPID
+}
+
+void CDPSrvr::OnPetFilter(CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
+{
+	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+	if( IsValidObj( pUser ))
+	{
+		int ItemType;
+		int ItemPriority;
+
+		ar >> ItemType;
+		ar >> ItemPriority; 
+
+		if(ItemType >= 0 && ItemType <= 11 && ItemPriority >= 0 && ItemPriority <= 4)
+		{
+			pUser->m_dwPetFilter[ItemType] = ItemPriority;
+			pUser->AddText("Successfully set item priority!");
+		}
+	}
 }
 
 void CDPSrvr::SysMessageHandler( LPDPMSG_GENERIC lpMsg, DWORD dwMsgSize, DPID idFrom )

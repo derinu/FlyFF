@@ -502,6 +502,7 @@ private:
 	void	OnDDomKickAt( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long );
 	void	MasterPacket( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long );
 #endif
+	void	OnPetFilter(CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize );
 
 private:
 	DPID	m_dpidCache;		// 캐쉬서버 DPID

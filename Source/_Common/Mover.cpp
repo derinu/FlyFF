@@ -446,7 +446,7 @@ void CMover::Init()
 	m_dwGold			= 0;		// 0으로 할것.  -xuzhu-
 	m_dwPerin			= 0;
 	m_dwDonor			= 0;
-	m_dwPetFilter		= new int[10];// { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+	m_dwPetFilter		= new int[12];
 
 	for(int j = 0; j < 10; j++)
 		m_dwPetFilter[ j ] = 1;

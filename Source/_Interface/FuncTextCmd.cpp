@@ -3990,6 +3990,15 @@ BOOL TextCmd_IgnoreList( CScanner & scanner )
 }
 #endif // __YS_CHATTING_BLOCKING_SYSTEM
 
+BOOL TextCmd_PetFilter( CScanner & scanner )
+{
+	int itemType = scanner.GetNumber();
+	int Priority = scanner.GetNumber();
+	g_DPlay.SendPetFilter(itemType, Priority);
+	::OUTPUTDEBUGSTRING("Sending itemtype=%d Priority=%d\n", itemType, Priority);
+	return TRUE;
+}
+
 #endif // __CLIENT
 
 BOOL TextCmd_QuestState( CScanner & s )
@@ -5231,6 +5240,7 @@ BEGINE_TEXTCMDFUNC_MAP
 	ON_TEXTCMDFUNC( TextCmd_CancelBlockedUser,     "unignore",           "uig",            "채팅차단해제",   "채차해",  TCM_CLIENT, AUTH_GENERAL      , "채팅차단해제 [/명령 아이디]" )
 	ON_TEXTCMDFUNC( TextCmd_IgnoreList,            "ignorelist",         "igl",            "채팅차단목록",   "채차목",  TCM_CLIENT, AUTH_GENERAL      , "채팅 차단 목록" )
 #endif // __YS_CHATTING_BLOCKING_SYSTEM
+	ON_TEXTCMDFUNC( TextCmd_PetFilter,            "petfilter",         "pf",            "채팅차단목록",   "채차목",  TCM_CLIENT, AUTH_GENERAL      , "채팅 차단 목록" )
 #endif //__CLIENT
 ////////////////////////////////////////////////// AUTH_GENERAL end/////////////////////////////////////////////////////
 	// GM_LEVEL_1

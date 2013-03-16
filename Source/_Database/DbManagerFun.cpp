@@ -1056,8 +1056,8 @@ void CDbManager::GetBaseCharacter( CMover* pMover, CQuery *qry, LPDB_OVERLAPPED_
 		m++;
 	}
 
-	for(int m = 0; m < 10; m++)
-		::Error("%d", pMover->m_dwPetFilter[m]);
+	//for(int m = 0; m < 10; m++)
+		//::Error("%d", pMover->m_dwPetFilter[m]);
 
 	//pMover->m_dwPetFilter = (int*)tmpChr;
 

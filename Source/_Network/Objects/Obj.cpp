@@ -161,7 +161,7 @@ CMover::CMover()
   	m_dwGold	= 0;
 	m_dwPerin = 0;
 	m_dwDonor = 0;
-	m_dwPetFilter = new int[10];
+	m_dwPetFilter = new int[12];
 
 	m_nJob	= -1;
 	

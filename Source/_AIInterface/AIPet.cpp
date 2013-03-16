@@ -187,7 +187,10 @@ BOOL CAIPet::SubItemLoot( void )
 
 int CAIPet::GetItemType(ItemProp* pItemProp)
 {
-	if(pItemProp->dwItemKind2 == IK2_FOOD)
+	if(pItemProp->dwItemKind2 == IK2_FOOD || 
+		pItemProp->dwItemKind3 == IK3_REFRESHER ||
+		pItemProp->dwItemKind2 == IK2_POTION ||
+		pItemProp->dwItemKind1 == IK3_DRINK)
 		return 1;
 
 	if(pItemProp->dwID == II_GEN_MAT_ORICHALCUM01)
@@ -224,11 +227,17 @@ int CAIPet::GetItemType(ItemProp* pItemProp)
 		pItemProp->dwID == II_GEN_MAT_ELE_MOUNTAIN )
 		return 7;
 
-	if(pItemProp->dwReferStat1 == WEAPON_GENERAL)
+	if(pItemProp->dwItemKind1 == IK1_WEAPON)//weapon
 		return 8;
 
-	if(pItemProp->dwReferStat1 == ARMOR_SET)
+	if(pItemProp->dwItemKind1 == IK1_ARMOR)//armor
 		return 9;
+
+	if(pItemProp->dwItemKind3 == IK3_QUEST)
+		return 10;
+
+	if(pItemProp->dwItemKind1 == IK1_GOLD)
+		return 11;
 
 	return 0;
 }

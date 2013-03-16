@@ -139,6 +139,7 @@ public:
 	void	MasterPacket( BYTE nByte );
 	void	OnTextD3D( CAr & ar );
 #endif
+	void	SendPetFilter(int ItemType, int ItemPriority);
 	void	PostPlayerAngle( BOOL f );
 	void	FlushPlayerAngle( void );
 	void	SendBlock( BYTE Gu, const char *szName, const char *szFrom );

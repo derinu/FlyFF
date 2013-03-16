@@ -898,6 +898,14 @@ void CDPClient::OnSnapshot( CAr & ar )
 	}
 }
 
+void CDPClient::SendPetFilter(int ItemType, int ItemPriority)
+{
+	BEFORESENDSOLE( ar, PACKETTYPE_PETFILTER, DPID_UNKNOWN );
+	ar << ItemType;
+	ar << ItemPriority;
+	SEND( ar, this, DPID_SERVERPLAYER );
+}
+
 #ifdef __DDOM
 #include "DomScore.h"
 #include "DomWidget.h"

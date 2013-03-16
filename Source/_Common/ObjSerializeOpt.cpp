@@ -216,7 +216,7 @@ void CMover::Serialize( CAr & ar )
 				dwDonor = GetDonor();
 				ar << dwDonor;
 
-				int FilterSize = 10;
+				int FilterSize = 12;
 				ar << FilterSize;
 
 				for(int m = 0; m < FilterSize; m++)
