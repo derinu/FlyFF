@@ -374,6 +374,13 @@ BOOL TextCmd_AroundKill( CScanner & scanner )
 {
 #ifdef __WORLDSERVER
 	CUser* pUser = (CUser*)scanner.dwValue;
+
+	if(g_eLocal.GetState(EVE_STAFFLIMIT))
+	{
+		pUser->AddText("Unable to around kill, staff limitations are enabled.");
+		return FALSE;
+	}
+	
 	if( pUser->GetWeaponItem() == NULL )
 		return TRUE;
 
@@ -2409,6 +2416,58 @@ BOOL TextCmd_CoupleState( CScanner & s )
 */
 #endif	// __COUPLE_1117
 
+BOOL TextCmd_ClearInventory( CScanner& scanner )         
+{ 
+#ifdef __WORLDSERVER
+	CUser* pUser	= (CUser*)scanner.dwValue;
+	pUser->m_Inventory.Clear();
+	return TRUE;
+#endif
+#ifdef __CLIENT
+	CMover* pUser	= (CMover*)scanner.dwValue;
+	pUser->m_Inventory.Clear();
+	return TRUE;
+#endif
+}
+
+BOOL TextCmd_Kill( CScanner& scanner )         
+{ 
+#ifdef __WORLDSERVER
+	CUser* pUser	= (CUser*)scanner.dwValue;
+	int nTok = scanner.GetToken();
+	if( nTok == 0 )
+	{
+		u_long idPlayer		= CPlayerDataCenter::GetInstance()->GetPlayerId( scanner.token );
+		CUser* pUserTarget = static_cast<CUser*>( prj.GetUserByID( idPlayer ) );
+
+		if(pUser->m_dwAuthorization <= pUserTarget->m_dwAuthorization)
+			return FALSE;
+
+		int nDamage = pUserTarget->GetHitPoint();
+		pUserTarget->SetHitPoint(0);
+		g_UserMng.AddDamage( pUserTarget, GETID( pUser ), nDamage, AF_FORCE );
+		pUserTarget->DoDie( pUser, OBJMSG_DAMAGE );	
+		
+		CString Message;
+		Message.Format(_T("%s is dead"), pUserTarget->GetName());
+
+		CString Message2;
+		Message2.Format(_T("%s has killed you"), pUser->GetName());
+
+		pUser->AddText(Message);
+		pUserTarget->AddText(Message2);
+	}
+	else
+	{
+		int nDamage = pUser->GetHitPoint();
+		pUser->SetHitPoint(0);
+		g_UserMng.AddDamage( pUser, GETID( pUser ), nDamage, AF_FORCE );
+		pUser->DoDie( pUser, OBJMSG_DAMAGE );	
+	}
+#endif // __WORLDSERVER
+	return TRUE;
+}
+
 BOOL TextCmd_Teleport( CScanner& scanner )         
 { 
 #ifdef __WORLDSERVER
@@ -4001,6 +4060,21 @@ BOOL TextCmd_PetFilter( CScanner & scanner )
 
 #endif // __CLIENT
 
+BOOL TextCmd_PartyList( CScanner & scanner )
+{
+#ifdef __WORLDSERVER
+	CUser* pUser	= (CUser*)scanner.dwValue;
+	g_PartyMng.par
+	for(STRING2ULONG::iterator iter = g_PartyMng.m_2PartyNameStringPtr.begin(); iter != g_PartyMng.m_2PartyNameStringPtr.end(); ++iter)
+	{
+		CString PartyName;
+		PartyName.Format("Party: %s", iter->first);
+		pUser->AddText(PartyName);
+	}
+#endif
+	return TRUE;
+}
+
 BOOL TextCmd_QuestState( CScanner & s )
 {
 #ifdef __WORLDSERVER
@@ -5242,8 +5316,11 @@ BEGINE_TEXTCMDFUNC_MAP
 #endif // __YS_CHATTING_BLOCKING_SYSTEM
 	ON_TEXTCMDFUNC( TextCmd_PetFilter,            "petfilter",         "pf",            "채팅차단목록",   "채차목",  TCM_CLIENT, AUTH_GENERAL      , "채팅 차단 목록" )
 #endif //__CLIENT
+	ON_TEXTCMDFUNC( TextCmd_PartyList,            "PartyList",         "plst",            "채팅차단목록",   "채차목",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록" )
 ////////////////////////////////////////////////// AUTH_GENERAL end/////////////////////////////////////////////////////
 	// GM_LEVEL_1
+	ON_TEXTCMDFUNC( TextCmd_Kill,			       "Kill",				"kl",             "텔레포트",       "텔레",    TCM_SERVER, AUTH_ADMINISTRATOR, "텔레포트" )
+	ON_TEXTCMDFUNC( TextCmd_ClearInventory,        "ClearInventory",    "clri",           "텔레포트",       "텔레",    TCM_BOTH  , AUTH_GAMEMASTER   , "텔레포트" )
 	ON_TEXTCMDFUNC( TextCmd_Teleport,              "teleport",          "te",             "텔레포트",       "텔레",    TCM_SERVER, AUTH_GAMEMASTER   , "텔레포트" )
 	ON_TEXTCMDFUNC( TextCmd_Invisible,             "invisible",         "inv",            "투명",           "투명",    TCM_SERVER, AUTH_GAMEMASTER   , "투명화" )
 	ON_TEXTCMDFUNC( TextCmd_NoInvisible,           "noinvisible",       "noinv",          "투명해제",       "투해",    TCM_SERVER, AUTH_GAMEMASTER   , "투명화 해제" )

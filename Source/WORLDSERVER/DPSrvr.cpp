@@ -895,8 +895,11 @@ void CDPSrvr::OnDropItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf,
 	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj(pUser) )
 	{
-		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER && g_eLocal.GetState(EVE_STAFFLIMIT))
+		{
+			pUser->AddText("Unable to drop item, staff limitations are enabled.");
 			return;
+		}
 
 		if( g_eLocal.GetState( EVE_DROPITEMREMOVE ) )
 		{
@@ -3658,8 +3661,11 @@ void CDPSrvr::OnPutItemBank( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
-		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER && g_eLocal.GetState(EVE_STAFFLIMIT))
+		{
+			pUser->AddText("Unable to use bank, staff limitations are enabled.");
 			return;
+		}
 
 		if( !pUser->m_bInstantBank )
 		{
@@ -3762,8 +3768,11 @@ void CDPSrvr::OnPutItemGuildBank( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYT
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );	
 	if( IsValidObj( pUser ) )
 	{
-		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER && g_eLocal.GetState(EVE_STAFFLIMIT))
+		{
+			pUser->AddText("Unable to use guild bank, staff limitations are enabled.");
 			return;
+		}
 
 #if __VER >= 15 // __GUILD_HOUSE
 		if( !pUser->GetWorld() || !GuildHouseMng->IsGuildHouse( pUser->GetWorld()->GetID() ) )
@@ -4086,8 +4095,11 @@ void CDPSrvr::OnPutGoldBank( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpb
 
 	if( IsValidObj( pUser ) )
 	{
-		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER && g_eLocal.GetState(EVE_STAFFLIMIT))
+		{
+			pUser->AddText("Unable to use bank, staff limitations are enabled.");
 			return;
+		}
 
 		if( !pUser->m_bInstantBank )
 		{
@@ -4371,8 +4383,11 @@ void CDPSrvr::OnMeleeAttack( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
-		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER && g_eLocal.GetState(EVE_STAFFLIMIT))
+		{
+			pUser->AddText("Unable to attack, staff limitations are enabled.");
 			return;
+		}
 
 		if( pUser->GetIndex() == 0 )
 		{
@@ -4418,8 +4433,11 @@ void CDPSrvr::OnMeleeAttack2( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lp
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
-		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER && g_eLocal.GetState(EVE_STAFFLIMIT))
+		{
+			pUser->AddText("Unable to attack, staff limitations are enabled.");
 			return; 
+		}
 
 		if( pUser->GetIndex() == 0 )
 		{
@@ -4457,8 +4475,11 @@ void CDPSrvr::OnMagicAttack( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
-		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER && g_eLocal.GetState(EVE_STAFFLIMIT))
+		{
+			pUser->AddText("Unable to attack, staff limitations are enabled.");
 			return;
+		}
 
 		CMover* pTargetObj	= prj.GetMover( objid );
 
@@ -4488,8 +4509,11 @@ void CDPSrvr::OnRangeAttack( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
-		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER && g_eLocal.GetState(EVE_STAFFLIMIT))
+		{
+			pUser->AddText("Unable to attack, staff limitations are enabled.");
 			return;
+		}
 
 		CMover* pTargetObj	= prj.GetMover( objid );
 
@@ -7449,8 +7473,11 @@ void CDPSrvr::OnQueryPostMail( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE l
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
-		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER && g_eLocal.GetState(EVE_STAFFLIMIT))
+		{
+			pUser->AddText("Unable to use mail, staff limitations are enabled.");
 			return;
+		}
 
 		//raiders.2006.11.27
 		if( pUser->m_vtInfo.GetOther() )	// 거래중인 대상이 있으면?
@@ -8836,8 +8863,11 @@ void CDPSrvr::OnTrade( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_
 	CWorld* pWorld;
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 
-	if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+	if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER && g_eLocal.GetState(EVE_STAFFLIMIT))
+	{
+		pUser->AddText("Unable to trade, staff limitations are enabled.");
 		return;
+	}
 
 	if( IsValidObj( pUser ) && ( pWorld = pUser->GetWorld() ) && pUser->m_vtInfo.GetOther() == NULL )
 	{
@@ -8845,8 +8875,11 @@ void CDPSrvr::OnTrade( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_
 
 		if( IsValidObj( pTrader ) && pTrader->GetWorld() && pTrader->m_vtInfo.GetOther() == NULL )
 		{
-			if(pTrader->m_dwAuthorization >= AUTH_GAMEMASTER)
+			if(pTrader->m_dwAuthorization >= AUTH_GAMEMASTER && g_eLocal.GetState(EVE_STAFFLIMIT))
+			{
+				pUser->AddText("Unable to trade, staff limitations are enabled.");
 				return;
+			}
 
 			if( pTrader->IsPlayer() )	// pc
 			{
@@ -9173,8 +9206,11 @@ void CDPSrvr::OnPVendorOpen( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
-		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER && g_eLocal.GetState(EVE_STAFFLIMIT))
+		{
+			pUser->AddText("Unable to vend, staff limitations are enabled.");
 			return;
+		}
 /*		
 #ifdef __Y_BEAUTY_SHOP_CHARGE
 		if( ::GetLanguage() == LANG_TWN )
@@ -9362,8 +9398,11 @@ void CDPSrvr::OnBuyPVendorItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE 
 	if( IsValidObj( pUser ) == FALSE )
 		return;
 
-	if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+	if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER && g_eLocal.GetState(EVE_STAFFLIMIT))
+	{
+		pUser->AddText("Unable to vend, staff limitations are enabled.");
 		return;
+	}
 
 	CUser* pPVendor	= prj.GetUser( objidVendor );
 	if( IsValidObj( pPVendor ) )

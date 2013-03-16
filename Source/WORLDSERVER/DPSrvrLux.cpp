@@ -50,8 +50,9 @@ void CDPSrvr::OnUseSkill( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf,
 	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( (CObj*)pUser ) )
 	{
-		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+		if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER && g_eLocal.GetState(EVE_STAFFLIMIT))
 		{
+			pUser->AddText("Unable to use skill, staff limitations are enabled.");
 			pUser->AddHdr( GETID( pUser ), SNAPSHOTTYPE_CLEAR_USESKILL );
 			return;
 		}

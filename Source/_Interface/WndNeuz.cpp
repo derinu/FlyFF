@@ -195,7 +195,7 @@ void CWndNeuz::OnInitialUpdate()
 	m_rectBackup = m_rectWindow;
 
 	int x = m_rectWindow.Width() / 2;
-	int y = m_rectWindow.Height() - 45;
+	int y = m_rectWindow.Height();// - 45;
 	CSize size = CSize( 60, 25 );//m_pSprPack->GetAt(9)->GetSize();
 //	//DWORD dwStyle,const RECT& rect,CWndBase* pParentWnd,UINT nID);
 	if( IsWndStyle( WBS_CAPTION ) )

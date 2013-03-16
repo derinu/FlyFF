@@ -630,6 +630,10 @@ BOOL Script( LPCSTR lpszFileName )
 		{
 			g_eLocal.SetState( EVE_WORMON, 1 );
 		}
+		else if( s.Token == "STAFFLIMIT" )
+		{
+			g_eLocal.SetState( EVE_STAFFLIMIT, 1 );
+		}
 		else if( s.Token == "respawn" )
 		{
 			g_eLocal.SetState( EVE_RESPAWN, (BYTE)s.GetNumber() );
