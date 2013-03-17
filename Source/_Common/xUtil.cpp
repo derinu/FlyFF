@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include <direct.h>
 #include "xUtil.h"
+#ifdef __WORLDSERVER
+#include "HttpRequest.h"
+#endif
 #include "../../resource/lang.h"
 ////////////////////////////////////////////////////////////////////////////////////
 // global variable
@@ -61,6 +64,11 @@ void	xSRand( DWORD seed )
    g_next = seed;
 }
 
+void OnComplete(char* Result)
+{
+	MessageBox( NULL, Result, "¿À·ù", MB_OKCANCEL);
+}
+
 #ifdef __CLIENT
 LPCTSTR Error( LPCTSTR strFormat, ... )
 {
@@ -118,6 +126,12 @@ LPCTSTR Error( LPCTSTR strFormat, ... )
 			szBuff );		
 		
 		DEBUGOUT2( szStr );	
+
+#ifdef __WORLDSERVER
+		CString tmp;
+		tmp.Format("Type=World&Log=%s\0", szBuff);
+		HttpRequest::New("127.0.0.1", "/api/logging/", tmp);
+#endif
 	}
 
 	return "";

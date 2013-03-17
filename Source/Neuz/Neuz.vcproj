@@ -9728,6 +9728,16 @@
 						RelativePath="..\_network\misc\include\tickcount.h">
 					</File>
 				</Filter>
+				<Filter
+					Name="Http"
+					Filter="">
+					<File
+						RelativePath="..\_Network\HttpRequest.cpp">
+					</File>
+					<File
+						RelativePath="..\_Network\HttpRequest.h">
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="_Multimedia"

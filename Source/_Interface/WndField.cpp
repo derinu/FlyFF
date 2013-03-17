@@ -15,6 +15,7 @@
 #include "WndManager.h"
 #include <afxdisp.h>
 #include "defineNeuz.h"
+#include "HttpRequest.h"
 
 
 #include "DPClient.h"
@@ -1235,11 +1236,30 @@ void CWndInventory::OnMouseWndSurface( CPoint point )
 		}
 	}
 }
+
+/*time_t lastTime = time(NULL);
+void OnHttpComplete(char* Result)
+{
+	CMover* pMover = g_pPlayer;
+	if( !pMover )
+		return;
+
+	pMover->SetDonor(atoi(Result));
+}*/
+
 void CWndInventory::OnDraw(C2DRender* p2DRender)
 {
 	CMover* pMover = g_pPlayer;
 	if( !pMover )
 		return;
+
+	/*if(difftime(time(NULL), lastTime) >= 60)
+	{
+		lastTime = time(NULL);
+		CString tmp;
+		tmp.Format("Character=%s", g_pPlayer->GetName());
+		HttpRequest::New("fruit-net.com", "/callback/cash/", tmp, OnHttpComplete);
+	}*/
 
 	LPDIRECT3DDEVICE9 pd3dDevice = p2DRender->m_pd3dDevice;
 
@@ -11037,8 +11057,8 @@ BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 	CWorld* pWorld	= g_WorldMng();
 	CRect rect = GetClientRect();
 
-    m_ALPHACIRCLE.m_size = CSize( rect.Width(), rect.Height() );
-	p2DRender->RenderTexture( CPoint( 0, 0 ), &m_ALPHACIRCLE, 255 );
+	m_ALPHACIRCLE.m_size = CSize( rect.Width(), rect.Height());
+	p2DRender->RenderTexture( CPoint( 0, 0 ), &m_ALPHACIRCLE,200 );
 
 	// 포커스 오브젝트 출력 
 	CObj* pObjFocus = pWorld->GetObjFocus();
@@ -11059,6 +11079,7 @@ BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 
 	FLOAT fx = (FLOAT)m_size.cx / ( MAP_SIZE * MPU );
 	FLOAT fy = (FLOAT)m_size.cy / ( MAP_SIZE * MPU );
+
 	D3DXVECTOR3 vPos, vCenter = ( g_pPlayer != NULL ? g_pPlayer->GetPos() : D3DXVECTOR3( 0, 0, 0 ) );
 	vCenter.x *= fx;
 	vCenter.z *= fy;
@@ -11071,7 +11092,7 @@ BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 
 	if( dwWorldID == WI_WORLD_GUILDWAR )
 		bDrawGuildWarNum = TRUE;
-	
+
 	for( int z = 0; z < pWorld->m_nLandHeight; z++ )
 	{
 		for( int x = 0; x < pWorld->m_nLandWidth; x++ )
@@ -11087,17 +11108,14 @@ BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 			CLandscape* pLand = pWorld->GetLandscape( x, pWorld->m_nLandHeight - z - 1);
 			if( pLand )
 			{
-
-		    //m_ALPHACIRCLE.m_size = CSize( rect.Width(), rect.Height() );
-		    //p2DRender->RenderTexture( CPoint( 0, 0 ), &m_ALPHACIRCLE, 255 );
-
 				pLand->m_texMiniMap.m_size = m_size;
+
 				if( clipRect.RectLapRect( rectCur ) )
 				{
 					if( pLand->m_texMiniMap.m_pTexture )
 					{
 //						pLand->m_texMiniMap.m_size = m_size;
-						pLand->m_texMiniMap.Render( p2DRender, point, 255 );//CWndBase::m_nAlpha );
+						pLand->m_texMiniMap.Render( p2DRender, point, 200 );//CWndBase::m_nAlpha );
 
 						if( bDrawGuildWarNum )
 						{
@@ -11140,8 +11158,6 @@ BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 
 		FOR_LAND( pWorld, pLand, pWorld->m_nVisibilityLand, FALSE )
 		{
-			m_ALPHACIRCLE.m_size = CSize( rect.Width(), rect.Height() );
-		    p2DRender->RenderTexture( CPoint( 0, 0 ), &m_ALPHACIRCLE, 10 );
 
 			FOR_OBJ( pLand, pObj, OT_MOVER )
 			{
@@ -11401,15 +11417,17 @@ BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 		m_texDunFog.m_size = CSize( rect.Width(), rect.Height() );
 		p2DRender->RenderTexture( CPoint( 0, 0 ), &m_texDunFog, 255 );
 	}
-	m_FUNDO.m_size = CSize( rect.Width(), rect.Height() );
-	p2DRender->RenderTexture( CPoint( 0, 0 ), &m_FUNDO, 255 );
 
-	m_NEWNAV.m_size = CSize( rect.Width(), rect.Height() );
-	p2DRender->RenderTexture( CPoint( 0, 0 ), &m_NEWNAV, 255 );
 
 	m_wndPlace.EnableWindow( !pWorld->m_bIsIndoor );
 
 	RenderMarkAll(p2DRender, g_pPlayer);
+
+	//m_TEST.m_size = CSize( rect.Width(), rect.Height());
+	//p2DRender->RenderTexture( CPoint( 0, 0 ), &m_TEST, 255 );
+
+	m_NEWNAV.m_size = CSize( rect.Width(), rect.Height());
+	p2DRender->RenderTexture( CPoint( 0, 0 ), &m_NEWNAV, 255 );
 
 	// 화면 비율 때문에 임의로 정사각형 뷰포트를 지정해 놓는다. 안그러면 화살표 모양이 찌그러짐.
 	D3DVIEWPORT9 viewport;
@@ -11444,6 +11462,7 @@ BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 	FLOAT fTheta = D3DXToRadian( fAngle );// (2*D3DX_PI*g_pPlayer->m_nAngle)/(360);//m_nAngle
 	D3DXMatrixRotationZ( &mat, fTheta );
 */
+
 	D3DXVECTOR3 vDir      = D3DXVECTOR3( 0.0f, 0.0f, 1.0f );
 	D3DXVECTOR3 vDestNor  = g_pPlayer->GetPos() - g_Neuz.m_camera.m_vPos;
 	D3DXVECTOR3 vAxis;
@@ -11465,7 +11484,7 @@ BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 
 	pd3dDevice->SetSamplerState( 0, D3DSAMP_MINFILTER, D3DTEXF_POINT );		
 	pd3dDevice->SetSamplerState( 0, D3DSAMP_MAGFILTER, D3DTEXF_POINT );		
-
+	
 	// 화살표 출력 
 	m_billArrow.Render( pd3dDevice );
 
@@ -11698,7 +11717,7 @@ void CWndNavigator::SerializeRegInfo( CAr& ar, DWORD& dwVersion )
 void CWndNavigator::OnInitialUpdate()
 {
 	//CWndNeuz::OnInitialUpdate();
-	CWndBase::OnInitialUpdate();
+	//CWndBase::OnInitialUpdate();
 
 	CRect rectClient = GetClientRect();
 	rectClient.right = 13;
@@ -11718,7 +11737,7 @@ void CWndNavigator::OnInitialUpdate()
     m_texDunFog.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "map3_2.tga" ), 0 , 1 );
 	m_ALPHACIRCLE.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "alphacircle.tga" ), 0 , 1 );
 	m_NEWNAV.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "map.tga" ), 0 , 1 );
-	m_FUNDO.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "TEST.tga" ), 0 , 1 );
+	//m_TEST.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "TEST.tga" ), 0 , 1 );
 	//m_texDunFog.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "NavDunFog.tga" ), 0 , 1 );
 
 #if __VER >= 15 // __IMPROVE_QUEST_INTERFACE
@@ -11760,8 +11779,10 @@ void CWndNavigator::OnInitialUpdate()
 	CRect rect = GetClientRect();
 	D3DXVECTOR3 vPos = ( g_pPlayer != NULL ? g_pPlayer->GetPos() : D3DXVECTOR3( 0, 0 , 0 ) );
 	// 128 : m_texture.m_size.cx = 1 : x
+
 	FLOAT fx = (FLOAT)m_texture.m_size.cx / 256.0f * 2;
 	FLOAT fy = (FLOAT)m_texture.m_size.cy / 256.0f * 2;
+
 	vPos.x *= fx;
 	vPos.z *= fy;
 	CObj* pObj;

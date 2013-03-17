@@ -112,6 +112,8 @@ using namespace std;
 #include "flyffevent.h"
 #include "buyinginfo.h"
 
+#include "DPConsoleClient.h"
+
 #ifdef __SHOPPING_CART
 #include "ShoppingCart.h"
 #endif __SHOPPING_CART

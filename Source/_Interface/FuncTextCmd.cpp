@@ -4,6 +4,7 @@
 #include "FuncTextCmd.h"
 #include "WorldMng.h"
 #include "definequest.h"
+#include "defineSkill.h"
 
 #ifdef __CLIENT
 #include "AppDefine.h"
@@ -2420,14 +2421,41 @@ BOOL TextCmd_ClearInventory( CScanner& scanner )
 { 
 #ifdef __WORLDSERVER
 	CUser* pUser	= (CUser*)scanner.dwValue;
-	pUser->m_Inventory.Clear();
-	return TRUE;
+	for(int i = 0; i < 42; i++)
+		pUser->RemoveItem(i, 9999);
 #endif
-#ifdef __CLIENT
-	CMover* pUser	= (CMover*)scanner.dwValue;
-	pUser->m_Inventory.Clear();
 	return TRUE;
+}
+
+BOOL TextCmd_Buff( CScanner& scanner )         
+{ 
+#ifdef __WORLDSERVER
+	CUser* pUser	= (CUser*)scanner.dwValue;
+	int nTok = scanner.GetToken();
+	if( nTok == 0 )
+	{
+		u_long idPlayer		= CPlayerDataCenter::GetInstance()->GetPlayerId( scanner.token );
+		pUser = static_cast<CUser*>( prj.GetUserByID( idPlayer ) );
+	}
+
+	if(!pUser)
+		return FALSE;
+
+	pUser->AddBuff(BUFF_SKILL, SI_ASS_HEAL_PATIENCE			, 20, 172800000);
+	pUser->AddBuff(BUFF_SKILL, SI_ASS_CHEER_QUICKSTEP		, 20, 172800000);
+	pUser->AddBuff(BUFF_SKILL, SI_ASS_CHEER_HASTE			, 20, 172800000);
+	pUser->AddBuff(BUFF_SKILL, SI_ASS_CHEER_CATSREFLEX		, 20, 172800000);
+	pUser->AddBuff(BUFF_SKILL, SI_ASS_CHEER_CANNONBALL		, 20, 172800000);
+	pUser->AddBuff(BUFF_SKILL, SI_ASS_CHEER_MENTALSIGN		, 20, 172800000);
+	pUser->AddBuff(BUFF_SKILL, SI_ASS_CHEER_HEAPUP			, 20, 172800000);
+	pUser->AddBuff(BUFF_SKILL, SI_ASS_CHEER_BEEFUP			, 20, 172800000);
+	pUser->AddBuff(BUFF_SKILL, SI_ASS_CHEER_ACCURACY		, 20, 172800000);
+	pUser->AddBuff(BUFF_SKILL, SI_RIN_SUP_PROTECT			, 10, 172800000);
+	pUser->AddBuff(BUFF_SKILL, SI_RIN_SUP_HOLYGUARD			, 10, 172800000);
+	pUser->AddBuff(BUFF_SKILL, SI_RIN_SUP_SPIRITUREFORTUNE	, 10, 172800000);
+	pUser->AddBuff(BUFF_SKILL, SI_RIN_SQU_GEBURAHTIPHRETH	, 10, 172800000);
 #endif
+	return TRUE;
 }
 
 BOOL TextCmd_Kill( CScanner& scanner )         
@@ -2459,10 +2487,10 @@ BOOL TextCmd_Kill( CScanner& scanner )
 	}
 	else
 	{
-		int nDamage = pUser->GetHitPoint();
-		pUser->SetHitPoint(0);
-		g_UserMng.AddDamage( pUser, GETID( pUser ), nDamage, AF_FORCE );
-		pUser->DoDie( pUser, OBJMSG_DAMAGE );	
+		//int nDamage = pUser->GetHitPoint();
+		//pUser->SetHitPoint(0);
+		//g_UserMng.AddDamage( pUser, GETID( pUser ), nDamage, AF_FORCE );
+		//pUser->DoDie( pUser, OBJMSG_DAMAGE );	
 	}
 #endif // __WORLDSERVER
 	return TRUE;
@@ -4060,21 +4088,6 @@ BOOL TextCmd_PetFilter( CScanner & scanner )
 
 #endif // __CLIENT
 
-BOOL TextCmd_PartyList( CScanner & scanner )
-{
-#ifdef __WORLDSERVER
-	CUser* pUser	= (CUser*)scanner.dwValue;
-	g_PartyMng.par
-	for(STRING2ULONG::iterator iter = g_PartyMng.m_2PartyNameStringPtr.begin(); iter != g_PartyMng.m_2PartyNameStringPtr.end(); ++iter)
-	{
-		CString PartyName;
-		PartyName.Format("Party: %s", iter->first);
-		pUser->AddText(PartyName);
-	}
-#endif
-	return TRUE;
-}
-
 BOOL TextCmd_QuestState( CScanner & s )
 {
 #ifdef __WORLDSERVER
@@ -5316,9 +5329,10 @@ BEGINE_TEXTCMDFUNC_MAP
 #endif // __YS_CHATTING_BLOCKING_SYSTEM
 	ON_TEXTCMDFUNC( TextCmd_PetFilter,            "petfilter",         "pf",            "채팅차단목록",   "채차목",  TCM_CLIENT, AUTH_GENERAL      , "채팅 차단 목록" )
 #endif //__CLIENT
-	ON_TEXTCMDFUNC( TextCmd_PartyList,            "PartyList",         "plst",            "채팅차단목록",   "채차목",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록" )
+	//ON_TEXTCMDFUNC( TextCmd_PartyList,            "PartyList",         "plst",            "채팅차단목록",   "채차목",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록" )
 ////////////////////////////////////////////////// AUTH_GENERAL end/////////////////////////////////////////////////////
 	// GM_LEVEL_1
+	ON_TEXTCMDFUNC( TextCmd_Buff,			       "Buff",				"bf",             "텔레포트",       "텔레",    TCM_SERVER, AUTH_GAMEMASTER   , "텔레포트" )
 	ON_TEXTCMDFUNC( TextCmd_Kill,			       "Kill",				"kl",             "텔레포트",       "텔레",    TCM_SERVER, AUTH_ADMINISTRATOR, "텔레포트" )
 	ON_TEXTCMDFUNC( TextCmd_ClearInventory,        "ClearInventory",    "clri",           "텔레포트",       "텔레",    TCM_BOTH  , AUTH_GAMEMASTER   , "텔레포트" )
 	ON_TEXTCMDFUNC( TextCmd_Teleport,              "teleport",          "te",             "텔레포트",       "텔레",    TCM_SERVER, AUTH_GAMEMASTER   , "텔레포트" )

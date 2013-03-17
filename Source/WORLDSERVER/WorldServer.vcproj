@@ -322,6 +322,9 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\DPConsoleClient.cpp">
+			</File>
+			<File
 				RelativePath="DPCoreClient.cpp">
 				<FileConfiguration
 					Name="Debug|Win32">
@@ -1263,6 +1266,9 @@
 				RelativePath="dpaccountclient.h">
 			</File>
 			<File
+				RelativePath=".\DPConsoleClient.h">
+			</File>
+			<File
 				RelativePath="DPCoreClient.h">
 			</File>
 			<File
@@ -1763,6 +1769,16 @@
 				</File>
 				<File
 					RelativePath="..\_network\misc\include\tickcount.h">
+				</File>
+			</Filter>
+			<Filter
+				Name="Http"
+				Filter="">
+				<File
+					RelativePath="..\_Network\HttpRequest.cpp">
+				</File>
+				<File
+					RelativePath="..\_Network\HttpRequest.h">
 				</File>
 			</Filter>
 		</Filter>
