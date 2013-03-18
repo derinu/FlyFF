@@ -233,7 +233,7 @@ int CAIPet::GetItemType(ItemProp* pItemProp)
 	if(pItemProp->dwItemKind1 == IK1_ARMOR)//armor
 		return 9;
 
-	if(pItemProp->dwItemKind3 == IK3_QUEST)
+	if(pItemProp->dwItemKind2 == IK2_GEM || pItemProp->dwItemKind3 == IK3_GEM)
 		return 10;
 
 	if(pItemProp->dwItemKind1 == IK1_GOLD)

@@ -15,7 +15,6 @@
 #include "WndManager.h"
 #include <afxdisp.h>
 #include "defineNeuz.h"
-#include "HttpRequest.h"
 
 
 #include "DPClient.h"
@@ -74,14 +73,14 @@ extern DWORD FULLSCREEN_HEIGHT;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 애플렛 
+// ??? 
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 드롭아이템
+// ?????
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 CWndDropItem::CWndDropItem() 
@@ -116,7 +115,7 @@ void CWndDropItem::OnDraw( C2DRender* p2DRender )
 			char szNumberbuf[8] = {0, };
 			strncpy( szNumberbuf, szNumber, 8 );
 			
-			// 0 : 공백, 48 : 숫자 0, 57 : 숫자 9
+			// 0 : ??, 48 : ?? 0, 57 : ?? 9
 			if( 47 >= szNumberbuf[i] || szNumberbuf[i] >= 58 )
 			{
 				if( szNumberbuf[i] != 0 )
@@ -133,7 +132,7 @@ void CWndDropItem::OnDraw( C2DRender* p2DRender )
 void CWndDropItem::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 
 	m_pEdit   = (CWndEdit  *)GetDlgItem( WIDC_EDIT1 );
 	CWndButton* pWndOk = (CWndButton *)GetDlgItem( WIDC_OK );	
@@ -152,17 +151,17 @@ void CWndDropItem::OnInitialUpdate()
 		m_pEdit->SetString( szNumber );
 	}	
 
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndDropItem::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_DROP_ITEM, 0, CPoint( 0, 0 ), pWndParent );
 } 
 /*
-  직접 윈도를 열때 사용 
+  ?? ??? ?? ?? 
 BOOL CWndDropItem::Initialize( CWndBase* pWndParent, DWORD dwWndId ) 
 { 
 	CRect rectWindow = m_pWndRoot->GetWindowRect(); 
@@ -223,7 +222,7 @@ BOOL CWndDropItem::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 드롭확인
+// ????
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 CWndDropConfirm::CWndDropConfirm() 
@@ -241,18 +240,18 @@ void CWndDropConfirm::OnDraw( C2DRender* p2DRender )
 void CWndDropConfirm::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 
 	CWndButton* pWndOk = (CWndButton *)GetDlgItem( WIDC_YES );	
 	pWndOk->SetDefault( TRUE );
 
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndDropConfirm::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_DROP_CONFIRM, 0, CPoint( 0, 0 ), pWndParent );
 } 
 BOOL CWndDropConfirm::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ) 
@@ -296,7 +295,7 @@ BOOL CWndDropConfirm::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 } 
 
 /****************************************************
-  WndId : APP_RANDOMSCROLL_CONFIRM - 랜덤 옵션
+  WndId : APP_RANDOMSCROLL_CONFIRM - ?? ??
   CtrlId : WIDC_TEXT1 - 
   CtrlId : WIDC_YES - Button
   CtrlId : WIDC_NO - Button
@@ -323,7 +322,7 @@ void CWndRandomScrollConfirm::OnDraw( C2DRender* p2DRender )
 void CWndRandomScrollConfirm::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	CItemElem* pItemElem0	= g_pPlayer->m_Inventory.GetAtId( objid );
 	CItemElem* pItemElem1	= g_pPlayer->m_Inventory.GetAtId( objid1 );
 
@@ -344,21 +343,21 @@ void CWndRandomScrollConfirm::OnInitialUpdate()
 		Destroy();
 	}
 
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	CRect rectRoot = m_pWndRoot->GetLayoutRect();
 	CRect rectWindow = GetWindowRect();
 	CPoint point( rectRoot.right - rectWindow.Width(), 110 );
 	Move( point );
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndRandomScrollConfirm::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_RANDOMSCROLL_CONFIRM, 0, CPoint( 0, 0 ), pWndParent );
 } 
 /*
-  직접 윈도를 열때 사용 
+  ?? ??? ?? ?? 
 BOOL CWndRandomScrollConfirm::Initialize( CWndBase* pWndParent, DWORD dwWndId ) 
 { 
 	CRect rectWindow = m_pWndRoot->GetWindowRect(); 
@@ -393,7 +392,7 @@ BOOL CWndRandomScrollConfirm::OnChildNotify( UINT message, UINT nID, LRESULT* pL
 } 
 
 /****************************************************
-WndId : APP_QUEITMWARNING - 아이템 경고
+WndId : APP_QUEITMWARNING - ??? ??
 CtrlId : WIDC_CONTEXT - 
 CtrlId : WIDC_BTN_YES - Button
 CtrlId : WIDC_BTN_NO - Button
@@ -414,7 +413,7 @@ void CWndQuestItemWarning::OnDraw( C2DRender* p2DRender )
 void CWndQuestItemWarning::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	CWndEdit* pWndEdit	= (CWndEdit*)GetDlgItem( WIDC_CONTEXT );
 	
 	if( pWndEdit )
@@ -423,17 +422,17 @@ void CWndQuestItemWarning::OnInitialUpdate()
 		pWndEdit->EnableWindow( FALSE );	
 	}
 	
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndQuestItemWarning::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_QUEITMWARNING, 0, CPoint( 0, 0 ), pWndParent );
 } 
 /*
-직접 윈도를 열때 사용 
+?? ??? ?? ?? 
 BOOL CWndQuestItemWarning::Initialize( CWndBase* pWndParent, DWORD dwWndId ) 
 { 
 CRect rectWindow = m_pWndRoot->GetWindowRect(); 
@@ -460,7 +459,7 @@ BOOL CWndQuestItemWarning::OnChildNotify( UINT message, UINT nID, LRESULT* pLRes
 { 
 	if( nID == WIDC_BTN_YES || message == EN_RETURN )
 	{
-		if( m_pItemElem->m_nItemNum == 1 )	// 갯수가 하나라면 그냥 떨군다.
+		if( m_pItemElem->m_nItemNum == 1 )	// ??? ???? ?? ???.
 		{
 			g_WndMng.m_pWndDropConfirm = new CWndDropConfirm;
 			g_WndMng.m_pWndDropConfirm->m_pItemElem = m_pItemElem;
@@ -488,7 +487,7 @@ BOOL CWndQuestItemWarning::OnChildNotify( UINT message, UINT nID, LRESULT* pLRes
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 인벤토리 
+// ???? 
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -540,7 +539,7 @@ BOOL CWndQueryEquip::Process()
 	}
 
 #if __VER < 12 // __CSC_VER12_1
-	D3DXVECTOR3	vDist = pMover->GetPos() - g_pPlayer->GetPos();	// 타겟과의 거리.
+	D3DXVECTOR3	vDist = pMover->GetPos() - g_pPlayer->GetPos();	// ???? ??.
 	FLOAT		fDistSq = D3DXVec3LengthSq( &vDist );
 	
 	int nHalfRange = 20 / 2;
@@ -571,7 +570,7 @@ void CWndQueryEquip::OnMouseWndSurface( CPoint point )
 		CRect DrawRect = m_InvenRect[i];
 		
 		CPoint point = GetMousePoint();
-		// 툴팁
+		// ??
 		if( DrawRect.PtInRect( point ) )
 		{
 			CPoint point2 = point;
@@ -591,7 +590,7 @@ void CWndQueryEquip::OnMouseWndSurface( CPoint point )
 #endif	// __SYS_IDENTIFY
 			itemElem.CopyPiercing( m_aEquipInfoAdd[i].piercing );
 			
-			// 장비창에 있는것 툴팁
+			// ???? ??? ??
 			g_WndMng.PutToolTip_Item( (CItemBase*)&itemElem, point2, &DrawRect, APP_QUERYEQUIP );
 		}
 	}
@@ -605,7 +604,7 @@ void CWndQueryEquip::OnDraw(C2DRender* p2DRender)
 	
 	LPDIRECT3DDEVICE9 pd3dDevice = p2DRender->m_pd3dDevice;
 
-	// 뷰포트 세팅 
+	// ??? ?? 
 	D3DVIEWPORT9 viewport;
 
 	viewport.X      = p2DRender->m_ptOrigin.x + 5;//100;// + 5;
@@ -635,9 +634,9 @@ void CWndQueryEquip::OnDraw(C2DRender* p2DRender)
 		if( m_aEquipInfoAdd[i].pTexture == NULL )
 			continue;
 
-		if( i == PARTS_LWEAPON )		// 왼손무기 그릴타이밍일때
+		if( i == PARTS_LWEAPON )		// ???? ???????
 		{
-			if( pItemProp->dwHanded == HD_TWO )	// 투핸드 무기면
+			if( pItemProp->dwHanded == HD_TWO )	// ??? ???
 			{
 				dwAlpha   = 100;
 			}
@@ -693,13 +692,13 @@ void CWndQueryEquip::OnDraw(C2DRender* p2DRender)
 	
 	CRect rect = GetClientRect();
 
-	// 뷰포트 세팅 
+	// ??? ?? 
 	D3DXMATRIXA16 matWorld;
 	D3DXMATRIXA16 matScale;
 	D3DXMATRIXA16 matRot;
 	D3DXMATRIXA16 matTrans;
 
-	// 카메라 
+	// ??? 
 	D3DXMATRIX  matView;
 	D3DXVECTOR3 vecLookAt( 0.0f, 0.0f, 3.0f );
 	D3DXVECTOR3 vecPos(  0.0f, 0.7f, -3.5f );
@@ -713,7 +712,7 @@ void CWndQueryEquip::OnDraw(C2DRender* p2DRender)
 	SetLightVec( vDir );
 	#endif //__YENV
 	
-	// 왼쪽 원본 모델 랜더링
+	// ?? ?? ?? ???
 
 	{
 	
@@ -760,7 +759,7 @@ void CWndQueryEquip::OnDraw(C2DRender* p2DRender)
 		D3DXMatrixMultiply(&matWorld, &matWorld, &matTrans );
 		pd3dDevice->SetTransform( D3DTS_WORLD, &matWorld );
 
-		// 랜더링 
+		// ??? 
 		pd3dDevice->SetRenderState( D3DRS_FOGENABLE, FALSE );
 		pd3dDevice->SetRenderState( D3DRS_LIGHTING, FALSE );//m_bViewLight );
 		
@@ -784,7 +783,7 @@ void CWndQueryEquip::OnDraw(C2DRender* p2DRender)
 	
 	pMover->OverCoatItemRenderCheck(m_pModel);
 		
-	// 헬멧이 머리카락 날려야하는것이냐?  // 인벤이 없는경우
+	// ??? ???? ?????????  // ??? ????
 			DWORD dwId	= pMover->m_aEquipInfo[PARTS_CAP].dwId;
 			O3D_ELEMENT*	pElement = NULL;
 			ItemProp*		pItemProp = NULL;
@@ -798,7 +797,7 @@ void CWndQueryEquip::OnDraw(C2DRender* p2DRender)
 					pElement = m_pModel->SetEffect(pItemProp->dwBasePartsIgnore, XE_HIDE );
 				}
 				
-				// 외투의상을 입었을경우 머리날릴것인가의 기준을 외투 모자를 기준으로 바꾼다
+				// ????? ????? ???????? ??? ?? ??? ???? ???
 				dwId	= pMover->m_aEquipInfo[PARTS_HAT].dwId;
 				if( dwId != NULL_ID )
 				{
@@ -823,7 +822,7 @@ void CWndQueryEquip::OnDraw(C2DRender* p2DRender)
 			}
 			else
 			{
-				// 외투의상을 입었을경우 머리날릴것인가의 기준을 외투 모자를 기준으로 바꾼다
+				// ????? ????? ???????? ??? ?? ??? ???? ???
 				dwId	= pMover->m_aEquipInfo[PARTS_HAT].dwId;
 				if( dwId != NULL_ID )
 				{
@@ -977,7 +976,7 @@ BOOL CWndQueryEquip::Initialize( CWndBase* pWndParent, DWORD dwWndId )
 
 	CRect rect( 792, 130, 792 + 232, 130 + 405 + 20 ); // 1024 768
 
-	// 인벤토리 출력 위치 지정
+	// ???? ?? ?? ??
 	memset( m_InvenRect, 0, sizeof(CRect) * MAX_HUMAN_PARTS );
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), dwWndId, 0, CPoint( 792, 130 ), pWndParent );
 }
@@ -1126,7 +1125,7 @@ void CWndInventory::OnMouseWndSurface( CPoint point )
 		CRect DrawRect = m_InvenRect[i];
 		
 		CPoint point = GetMousePoint();
-		// 툴팁
+		// ??
 		if( DrawRect.PtInRect( point ) )
 		{
 			nTemp = i;
@@ -1154,7 +1153,7 @@ void CWndInventory::OnMouseWndSurface( CPoint point )
 				ClientToScreen( &point2 );
 				ClientToScreen( &DrawRect );
 				
-				// 장비창에 있는것 툴팁
+				// ???? ??? ??
 #if __VER >= 15 // __IMPROVE_SYSTEM_VER15
 				g_toolTip.SetSubToolTipNumber( 0 );
 #endif // __IMPROVE_SYSTEM_VER15
@@ -1163,7 +1162,7 @@ void CWndInventory::OnMouseWndSurface( CPoint point )
 			}
 			else
 			{
-				// 장비창에 없는것 툴팁
+				// ???? ??? ??
 				
 				CPoint point2 = point;
 				ClientToScreen( &point2 );
@@ -1236,34 +1235,15 @@ void CWndInventory::OnMouseWndSurface( CPoint point )
 		}
 	}
 }
-
-/*time_t lastTime = time(NULL);
-void OnHttpComplete(char* Result)
-{
-	CMover* pMover = g_pPlayer;
-	if( !pMover )
-		return;
-
-	pMover->SetDonor(atoi(Result));
-}*/
-
 void CWndInventory::OnDraw(C2DRender* p2DRender)
 {
 	CMover* pMover = g_pPlayer;
 	if( !pMover )
 		return;
 
-	/*if(difftime(time(NULL), lastTime) >= 60)
-	{
-		lastTime = time(NULL);
-		CString tmp;
-		tmp.Format("Character=%s", g_pPlayer->GetName());
-		HttpRequest::New("fruit-net.com", "/callback/cash/", tmp, OnHttpComplete);
-	}*/
-
 	LPDIRECT3DDEVICE9 pd3dDevice = p2DRender->m_pd3dDevice;
 
-	// 뷰포트 세팅 
+	// ??? ?? 
 	D3DVIEWPORT9 viewport;
 
 	viewport.X      = p2DRender->m_ptOrigin.x + 5;
@@ -1319,12 +1299,12 @@ void CWndInventory::OnDraw(C2DRender* p2DRender)
 	{
 		DWORD dwAlpha = 255;
 		CItemBase* pItemBase = g_pPlayer->GetEquipItem( i );
-		if( i == PARTS_LWEAPON )		// 왼손무기 그릴타이밍일때
+		if( i == PARTS_LWEAPON )		// ???? ???????
 		{
-			CItemBase* pRWeapon = g_pPlayer->GetEquipItem( PARTS_RWEAPON );		// 오른손 무기를 꺼내보고
-			if( pRWeapon && pRWeapon->GetProp()->dwHanded == HD_TWO )	// 투핸드 무기면
+			CItemBase* pRWeapon = g_pPlayer->GetEquipItem( PARTS_RWEAPON );		// ??? ??? ????
+			if( pRWeapon && pRWeapon->GetProp()->dwHanded == HD_TWO )	// ??? ???
 			{
-				pItemBase = pRWeapon;	// 오른손무기랑 같은걸 그리자.
+				pItemBase = pRWeapon;	// ?????? ??? ???.
 				dwAlpha   = 100;
 			}
 		}
@@ -1364,7 +1344,7 @@ void CWndInventory::OnDraw(C2DRender* p2DRender)
 			}
 
 			CItemElem *pItemElem = (CItemElem *)pItemBase;
-			if( pItemElem->GetProp()->dwPackMax > 1 )		// 묶음 아이템이냐?
+			if( pItemElem->GetProp()->dwPackMax > 1 )		// ?? ??????
 			{
 				short nItemNum	= pItemElem->m_nItemNum;
 
@@ -1400,13 +1380,13 @@ void CWndInventory::OnDraw(C2DRender* p2DRender)
 	
 	CRect rect = GetClientRect();
 
-	// 뷰포트 세팅 
+	// ??? ?? 
 	D3DXMATRIXA16 matWorld;
 	D3DXMATRIXA16 matScale;
 	D3DXMATRIXA16 matRot;
 	D3DXMATRIXA16 matTrans;
 
-	// 카메라 
+	// ??? 
 	D3DXMATRIX  matView;
 	D3DXVECTOR3 vecLookAt( 0.0f, 0.0f, 3.0f );
 	D3DXVECTOR3 vecPos(  0.0f, 0.7f, -3.5f );
@@ -1461,7 +1441,7 @@ void CWndInventory::OnDraw(C2DRender* p2DRender)
 		D3DXMatrixMultiply(&matWorld, &matWorld, &matTrans );
 		pd3dDevice->SetTransform( D3DTS_WORLD, &matWorld );
 
-		// 랜더링 
+		// ??? 
 		pd3dDevice->SetRenderState( D3DRS_FOGENABLE, FALSE );
 		pd3dDevice->SetRenderState( D3DRS_LIGHTING, FALSE );//m_bViewLight );
 		
@@ -1486,7 +1466,7 @@ void CWndInventory::OnDraw(C2DRender* p2DRender)
 	if( g_pPlayer )
 		g_pPlayer->OverCoatItemRenderCheck(m_pModel);
 		
-		// 헬멧이 머리카락 날려야하는것이냐?  // 인벤이 있는 경우 
+		// ??? ???? ?????????  // ??? ?? ?? 
 		CItemElem* pItemElem	= g_pPlayer->GetEquipItem( PARTS_CAP );
 		if( pItemElem )
 		{
@@ -1497,7 +1477,7 @@ void CWndInventory::OnDraw(C2DRender* p2DRender)
 				pElement = m_pModel->SetEffect(pItemProp->dwBasePartsIgnore, XE_HIDE);
 			}
 
-			// 외투의상을 입었을경우 머리날릴것인가의 기준을 외투 모자를 기준으로 바꾼다
+			// ????? ????? ???????? ??? ?? ??? ???? ???
 			CItemElem* pItemElemOvercoat	= g_pPlayer->GetEquipItem( PARTS_HAT );
 			
 			if( pItemElemOvercoat )
@@ -1532,7 +1512,7 @@ void CWndInventory::OnDraw(C2DRender* p2DRender)
 		}
 		else
 		{
-			// 외투의상을 입었을경우 머리날릴것인가의 기준을 외투 모자를 기준으로 바꾼다
+			// ????? ????? ???????? ??? ?? ??? ???? ???
 			CItemElem* pItemElemOvercoat	= g_pPlayer->GetEquipItem( PARTS_HAT );
 			
 			if( pItemElemOvercoat )
@@ -1637,7 +1617,7 @@ void CWndInventory::OnInitialUpdate()
 
 	WTCITEM tabTabItem;
 	tabTabItem.mask = WTCIF_TEXT | WTCIF_PARAM;
-	tabTabItem.pszText = GETTEXT( TID_GAME_ITEM );//"아이템";
+	tabTabItem.pszText = GETTEXT( TID_GAME_ITEM );//"???";
 	tabTabItem.pWndBase = &m_wndItemCtrl;
 	pTabCtrl->InsertItem( 0, &tabTabItem );
 
@@ -1674,7 +1654,7 @@ BOOL CWndInventory::Initialize( CWndBase* pWndParent, DWORD dwWndId )
 	CRect rectWindow = m_pWndRoot->GetWindowRect();
 	CRect rect( 792, 130, 792 + 232, 130 + 405 + 20 ); // 1024 768
 
-	// 인벤토리 출력 위치 지정
+	// ???? ?? ?? ??
 	memset( m_InvenRect, 0, sizeof(CRect) * MAX_HUMAN_PARTS );
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), dwWndId, 0, CPoint( 792, 130 ), pWndParent );
 //	return CWndNeuz::Create( WBS_VIEW | WBS_MOVE | WBS_SOUND | WBS_CAPTION | WBS_THICKFRAME, rect, pWndParent, dwWndId );
@@ -1699,11 +1679,11 @@ BOOL CWndInventory::Process()
 		if( pItemElem && m_pUpgradeMaterialItem )
 		{
 			CItemElem* pItemMaterialElem = (CItemElem*)m_pUpgradeMaterialItem;
-			// 패킷 전송
+			// ?? ??
 			
 			if( pItemMaterialElem->GetProp() )
 			{
-				// 인첸트에 관한 아이템이냐?
+				// ???? ?? ??????
 #if __VER >= 8 //__Y_NEW_ENCHANT
 				if( pItemMaterialElem->GetProp()->dwItemKind3 == IK3_ELECARD 
 					|| pItemMaterialElem->GetProp()->dwItemKind3 == IK3_ENCHANT
@@ -1738,7 +1718,7 @@ BOOL CWndInventory::Process()
 #endif //__CSC_VER9_1
 				}
 				else
-				// 피어싱에 관한 아이템이냐?
+				// ???? ?? ??????
 				if( pItemMaterialElem->GetProp()->dwItemKind3 == IK3_SOCKETCARD
 #if __VER >= 12 // __EXT_PIERCING
 					|| pItemMaterialElem->GetProp()->dwItemKind3 == IK3_SOCKETCARD2
@@ -1772,13 +1752,13 @@ BOOL CWndInventory::Process()
 
 BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 {
-	// 인벤토리로 아이템이 Drop되었다. 어디서 왔는지 확인한후 적절히 대응하라.
+	// ????? ???? Drop???. ??? ??? ???? ??? ????.
 	if( message == WIN_ITEMDROP )
 	{
 		LPSHORTCUT lpShortcut = (LPSHORTCUT)pLResult;
 		if( lpShortcut->m_pFromWnd == NULL )
 		{
-			ADDERRORMSG( "CWndInventory::OnChildNotify : m_pFromWnd 가 NULL " );
+			ADDERRORMSG( "CWndInventory::OnChildNotify : m_pFromWnd ? NULL " );
 			return CWndNeuz::OnChildNotify( message, nID, pLResult );
 		}
 		CWndBase* pWndFrame = lpShortcut->m_pFromWnd->GetFrameWnd();
@@ -1797,7 +1777,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 				return FALSE;
 			}
 			
-			// 장착과 탈착이 이루어질 것이다.
+			// ??? ??? ???? ???.
 			if( pWndFrame->GetWndId() == GetWndId() && lpShortcut->m_dwIndex != II_GOLD_SEED1 )
 			{
 
@@ -1809,7 +1789,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 				bForbid = FALSE;
 			}
 			else
-			// 숍에서 온거라면 구입 
+			// ??? ???? ?? 
 			
 			if( pWndFrame->GetWndId() == APP_SHOP_ )
 			{
@@ -1826,7 +1806,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					LPCHARACTER lpCharacter = pwndShop->m_pMover->GetCharacter();
 					if(lpCharacter->m_nVenderType == 1)
 					{
-						if(g_pPlayer->m_Inventory.GetAtItemNum( II_CHP_RED ) - (int)((CItemElem*)lpShortcut->m_dwData)->GetChipCost() >= 0) //구매하려는 품목의 칩개수 이상을 가지고 있는지 확인.
+						if(g_pPlayer->m_Inventory.GetAtItemNum( II_CHP_RED ) - (int)((CItemElem*)lpShortcut->m_dwData)->GetChipCost() >= 0) //????? ??? ??? ??? ??? ??? ??.
 						{
 							SAFE_DELETE( m_pWndConfirmBuy );
 							m_pWndConfirmBuy = new CWndConfirmBuy;
@@ -1884,7 +1864,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 				bForbid		= FALSE;
 			}
 			else
-			// 뱅크에서 온거라면 빼옴
+			// ???? ???? ??
 			if( pWndFrame->GetWndId() == APP_COMMON_BANK )
 			{
 				CWndBase* pWndTaget = pWndFrame->m_pCurFocus;
@@ -1920,7 +1900,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 						g_WndMng.m_pWndTradeGold = new CWndTradeGold;
 						memcpy( &g_WndMng.m_pWndTradeGold->m_Shortcut, pLResult, sizeof(SHORTCUT) );
 						g_WndMng.m_pWndTradeGold->m_dwGold = itemElem->m_nItemNum;
-						g_WndMng.m_pWndTradeGold->m_nIdWndTo = APP_GOLD; // 인벤토리 인데 쓰고 있어서 Gold로 씀.
+						g_WndMng.m_pWndTradeGold->m_nIdWndTo = APP_GOLD; // ???? ?? ?? ??? Gold? ?.
 						g_WndMng.m_pWndTradeGold->m_pWndBase = this;
 						g_WndMng.m_pWndTradeGold->m_nSlot = nSlot;
 						
@@ -1928,8 +1908,8 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 						g_WndMng.m_pWndTradeGold->MoveParentCenter();
 						CWndStatic* pStatic	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_STATIC );
 						CWndStatic* pStaticCount	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_CONTROL1 );
-						CString strMain = prj.GetText( TID_GAME_MOVECOUNT );//"몇개를 이동하시겠습니까?";
-						CString strCount = prj.GetText(TID_GAME_NUMCOUNT);//" 갯수 : ";
+						CString strMain = prj.GetText( TID_GAME_MOVECOUNT );//"??? ?????????";
+						CString strCount = prj.GetText(TID_GAME_NUMCOUNT);//" ?? : ";
 						pStatic->m_strTitle = strMain;
 						pStaticCount->m_strTitle = strCount;
 					}
@@ -1953,11 +1933,11 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 						nSlot = 2;
 					}
 
-					// 페냐 (돈)
+					// ?? (?)
 					g_WndMng.m_pWndTradeGold = new CWndTradeGold;
 					memcpy( &g_WndMng.m_pWndTradeGold->m_Shortcut, pLResult, sizeof(SHORTCUT) );
 					g_WndMng.m_pWndTradeGold->m_dwGold = g_pPlayer->m_dwGoldBank[nSlot];
-					g_WndMng.m_pWndTradeGold->m_nIdWndTo = APP_GOLD;	// 인벤토리 인데 쓰고 있어서 Gold로 씀.
+					g_WndMng.m_pWndTradeGold->m_nIdWndTo = APP_GOLD;	// ???? ?? ?? ??? Gold? ?.
 					g_WndMng.m_pWndTradeGold->m_pWndBase = this;
 					g_WndMng.m_pWndTradeGold->m_nSlot = nSlot;
 					
@@ -1965,7 +1945,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					g_WndMng.m_pWndTradeGold->MoveParentCenter();
 					CWndStatic* pStatic	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_STATIC );
 					CWndStatic* pStaticCount	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_CONTROL1 );
-					CString strMain = prj.GetText( TID_GAME_MOVEPENYA );//"얼마를 이동하시겠습니까?";
+					CString strMain = prj.GetText( TID_GAME_MOVEPENYA );//"??? ?????????";
 					CString strCount = prj.GetText(TID_GAME_PENYACOUNT);//" SEED : ";
 					pStatic->m_strTitle = strMain;
 					pStaticCount->m_strTitle = strCount;
@@ -1973,7 +1953,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 				bForbid = FALSE;
 			}
 #if __VER >= 11 // __SYS_POCKET
-			// 휴대가방에서 온 경우
+			// ?????? ? ??
 			if( pWndFrame->GetWndId() == APP_BAG_EX )
 			{
 				
@@ -2012,7 +1992,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 						g_WndMng.m_pWndTradeGold = new CWndTradeGold;
 						memcpy( &g_WndMng.m_pWndTradeGold->m_Shortcut, pLResult, sizeof(SHORTCUT) );
 						g_WndMng.m_pWndTradeGold->m_dwGold = itemElem->m_nItemNum;
-						g_WndMng.m_pWndTradeGold->m_nIdWndTo = APP_BAG_EX; // 인벤토리 인데 쓰고 있어서 Gold로 씀.
+						g_WndMng.m_pWndTradeGold->m_nIdWndTo = APP_BAG_EX; // ???? ?? ?? ??? Gold? ?.
 						g_WndMng.m_pWndTradeGold->m_pWndBase = this;
 						g_WndMng.m_pWndTradeGold->m_nSlot = -1;
 						g_WndMng.m_pWndTradeGold->m_nPutSlot = nSlot;
@@ -2021,8 +2001,8 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 						g_WndMng.m_pWndTradeGold->MoveParentCenter();
 						CWndStatic* pStatic	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_STATIC );
 						CWndStatic* pStaticCount	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_CONTROL1 );
-						CString strMain = prj.GetText( TID_GAME_MOVECOUNT );//"몇개를 이동하시겠습니까?";
-						CString strCount = prj.GetText(TID_GAME_NUMCOUNT);//" 갯수 : ";
+						CString strMain = prj.GetText( TID_GAME_MOVECOUNT );//"??? ?????????";
+						CString strCount = prj.GetText(TID_GAME_NUMCOUNT);//" ?? : ";
 						pStatic->m_strTitle = strMain;
 						pStaticCount->m_strTitle = strCount;
 					}
@@ -2076,15 +2056,15 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 							g_WndMng.m_pWndTradeGold = new CWndTradeGold;
 							memcpy( &g_WndMng.m_pWndTradeGold->m_Shortcut, pLResult, sizeof(SHORTCUT) );
 							g_WndMng.m_pWndTradeGold->m_dwGold = itemElem->m_nItemNum;
-							g_WndMng.m_pWndTradeGold->m_nIdWndTo = APP_MESSENGER;	// ****중요****
+							g_WndMng.m_pWndTradeGold->m_nIdWndTo = APP_MESSENGER;	// ****??****
 							g_WndMng.m_pWndTradeGold->m_pWndBase = this;
 							
 							g_WndMng.m_pWndTradeGold->Initialize( &g_WndMng, APP_TRADE_GOLD );
 							g_WndMng.m_pWndTradeGold->MoveParentCenter();
 							CWndStatic* pStatic	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_STATIC );
 							CWndStatic* pStaticCount	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_CONTROL1 );
-							CString strMain = prj.GetText( TID_GAME_MOVECOUNT );//"몇개를 이동하시겠습니까?";
-							CString strCount = prj.GetText(TID_GAME_NUMCOUNT);//" 갯수 : ";
+							CString strMain = prj.GetText( TID_GAME_MOVECOUNT );//"??? ?????????";
+							CString strCount = prj.GetText(TID_GAME_NUMCOUNT);//" ?? : ";
 							pStatic->m_strTitle = strMain;
 							pStaticCount->m_strTitle = strCount;
 						}
@@ -2099,18 +2079,18 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					CGuild* pGuild = g_pPlayer->GetGuild();
 					if( pGuild && pGuild->IsGetPenya( g_pPlayer->m_idPlayer ))
 					{
-						// 페냐 (돈)
+						// ?? (?)
 						g_WndMng.m_pWndTradeGold = new CWndTradeGold;
 						memcpy( &g_WndMng.m_pWndTradeGold->m_Shortcut, pLResult, sizeof(SHORTCUT) );
 						g_WndMng.m_pWndTradeGold->m_dwGold = pGuild->m_nGoldGuild;
-						g_WndMng.m_pWndTradeGold->m_nIdWndTo = APP_MESSENGER;	// 인벤토리 인데 쓰고 있어서 Gold로 씀.
+						g_WndMng.m_pWndTradeGold->m_nIdWndTo = APP_MESSENGER;	// ???? ?? ?? ??? Gold? ?.
 						g_WndMng.m_pWndTradeGold->m_pWndBase = this;
 						
 						g_WndMng.m_pWndTradeGold->Initialize( &g_WndMng, APP_TRADE_GOLD );
 						g_WndMng.m_pWndTradeGold->MoveParentCenter();
 						CWndStatic* pStatic	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_STATIC );
 						CWndStatic* pStaticCount	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_CONTROL1 );
-						CString strMain = prj.GetText( TID_GAME_MOVEPENYA );//"얼마를 이동하시겠습니까?";
+						CString strMain = prj.GetText( TID_GAME_MOVEPENYA );//"??? ?????????";
 						CString strCount = prj.GetText(TID_GAME_PENYACOUNT);//" SEED : ";
 						pStatic->m_strTitle = strMain;
 						pStaticCount->m_strTitle = strCount;
@@ -2122,7 +2102,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 		SetForbid( bForbid );
 	}
 	else
-	// 차일드로부터 더블클릭 알림 메시지가 왔다. 아이템 콘트롤에서 아이템을 사용하겠다는 메시지다.
+	// ?????? ???? ?? ???? ??. ??? ????? ???? ?????? ????.
 	if( message == WIN_DBLCLK )
 	{
 		if( nID == 11 ) // item
@@ -2162,9 +2142,9 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 			if( pFocusItem )
 			{
 				ItemProp *pProp = pFocusItem->GetProp();
-				// 소비아이템이 1개 남았을때 더블클릭하고 서버로 갔다가 
-				// 삭제되기 전에 또 더블클릭하면 pFocusItem->m_dwItemId가 0이 되면서
-				// 프로퍼티가 널되서 죽는다.
+				// ?????? 1? ???? ?????? ??? ??? 
+				// ???? ?? ? ?????? pFocusItem->m_dwItemId? 0? ???
+				// ????? ??? ???.
 				if( pProp )
 				{					
 #if __VER >= 8 // __CSC_VER8_5
@@ -2424,7 +2404,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 							}
 						}
 					}
-					// 속성카드나 주나위를 더블클릭했을경우 인첸트모드로 변경한다.
+					// ????? ???? ???????? ?????? ????.
 					if( (pFocusItem->GetExtra() < ((CItemElem*)pFocusItem)->m_nItemNum) 
 						&& ( 
 							pProp->dwItemKind3 == IK3_ELECARD
@@ -2441,7 +2421,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 							) 
 						)
 #else //__CSC_VER9_1
-					// 속성카드나 주나위를 더블클릭했을경우 인첸트모드로 변경한다.
+					// ????? ???? ???????? ?????? ????.
 				#if __VER >= 8 //__Y_NEW_ENCHANT
 					if(  pProp->dwItemKind3 == IK3_ELECARD || pProp->dwItemKind3 == IK3_ENCHANT ||
 						pProp->dwItemKind3 == IK3_SOCKETCARD
@@ -2471,16 +2451,16 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 							m_pSfxUpgrade = CreateSfx( g_Neuz.m_pd3dDevice, XI_INT_INCHANT, g_pPlayer->GetPos(), g_pPlayer->GetId(), g_pPlayer->GetPos(), g_pPlayer->GetId(), -1 );
 					}
 					
-					if( pProp->dwItemKind1 == IK1_RIDE )	// 사용한 아이템이 탈것인가.
+					if( pProp->dwItemKind1 == IK1_RIDE )	// ??? ???? ????.
 					{
-						if( g_pPlayer->m_pActMover->IsFly() == FALSE )		// Ground상태인가?
-							if( g_pPlayer->m_pActMover->m_bGround == 0 )		// 땅에 발을 안붙이고 있다면 못탄다.
-								bAble = FALSE;	// 아이템사용 실패.
+						if( g_pPlayer->m_pActMover->IsFly() == FALSE )		// Ground?????
+							if( g_pPlayer->m_pActMover->m_bGround == 0 )		// ?? ?? ???? ??? ???.
+								bAble = FALSE;	// ????? ??.
 					}
 
 					if( pFocusItem->m_dwItemId == II_SYS_SYS_MAP_FLARIS )
 					{
-						g_WndMng.OpenMap( "map_flaris.tga" );	// 파일이 없어서 잠시 막아둠
+						g_WndMng.OpenMap( "map_flaris.tga" );	// ??? ??? ?? ???
 					}
 					else
 					if( pFocusItem->m_dwItemId == II_SYS_SYS_MAP_SAINTMORNING )
@@ -2519,7 +2499,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					}
 #endif // __TELEPORT_SCROLL
 					if(pProp && pProp->dwID == II_SYS_SYS_SCR_RECCURENCE || pProp->dwID == II_SYS_SYS_SCR_RECCURENCE_LINK)
-					{	// 리스킬 아이템은 모두 확인 창 띄운다.
+					{	// ??? ???? ?? ?? ? ???.
 						if(g_pPlayer->m_nSkillPoint < g_pPlayer->GetCurrentMaxSkillPoint())
 						{
 							SAFE_DELETE( g_WndMng.m_pWndCommItemDlg );
@@ -2627,13 +2607,13 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 				}
 #endif
 			}
-			if( bAble )	// 성공판정 났을때만 보냄.
+			if( bAble )	// ???? ???? ??.
 			{
 				if( g_WndMng.GetWndBase( APP_SHOP_ )  ||
 					g_WndMng.GetWndBase( APP_BANK )  ||
 					g_WndMng.GetWndBase( APP_TRADE ) )
 				{
-					//g_WndMng.PutString( "거래중에 아이템 사용은 불가능해요.", NULL, 0xffff0000 );
+					//g_WndMng.PutString( "???? ??? ??? ?????.", NULL, 0xffff0000 );
 					g_WndMng.PutString( prj.GetText(TID_GAME_TRADELIMITUSING), NULL, prj.GetTextColor(TID_GAME_TRADELIMITUSING) );
 				}
 #if __VER >= 8 // __CSC_VER8_5
@@ -2696,7 +2676,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 #endif //__CSC_VER9_1
 				else if( g_WndMng.GetWndBase( APP_REPAIR ) )
 				{
-					//g_WndMng.PutString( "수리중에 아이템 사용은 불가능해요.", NULL, 0xffff0000 );
+					//g_WndMng.PutString( "???? ??? ??? ?????.", NULL, 0xffff0000 );
 					g_WndMng.PutString( prj.GetText(TID_GAME_REPAIR_NOTUSE), NULL, prj.GetTextColor(TID_GAME_TRADELIMITUSING) );
 				}
 				else
@@ -2713,7 +2693,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					else
 					{
 #endif // __EQUIP_BIND
-						// 탈착 명령일 경우, nPart는 실제 장착되어 있는 부분과 일치해야 하므로 프로퍼티에서 꺼내지 않는다.
+						// ?? ??? ??, nPart? ?? ???? ?? ??? ???? ??? ?????? ??? ???.
 						ItemProp* pItemProp = pFocusItem->GetProp();
 						
 						if( pItemProp )
@@ -2724,7 +2704,7 @@ BOOL CWndInventory::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 							if( bEquiped )
 								nPart	= pFocusItem->m_dwObjIndex - g_pPlayer->m_Inventory.m_dwIndexNum;
 #if __VER >= 15 // __PETVIS
-							if( !g_WndMng.CheckConfirm( pFocusItem ) )		//gmpbigsun: 패킷보내기전 확인등의 처리담당 
+							if( !g_WndMng.CheckConfirm( pFocusItem ) )		//gmpbigsun: ?????? ???? ???? 
 							{
 								g_DPlay.SendDoUseItem( MAKELONG( ITYPE_ITEM, pFocusItem->m_dwObjId ), dwObjId, nPart );
 							}
@@ -2780,14 +2760,14 @@ BOOL CWndInventory::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase )
 		case 1: // wnd2
 			g_WndMng.OpenCharacter();
 			break;
-		case 2: // 챗 
+		case 2: // ? 
 			g_WndMng.OpenChat();
 			break;
 		case 3:
 			g_clientMsg.PutMessage(&g_Neuz.m_2DRender,0xffffffff,"fuck");
 			break;
 		case 9:
-			g_WndMng.OpenCustomBox("종료하시겠습니까?",new CWndExitBox);
+			g_WndMng.OpenCustomBox("?????????",new CWndExitBox);
 			break;
 	}
 	*/
@@ -2878,9 +2858,9 @@ void CWndInventory::OnLButtonDblClk( UINT nFlags, CPoint point)
 			
 			if( pItemElem )
 			{
-				g_DPlay.SendDoEquip( pItemElem, i );		// 파츠번호를 같이 보낸다. 쌍칼땜시.
-				// 장착인벤 영역을 더블클릭해서 벗기거나
-				// 드래그&드롭으로 장착하려 하거나 벗기려고 할때 파츠번호를 보낸다.
+				g_DPlay.SendDoEquip( pItemElem, i );		// ????? ?? ???. ????.
+				// ???? ??? ?????? ????
+				// ???&???? ???? ??? ???? ?? ????? ???.
 			}
 		}
 	}
@@ -2900,7 +2880,7 @@ BOOL CWndInventory::OnSetCursor ( CWndBase* pWndBase, UINT nHitTest, UINT messag
 
 void CWndInventory::SetEnchantCursor()
 {
-	// 인벤창이 열려있고 인첸트 모드이면 커서모양 변경
+	// ???? ???? ??? ???? ???? ??
 	if( m_bIsUpgradeMode )
 	{
 		SetMouseCursor( CUR_HAMMER );
@@ -2956,7 +2936,7 @@ BOOL CWndInventory::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 		if( pWndFrame->GetWndId() == APP_INVENTORY )
 		{
 			SetForbid( TRUE );
-			//g_WndMng.PutString( "거래중에 아이템 사용은 불가능해요.", NULL, 0xffff0000 );
+			//g_WndMng.PutString( "???? ??? ??? ?????.", NULL, 0xffff0000 );
 			g_WndMng.PutString( prj.GetText(TID_GAME_TRADELIMITUSING), NULL, prj.GetTextColor(TID_GAME_TRADELIMITUSING) );
 			
 			return FALSE;
@@ -2967,7 +2947,7 @@ BOOL CWndInventory::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 		if( pWndFrame->GetWndId() == APP_INVENTORY )
 		{
 			SetForbid( TRUE );
-			//g_WndMng.PutString( "수리중에 아이템 사용은 불가능해요.", NULL, 0xffff0000 );
+			//g_WndMng.PutString( "???? ??? ??? ?????.", NULL, 0xffff0000 );
 			g_WndMng.PutString( prj.GetText(TID_GAME_REPAIR_NOTUSE), NULL, prj.GetTextColor(TID_GAME_TRADELIMITUSING) );
 			
 			return FALSE;
@@ -2980,7 +2960,7 @@ BOOL CWndInventory::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 			LPWNDCTRL lpWndCtrl1 = GetWndCtrl( WIDC_CUSTOM21 );
 			if( lpWndCtrl1->rect.PtInRect( point ) )
 			{
-				if( pShortcut->m_dwType == ITYPE_ITEM && pShortcut->m_dwData ) // dwData가 0이면 골드
+				if( pShortcut->m_dwType == ITYPE_ITEM && pShortcut->m_dwData ) // dwData? 0?? ??
 				{
 					CItemElem* pItemElem = (CItemElem*)g_pPlayer->GetItemId( pShortcut->m_dwId );
 					if( !pItemElem )
@@ -2997,10 +2977,10 @@ BOOL CWndInventory::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 						return FALSE;
 					}
 
-#if __VER >= 11 // __MA_VER11_05	// 케릭터 봉인 거래 기능 world,database,neuz
+#if __VER >= 11 // __MA_VER11_05	// ??? ?? ?? ?? world,database,neuz
 					if( pItemElem && pItemElem->m_dwItemId == II_SYS_SYS_SCR_SEALCHARACTER  )
 						return FALSE;
-#endif // __MA_VER11_05	// 케릭터 봉인 거래 기능 world,database,neuz
+#endif // __MA_VER11_05	// ??? ?? ?? ?? world,database,neuz
 
 					SAFE_DELETE( g_WndMng.m_pWndInvenRemoveItem );
 					g_WndMng.m_pWndInvenRemoveItem = new CWndInvenRemoveItem;
@@ -3014,12 +2994,12 @@ BOOL CWndInventory::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 	
 	if( pShortcut->m_dwShortcut == SHORTCUT_ITEM && pShortcut->m_pFromWnd != this && pWndFrame->GetWndId() == APP_INVENTORY )
 	{
-		if( pShortcut->m_dwType == ITYPE_ITEM && pShortcut->m_dwData ) // dwData가 0이면 골드 
+		if( pShortcut->m_dwType == ITYPE_ITEM && pShortcut->m_dwData ) // dwData? 0?? ?? 
 		{
 			CItemElem* pItemElem = (CItemElem*)g_pPlayer->GetItemId( pShortcut->m_dwId );
 			if( pItemElem && pItemElem->GetProp()->dwParts != NULL_ID ) //&& pItemElem->GetProp()->dwParts == i * 3 + j )
 			{
-				//인벤토리 테두리에 올려지는 아이템은 장착이 되지 않도록 수정.
+				//???? ???? ???? ???? ??? ?? ??? ??.
 				CRect rect;
 				LPWNDCTRL lpWndCtrl = GetWndCtrl( WIDC_CUSTOM5 );
 				rect = lpWndCtrl->rect;
@@ -3063,7 +3043,7 @@ void CWndInventory::OnDestroyChildWnd( CWndBase* pWndChild )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 캐릭터 통합 정보
+// ??? ?? ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3130,14 +3110,14 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
 			else
 				xpos = 103;
 		}
-#if __VER >= 15 // __HERO129_VER15				// 15차 히어로 레벨확장
+#if __VER >= 15 // __HERO129_VER15				// 15? ??? ????
 		if(checkhero == LEGEND_CLASS_HERO || checkhero == LEGEND_CLASS_LEGENDHERO)
 			xpos = 103;
 	#else
 		if(checkhero == LEGEND_CLASS_HERO || checkhero == LEGEND_CLASS_LEGENDHERO)
 			xpos = 80;
 		else
-	#endif	// 15차 히어로 레벨확장	
+	#endif	// 15? ??? ????	
 			p2DRender->TextOut( 80, y, g_pPlayer->GetLevel()      , dwColor ); y += nNext;
 #else
 		p2DRender->TextOut( 80, y, g_pPlayer->GetLevel()      , dwColor ); y += nNext;
@@ -3158,14 +3138,14 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
 			else
 				xpos = 73;
 		}
-#if __VER >= 15 // __HERO129_VER15				// 15차 히어로 레벨확장
+#if __VER >= 15 // __HERO129_VER15				// 15? ??? ????
 		if(checkhero == LEGEND_CLASS_HERO || checkhero == LEGEND_CLASS_LEGENDHERO )
 			xpos = 73;
 	#else
 		if(checkhero == LEGEND_CLASS_HERO || checkhero == LEGEND_CLASS_LEGENDHERO )
 			xpos = 50;
 		else
-	#endif	// 15차 히어로 레벨확장	
+	#endif	// 15? ??? ????	
 			p2DRender->TextOut( 50, y, g_pPlayer->GetLevel()      , dwColor ); y += nNext;
 	
 #else
@@ -3177,9 +3157,9 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
 #if __VER >= 10 // __CSC_VER9_1
 	point.x = xpos;
 	point.y = ypos - 2;
-	if(checkhero == LEGEND_CLASS_MASTER) //전승을 했을 경우.
+	if(checkhero == LEGEND_CLASS_MASTER) //??? ?? ??.
 	{
-		if(/*g_pPlayer->m_nLevel >= 60 && */g_pPlayer->m_nLevel < 70) //Level Down될 경우를 생각해서 주석처리
+		if(/*g_pPlayer->m_nLevel >= 60 && */g_pPlayer->m_nLevel < 70) //Level Down? ??? ???? ????
 			strPath = MakePath( DIR_ICON, "Icon_MasterMark1.dds");
 		else if(g_pPlayer->m_nLevel >= 70 && g_pPlayer->m_nLevel < 80)
 			strPath = MakePath( DIR_ICON, "Icon_MasterMark2.dds");
@@ -3197,7 +3177,7 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
 			pTexture->Render( p2DRender, point );			
 		
 	}
-	else if(checkhero == LEGEND_CLASS_HERO || checkhero == LEGEND_CLASS_LEGENDHERO ) //영웅일 경우.
+	else if(checkhero == LEGEND_CLASS_HERO || checkhero == LEGEND_CLASS_LEGENDHERO ) //??? ??.
 	{
 		strPath = MakePath( DIR_ICON, "Icon_HeroMark.dds");
 		pTexture = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, strPath, 0xffff00ff );
@@ -3206,7 +3186,7 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
 	}
 
 #endif //__CSC_VER9_1
-	//서버 정보
+	//?? ??
 	y = 55+ nyAdd3;
 	CString strServerName;
 	strServerName.Format( "%s", g_dpCertified.GetServerName(g_Option.m_nSer) );
@@ -3221,7 +3201,7 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
 		y += nNext;
 	}
 
-	//채널 정보
+	//?? ??
 	LPSERVER_DESC pServerDesc = NULL;
 	int nCount = 0;
 	for( int j = 0; j < (int)( g_dpCertified.m_dwSizeofServerset ); j++ )
@@ -3267,7 +3247,7 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
 	p2DRender->TextOut( 7, y, prj.GetText(TID_APP_CHARACTER_JOB), dwColor ); y += nNext;
 	p2DRender->TextOut( 7, y, prj.GetText(TID_GAME_CHARACTER_02), dwColor ); y += nNext;
 	//p2DRender->TextOut( 7, y, prj.GetText(TID_GAME_CHARACTER_03), dwColor ); y += nNext;
-	//직업레벨 -> 서버/채널 정보
+	//???? -> ??/?? ??
 	p2DRender->TextOut( 7, y, prj.GetText(TID_GAME_CHAR_SERVER), dwColor ); y += nNext;
 	p2DRender->TextOut( 7, y, prj.GetText(TID_GAME_CHAR_SERVERNAME), dwColor ); y += nNext;
 	/*
@@ -3289,12 +3269,12 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
 /***********************************************************************************/
 	x = 50; y = 10 + nyAdd;
 	nNext = 15;
-	// 공격력
+	// ???
 	RenderATK( p2DRender, x, y );
 	y += nNext;
 
-	//방어력
-	if(	m_nStaCount != 0 && GetVirtualDEF() != g_pPlayer->GetShowDefense( FALSE ) ) //임의 스탯이 변경되고 현재 능력치랑 다를 경우
+	//???
+	if(	m_nStaCount != 0 && GetVirtualDEF() != g_pPlayer->GetShowDefense( FALSE ) ) //?? ??? ???? ?? ???? ?? ??
 	{
 		if( (g_nRenderCnt / 8) & 1 )	
 		{
@@ -3307,7 +3287,7 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
 
 	x = 140; y = 10 + nyAdd;
 
-	//크리티컬
+	//????
 	CString strMsg;
 /***********************************************************************************
                                   ADEILSON V19
@@ -3315,7 +3295,7 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
     dwColor = D3DCOLOR_ARGB( 255, 255, 255, 255 );//AGORA
 	//dwColor = D3DCOLOR_ARGB(255,0,0,0);//ANTES
 /**********************************************************************************/
-	if(	m_nDexCount != 0 && GetVirtualCritical() != g_pPlayer->GetCriticalProb() ) //임의 스탯이 변경되고 현재 능력치랑 다를 경우
+	if(	m_nDexCount != 0 && GetVirtualCritical() != g_pPlayer->GetCriticalProb() ) //?? ??? ???? ?? ???? ?? ??
 	{
 		if( (g_nRenderCnt / 8) & 1 )	
 		{
@@ -3327,7 +3307,7 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
 		strMsg.Format( "%d%%", g_pPlayer->GetCriticalProb() );
 	p2DRender->TextOut( x , y, strMsg, dwColor ); y += nNext;
 
-	//공격속도	
+	//????	
 	float fAttackSpeed;
 /***********************************************************************************
                                   ADEILSON V19
@@ -3335,7 +3315,7 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
     dwColor = D3DCOLOR_ARGB( 255, 255, 255, 255 );//AGORA
 	//dwColor = D3DCOLOR_ARGB(255,0,0,0);//ANTES
 /**********************************************************************************/
-	if(	m_nDexCount != 0 && GetVirtualATKSpeed() != g_pPlayer->GetAttackSpeed() ) //임의 스탯이 변경되고 현재 능력치랑 다를 경우
+	if(	m_nDexCount != 0 && GetVirtualATKSpeed() != g_pPlayer->GetAttackSpeed() ) //?? ??? ???? ?? ???? ?? ??
 	{
 		if( (g_nRenderCnt / 8) & 1 )	
 		{
@@ -3350,7 +3330,7 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
 	p2DRender->TextOut( x , y, strMsg, dwColor ); y += nNext;
 
 	x =15; nNextX = 60;
-	// 아래부터 능력치 관련 
+	// ???? ??? ?? 
 	y = 52 + nyAdd;
 	int StatYPos = 50;
 
@@ -3454,7 +3434,7 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
 
 	CRect rectTemp;
 	CPoint ptTemp;
-	// 툴팁 나오게 하기( Str, Sta, Dex, Int, GP )
+	// ?? ??? ??( Str, Sta, Dex, Int, GP )
 	CPoint ptMouse = GetMousePoint();
 	for( int iC = 0 ; iC < 5 ; ++iC )
 	{
@@ -3545,7 +3525,7 @@ void CWndCharInfo::OnDraw(C2DRender* p2DRender)
 	p2DRender->TextOut( 7, y, prj.GetText(TID_TOOLTIP_INT), dwColor ); y += nNext;
 	p2DRender->TextOut( 7, y, prj.GetText(TID_GAME_CHARACTER_07), dwColor ); y += nNext;
 	
-	//능력치 상태 Tooltip
+	//??? ?? Tooltip
 	rect.SetRect( 7, 10+ nyAdd, 160, 38 + nyAdd);
 	if( rect.PtInRect( ptMouse ) )
 	{
@@ -3689,7 +3669,7 @@ void CWndCharInfo::OnInitialUpdate()
 	CRect rect3_2( x - ( size.cx / 2)               , y, (x - ( size.cx / 2)               ) + size.cx, y + size.cy );
 	CRect rect3_3( x + ( size.cx / 2) + 10          , y, (x + ( size.cx / 2) + 10          ) + size.cx, y + size.cy );
 */
-	// 아래부터 능력치 관련 
+	// ???? ??? ?? 
 	int nyAdd = 121;
 	int posY = 49 + nyAdd;
 	int posX = 128;
@@ -3734,7 +3714,7 @@ void CWndCharInfo::OnInitialUpdate()
 		m_wndReset.SetTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, _T( "ButtNormal05.tga" ) ), TRUE );
 	}
 
-	//모든 스탯의 증가량 1로 고정이므로 아래 삭제
+	//?? ??? ??? 1? ????? ?? ??
 	/*
 	LPJOBABILITY pJobAbillity;
 	if( g_pPlayer->IsExpert() )
@@ -3749,7 +3729,7 @@ void CWndCharInfo::OnInitialUpdate()
 	*/
 
 	m_nGpPoint = g_pPlayer->GetRemainGP();
-	//스탯 증가량 한적 없으므로 Minus Button Default는 False
+	//?? ??? ?? ???? Minus Button Default? False
 	m_wndStrMinus.EnableWindow(FALSE);
 	m_wndStaMinus.EnableWindow(FALSE);
 	m_wndDexMinus.EnableWindow(FALSE);
@@ -3884,7 +3864,7 @@ BOOL CWndCharInfo::OnChildNotify(UINT message,UINT nID,LRESULT* pLResult)
 				{
 					if( nID != g_pPlayer->GetJob() )
 					{
-						//"자신의 직업만 올릴수 있습니다"
+						//"??? ??? ??? ????"
 						g_WndMng.OpenMessageBox( _T( prj.GetText(TID_DIAG_0037) ) );
 					}
 					if( m_fWaitingConfirm == FALSE ) 
@@ -3894,8 +3874,8 @@ BOOL CWndCharInfo::OnChildNotify(UINT message,UINT nID,LRESULT* pLResult)
 					}
 					break;
 				}
-			case 10: // 전직 
-				// 방랑자의 레벨이 15이상인것을 찾음
+			case 10: // ?? 
+				// ???? ??? 15????? ??
 				if( g_pPlayer->GetLevel() >= MAX_JOB_LEVEL )
 				{
 					SAFE_DELETE(m_pWndChangeJob);
@@ -4080,7 +4060,7 @@ void CWndCharInfo::GetVirtualATK(int* pnMin, int* pnMax)
 				break;
 		}
 		
-		nATK += g_pPlayer->GetPlusWeaponATK( pItemProp->dwWeaponType );	// 무기의 추가 공격력를 구한다.
+		nATK += g_pPlayer->GetPlusWeaponATK( pItemProp->dwWeaponType );	// ??? ?? ???? ???.
 
 		int nPlus = nATK + g_pPlayer->GetParam( DST_CHR_DMG, 0 );
 
@@ -4144,7 +4124,7 @@ int CWndCharInfo::GetVirtualCritical()
 	int nCritical;
 	nCritical	= ((g_pPlayer->GetDex() + m_nDexCount) / 10);
 	nCritical	= (int)( nCritical * g_pPlayer->GetJobPropFactor( JOB_PROP_CRITICAL ) );
-	nCritical	= g_pPlayer->GetParam( DST_CHR_CHANCECRITICAL, nCritical );	// 크리티컬 확률을 높여주는 스킬관련 
+	nCritical	= g_pPlayer->GetParam( DST_CHR_CHANCECRITICAL, nCritical );	// ???? ??? ???? ???? 
 #ifdef __JEFF_11
 	if( nCritical < 0 )
 		nCritical	= 0;
@@ -4152,7 +4132,7 @@ int CWndCharInfo::GetVirtualCritical()
 	
 	if( g_pPlayer )
 	{
-		if( g_pPlayer->m_idparty && (g_pPlayer->m_dwFlag & MVRF_CRITICAL) )	// 파티 && 1회 크리티컬 발동?
+		if( g_pPlayer->m_idparty && (g_pPlayer->m_dwFlag & MVRF_CRITICAL) )	// ?? && 1? ???? ???
 		{
 			if( g_Party.IsMember( g_pPlayer->m_idPlayer ) )
 				nCritical += (g_Party.m_nSizeofMember / 2);	
@@ -4160,11 +4140,11 @@ int CWndCharInfo::GetVirtualCritical()
 		}
 
 #if __VER < 9 // __S_9_ADD
-		if( g_pPlayer->IsAfterDeath() )							// 죽음 이후 상태라면?
+		if( g_pPlayer->IsAfterDeath() )							// ?? ?? ?????
 			nCritical += CRITICAL_AFTER_DEATH;
 		
 		int nHitPercent = g_pPlayer->GetHitPointPercent( 100 );
-		if( nHitPercent < CRITICAL_BERSERK_HP )			// HP가 MAX대비 30% 미만? 
+		if( nHitPercent < CRITICAL_BERSERK_HP )			// HP? MAX?? 30% ??? 
 		{
 			// CRITICAL_BERSERK_HP : nHitPercent = CRITICAL_BERSERK_PROB : x
 			// 30 : 15 = 20 : x
@@ -4188,8 +4168,8 @@ float CWndCharInfo::GetVirtualATKSpeed()
 	JobProp* pProperty = prj.GetJobProp( g_pPlayer->GetJob() ); 
 	ASSERT( pProperty );
 	
-	// A = int( 캐릭터의 공속 + ( 무기의 공속 * ( 4 * 덱스 + ( 레벨 / 8 ) ) ) - 3 )
-	// 공격속도 = ( ( 50 / 200 - A ) / 2 ) + 가중치 
+	// A = int( ???? ?? + ( ??? ?? * ( 4 * ?? + ( ?? / 8 ) ) ) - 3 )
+	// ???? = ( ( 50 / 200 - A ) / 2 ) + ??? 
 	int A = int( pProperty->fAttackSpeed + ( fItem * ( 4.0f * (g_pPlayer->GetDex() + m_nDexCount) + g_pPlayer->GetLevel() / 8.0f ) ) - 3.0f );
 
 	if( 187.5f <= A )
@@ -4240,7 +4220,7 @@ void CWndCharInfo::RenderATK( C2DRender* p2DRender, int x, int y )
 	GetVirtualATK(&nTemp1, &nTemp2);
 	g_pPlayer->GetHitMinMax( &nMin, &nMax );
 
-	if(	(m_nStrCount != 0 || m_nDexCount != 0 || m_nIntCount != 0) && (nTemp1 != nMin || nTemp2 != nMax) ) //임의 스탯이 변경되고 현재 능력치랑 다를 경우
+	if(	(m_nStrCount != 0 || m_nDexCount != 0 || m_nIntCount != 0) && (nTemp1 != nMin || nTemp2 != nMax) ) //?? ??? ???? ?? ???? ?? ??
 	{
 		if( (g_nRenderCnt / 8) & 1 )	
 		{
@@ -4309,7 +4289,7 @@ void CWndHonor::OnDraw( C2DRender* p2DRender )
 void CWndHonor::OnInitialUpdate()
 {
 	CWndNeuz::OnInitialUpdate();
-	// 타이틀을 검색해서 리스트에 추가하고, 없으면 없다는 메시지 출력
+	// ???? ???? ???? ????, ??? ??? ??? ??
 	RefreshList();
 	CWndListBox* pWndListBox = (CWndListBox*)GetDlgItem( WIDC_LISTBOX1 );
 	pWndListBox->m_nSelectColor = D3DCOLOR_ARGB(255, 255, 0, 0);
@@ -4377,7 +4357,7 @@ BOOL CWndHonor::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 			}
 			break;
 		}
-	case WIDC_BUTTON1:// 선택된 타이틀을 사용하게 한다
+	case WIDC_BUTTON1:// ??? ???? ???? ??
 		if(g_pPlayer)
 		{
 			pWndButton1->EnableWindow(FALSE);
@@ -4415,7 +4395,7 @@ void CWndHonor::OnLButtonDown( UINT nFlags, CPoint point )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 캐릭터 정보  
+// ??? ??  
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4471,11 +4451,11 @@ void CWndCharacter::OnInitialUpdate()
 	WTCITEM tabTabItem;
 
 	tabTabItem.mask = WTCIF_TEXT | WTCIF_PARAM;
-	tabTabItem.pszText = prj.GetText(TID_GAME_TITLE_CHAR_INFO);//"기본";
+	tabTabItem.pszText = prj.GetText(TID_GAME_TITLE_CHAR_INFO);//"??";
 	tabTabItem.pWndBase = &m_wndCharInfo;
 	lpTapCtrl->InsertItem( 0, &tabTabItem );
 	
-	tabTabItem.pszText = prj.GetText(TID_GAME_TITLE_HONOR);//"달인";
+	tabTabItem.pszText = prj.GetText(TID_GAME_TITLE_HONOR);//"??";
 	tabTabItem.pWndBase = &m_wndHonor;
 	lpTapCtrl->InsertItem( 1, &tabTabItem );
 	lpTapCtrl->SetCurSel( 0 );
@@ -4490,12 +4470,12 @@ void CWndCharacter::OnInitialUpdate()
 	WTCITEM tabTabItem;
 
 	tabTabItem.mask = WTCIF_TEXT | WTCIF_PARAM;
-	tabTabItem.pszText = prj.GetText(TID_APP_CHARACTER_BASE);//"기본";
+	tabTabItem.pszText = prj.GetText(TID_APP_CHARACTER_BASE);//"??";
 	tabTabItem.pWndBase = &m_wndStateBase;
 	lpTapCtrl->InsertItem( 0, &tabTabItem );
 	//lpTapCtrl->InsertTexture( 0 ,MakePath( DIR_THEME, "TabCharacter1.bmp" ) );
 
-	tabTabItem.pszText = prj.GetText(TID_APP_CHARACTER_DETAIL);//"자세히";
+	tabTabItem.pszText = prj.GetText(TID_APP_CHARACTER_DETAIL);//"???";
 	tabTabItem.pWndBase = &m_wndStateDetail;
 	lpTapCtrl->InsertItem( 1, &tabTabItem );
 	//lpTapCtrl->InsertTexture( 1 ,MakePath( DIR_THEME, "TabCharacter2.bmp" ) );
@@ -4590,7 +4570,7 @@ void CWndStateConfirm::OnSetState( UINT nId )
 void CWndStateConfirm::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 //	strTemp.Format( prj.GetText(TID_GAME_TOOLTIP_SHELLCOST)
 	CString strMessage;
 
@@ -4618,10 +4598,10 @@ void CWndStateConfirm::OnInitialUpdate()
 
 	CWndText* pWndText = (CWndText*)GetDlgItem( WIDC_TEXT1 );
 
-	// 1차 전직인지 확인
+	// 1? ???? ??
 	if( g_pPlayer->IsBaseJob() == TRUE )
 	{
-		// 방랑자
+		// ???
 		CString strAddMessage;
 		strAddMessage.Format( prj.GetText( TID_DIAG_0082 ) );
 		strMessage += '\n';
@@ -4630,17 +4610,17 @@ void CWndStateConfirm::OnInitialUpdate()
 	pWndText->SetString( strMessage );
 	pWndText->EnableWindow( FALSE );
 
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndStateConfirm::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_STATE_CONFIRM, 0, CPoint( 0, 0 ), pWndParent );
 } 
 /*
-  직접 윈도를 열때 사용 
+  ?? ??? ?? ?? 
 BOOL CWndStateConfirm::Initialize( CWndBase* pWndParent, DWORD dwWndId ) 
 { 
 	CRect rectWindow = m_pWndRoot->GetWindowRect(); 
@@ -4791,11 +4771,11 @@ void CWndCharacterBase::OnDraw(C2DRender* p2DRender)
 			else
 				xpos = 103;
 		}
-#if __VER < 15 // __HERO129_VER15				// 15차 히어로 레벨확장
+#if __VER < 15 // __HERO129_VER15				// 15? ??? ????
 		if(checkhero == LEGEND_CLASS_HERO)
 			xpos = 80;
 		else
-	#endif	// 15차 히어로 레벨확장		
+	#endif	// 15? ??? ????		
 			p2DRender->TextOut( 80, y, g_pPlayer->GetLevel()      , dwColor ); y += nNext;
 #else
 		p2DRender->TextOut( 80, y, g_pPlayer->GetLevel()      , dwColor ); y += nNext;
@@ -4816,11 +4796,11 @@ void CWndCharacterBase::OnDraw(C2DRender* p2DRender)
 			else
 				xpos = 73;
 		}
-#if __VER < 15 // __HERO129_VER15				// 15차 히어로 레벨확장
+#if __VER < 15 // __HERO129_VER15				// 15? ??? ????
 		if(checkhero == LEGEND_CLASS_HERO)
 			xpos = 50;
 		else
-	#endif	// 15차 히어로 레벨확장	
+	#endif	// 15? ??? ????	
 			p2DRender->TextOut( 50, y, g_pPlayer->GetLevel()      , dwColor ); y += nNext;
 #else
 		p2DRender->TextOut( 50, y, g_pPlayer->GetLevel()      , dwColor ); y += nNext;
@@ -4831,9 +4811,9 @@ void CWndCharacterBase::OnDraw(C2DRender* p2DRender)
 #if __VER >= 10 // __CSC_VER9_1
 	point.x = xpos;
 	point.y = ypos - 2;
-	if(checkhero == LEGEND_CLASS_MASTER) //전승을 했을 경우.
+	if(checkhero == LEGEND_CLASS_MASTER) //??? ?? ??.
 	{
-		if(/*g_pPlayer->m_nLevel >= 60 && */g_pPlayer->m_nLevel < 70) //Level Down될 경우를 생각해서 주석처리
+		if(/*g_pPlayer->m_nLevel >= 60 && */g_pPlayer->m_nLevel < 70) //Level Down? ??? ???? ????
 			strPath = MakePath( DIR_ICON, "Icon_MasterMark1.dds");
 		else if(g_pPlayer->m_nLevel >= 70 && g_pPlayer->m_nLevel < 80)
 			strPath = MakePath( DIR_ICON, "Icon_MasterMark2.dds");
@@ -4851,19 +4831,19 @@ void CWndCharacterBase::OnDraw(C2DRender* p2DRender)
 			pTexture->Render( p2DRender, point );			
 		
 	}
-	else if(checkhero == LEGEND_CLASS_HERO) //영웅일 경우.
+	else if(checkhero == LEGEND_CLASS_HERO) //??? ??.
 	{
-#if __VER >= 15 // __HERO129_VER15				// 15차 히어로 레벨확장
+#if __VER >= 15 // __HERO129_VER15				// 15? ??? ????
 		strPath = MakePath( DIR_ICON, "Icon_Hero.dds");
-	#else	// 15차 히어로 레벨확장
+	#else	// 15? ??? ????
 		strPath = MakePath( DIR_ICON, "Icon_HeroMark.dds");
-	#endif	// 15차 히어로 레벨확장
+	#endif	// 15? ??? ????
 		pTexture = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, strPath, 0xffff00ff );
 		if(pTexture != NULL)
 			pTexture->Render( p2DRender, point );
 	}
 #endif //__CSC_VER9_1
-	//서버 정보
+	//?? ??
 	y = 55;
 	CString strServerName;
 	strServerName.Format( "%s", g_dpCertified.GetServerName(g_Option.m_nSer) );
@@ -4878,7 +4858,7 @@ void CWndCharacterBase::OnDraw(C2DRender* p2DRender)
 		y += nNext;
 	}
 
-	//채널 정보
+	//?? ??
 	LPSERVER_DESC pServerDesc = NULL;
 	int nCount = 0;
 	for( int j = 0; j < (int)( g_dpCertified.m_dwSizeofServerset ); j++ )
@@ -5046,16 +5026,16 @@ void CWndCharacterDetail::OnDraw(C2DRender* p2DRender)
 	int x = 5, nNextX = 100;
 
 	x = 50; y = 10;
-	RenderATK( p2DRender, x, y );		// 공격력
+	RenderATK( p2DRender, x, y );		// ???
 	y += nNext;
 
-	p2DRender->TextOut( x , y, g_pPlayer->GetShowDefense( FALSE ), dwColor ); y += nNext; //방어력
+	p2DRender->TextOut( x , y, g_pPlayer->GetShowDefense( FALSE ), dwColor ); y += nNext; //???
 	x = 100; y = 5;
 
 	x = 130; y = 10;
 	CString strMsg;
 	strMsg.Format( "%d%%", g_pPlayer->GetCriticalProb() );
-	p2DRender->TextOut( x , y, strMsg, dwColor ); y += nNext;		// 크리티컬
+	p2DRender->TextOut( x , y, strMsg, dwColor ); y += nNext;		// ????
 	
 	float fAttackSpeed = g_pPlayer->GetAttackSpeed();
 	strMsg.Format( "%d%%", int( fAttackSpeed*100.0f ) /2 );
@@ -5068,7 +5048,7 @@ void CWndCharacterDetail::OnDraw(C2DRender* p2DRender)
 	p2DRender->TextOut( x , y, strMsg, dwColor );
 #endif
 	x =15; y = 40; nNextX = 60;
-	// 아래부터 능력치 관련 
+	// ???? ??? ?? 
 #ifdef _KWCSC_UPDATE
 	y = 67;
 #else
@@ -5205,9 +5185,9 @@ void CWndCharacterDetail::OnDraw(C2DRender* p2DRender)
 #endif // __S_ADD_RESTATE
 
 	//
-	// m_nCnt같은 글로벌성 카운터는 g_nRenderCnt나 g_nProcessCnt를 쓰면 됩니다.
-	// g_nProcessCnt는 매 프로세스(1/60)마다 한번씩 올라가는 카운트고
-	// g_nRenderCnt는 매 렌더화면마다 한번씩 카운팅 되는 값입니다.  -xuzhu-
+	// m_nCnt?? ???? ???? g_nRenderCnt? g_nProcessCnt? ?? ???.
+	// g_nProcessCnt? ? ????(1/60)?? ??? ???? ????
+	// g_nRenderCnt? ? ?????? ??? ??? ?? ????.  -xuzhu-
 	// 
 	if( g_pPlayer->GetRemainGP() )
 	{
@@ -5236,7 +5216,7 @@ void CWndCharacterDetail::OnDraw(C2DRender* p2DRender)
 #endif
 	CRect rectTemp;
 	CPoint ptTemp;
-	// 툴팁 나오게 하기( Str, Sta, Dex, Int, GP )
+	// ?? ??? ??( Str, Sta, Dex, Int, GP )
 	CPoint ptMouse = GetMousePoint();
 	for( int iC = 0 ; iC < 5 ; ++iC )
 	{
@@ -5355,7 +5335,7 @@ void CWndCharacterDetail::OnInitialUpdate()
 	CRect rect3_3( x + ( size.cx / 2) + 10          , y, (x + ( size.cx / 2) + 10          ) + size.cx, y + size.cy );
 
 
-	// 아래부터 능력치 관련 
+	// ???? ??? ?? 
 #ifdef _KWCSC_UPDATE
 	y = 67;
 #else
@@ -5442,7 +5422,7 @@ void CWndCharacterDetail::OnLButtonDown(UINT nFlags, CPoint point)
 }
 void CWndCharacterDetail::OnMouseWndSurface( CPoint point )
 {
-	// 직업 아이콘 위치에 커서를 가져가면 접속한 서버의 정보(서버이름과 멀티서버 번호)를 보여준다.
+	// ?? ??? ??? ??? ???? ??? ??? ??(????? ???? ??)? ????.
 /*	CRect rectHittest( 10, 52, 100, 64 );	
 	if( rectHittest.PtInRect( point ) )
 	{
@@ -5497,7 +5477,7 @@ void CWndCharacterDetail2::RenderATK( C2DRender* p2DRender, int x, int y )
 	GetVirtualATK(&nTemp1, &nTemp2);
 	g_pPlayer->GetHitMinMax( &nMin, &nMax );
 
-	if(	(m_nStrCount != 0 || m_nDexCount != 0 || m_nIntCount != 0) && (nTemp1 != nMin || nTemp2 != nMax) ) //임의 스탯이 변경되고 현재 능력치랑 다를 경우
+	if(	(m_nStrCount != 0 || m_nDexCount != 0 || m_nIntCount != 0) && (nTemp1 != nMin || nTemp2 != nMax) ) //?? ??? ???? ?? ???? ?? ??
 	{
 		if( (g_nRenderCnt / 8) & 1 )	
 		{
@@ -5547,12 +5527,12 @@ void CWndCharacterDetail2::OnDraw(C2DRender* p2DRender)
 	int x = 5, nNextX = 100;
 
 	x = 50; y = 10;
-	// 공격력
+	// ???
 	RenderATK( p2DRender, x, y );
 	y += nNext;
 
-	//방어력
-	if(	m_nStaCount != 0 && GetVirtualDEF() != g_pPlayer->GetShowDefense( FALSE ) ) //임의 스탯이 변경되고 현재 능력치랑 다를 경우
+	//???
+	if(	m_nStaCount != 0 && GetVirtualDEF() != g_pPlayer->GetShowDefense( FALSE ) ) //?? ??? ???? ?? ???? ?? ??
 	{
 		if( (g_nRenderCnt / 8) & 1 )	
 		{
@@ -5565,7 +5545,7 @@ void CWndCharacterDetail2::OnDraw(C2DRender* p2DRender)
 
 	x = 130; y = 10;
 
-	//크리티컬
+	//????
 	CString strMsg;
 /***********************************************************************************
                                   ADEILSON V19
@@ -5573,7 +5553,7 @@ void CWndCharacterDetail2::OnDraw(C2DRender* p2DRender)
 	dwColor = D3DCOLOR_ARGB( 255, 255, 255, 255);//agora
 	//dwColor = D3DCOLOR_ARGB(255,0,0,0);//antes
 /***********************************************************************************/
-	if(	m_nDexCount != 0 && GetVirtualCritical() != g_pPlayer->GetCriticalProb() ) //임의 스탯이 변경되고 현재 능력치랑 다를 경우
+	if(	m_nDexCount != 0 && GetVirtualCritical() != g_pPlayer->GetCriticalProb() ) //?? ??? ???? ?? ???? ?? ??
 	{
 		if( (g_nRenderCnt / 8) & 1 )	
 		{
@@ -5585,7 +5565,7 @@ void CWndCharacterDetail2::OnDraw(C2DRender* p2DRender)
 		strMsg.Format( "%d%%", g_pPlayer->GetCriticalProb() );
 	p2DRender->TextOut( x , y, strMsg, dwColor ); y += nNext;
 
-	//공격속도	
+	//????	
 	float fAttackSpeed;
 /***********************************************************************************
                                   ADEILSON V19
@@ -5593,7 +5573,7 @@ void CWndCharacterDetail2::OnDraw(C2DRender* p2DRender)
 	dwColor = D3DCOLOR_ARGB( 255, 255, 255, 255);//agora
 	//dwColor = D3DCOLOR_ARGB(255,0,0,0);//antes
 /***********************************************************************************/
-	if(	m_nDexCount != 0 && GetVirtualATKSpeed() != g_pPlayer->GetAttackSpeed() ) //임의 스탯이 변경되고 현재 능력치랑 다를 경우
+	if(	m_nDexCount != 0 && GetVirtualATKSpeed() != g_pPlayer->GetAttackSpeed() ) //?? ??? ???? ?? ???? ?? ??
 	{
 		if( (g_nRenderCnt / 8) & 1 )	
 		{
@@ -5608,7 +5588,7 @@ void CWndCharacterDetail2::OnDraw(C2DRender* p2DRender)
 	p2DRender->TextOut( x , y, strMsg, dwColor ); y += nNext;
 
 	x =15; y = 40; nNextX = 60;
-	// 아래부터 능력치 관련 
+	// ???? ??? ?? 
 	y = 52;
 	int StatYPos = 50;
 
@@ -5725,7 +5705,7 @@ void CWndCharacterDetail2::OnDraw(C2DRender* p2DRender)
 
 	CRect rectTemp;
 	CPoint ptTemp;
-	// 툴팁 나오게 하기( Str, Sta, Dex, Int, GP )
+	// ?? ??? ??( Str, Sta, Dex, Int, GP )
 	CPoint ptMouse = GetMousePoint();
 	for( int iC = 0 ; iC < 5 ; ++iC )
 	{
@@ -5816,7 +5796,7 @@ void CWndCharacterDetail2::OnDraw(C2DRender* p2DRender)
 	p2DRender->TextOut( 7, y, prj.GetText(TID_TOOLTIP_INT), dwColor ); y += nNext;
 	p2DRender->TextOut( 7, y, prj.GetText(TID_GAME_CHARACTER_07), dwColor ); y += nNext;
 	
-	//능력치 상태 Tooltip
+	//??? ?? Tooltip
 	CRect rect;
 	rect.SetRect( 7, 10, 160, 38 );
 	if( rect.PtInRect( ptMouse ) )
@@ -5881,7 +5861,7 @@ void CWndCharacterDetail2::OnInitialUpdate()
 	CRect rect3_2( x - ( size.cx / 2)               , y, (x - ( size.cx / 2)               ) + size.cx, y + size.cy );
 	CRect rect3_3( x + ( size.cx / 2) + 10          , y, (x + ( size.cx / 2) + 10          ) + size.cx, y + size.cy );
 
-	// 아래부터 능력치 관련 
+	// ???? ??? ?? 
 	int posY = 49;
 	int posX = 128;
 
@@ -5925,7 +5905,7 @@ void CWndCharacterDetail2::OnInitialUpdate()
 		m_wndReset.SetTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, _T( "ButtNormal05.tga" ) ), TRUE );
 	}
 
-	//모든 스탯의 증가량 1로 고정이므로 아래 삭제
+	//?? ??? ??? 1? ????? ?? ??
 	/*
 	LPJOBABILITY pJobAbillity;
 	if( g_pPlayer->IsExpert() )
@@ -5940,7 +5920,7 @@ void CWndCharacterDetail2::OnInitialUpdate()
 	*/
 
 	m_nGpPoint = g_pPlayer->GetRemainGP();
-	//스탯 증가량 한적 없으므로 Minus Button Default는 False
+	//?? ??? ?? ???? Minus Button Default? False
 	m_wndStrMinus.EnableWindow(FALSE);
 	m_wndStaMinus.EnableWindow(FALSE);
 	m_wndDexMinus.EnableWindow(FALSE);
@@ -6083,7 +6063,7 @@ void CWndCharacterDetail2::GetVirtualATK(int* pnMin, int* pnMax)
 				break;
 		}
 		
-		nATK += g_pPlayer->GetPlusWeaponATK( pItemProp->dwWeaponType );	// 무기의 추가 공격력를 구한다.
+		nATK += g_pPlayer->GetPlusWeaponATK( pItemProp->dwWeaponType );	// ??? ?? ???? ???.
 
 		int nPlus = nATK + g_pPlayer->GetParam( DST_CHR_DMG, 0 );
 
@@ -6144,7 +6124,7 @@ int CWndCharacterDetail2::GetVirtualCritical()
 	int nCritical;
 	nCritical	= ((g_pPlayer->GetDex() + m_nDexCount) / 10);
 	nCritical	= (int)( nCritical * g_pPlayer->GetJobPropFactor( JOB_PROP_CRITICAL ) );
-	nCritical	= g_pPlayer->GetParam( DST_CHR_CHANCECRITICAL, nCritical );	// 크리티컬 확률을 높여주는 스킬관련 
+	nCritical	= g_pPlayer->GetParam( DST_CHR_CHANCECRITICAL, nCritical );	// ???? ??? ???? ???? 
 #ifdef __JEFF_11
 	if( nCritical < 0 )
 		nCritical	= 0;
@@ -6152,7 +6132,7 @@ int CWndCharacterDetail2::GetVirtualCritical()
 	
 	if( g_pPlayer )
 	{
-		if( g_pPlayer->m_idparty && (g_pPlayer->m_dwFlag & MVRF_CRITICAL) )	// 파티 && 1회 크리티컬 발동?
+		if( g_pPlayer->m_idparty && (g_pPlayer->m_dwFlag & MVRF_CRITICAL) )	// ?? && 1? ???? ???
 		{
 			if( g_Party.IsMember( g_pPlayer->m_idPlayer ) )
 				nCritical += (g_Party.m_nSizeofMember / 2);	
@@ -6160,11 +6140,11 @@ int CWndCharacterDetail2::GetVirtualCritical()
 		}
 
 #if __VER < 9 // __S_9_ADD
-		if( g_pPlayer->IsAfterDeath() )							// 죽음 이후 상태라면?
+		if( g_pPlayer->IsAfterDeath() )							// ?? ?? ?????
 			nCritical += CRITICAL_AFTER_DEATH;
 		
 		int nHitPercent = g_pPlayer->GetHitPointPercent( 100 );
-		if( nHitPercent < CRITICAL_BERSERK_HP )			// HP가 MAX대비 30% 미만? 
+		if( nHitPercent < CRITICAL_BERSERK_HP )			// HP? MAX?? 30% ??? 
 		{
 			// CRITICAL_BERSERK_HP : nHitPercent = CRITICAL_BERSERK_PROB : x
 			// 30 : 15 = 20 : x
@@ -6187,8 +6167,8 @@ float CWndCharacterDetail2::GetVirtualATKSpeed()
 	JobProp* pProperty = prj.GetJobProp( g_pPlayer->GetJob() ); 
 	ASSERT( pProperty );
 	
-	// A = int( 캐릭터의 공속 + ( 무기의 공속 * ( 4 * 덱스 + ( 레벨 / 8 ) ) ) - 3 )
-	// 공격속도 = ( ( 50 / 200 - A ) / 2 ) + 가중치 
+	// A = int( ???? ?? + ( ??? ?? * ( 4 * ?? + ( ?? / 8 ) ) ) - 3 )
+	// ???? = ( ( 50 / 200 - A ) / 2 ) + ??? 
 	int A = int( pProperty->fAttackSpeed + ( fItem * ( 4.0f * (g_pPlayer->GetDex() + m_nDexCount) + g_pPlayer->GetLevel() / 8.0f ) ) - 3.0f );
 
 	if( 187.5f <= A )
@@ -6381,7 +6361,7 @@ void CWndCharacterDetail2::OnMouseWndSurface( CPoint point )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 직업  
+// ??  
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -6424,7 +6404,7 @@ BOOL CWndChangeJob::Initialize( CWndBase* pWndParent, DWORD dwWndId )
 { 
 	CRect rectWindow = m_pWndRoot->GetWindowRect(); 
 	CRect rect( 50 ,50, 300, 300 ); 
-	//SetTitle( _T( "전직" ) ); 
+	//SetTitle( _T( "??" ) ); 
 	return CWndNeuz::Create( WBS_THICKFRAME | WBS_MOVE | WBS_SOUND | WBS_CAPTION | WBS_MODAL, rect, pWndParent, dwWndId ); 
 } 
 BOOL CWndChangeJob::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ) 
@@ -6483,7 +6463,7 @@ BOOL CWndChangeJob::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 인벤토리 
+// ???? 
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -7399,7 +7379,7 @@ void CWndSkillTreeEx::OnMouseMove(UINT nFlags, CPoint point)
 		m_GlobalShortcut.m_dwType  = 0;
 		m_GlobalShortcut.m_dwIndex = dwSkill;
 		m_GlobalShortcut.m_dwData = 0;
-		m_GlobalShortcut.m_dwId       = g_nSkillCurSelect; // 컬런트 셀렉트가 곧 ID나 마찬가지임.
+		m_GlobalShortcut.m_dwId       = g_nSkillCurSelect; // ??? ???? ? ID? ?????.
 		m_GlobalShortcut.m_pTexture = m_atexSkill[ g_nSkillCurSelect ];//L;//pItemElem->m_pTexture;
 		_tcscpy( m_GlobalShortcut.m_szString, pSkillProp->szName);
 	}
@@ -8000,7 +7980,7 @@ void CWndSkillTreeEx::OnLButtonDblClk( UINT nFlags, CPoint point)
 					if( g_pPlayer->CheckSkill( m_pFocusItem->dwSkill ) == FALSE )
 						return;
 					CWndTaskBar* pTaskBar = g_WndMng.m_pWndTaskBar;
-					if( pTaskBar->m_nExecute == 0 )		// 스킬큐가 사용되지 않을때만 등록됨.
+					if( pTaskBar->m_nExecute == 0 )		// ???? ???? ???? ???.
 						pTaskBar->SetSkillQueue( pTaskBar->m_nCurQueueNum, 0, i, m_atexSkill[i] );
 					break;
 				}		
@@ -8486,7 +8466,7 @@ BOOL CWndSkillTreeEx::CheckSkill( int i )
 	if( pSkillProp == NULL || pSkillProp->nLog == 1 )
 		return FALSE;
 
-#if __VER >= 10 // __LEGEND	//	9차 전승시스템	Neuz, World, Trans
+#if __VER >= 10 // __LEGEND	//	9? ?????	Neuz, World, Trans
 #ifdef __3RD_LEGEND16
 		if( g_pPlayer->GetLevel() < (int)( pSkillProp->dwReqDisLV ) && !g_pPlayer->IsMaster() && !g_pPlayer->IsHero() && !g_pPlayer->IsLegendHero() )
 		return FALSE;
@@ -8494,10 +8474,10 @@ BOOL CWndSkillTreeEx::CheckSkill( int i )
 		if( g_pPlayer->GetLevel() < (int)( pSkillProp->dwReqDisLV ) && !g_pPlayer->IsMaster() && !g_pPlayer->IsHero() )
 		return FALSE;
 #endif // __3RD_LEGEND16
-#else //__LEGEND	//	9차 전승시스템	Neuz, World, Trans
+#else //__LEGEND	//	9? ?????	Neuz, World, Trans
 	if( g_pPlayer->GetLevel() < pSkillProp->dwReqDisLV )
 		return FALSE;
-#endif	//__LEGEND	//	9차 전승시스템	Neuz, World, Trans
+#endif	//__LEGEND	//	9? ?????	Neuz, World, Trans
 				
 	if( pSkillProp->dwReSkill1 != 0xffffffff )
 	{
@@ -8734,12 +8714,12 @@ void CWndSkillTreeEx::InitItem(int nJob, LPSKILL apSkill, BOOL bReset )
 		lpWndStatic3->SetTitle( prj.m_aJob[JOB_RANGER].szName );
 		break;
 	default:
-		Error( "CWndSkillTreeEx::InitItem 알수없는 직업 : %d", m_nJob );
+		Error( "CWndSkillTreeEx::InitItem ???? ?? : %d", m_nJob );
 		return;
 	}
 	
 #if __VER >= 10 // __CSC_VER9_1
-	//Master Skill은 시작부터 1Lv이므로 배경 이미지 제외.
+	//Master Skill? ???? 1Lv??? ?? ??? ??.
 	switch( m_nJob )
 	{
 		case JOB_KNIGHT_HERO:
@@ -8776,7 +8756,7 @@ void CWndSkillTreeEx::InitItem(int nJob, LPSKILL apSkill, BOOL bReset )
 	{
 		m_atexJobPannel[0] = new IMAGE;
 		if( LoadImage( MakePath( DIR_THEME, strTex[0] ), m_atexJobPannel[0] ) == FALSE )
-			Error( "CWndSkillTreeEx::InitItem에서 %s Open1 실패", strTex[0] );
+			Error( "CWndSkillTreeEx::InitItem?? %s Open1 ??", strTex[0] );
 
 	}
 
@@ -8784,12 +8764,12 @@ void CWndSkillTreeEx::InitItem(int nJob, LPSKILL apSkill, BOOL bReset )
 	{
 		m_atexJobPannel[1] = new IMAGE;
 		if( LoadImage( MakePath( DIR_THEME, strTex[1] ), m_atexJobPannel[1] ) == FALSE )
-			Error( "CWndSkillTreeEx::InitItem에서 %s Open1 실패", strTex[1] );
+			Error( "CWndSkillTreeEx::InitItem?? %s Open1 ??", strTex[1] );
 
 	}
 	AdjustWndBase();
 	
-	// 소스 아이템을 입력
+	// ?? ???? ??
 	LoadTextureSkillicon();
 
 #if __VER >= 15 // __IMPROVE_SYSTEM_VER15
@@ -8840,7 +8820,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 			}
 			break;
 
-//머서너리
+//????
 		case SI_MER_ONE_SPLMASH:		rect = CRect( 34, 109, 58, 133 ); break;
 		case SI_MER_SHIELD_PROTECTION:	rect = CRect( 34, 161, 58, 185 ); break;
 		case SI_MER_ONE_KEENWHEEL:		rect = CRect( 84, 97, 108, 121 ); break;
@@ -8856,7 +8836,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 		case SI_MER_ONE_GUILOTINE:		rect = CRect( 184, 123, 208, 147 ); break;
 		case SI_MER_SUP_AXEMASTER:		rect = CRect( 184, 175, 208, 199 ); break;
 		case SI_MER_SUP_SWORDMASTER:	rect = CRect( 184, 201, 208, 225 ); break;
-// 나이트
+// ???
 		case SI_KNT_TWOSW_CHARGE:		rect = CRect( 34, 260, 58, 284 ); break;
 		case SI_KNT_TWOAX_PAINDEALER:	rect = CRect( 34, 286, 58, 310 ); break;
 		case SI_KNT_SUP_GUARD:			rect = CRect( 34, 312, 58, 336 ); break;
@@ -8865,7 +8845,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 		case SI_KNT_SUP_RAGE:			rect = CRect( 84, 312, 108, 336 ); break;
 		case SI_KNT_TWO_POWERSWING:		rect = CRect( 134, 272, 158, 296 ); break;
 		case SI_KNT_SUP_PAINREFLECTION:	rect = CRect( 134, 312, 158, 336 ); break;
-// 블레이드
+// ????
 		case SI_BLD_DOUBLESW_SILENTSTRIKE:	rect = CRect( 34, 260, 58, 284 ); break;
 		case SI_BLD_DOUBLEAX_SPRINGATTACK:	rect = CRect( 34, 286, 58, 310 ); break;
 		case SI_BLD_DOUBLE_ARMORPENETRATE:	rect = CRect( 34, 312, 58, 336 ); break;
@@ -8876,7 +8856,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 		case SI_BLD_DOUBLE_SONICBLADE:		rect = CRect( 134, 312, 158, 336 ); break;
 		
 			
-// 어시스트	
+// ????	
 		case SI_ASS_HEAL_HEALING:			rect = CRect( 18, 136, 42, 160 ); break;
 		case SI_ASS_HEAL_PATIENCE:			rect = CRect( 64, 110, 88, 134 ); break;
 		case SI_ASS_CHEER_QUICKSTEP:		rect = CRect( 64, 136, 88, 160 ); break;
@@ -8894,7 +8874,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 		case SI_ASS_CHEER_CANNONBALL:		rect = CRect( 202, 136, 226, 160 ); break;
 		case SI_ASS_CHEER_ACCURACY:			rect = CRect( 202, 162, 226, 186 ); break;
 		case SI_ASS_KNU_POWERFIST:			rect = CRect( 202, 188, 226, 212 ); break;		
-//링마스터
+//????
 		case SI_RIN_SUP_PROTECT:            rect = CRect( 34, 260, 58, 284 ); break;
 		case SI_RIN_SUP_HOLYCROSS:			rect = CRect( 34, 286, 58, 310 ); break;
 		case SI_RIN_HEAL_GVURTIALLA:		rect = CRect( 34, 312, 58, 336 ); break;
@@ -8903,7 +8883,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 		case SI_RIN_HEAL_HEALRAIN:			rect = CRect( 84, 312, 108, 336 ); break;
 		case SI_RIN_SQU_GEBURAHTIPHRETH:	rect = CRect( 134, 272, 158, 296 ); break;
 		case SI_RIN_SUP_MERKABAHANZELRUSHA:	rect = CRect( 134, 312, 158, 336 ); break;
-//빌포스터
+//????
 		case SI_BIL_KNU_BELIALSMESHING:		rect = CRect( 34, 260, 58, 284 ); break;
 		case SI_BIL_PST_ASMODEUS:			rect = CRect( 34, 286, 58, 310 ); break;
 		case SI_BIL_KNU_BLOODFIST:			rect = CRect( 84, 260, 108, 284 ); break;
@@ -8914,7 +8894,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 		case SI_BIL_PST_ASALRAALAIKUM:		rect = CRect( 184, 312, 208, 336 ); break;
 			
 			
-// 매지션
+// ???
 		case SI_MAG_MAG_MENTALSTRIKE:			rect = CRect( 34, 96, 58, 120 );	break;
 		case SI_MAG_MAG_BLINKPOOL: 				rect = CRect( 34, 148, 58, 172 );	break;
 		case SI_MAG_FIRE_BOOMERANG:				rect = CRect( 84, 96, 108, 120 );   break;
@@ -8932,7 +8912,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 		case SI_MAG_WATER_SPRINGWATER:			rect = CRect( 184, 148, 208, 172 );		break;		
 		case SI_MAG_ELECTRICITY_LIGHTINGSHOCK:	rect = CRect( 184, 174, 208, 198 );		break;		
 		case SI_MAG_EARTH_LOOTING:				rect = CRect( 184, 200, 208, 224 );		break;
-// 엘리멘터
+// ????
 		case SI_ELE_FIRE_FIREBIRD:				rect = CRect( 34, 234, 58, 258 ); break;
 		case SI_ELE_EARTH_STONESPEAR:			rect = CRect( 34, 260, 58, 284 ); break;
 		case SI_ELE_WIND_VOID:					rect = CRect( 34, 286, 58, 310 ); break;
@@ -8952,7 +8932,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 		case SI_ELE_WIND_WINDMASTER:			rect = CRect( 184, 286, 208, 310 ); break;
 		case SI_ELE_ELECTRICITY_LIGHTINGMASTER:	rect = CRect( 184, 312, 208, 336 ); break;
 		case SI_ELE_WATER_WATERMASTER:			rect = CRect( 184, 338, 208, 362 ); break;
-// 사이키퍼
+// ????
 		case SI_PSY_NLG_DEMONOLGY:				rect = CRect( 34, 260, 58, 284 ); break;
 		case SI_PSY_PSY_PSYCHICBOMB:			rect = CRect( 34, 286, 58, 310 ); break;
 		case SI_PSY_NLG_CRUCIOSPELL:			rect = CRect( 34, 312, 58, 336 ); break;
@@ -9023,7 +9003,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 					rect.top += 1;
 				}
 				break;
-	//머서너리
+	//????
 			case SI_MER_ONE_SPLMASH:				nRectX =  34, nRectY = 109, nJobKind = MAX_EXPERT; break;
 			case SI_MER_SHIELD_PROTECTION:			nRectX =  34, nRectY = 161, nJobKind = MAX_EXPERT; break;
 			case SI_MER_ONE_KEENWHEEL:				nRectX =  84, nRectY =  97, nJobKind = MAX_EXPERT; break;
@@ -9039,7 +9019,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 			case SI_MER_ONE_GUILOTINE:				nRectX = 184, nRectY = 123, nJobKind = MAX_EXPERT; break;
 			case SI_MER_SUP_AXEMASTER:				nRectX = 184, nRectY = 175, nJobKind = MAX_EXPERT; break;
 			case SI_MER_SUP_SWORDMASTER:			nRectX = 184, nRectY = 201, nJobKind = MAX_EXPERT; break;
-	// 나이트
+	// ???
 			case SI_KNT_TWOSW_CHARGE:				nRectX =  34, nRectY = 260, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_KNT_TWOAX_PAINDEALER:			nRectX =  34, nRectY = 286, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_KNT_SUP_GUARD:					nRectX =  34, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
@@ -9048,7 +9028,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 			case SI_KNT_SUP_RAGE:					nRectX =  84, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_KNT_TWO_POWERSWING:				nRectX = 134, nRectY = 272, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_KNT_SUP_PAINREFLECTION:			nRectX = 134, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
-	// 블레이드
+	// ????
 			case SI_BLD_DOUBLESW_SILENTSTRIKE:		nRectX =  34, nRectY = 260, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_BLD_DOUBLEAX_SPRINGATTACK:		nRectX =  34, nRectY = 286, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_BLD_DOUBLE_ARMORPENETRATE:		nRectX =  34, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
@@ -9058,7 +9038,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 			case SI_BLD_DOUBLE_CROSSSTRIKE:			nRectX = 134, nRectY = 272, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_BLD_DOUBLE_SONICBLADE:			nRectX = 134, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
 				
-	// 어시스트	
+	// ????	
 			case SI_ASS_HEAL_HEALING:				nRectX =  18, nRectY = 135, nJobKind = MAX_EXPERT; break;
 			case SI_ASS_HEAL_PATIENCE:				nRectX =  64, nRectY = 109, nJobKind = MAX_EXPERT; break;
 			case SI_ASS_CHEER_QUICKSTEP:			nRectX =  64, nRectY = 135, nJobKind = MAX_EXPERT; break;
@@ -9076,7 +9056,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 			case SI_ASS_CHEER_CANNONBALL:			nRectX = 202, nRectY = 135, nJobKind = MAX_EXPERT; break;
 			case SI_ASS_CHEER_ACCURACY:				nRectX = 202, nRectY = 161, nJobKind = MAX_EXPERT; break;
 			case SI_ASS_KNU_POWERFIST:				nRectX = 202, nRectY = 187, nJobKind = MAX_EXPERT; break;
-	//링마스터
+	//????
 			case SI_RIN_SUP_PROTECT:				nRectX =  34, nRectY = 260, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_RIN_SUP_HOLYCROSS:				nRectX =  34, nRectY = 286, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_RIN_HEAL_GVURTIALLA:			nRectX =  34, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
@@ -9085,7 +9065,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 			case SI_RIN_HEAL_HEALRAIN:				nRectX =  84, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_RIN_SQU_GEBURAHTIPHRETH:		nRectX = 134, nRectY = 272, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_RIN_SUP_MERKABAHANZELRUSHA:		nRectX = 134, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
-	//빌포스터
+	//????
 			case SI_BIL_KNU_BELIALSMESHING:			nRectX =  34, nRectY = 260, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_BIL_PST_ASMODEUS:				nRectX =  34, nRectY = 286, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_BIL_KNU_BLOODFIST:				nRectX =  84, nRectY = 260, nJobKind = MAX_PROFESSIONAL; break;
@@ -9095,7 +9075,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 			case SI_BIL_KNU_SONICHAND:				nRectX = 184, nRectY = 272, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_BIL_PST_ASALRAALAIKUM:			nRectX = 184, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
 								
-	// 매지션
+	// ???
 			case SI_MAG_MAG_MENTALSTRIKE:			nRectX =  34, nRectY =  96, nJobKind = MAX_EXPERT; break;
 			case SI_MAG_MAG_BLINKPOOL: 				nRectX =  34, nRectY = 148, nJobKind = MAX_EXPERT; break;
 			case SI_MAG_FIRE_BOOMERANG:				nRectX =  84, nRectY =  96, nJobKind = MAX_EXPERT; break;
@@ -9113,7 +9093,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 			case SI_MAG_WATER_SPRINGWATER:			nRectX = 184, nRectY = 148, nJobKind = MAX_EXPERT; break;
 			case SI_MAG_ELECTRICITY_LIGHTINGSHOCK:	nRectX = 184, nRectY = 174, nJobKind = MAX_EXPERT; break;
 			case SI_MAG_EARTH_LOOTING:				nRectX = 184, nRectY = 200, nJobKind = MAX_EXPERT; break;
-	// 엘리멘터
+	// ????
 			case SI_ELE_FIRE_FIREBIRD:				nRectX =  34, nRectY = 234, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_ELE_EARTH_STONESPEAR:			nRectX =  34, nRectY = 260, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_ELE_WIND_VOID:					nRectX =  34, nRectY = 286, nJobKind = MAX_PROFESSIONAL; break;
@@ -9133,7 +9113,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 			case SI_ELE_WIND_WINDMASTER:			nRectX = 184, nRectY = 286, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_ELE_ELECTRICITY_LIGHTINGMASTER:	nRectX = 184, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_ELE_WATER_WATERMASTER:			nRectX = 184, nRectY = 338, nJobKind = MAX_PROFESSIONAL; break;
-	// 사이키퍼
+	// ????
 			case SI_PSY_NLG_DEMONOLGY:				nRectX =  34, nRectY = 260, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_PSY_PSY_PSYCHICBOMB:			nRectX =  34, nRectY = 286, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_PSY_NLG_CRUCIOSPELL:			nRectX =  34, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
@@ -9143,7 +9123,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 			case SI_PSY_PSY_PSYCHICWALL:			nRectX = 134, nRectY = 272, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_PSY_PSY_PSYCHICSQUARE:			nRectX = 134, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
 	////////////////////////////////////////////////////////////////////////////////////
-	// 아크로벳
+	// ????
 			case SI_ACR_YOYO_PULLING:				nRectX =  34, nRectY =  97, nJobKind = MAX_EXPERT; break;
 			case SI_ACR_SUP_SLOWSTEP:				nRectX =  34, nRectY = 123, nJobKind = MAX_EXPERT; break;
 			case SI_ACR_BOW_JUNKBOW:				nRectX =  34, nRectY = 175, nJobKind = MAX_EXPERT; break;
@@ -9160,7 +9140,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 			case SI_ACR_YOYO_COUNTER:				nRectX = 184, nRectY = 149, nJobKind = MAX_EXPERT; break;		
 			case SI_ACR_BOW_AUTOSHOT:				nRectX = 184, nRectY = 174, nJobKind = MAX_EXPERT; break;		
 			case SI_ACR_BOW_ARROWRAIN:				nRectX = 184, nRectY = 200, nJobKind = MAX_EXPERT; break;		
-	//제스터
+	//???
 			case SI_JST_SUP_POISON:					nRectX =  34, nRectY = 260, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_JST_SUP_BLEEDING:				nRectX =  34, nRectY = 286, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_JST_YOYO_ESCAPE:				nRectX =  34, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
@@ -9169,7 +9149,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 			case SI_JST_SUP_ABSORB:					nRectX =  84, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_JST_YOYO_VATALSTAB:				nRectX = 134, nRectY = 272, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_JST_YOYO_HITOFPENYA:			nRectX = 134, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
-	//레인저
+	//???
 			case SI_RAG_BOW_ICEARROW:				nRectX =  34, nRectY = 260, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_RAG_BOW_FLAMEARROW:				nRectX =  34, nRectY = 286, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_RAG_BOW_POISONARROW:			nRectX =  34, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
@@ -9179,8 +9159,8 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 			case SI_RAG_BOW_TRIPLESHOT:				nRectX = 134, nRectY = 272, nJobKind = MAX_PROFESSIONAL; break;
 			case SI_RAG_BOW_SILENTARROW:			nRectX = 134, nRectY = 312, nJobKind = MAX_PROFESSIONAL; break;
 				
-#if __VER >= 10 // __CSC_VER9_1 //9차 전승 관련 영웅 스킬 추가.
-			//마스터 스킬
+#if __VER >= 10 // __CSC_VER9_1 //9? ?? ?? ?? ?? ??.
+			//??? ??
 			case SI_BLD_MASTER_ONEHANDMASTER:		nLegendSkill = 0, nJobKind = MAX_MASTER; break;
 			case SI_KNT_MASTER_TWOHANDMASTER:		nLegendSkill = 0, nJobKind = MAX_MASTER; break;
 			case SI_JST_MASTER_YOYOMASTER:			nLegendSkill = 0, nJobKind = MAX_MASTER; break;
@@ -9189,7 +9169,7 @@ BOOL CWndSkillTreeEx::GetSkillPoint(DWORD dwSkillID, CRect& rect )
 			case SI_PSY_MASTER_INTMASTER:			nLegendSkill = 0, nJobKind = MAX_MASTER; break;
 			case SI_BIL_MASTER_KNUCKLEMASTER:		nLegendSkill = 0, nJobKind = MAX_MASTER; break;
 			case SI_RIG_MASTER_BLESSING:			nLegendSkill = 0, nJobKind = MAX_MASTER; break;
-			//영웅 스킬			
+			//?? ??			
 			case SI_BLD_HERO_DEFFENCE:				nLegendSkill = 1, nJobKind = MAX_HERO; break;
 			case SI_KNT_HERO_DRAWING:				nLegendSkill = 1, nJobKind = MAX_HERO; break;
 			case SI_JST_HERO_SILENCE:				nLegendSkill = 1, nJobKind = MAX_HERO; break;
@@ -9287,7 +9267,7 @@ void CWndSkillTreeEx::OnMouseMove(UINT nFlags, CPoint point)
 		m_GlobalShortcut.m_dwType  = 0;
 		m_GlobalShortcut.m_dwIndex = dwSkill;
 		m_GlobalShortcut.m_dwData = 0;
-		m_GlobalShortcut.m_dwId       = g_nSkillCurSelect; // 컬런트 셀렉트가 곧 ID나 마찬가지임.
+		m_GlobalShortcut.m_dwId       = g_nSkillCurSelect; // ??? ???? ? ID? ?????.
 		m_GlobalShortcut.m_pTexture = m_atexSkill[ g_nSkillCurSelect ];//L;//pItemElem->m_pTexture;
 		_tcscpy( m_GlobalShortcut.m_szString, pSkillProp->szName);
 	}
@@ -9384,7 +9364,7 @@ BOOL CWndSkillTreeEx::Process()
 			m_pWndButton[3]->EnableWindow( TRUE );
 		}
 
-#if __VER >= 10 // __CSC_VER9_1 //전승 스킬의 레벨업은 NPC를 통해서 하기 때문에 막자.
+#if __VER >= 10 // __CSC_VER9_1 //?? ??? ???? NPC? ??? ?? ??? ??.
 		pSkillProp = prj.GetSkillProp( m_pFocusItem->dwSkill );
 		if(pSkillProp->dwItemKind1 == JTYPE_MASTER || pSkillProp->dwItemKind1 == JTYPE_HERO)
 		{
@@ -9563,7 +9543,7 @@ void CWndSkillTreeEx::OnDraw(C2DRender* p2DRender)
 #if __VER >= 10 // __CSC_VER9_1 //Hero Skill Background Image.
 	if(m_bLegend && m_bSlot[3])
 	{
-		//Master Skill은 시작부터 1Lv이므로 배경 이미지 제외.
+		//Master Skill? ???? 1Lv??? ?? ??? ??.
 /*		if( !m_strHeroSkilBg[0].IsEmpty() )
 		{
 			CTexture* pTexture;
@@ -9643,7 +9623,7 @@ void CWndSkillTreeEx::OnDraw(C2DRender* p2DRender)
 		
 		if( pSkillProp && pSkillProp->nLog != 1 && dwSkill != NULL_ID )
 		{
-			// 스킬 아이콘 출력 
+			// ?? ??? ?? 
 			if( m_atexSkill[ i ] && CheckSkill( i ) && 0 < pSkill->dwLevel )
 			{
 				CRect rect;
@@ -9680,7 +9660,7 @@ void CWndSkillTreeEx::OnDraw(C2DRender* p2DRender)
 	strSP.Format( "%d", m_nCurrSkillPoint );
 	lpWndStatic9->SetTitle( strSP );
 
-	// 선택된 스킬이 있을시 위 창에 출력
+	// ??? ??? ??? ? ?? ??
 #if __VER >= 15 // __IMPROVE_SYSTEM_VER15
 	if( m_pFocusItem && g_nSkillCurSelect > -1 )
 #else // __IMPROVE_SYSTEM_VER15
@@ -9690,7 +9670,7 @@ void CWndSkillTreeEx::OnDraw(C2DRender* p2DRender)
 		if( m_pFocusItem->dwSkill == -1 )
 		{
 			CString str;
-			str.Format( "스킬쓴넘 직업 %d\n스킬 인덱스가 %d인값이 나옴 : 레벨 %d, CurSelect %d", g_pPlayer->GetJob(), m_pFocusItem->dwSkill, m_pFocusItem->dwLevel, g_nSkillCurSelect );
+			str.Format( "???? ?? %d\n?? ???? %d??? ?? : ?? %d, CurSelect %d", g_pPlayer->GetJob(), m_pFocusItem->dwSkill, m_pFocusItem->dwLevel, g_nSkillCurSelect );
 			ADDERRORMSG( str );
 		}
 
@@ -9823,12 +9803,12 @@ void CWndSkillTreeEx::OnInitialUpdate()
 	if( g_nSkillCurSelect >= 0 )
 		m_pFocusItem = &m_apSkill[ g_nSkillCurSelect ];
 
-	m_pWndButton[0] = (CWndButton*) GetDlgItem( WIDC_BUTTON1 );	// + 버튼
-	m_pWndButton[1] = (CWndButton*) GetDlgItem( WIDC_BUTTON2 );	// - 버튼
-	m_pWndButton[2] = (CWndButton*) GetDlgItem( WIDC_BUTTON3 );	// Reset 버튼
-	m_pWndButton[3] = (CWndButton*) GetDlgItem( WIDC_BUTTON4 );	// Finish 버튼
+	m_pWndButton[0] = (CWndButton*) GetDlgItem( WIDC_BUTTON1 );	// + ??
+	m_pWndButton[1] = (CWndButton*) GetDlgItem( WIDC_BUTTON2 );	// - ??
+	m_pWndButton[2] = (CWndButton*) GetDlgItem( WIDC_BUTTON3 );	// Reset ??
+	m_pWndButton[3] = (CWndButton*) GetDlgItem( WIDC_BUTTON4 );	// Finish ??
 	
-#if __VER >= 10 // __CSC_VER9_1 //전승 스킬 추가.
+#if __VER >= 10 // __CSC_VER9_1 //?? ?? ??.
 	if(g_pPlayer->GetLegendChar() >= LEGEND_CLASS_MASTER)
 		m_bLegend = TRUE;
 	else
@@ -9885,7 +9865,7 @@ BOOL CWndSkillTreeEx::OnChildNotify(UINT message,UINT nID,LRESULT* pLResult)
 			int nPoint = prj.GetSkillPoint( pSkillProp );
 			switch( nID )
 			{
-			case WIDC_BUTTON1:	// + 버튼
+			case WIDC_BUTTON1:	// + ??
 				{
 					if( nPoint <= m_nCurrSkillPoint )
 					{
@@ -9901,7 +9881,7 @@ BOOL CWndSkillTreeEx::OnChildNotify(UINT message,UINT nID,LRESULT* pLResult)
 					}					
 				}
 				break;
-			case WIDC_BUTTON2:	// - 버튼
+			case WIDC_BUTTON2:	// - ??
 				{
 					if( IsDownPoint(m_pFocusItem->dwSkill) )
 					{
@@ -9911,14 +9891,14 @@ BOOL CWndSkillTreeEx::OnChildNotify(UINT message,UINT nID,LRESULT* pLResult)
 					}
 				}
 				break;
-			case WIDC_BUTTON3:	// Reset 버튼
+			case WIDC_BUTTON3:	// Reset ??
 				{
 					if( m_nCurrSkillPoint != g_pPlayer->m_nSkillPoint )
 						InitItem(g_pPlayer->GetJob(), g_pPlayer->m_aJobSkill, TRUE );
 					m_pFocusItem = NULL;
 				}
 				break;
-			case WIDC_BUTTON4:	// Finish 버튼
+			case WIDC_BUTTON4:	// Finish ??
 				{
 					if( m_nCurrSkillPoint != g_pPlayer->m_nSkillPoint )
 					{
@@ -10148,11 +10128,11 @@ void CWndSkillTreeEx::OnRButtonDblClk( UINT nFlags, CPoint point)
 
 void CWndSkillTreeEx::OnLButtonDblClk( UINT nFlags, CPoint point)
 {
-	// 스킬바 등록 및 스킬레벨 업
+	// ??? ?? ? ???? ?
 	if( m_apSkill == NULL )
 		return;
 
-	// 스킬창에서 더블클릭하면 자동으로 스킬바에 등록된다.
+	// ????? ?????? ???? ???? ????.
 	for( int i = 0; i < MAX_SKILL_JOB; i++ ) 
 	{
 		LPSKILL pSkill = GetSkill( i );
@@ -10214,7 +10194,7 @@ void CWndSkillTreeEx::OnLButtonDblClk( UINT nFlags, CPoint point)
 					if( g_pPlayer->CheckSkill( m_pFocusItem->dwSkill ) == FALSE )
 						return;
 					CWndTaskBar* pTaskBar = g_WndMng.m_pWndTaskBar;
-					if( pTaskBar->m_nExecute == 0 )		// 스킬큐가 사용되지 않을때만 등록됨.
+					if( pTaskBar->m_nExecute == 0 )		// ???? ???? ???? ???.
 						pTaskBar->SetSkillQueue( pTaskBar->m_nCurQueueNum, 0, i, m_atexSkill[i] );
 					break;
 				}			
@@ -10255,7 +10235,7 @@ void CWndSkillTreeEx::AfterSkinTexture( LPWORD pDest, CSize size, D3DFORMAT d3dF
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 돈 거래 
+// ? ?? 
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -10342,7 +10322,7 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 		else
 		if( m_nIdWndTo == APP_TRADE )
 		{
-			if( m_Shortcut.m_dwData == 0 ) // 돈
+			if( m_Shortcut.m_dwData == 0 ) // ?
 			{
 				if( nCost > g_pPlayer->GetTotalGold() )
 					nCost = (int)g_pPlayer->GetTotalGold();
@@ -10356,7 +10336,7 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					// error message
 				}
 			}
-			else // 아이템
+			else // ???
 			{
 				CItemBase* pItemBase = g_pPlayer->GetItemId( m_Shortcut.m_dwId );
 				if( pItemBase )
@@ -10374,14 +10354,14 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 		else
 		if( m_nIdWndTo == APP_BANK )
 		{
-			if( m_Shortcut.m_dwData == 0 ) // 돈
+			if( m_Shortcut.m_dwData == 0 ) // ?
 			{
 				if( nCost > g_pPlayer->GetGold() )
 					nCost = g_pPlayer->GetGold();
 
 				g_DPlay.SendPutGoldBank( m_nSlot, nCost );
 			}
-			else // 아이템
+			else // ???
 			{
 				CItemBase* pItemBase = g_pPlayer->GetItemId( m_Shortcut.m_dwId );
 				if( pItemBase )
@@ -10413,11 +10393,11 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 			}
 		}
 #endif
-		// 자신의 인벤토리에서 길드창고로 아이템을 이동
+		// ??? ?????? ????? ???? ??
 		else
 		if (m_nIdWndTo == APP_GUILD_BANK)
 		{
-			if( m_Shortcut.m_dwData != 0 ) // 아이템
+			if( m_Shortcut.m_dwData != 0 ) // ???
 			{
 				CItemBase* pItemBase = g_pPlayer->GetItemId( m_Shortcut.m_dwId );
 				if( pItemBase )
@@ -10434,24 +10414,24 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 				}
 			}
 		}
-		//	길드창고에서 자신의 인벤으로 가져올때
-		//	APP_MESSENGER로 그냥 설정
+		//	?????? ??? ???? ????
+		//	APP_MESSENGER? ?? ??
 		else
 		if (m_nIdWndTo == APP_MESSENGER)
 		{
 			if (g_pPlayer->GetGuild())
 			{
-				if( m_Shortcut.m_dwData == 0 ) // 돈
+				if( m_Shortcut.m_dwData == 0 ) // ?
 				{
 					if( (DWORD)nCost > ( g_pPlayer->GetGuild()->m_nGoldGuild ) )
 						nCost = g_pPlayer->GetGuild()->m_nGoldGuild;
 					
 					if( nCost > 0 )
 					{
-						g_DPlay.SendGetItemGuildBank( (BYTE)( m_Shortcut.m_dwId ), nCost, 0); // 0은 페냐가 변경됐다는 것을 의미한다.
+						g_DPlay.SendGetItemGuildBank( (BYTE)( m_Shortcut.m_dwId ), nCost, 0); // 0? ??? ????? ?? ????.
 					}
 				}
-				else // 아이템
+				else // ???
 				{
 					CItemBase* pItemBase = NULL;
 					if( m_Shortcut.m_dwType == ITYPE_ITEM )
@@ -10471,17 +10451,17 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 						}
 						
 						m_Shortcut.m_dwData -= 100;
-						g_DPlay.SendGetItemGuildBank( (BYTE)( m_Shortcut.m_dwId ), nCost, 1 ); // 1은 아이템이 변경됐다는 것을 의미한다.
+						g_DPlay.SendGetItemGuildBank( (BYTE)( m_Shortcut.m_dwId ), nCost, 1 ); // 1? ???? ????? ?? ????.
 					}
 				}
 			}
 		}
 
 		else
-		// 인벤토리 인데 쓰고 있어서 Gold로 씀.
-		if( m_nIdWndTo == APP_GOLD ) // 뱅크에서 인벤토리로 빼옴
+		// ???? ?? ?? ??? Gold? ?.
+		if( m_nIdWndTo == APP_GOLD ) // ???? ????? ??
 		{
-			if( m_Shortcut.m_dwData == 0 ) // 돈
+			if( m_Shortcut.m_dwData == 0 ) // ?
 			{
 				if( nCost > (int)( g_pPlayer->m_dwGoldBank[m_nSlot] ) )
 					nCost = g_pPlayer->m_dwGoldBank[m_nSlot];
@@ -10495,7 +10475,7 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					// error message
 				}
 			}
-			else // 아이템
+			else // ???
 			{
 				CItemBase* pItemBase = NULL;
 				if( m_Shortcut.m_dwType == ITYPE_ITEM )
@@ -10522,7 +10502,7 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 		else
 		if( m_nIdWndTo == APP_COMMON_BANK )
 		{
-			if( m_Shortcut.m_dwData == 0 ) // 돈
+			if( m_Shortcut.m_dwData == 0 ) // ?
 			{
 				if( nCost > (int)( g_pPlayer->m_dwGoldBank[m_nPutSlot] ) )
 					nCost = g_pPlayer->m_dwGoldBank[m_nPutSlot];
@@ -10536,7 +10516,7 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					// error message
 				}
 			}
-			else // 아이템
+			else // ???
 			{
 				CItemBase* pItemBase = NULL;
 				if( m_Shortcut.m_dwType == ITYPE_ITEM )
@@ -10562,14 +10542,14 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 		else
 		if( m_nIdWndTo == APP_POST_SEND )
 		{
-			if( m_Shortcut.m_dwData == 0 ) // 돈
+			if( m_Shortcut.m_dwData == 0 ) // ?
 			{
 				if( nCost > g_pPlayer->GetTotalGold()  )
 					nCost = (int)g_pPlayer->GetTotalGold();
 				
 				if( nCost > 0 ) 
 				{
-					// 보내기 창에 넣는다.
+					// ??? ?? ???.
 					if( g_WndMng.m_pWndPost )
 					{
 						g_WndMng.m_pWndPost->m_PostTabSend.SetCost(nCost);
@@ -10580,7 +10560,7 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					// error message
 				}
 			}
-			else // 아이템
+			else // ???
 			{
 				CItemBase* pItemBase = NULL;
 				if( m_Shortcut.m_dwType == ITYPE_ITEM )
@@ -10627,7 +10607,7 @@ BOOL CWndTradeGold::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 거래 확인
+// ?? ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -10644,7 +10624,7 @@ void CWndConfirmTrade::OnSetName( const char* szName, OBJID objid )
 	CWndStatic *m_pName   = (CWndStatic*)GetDlgItem( WIDC_STATIC2 );
 	CString sName;
 	sName = szName;
-	sName.Format( prj.GetText(TID_GAME_FROM),  szName ); // " 님에게"
+	sName.Format( prj.GetText(TID_GAME_FROM),  szName ); // " ???"
 	m_pName->SetTitle( sName );
 }
 void CWndConfirmTrade::OnDraw( C2DRender* p2DRender ) 
@@ -10659,11 +10639,11 @@ void CWndConfirmTrade::OnInitialUpdate()
 	CPoint point( ( rectRoot.right - rectWindow.Width() ) / 2, 70 );
 	Move( point );	
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndConfirmTrade::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
 	m_objid = 0;
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_CONFIRM_TRADE, 0, CPoint( 0, 0 ), pWndParent );
 } 
 
@@ -10690,7 +10670,7 @@ BOOL CWndConfirmTrade::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult 
 		{
 			g_DPlay.SendTrade( pTrader );
 		}
-		Destroy();		// 수동파괴로 바꿈.
+		Destroy();		// ????? ??.
 	}
 	else 
 	if( nID == WIDC_CANCEL || nID == WTBID_CLOSE )
@@ -10704,7 +10684,7 @@ BOOL CWndConfirmTrade::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 거래 최종 확인
+// ?? ?? ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -10720,7 +10700,7 @@ void CWndTradeConfirm::OnDraw( C2DRender* p2DRender )
 void CWndTradeConfirm::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	CWndButton * pWndButtonOk = (CWndButton*)GetDlgItem( WIDC_YES );
 	pWndButtonOk->SetVisible( TRUE );
 	CWndButton * pWndButtonNO = (CWndButton*)GetDlgItem( WIDC_NO );
@@ -10731,13 +10711,13 @@ void CWndTradeConfirm::OnInitialUpdate()
 	CWndStatic* pWndStatic = (CWndStatic*)GetDlgItem( WIDC_STATIC1 );
 	pWndStatic->SetTitle( prj.GetText( TID_DIAG_0083 ) );
 					
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndTradeConfirm::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_TRADE_CONFIRM, 0, CPoint( 0, 0 ), pWndParent );
 } 
 
@@ -10762,7 +10742,7 @@ BOOL CWndTradeConfirm::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult 
 		return( TRUE );
 	}
 
-	if( nID == WIDC_NO || nID == WTBID_CLOSE ) // 취소 
+	if( nID == WIDC_NO || nID == WTBID_CLOSE ) // ?? 
 	{
 		g_DPlay.SendTradeCancel();
 	}
@@ -10776,7 +10756,7 @@ BOOL CWndTradeConfirm::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 거래 
+// ?? 
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -10877,12 +10857,12 @@ void CWndTrade::OnInitialUpdate()
 	}
 }
 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndTrade::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
 	CWorld* pWorld = g_WorldMng.Get();
 	CMover* pMover	= g_pPlayer->m_vtInfo.GetOther();
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_TRADE, 0, CPoint( 0, 0 ), pWndParent );
 } 
 
@@ -10899,12 +10879,12 @@ BOOL CWndTrade::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 		SAFE_DELETE( g_WndMng.m_pWndTradeGold );
 		g_WndMng.m_pWndTradeGold = new CWndTradeGold;
 		memcpy( &g_WndMng.m_pWndTradeGold->m_Shortcut, pLResult, sizeof(SHORTCUT) );
-		if( g_WndMng.m_pWndTradeGold->m_Shortcut.m_dwData == 0 ) // 돈
+		if( g_WndMng.m_pWndTradeGold->m_Shortcut.m_dwData == 0 ) // ?
 		{
 			TradeGold = TRUE;
  			g_WndMng.m_pWndTradeGold->m_dwGold = (int)g_pPlayer->GetTotalGold();
 		}
-		else // 아이템
+		else // ???
 		{
 			CItemBase* pItemBase = g_pPlayer->GetItemId( g_WndMng.m_pWndTradeGold->m_Shortcut.m_dwId );
 			g_WndMng.m_pWndTradeGold->m_dwGold = ( (CItemElem*)pItemBase )->m_nItemNum;
@@ -10921,7 +10901,7 @@ BOOL CWndTrade::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 				CWndStatic* pStatic	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_STATIC );
 				CWndStatic* pStaticCount	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_CONTROL1 );
 				g_WndMng.m_pWndTradeGold->SetTitle( "Penya" );
-				CString strMain = prj.GetText( TID_GAME_MOVEPENYA );//"얼마를 이동하시겠습니까?";
+				CString strMain = prj.GetText( TID_GAME_MOVEPENYA );//"??? ?????????";
 				CString strCount = prj.GetText(TID_GAME_PENYACOUNT);//" SEED : ";
 				pStatic->m_strTitle = strMain;
 				pStaticCount->m_strTitle = strCount;
@@ -10938,8 +10918,8 @@ BOOL CWndTrade::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 			CWndStatic* pStatic	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_STATIC );
 			CWndStatic* pStaticCount	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_CONTROL1 );
 			g_WndMng.m_pWndTradeGold->SetTitle( "Item" );
-			CString strMain = prj.GetText( TID_GAME_MOVECOUNT );//"몇개를 이동하시겠습니까?";
-			CString strCount = prj.GetText(TID_GAME_NUMCOUNT);//" 갯수 : ";
+			CString strMain = prj.GetText( TID_GAME_MOVECOUNT );//"??? ?????????";
+			CString strCount = prj.GetText(TID_GAME_NUMCOUNT);//" ?? : ";
 			pStatic->m_strTitle = strMain;
 			pStaticCount->m_strTitle = strCount;
 		}
@@ -10951,11 +10931,11 @@ BOOL CWndTrade::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 		}
 		else
 		{
-			if( nID == WIDC_OK_I )	// 확인
+			if( nID == WIDC_OK_I )	// ??
 			{
 				g_DPlay.SendTradeOk();
 			}
-			else if( nID == WIDC_CANCEL || nID == WTBID_CLOSE ) // 취소 
+			else if( nID == WIDC_CANCEL || nID == WTBID_CLOSE ) // ?? 
 			{
 				g_DPlay.SendTradeCancel();
 				return( TRUE );
@@ -11010,7 +10990,7 @@ void CWndTrade::OnLButtonDown(UINT nFlags, CPoint point)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 네비게이터 
+// ????? 
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -11048,17 +11028,13 @@ void CWndNavigator::SetRegionName( TCHAR *tszName )
 
 	SetTitle( strTitle );
 }
-
+#define IHATEDX 0
 BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 {
 	if( g_pPlayer == NULL ) return TRUE;
 	LPDIRECT3DDEVICE9 pd3dDevice = p2DRender->m_pd3dDevice;
-
 	CWorld* pWorld	= g_WorldMng();
 	CRect rect = GetClientRect();
-
-	m_ALPHACIRCLE.m_size = CSize( rect.Width(), rect.Height());
-	p2DRender->RenderTexture( CPoint( 0, 0 ), &m_ALPHACIRCLE,200 );
 
 	// 포커스 오브젝트 출력 
 	CObj* pObjFocus = pWorld->GetObjFocus();
@@ -11079,7 +11055,6 @@ BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 
 	FLOAT fx = (FLOAT)m_size.cx / ( MAP_SIZE * MPU );
 	FLOAT fy = (FLOAT)m_size.cy / ( MAP_SIZE * MPU );
-
 	D3DXVECTOR3 vPos, vCenter = ( g_pPlayer != NULL ? g_pPlayer->GetPos() : D3DXVECTOR3( 0, 0, 0 ) );
 	vCenter.x *= fx;
 	vCenter.z *= fy;
@@ -11092,24 +11067,22 @@ BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 
 	if( dwWorldID == WI_WORLD_GUILDWAR )
 		bDrawGuildWarNum = TRUE;
-
+	
 	for( int z = 0; z < pWorld->m_nLandHeight; z++ )
 	{
 		for( int x = 0; x < pWorld->m_nLandWidth; x++ )
 		{
-			point = CPoint( x * nImageBlock, z * nImageBlock );
+			point = CPoint ( x * nImageBlock, z * nImageBlock );
 			point.y -= ( nImageBlock * pWorld->m_nLandWidth );
 			point.x += rect.Width() / 2;
 			point.y += rect.Height() / 2;
 			point.x -= xCenter;
 			point.y -= yCenter;
-
 			rectCur.SetRect( point.x, point.y, point.x + nImageBlock, point.y + nImageBlock );
 			CLandscape* pLand = pWorld->GetLandscape( x, pWorld->m_nLandHeight - z - 1);
 			if( pLand )
 			{
 				pLand->m_texMiniMap.m_size = m_size;
-
 				if( clipRect.RectLapRect( rectCur ) )
 				{
 					if( pLand->m_texMiniMap.m_pTexture )
@@ -11158,7 +11131,6 @@ BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 
 		FOR_LAND( pWorld, pLand, pWorld->m_nVisibilityLand, FALSE )
 		{
-
 			FOR_OBJ( pLand, pObj, OT_MOVER )
 			{
 //				BOOL bPartyMap = FALSE;
@@ -11417,17 +11389,9 @@ BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 		m_texDunFog.m_size = CSize( rect.Width(), rect.Height() );
 		p2DRender->RenderTexture( CPoint( 0, 0 ), &m_texDunFog, 255 );
 	}
-
-
 	m_wndPlace.EnableWindow( !pWorld->m_bIsIndoor );
 
 	RenderMarkAll(p2DRender, g_pPlayer);
-
-	//m_TEST.m_size = CSize( rect.Width(), rect.Height());
-	//p2DRender->RenderTexture( CPoint( 0, 0 ), &m_TEST, 255 );
-
-	m_NEWNAV.m_size = CSize( rect.Width(), rect.Height());
-	p2DRender->RenderTexture( CPoint( 0, 0 ), &m_NEWNAV, 255 );
 
 	// 화면 비율 때문에 임의로 정사각형 뷰포트를 지정해 놓는다. 안그러면 화살표 모양이 찌그러짐.
 	D3DVIEWPORT9 viewport;
@@ -11462,7 +11426,6 @@ BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 	FLOAT fTheta = D3DXToRadian( fAngle );// (2*D3DX_PI*g_pPlayer->m_nAngle)/(360);//m_nAngle
 	D3DXMatrixRotationZ( &mat, fTheta );
 */
-
 	D3DXVECTOR3 vDir      = D3DXVECTOR3( 0.0f, 0.0f, 1.0f );
 	D3DXVECTOR3 vDestNor  = g_pPlayer->GetPos() - g_Neuz.m_camera.m_vPos;
 	D3DXVECTOR3 vAxis;
@@ -11484,7 +11447,7 @@ BOOL CWndNavigator::OnEraseBkgnd(C2DRender* p2DRender)
 
 	pd3dDevice->SetSamplerState( 0, D3DSAMP_MINFILTER, D3DTEXF_POINT );		
 	pd3dDevice->SetSamplerState( 0, D3DSAMP_MAGFILTER, D3DTEXF_POINT );		
-	
+
 	// 화살표 출력 
 	m_billArrow.Render( pd3dDevice );
 
@@ -11496,8 +11459,8 @@ void CWndNavigator::RenderMark( C2DRender* p2DRender, CMover* Player )
 	FLOAT fx = (FLOAT)m_size.cx / ( MAP_SIZE * MPU );
 	FLOAT fy = (FLOAT)m_size.cy / ( MAP_SIZE * MPU );
     CRect rect;
-		    m_ALPHACIRCLE.m_size = CSize( rect.Width(), rect.Height() );
-		    p2DRender->RenderTexture( CPoint( 0, 0 ), &m_ALPHACIRCLE, 10 );
+		    //m_ALPHACIRCLE.m_size = CSize( rect.Width(), rect.Height() );
+		    //p2DRender->RenderTexture( CPoint( 0, 0 ), &m_ALPHACIRCLE, 10 );
 
 
 	if ( Player->m_nvPoint.Time != 0 )
@@ -11529,7 +11492,7 @@ void CWndNavigator::RenderMark( C2DRender* p2DRender, CMover* Player )
 	}
 }
 
-//	이걸 넣어 준다음에 정리를 위해서 NaviPoint형을 참조나 포인터로 받는 형태로 다시 만들어 주어야 할것이다.
+//	?? ?? ???? ??? ??? NaviPoint?? ??? ???? ?? ??? ?? ??? ??? ????.
 void CWndNavigator::RenderMarkAll( C2DRender* p2DRender , CMover * Player )
 {
 	RenderMark( p2DRender, Player );
@@ -11537,8 +11500,8 @@ void CWndNavigator::RenderMarkAll( C2DRender* p2DRender , CMover * Player )
 	FLOAT fx = (FLOAT)m_size.cx / ( MAP_SIZE * MPU );
 	FLOAT fy = (FLOAT)m_size.cy / ( MAP_SIZE * MPU );
     CRect rect;
-		    m_ALPHACIRCLE.m_size = CSize( rect.Width(), rect.Height() );
-		    p2DRender->RenderTexture( CPoint( 0, 0 ), &m_ALPHACIRCLE, 10 );
+		    //m_ALPHACIRCLE.m_size = CSize( rect.Width(), rect.Height() );
+		    //p2DRender->RenderTexture( CPoint( 0, 0 ), &m_ALPHACIRCLE, 10 );
 
 	V_NaviPoint::iterator nvi = g_pPlayer->m_vOtherPoint.begin();
 	for ( int i = 0 ; i < (int)( g_pPlayer->m_vOtherPoint.size() ) ; )
@@ -11587,8 +11550,8 @@ void CWndNavigator::RenderPartyMember( C2DRender* p2DRender, TEXTUREVERTEX** pVe
 	float fRadian = atan2( fDistx, fDistz );
 	float fDegree = D3DXToDegree( fRadian );
 
-		    m_ALPHACIRCLE.m_size = CSize( rect.Width(), rect.Height() );
-		    p2DRender->RenderTexture( CPoint( 0, 0 ), &m_ALPHACIRCLE, 10 );
+		    //m_ALPHACIRCLE.m_size = CSize( rect.Width(), rect.Height() );
+		    //p2DRender->RenderTexture( CPoint( 0, 0 ), &m_ALPHACIRCLE, 10 );
 
 
 	CPoint PointBuf;
@@ -11633,8 +11596,8 @@ HRESULT CWndNavigator::DeleteDeviceObjects()
 	m_GuildCombatTextureMask.DeleteDeviceObjects();
 #ifdef __YDEBUG
 	m_texDunFog.DeleteDeviceObjects();
-	m_ALPHACIRCLE.DeleteDeviceObjects();
-	m_NEWNAV.DeleteDeviceObjects();
+	//m_ALPHACIRCLE.DeleteDeviceObjects();
+	//m_NEWNAV.DeleteDeviceObjects();
 	m_FUNDO.DeleteDeviceObjects();
 #endif //__YDEBUG
 	
@@ -11647,8 +11610,8 @@ HRESULT CWndNavigator::InvalidateDeviceObjects()
 #ifdef __YDEBUG
 	m_texArrow.Invalidate();
 	m_texDunFog.Invalidate();
-	m_ALPHACIRCLE.Invalidate();
-	m_NEWNAV.Invalidate();
+	//m_ALPHACIRCLE.Invalidate();
+	//m_NEWNAV.Invalidate();
 	m_FUNDO.Invalidate();
 	m_texNavObjs.InvalidateDeviceObjects();
 #endif //__YDEBUG
@@ -11663,8 +11626,8 @@ HRESULT CWndNavigator::RestoreDeviceObjects()
 #ifdef __YDEBUG
 	m_texArrow.SetInvalidate(m_pApp->m_pd3dDevice);
 	m_texDunFog.SetInvalidate(m_pApp->m_pd3dDevice);
-	m_ALPHACIRCLE.SetInvalidate(m_pApp->m_pd3dDevice);
-	m_NEWNAV.SetInvalidate(m_pApp->m_pd3dDevice);
+	//m_ALPHACIRCLE.SetInvalidate(m_pApp->m_pd3dDevice);
+	//m_NEWNAV.SetInvalidate(m_pApp->m_pd3dDevice);
 	m_FUNDO.SetInvalidate(m_pApp->m_pd3dDevice);
 	m_texNavObjs.RestoreDeviceObjects(m_pApp->m_pd3dDevice);
 #endif //__YDEBUG
@@ -11676,7 +11639,7 @@ HRESULT CWndNavigator::RestoreDeviceObjects()
 void CWndNavigator::OnDraw(C2DRender* p2DRender)
 {
 #if __VER >= 13 // __RAINBOW_RACE
-	// Rainbow Race Time 출력
+	// Rainbow Race Time ??
 	DWORD dwRainbowRaceTime = CRainbowRace::GetInstance()->m_dwRemainTime;
 	if(dwRainbowRaceTime > 0)
 	{
@@ -11717,7 +11680,7 @@ void CWndNavigator::SerializeRegInfo( CAr& ar, DWORD& dwVersion )
 void CWndNavigator::OnInitialUpdate()
 {
 	//CWndNeuz::OnInitialUpdate();
-	//CWndBase::OnInitialUpdate();
+	CWndBase::OnInitialUpdate();
 
 	CRect rectClient = GetClientRect();
 	rectClient.right = 13;
@@ -11735,9 +11698,9 @@ void CWndNavigator::OnInitialUpdate()
 	m_wndZoomOut.FitTextureSize();
 
     m_texDunFog.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "map3_2.tga" ), 0 , 1 );
-	m_ALPHACIRCLE.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "alphacircle.tga" ), 0 , 1 );
-	m_NEWNAV.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "map.tga" ), 0 , 1 );
-	//m_TEST.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "TEST.tga" ), 0 , 1 );
+	//m_ALPHACIRCLE.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "alphacircle.tga" ), 0 , 1 );
+	//m_NEWNAV.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "map.tga" ), 0 , 1 );
+	m_FUNDO.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "TEST.tga" ), 0 , 1 );
 	//m_texDunFog.LoadTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "NavDunFog.tga" ), 0 , 1 );
 
 #if __VER >= 15 // __IMPROVE_QUEST_INTERFACE
@@ -11746,10 +11709,10 @@ void CWndNavigator::OnInitialUpdate()
 
 	m_wndMenuPlace.CreateMenu( this );	
 	/*
-	m_wndMenuPlace.AppendMenu( 0, 0 ,_T("플레이어" ) );
-	m_wndMenuPlace.AppendMenu( 0, 1 ,_T("극단"     ) ); 
+	m_wndMenuPlace.AppendMenu( 0, 0 ,_T("????" ) );
+	m_wndMenuPlace.AppendMenu( 0, 1 ,_T("??"     ) ); 
 	m_wndMenuPlace.AppendMenu( 0, 2 ,_T("NPC"      ) );
-	m_wndMenuPlace.AppendMenu( 0, 3 ,_T("몬스터"   ) ); 
+	m_wndMenuPlace.AppendMenu( 0, 3 ,_T("???"   ) ); 
 	*/
 	m_wndMenuPlace.AppendMenu( 0, 0 , prj.GetText(TID_GAME_PLAYER) );
 	m_wndMenuPlace.AppendMenu( 0, 1 , prj.GetText(TID_GAME_PARTYTEXT) ); 
@@ -11763,26 +11726,24 @@ void CWndNavigator::OnInitialUpdate()
 	m_wndMenuPlace.CheckMenuItem( 3, m_bObjFilterMonster );
 
 /*
-	m_wndMenuPlace.AppendMenu( 0, 0 ,_T("무기상점" ) );
-	m_wndMenuPlace.AppendMenu( 0, 1 ,_T("잡화점"   ) );
-	m_wndMenuPlace.AppendMenu( 0, 2 ,_T("방어구점" ) ); 
-	m_wndMenuPlace.AppendMenu( 0, 3 ,_T("술집"     ) );
-	m_wndMenuPlace.AppendMenu( 0, 4 ,_T("도시 "    ) );
-	m_wndMenuPlace.AppendMenu( 0, 5 ,_T("무기상점" ) );
-	m_wndMenuPlace.AppendMenu( 0, 6 ,_T("잡화점"   ) );
-	m_wndMenuPlace.AppendMenu( 0, 7 ,_T("방어구점" ) ); 
-	m_wndMenuPlace.AppendMenu( 0, 8 ,_T("술집"     ) );
-	m_wndMenuPlace.AppendMenu( 0, 9 ,_T("-- 장소추가 --" ));
+	m_wndMenuPlace.AppendMenu( 0, 0 ,_T("????" ) );
+	m_wndMenuPlace.AppendMenu( 0, 1 ,_T("???"   ) );
+	m_wndMenuPlace.AppendMenu( 0, 2 ,_T("????" ) ); 
+	m_wndMenuPlace.AppendMenu( 0, 3 ,_T("??"     ) );
+	m_wndMenuPlace.AppendMenu( 0, 4 ,_T("?? "    ) );
+	m_wndMenuPlace.AppendMenu( 0, 5 ,_T("????" ) );
+	m_wndMenuPlace.AppendMenu( 0, 6 ,_T("???"   ) );
+	m_wndMenuPlace.AppendMenu( 0, 7 ,_T("????" ) ); 
+	m_wndMenuPlace.AppendMenu( 0, 8 ,_T("??"     ) );
+	m_wndMenuPlace.AppendMenu( 0, 9 ,_T("-- ???? --" ));
 */
 	m_wndMenuMover.CreateMenu( this );	
 	/*
 	CRect rect = GetClientRect();
 	D3DXVECTOR3 vPos = ( g_pPlayer != NULL ? g_pPlayer->GetPos() : D3DXVECTOR3( 0, 0 , 0 ) );
 	// 128 : m_texture.m_size.cx = 1 : x
-
 	FLOAT fx = (FLOAT)m_texture.m_size.cx / 256.0f * 2;
 	FLOAT fy = (FLOAT)m_texture.m_size.cy / 256.0f * 2;
-
 	vPos.x *= fx;
 	vPos.z *= fy;
 	CObj* pObj;
@@ -11873,7 +11834,7 @@ BOOL CWndNavigator::OnChildNotify(UINT message,UINT nID,LRESULT* pLResult)
 	{
 		switch(nID)
 		{
-			case 100000: // 장소 찾기
+			case 100000: // ?? ??
 #if __VER >= 15 // __IMPROVE_SYSTEM_VER15
 				{
 					CRect rectRootLayout = m_pWndRoot->GetLayoutRect();
@@ -11891,7 +11852,7 @@ BOOL CWndNavigator::OnChildNotify(UINT message,UINT nID,LRESULT* pLResult)
 				m_wndMenuPlace.SetFocus();
 #endif // __IMPROVE_SYSTEM_VER15
 				break;
-			case 100001: // 장소 찾기
+			case 100001: // ?? ??
 				{
 					m_wndMenuMover.DeleteAllMenu();
 					CWorld* pWorld	= g_WorldMng();
@@ -12032,7 +11993,7 @@ void CWndNavigator::OnRButtonDown(UINT nFlags, CPoint point)
 		FOR_OBJ( pLand, pObj, OT_MOVER )
 		{
 			pMover = ( CMover* )pObj;
-			if( !pMover->IsPlayer( ) && pMover->GetCharacter( ) )		//NPC인경우만 
+			if( !pMover->IsPlayer( ) && pMover->GetCharacter( ) )		//NPC???? 
 			{
 				pWndButton = m_wndMenuMover.AppendMenu( i++, ((CMover*)pObj)->GetId() , ((CMover*)pObj)->GetName( TRUE ) );
 				pWndButton->m_shortcut.m_dwShortcut = SHORTCUT_OBJECT;
@@ -12077,7 +12038,7 @@ void CWndNavigator::OnLButtonDown(UINT nFlags, CPoint point)
 
 	g_pPlayer->m_nvPoint.Pos.x = vCenter.x + ( (float)( point.x - (rect.right / 2) ) / fx );
 	g_pPlayer->m_nvPoint.Pos.z = vCenter.z - ( (float)( point.y - (rect.bottom / 2) ) / fy );
-	//	이 시간은 네비게이터에 남아 있는 시간으로 디파인이나 파일로 뺄수도 있을듯하지만 우선 하드 코딩이닷
+	//	? ??? ?????? ?? ?? ???? ????? ??? ??? ?????? ?? ?? ????
 	g_pPlayer->m_nvPoint.Time = 200;	
 	if( pWorld )
 	{
@@ -12136,7 +12097,7 @@ void CWndNavigator::OnLButtonDown(UINT nFlags, CPoint point)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 게이지 
+// ??? 
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -12289,7 +12250,7 @@ void CWndStatus::PaintFrame( C2DRender* p2DRender )
 	if( m_pTexture && g_pPlayer )
 	{
 		RenderWnd();
-		// 여기는 타이틀 바의 텍스트를 출력하는 곳 
+		// ??? ??? ?? ???? ???? ? 
 		if( IsWndStyle( WBS_CAPTION ) )	
 		{
 			int y = 4;
@@ -12317,14 +12278,14 @@ void CWndStatus::PaintFrame( C2DRender* p2DRender )
 
 			char szNameLevel[128] = {0,};
 #if __VER >= 10 // __CSC_VER9_1
-#if __VER < 15 // __HERO129_VER15				// 15차 히어로 레벨확장
+#if __VER < 15 // __HERO129_VER15				// 15? ??? ????
 			if(g_pPlayer->GetLegendChar() == LEGEND_CLASS_HERO)
 			{
 				sprintf( szNameLevel, "%s", g_pPlayer->GetName() );
 				p2DRender->TextOut( 130, 4, prj.GetText(TID_GAME_STATUS_HERO), 0xffc0c0ff, 0x00000000 );
 			}
 			else
-	#endif	// 15차 히어로 레벨확장
+	#endif	// 15? ??? ????
 				sprintf( szNameLevel, prj.GetText( TID_GAME_WND_STATUS_PLAYER_INFORMATION ), g_pPlayer->GetName(), g_pPlayer->GetLevel() );
 #else //__CSC_VER9_1
 			sprintf( szNameLevel, "%s Lv %d", g_pPlayer->GetName(), g_pPlayer->GetLevel() );
@@ -12339,7 +12300,7 @@ void CWndStatus::PaintFrame( C2DRender* p2DRender )
 		m_pTheme->RenderWndBaseFrame( p2DRender, &rect );
 		if( IsWndStyle( WBS_CAPTION ) )
 		{
-			// 타이틀 바 
+			// ??? ? 
 			rect.bottom = 21;
 			{
 				m_pTheme->RenderWndBaseTitleBar( p2DRender, &rect, m_strTitle, m_dwColor );
@@ -12419,7 +12380,7 @@ void CWndStatus::OnDraw(C2DRender* p2DRender)
 			m_bExpVisible = !m_bExpVisible;
 		else
 			m_bExpVisible = TRUE;
-#if __VER >= 8     // 8차 스킬경험치다운변경
+#if __VER >= 8     // 8? ?????????
 		if( m_bVBEXPGauge )
 		{
 			m_pTheme->RenderGauge( p2DRender->m_pd3dDevice, m_pVBEXPGauge, &m_texGauFillSmall );
@@ -12547,7 +12508,7 @@ void CWndStatus::OnDraw(C2DRender* p2DRender)
 		EXPINTEGER	nExpResult = pMover->GetExp1() * (EXPINTEGER)10000 / pMover->GetMaxExp1();
 		float fExp = (float)nExpResult / 100.0f;
 		if( fExp >= 99.99f )
-			nCharEXP = sprintf( cbufExp, "99.99%%" );		// sprintf함수 내부에서 반올림되어 100.00으로 표시되는 것을 막기 위해서 
+			nCharEXP = sprintf( cbufExp, "99.99%%" );		// sprintf?? ???? ????? 100.00?? ???? ?? ?? ??? 
 		else
 			nCharEXP = sprintf( cbufExp, "%.2f%%", fExp );
 
@@ -12583,7 +12544,7 @@ void CWndStatus::OnDraw(C2DRender* p2DRender)
 //	pd3dDevice->SetRenderState( D3DRS_AMBIENT,  D3DCOLOR_ARGB( 255,255,255,255) );
 	pd3dDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE );
 
-	// 뷰포트 세팅 
+	// ??? ?? 
 	D3DVIEWPORT9 viewport;
 
 	viewport.X      = p2DRender->m_ptOrigin.x + lpFace->rect.left;//2;
@@ -12595,7 +12556,7 @@ void CWndStatus::OnDraw(C2DRender* p2DRender)
 
 	pd3dDevice->SetViewport(&viewport);
 
-	// 프로젝션 
+	// ???? 
 	D3DXMATRIX matProj;
 	D3DXMatrixIdentity( &matProj );
 	FLOAT fAspect = ((FLOAT)viewport.Width) / (FLOAT)viewport.Height;
@@ -12611,13 +12572,13 @@ void CWndStatus::OnDraw(C2DRender* p2DRender)
 
 	D3DXMATRIX  matView;
 
-	// 월드 
+	// ?? 
 	D3DXMATRIXA16 matWorld;
 	D3DXMATRIXA16 matScale;
 	D3DXMATRIXA16 matRot1, matRot2;
 	D3DXMATRIXA16 matTrans;
 
-	// 초기화 
+	// ??? 
 	D3DXMatrixIdentity(&matScale);
 	D3DXMatrixIdentity(&matRot1);
 	D3DXMatrixIdentity(&matRot2);
@@ -12672,23 +12633,23 @@ void CWndStatus::OnDraw(C2DRender* p2DRender)
 	pd3dDevice->SetTransform( D3DTS_WORLD, &matWorld );
 
 	/*
-	// 프로젝션 
+	// ???? 
 	D3DXMATRIX matProj;
 	D3DXMatrixIdentity( &matProj );
 	pd3dDevice->SetTransform( D3DTS_PROJECTION, &matProj );
 
-	// 카메라 
+	// ??? 
 	D3DXMATRIX  matView;
 	D3DXMatrixIdentity( &matView );
 	pd3dDevice->SetTransform( D3DTS_VIEW, &matView );
 
-	// 월드 
+	// ?? 
 	D3DXMATRIXA16 matWorld;
 	D3DXMATRIXA16 matScale;
 	D3DXMATRIXA16 matRot;
 	D3DXMATRIXA16 matTrans;
 
-	// 초기화 
+	// ??? 
 	D3DXMatrixIdentity(&matScale);
 	D3DXMatrixIdentity(&matRot);
 	D3DXMatrixIdentity(&matTrans);
@@ -12702,7 +12663,7 @@ void CWndStatus::OnDraw(C2DRender* p2DRender)
 	D3DXMatrixMultiply(&matWorld, &matWorld, &matTrans );
 	pd3dDevice->SetTransform( D3DTS_WORLD, &matWorld );
 */
-	// 랜더링 
+	// ??? 
 	pd3dDevice->SetRenderState( D3DRS_ZWRITEENABLE, TRUE );
 	
 	pd3dDevice->SetRenderState( D3DRS_ZENABLE, TRUE );
@@ -12795,7 +12756,7 @@ void CWndStatus::OnDraw(C2DRender* p2DRender)
 	if( g_pPlayer )
 		g_pPlayer->OverCoatItemRenderCheck(g_pBipedMesh);
 		
-		// 헬멧이 머리카락 날려야하는것이냐?  // 인벤이 있는 경우 
+		// ??? ???? ?????????  // ??? ?? ?? 
 		O3D_ELEMENT* pElement   = NULL;
 		CItemElem* pItemElem	= g_pPlayer->GetEquipItem( PARTS_CAP );
 
@@ -12807,7 +12768,7 @@ void CWndStatus::OnDraw(C2DRender* p2DRender)
 				pElement = g_pBipedMesh->SetEffect(pItemProp->dwBasePartsIgnore, XE_HIDE);
 			}
 
-			// 외투의상을 입었을경우 머리날릴것인가의 기준을 외투 모자를 기준으로 바꾼다
+			// ????? ????? ???????? ??? ?? ??? ???? ???
 			CItemElem* pItemElemOvercoat	= g_pPlayer->GetEquipItem( PARTS_HAT );
 			
 			if( pItemElemOvercoat )
@@ -12844,7 +12805,7 @@ void CWndStatus::OnDraw(C2DRender* p2DRender)
 		}
 		else
 		{
-			// 외투의상을 입었을경우 머리날릴것인가의 기준을 외투 모자를 기준으로 바꾼다
+			// ????? ????? ???????? ??? ?? ??? ???? ???
 			CItemElem* pItemElemOvercoat	= g_pPlayer->GetEquipItem( PARTS_HAT );
 			
 			if( pItemElemOvercoat )
@@ -12864,7 +12825,7 @@ void CWndStatus::OnDraw(C2DRender* p2DRender)
 							
 		}
 
-//gmpbigsun : 윈도 페이스 고정라이트
+//gmpbigsun : ?? ??? ?????
 	::SetLight( FALSE );
  	::SetFog( FALSE );
  	SetDiffuse( 1.0f, 1.0f, 1.0f );
@@ -12957,7 +12918,7 @@ void CWndStatus::RenderGauge( C2DRender* p2DRender, CRect* pRect, DWORD dwColor,
 
 	int nWidth = ( pRect->Width() / nTexWidth );// - 2;
 
-	// 기본 패턴으로 완성될 수 있는건 2이다. 2보다 작으면 이미지가 깨질 수 있으니 리턴.
+	// ?? ???? ??? ? ??? 2??. 2?? ??? ???? ?? ? ??? ??.
 	if( nWidth < 2 )
 		return;
 	
@@ -13176,7 +13137,7 @@ void CWndStatus::OnInitialUpdate()
 	//m_texGauFillNormal  
 	//m_texGauFillSmall   
 	
-	// 장착, 게이지에 나올 캐릭터 오브젝트 설정 
+	// ??, ???? ?? ??? ???? ?? 
 	if( g_pBipedMesh == NULL )
 	{
 		int nMover = (g_pPlayer->GetSex() == SEX_MALE ? MI_MALE : MI_FEMALE);
@@ -13273,7 +13234,7 @@ void CWndStatus::OnMouseWndSurface( CPoint point )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 퀘스트 아이템 정보
+// ??? ??? ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13319,7 +13280,7 @@ void CWndQuestItemInfo::OnDraw(C2DRender* p2DRender)
 	CEditString	string = "";
 	string.Init( m_pFont, &rectCtrl );
 	string = m_pItemBase->GetProp()->szCommand;
-	p2DRender->TextOut_EditString( rectCtrl.left , rectCtrl.top + 40/* '+40'의 의미는 아이콘있는 곳에서 한줄 아래에 찍겠다는 의미 */, string);
+	p2DRender->TextOut_EditString( rectCtrl.left , rectCtrl.top + 40/* '+40'? ??? ????? ??? ?? ??? ???? ?? */, string);
 }
 
 void CWndQuestItemInfo::OnInitialUpdate()
@@ -13354,7 +13315,7 @@ void CWndQuestItemInfo::OnLButtonDown( UINT nFlags, CPoint point )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 매크로
+// ???
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13402,7 +13363,7 @@ BOOL CWndMacro::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 스타일
+// ???
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13450,7 +13411,7 @@ BOOL CWndStyle::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 내정보
+// ???
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13498,7 +13459,7 @@ BOOL CWndOptMyInfo::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 단축키
+// ???
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13506,7 +13467,7 @@ BOOL CWndOptMyInfo::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13524,16 +13485,16 @@ void CWndEmotion::OnDraw( C2DRender* p2DRender )
 /*
 	CD3DFont* pFont = p2DRender->m_pFont;//GetFont();
 	p2DRender->m_pFont = m_pTheme->m_pFontGameTitle;
-	p2DRender->TextOut( 5, 10, _T( "Lv.0 기본 제스춰" ) );
-	p2DRender->TextOut( 5, 40, _T( "Lv.1 생활 표현" ) );
-	p2DRender->TextOut( 5, 70, _T( "Lv.2 도발" ) );
-	p2DRender->TextOut( 5,100, _T( "Lv.3 춤" ) );
-	p2DRender->TextOut( 5,130, _T( "Lv.4 곡예" ) );
-	p2DRender->TextOut( 5,160, _T( "Lv.5 무술" ) );
+	p2DRender->TextOut( 5, 10, _T( "Lv.0 ?? ???" ) );
+	p2DRender->TextOut( 5, 40, _T( "Lv.1 ?? ??" ) );
+	p2DRender->TextOut( 5, 70, _T( "Lv.2 ??" ) );
+	p2DRender->TextOut( 5,100, _T( "Lv.3 ?" ) );
+	p2DRender->TextOut( 5,130, _T( "Lv.4 ??" ) );
+	p2DRender->TextOut( 5,160, _T( "Lv.5 ??" ) );
 
 	p2DRender->m_pFont = pFont;
 	*/
-	p2DRender->TextOut( 5, rect.Height() - 50, _T( "연결 대사" ) );
+	p2DRender->TextOut( 5, rect.Height() - 50, _T( "?? ??" ) );
 } 
 void CWndEmotion::OnInitialUpdate() 
 { 
@@ -13576,7 +13537,7 @@ BOOL CWndEmotion::Initialize( CWndBase* pWndParent, DWORD dwWndId )
 { 
 	CRect rectWindow = m_pWndRoot->GetWindowRect(); 
 	CRect rect( 50 ,50, 300, 300 ); 
-	//SetTitle( _T( "감정표현" ) ); 
+	//SetTitle( _T( "????" ) ); 
 	return CWndNeuz::Create( WBS_THICKFRAME | WBS_MOVE | WBS_SOUND | WBS_CAPTION, rect, pWndParent, dwWndId ); 
 } 
 BOOL CWndEmotion::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ) 
@@ -13644,7 +13605,7 @@ BOOL CWndEmotion::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13652,178 +13613,138 @@ BOOL CWndEmotion::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//EMPTY_WNDCLASSMEMBER( CWndFriend, _T( "친구" ) )
+//EMPTY_WNDCLASSMEMBER( CWndFriend, _T( "??" ) )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//EMPTY_WNDCLASSMEMBER( CWndGuild, _T( "길드" ) )
+//EMPTY_WNDCLASSMEMBER( CWndGuild, _T( "??" ) )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//EMPTY_WNDCLASSMEMBER( CWndClub, _T( "클럽" ) )
+//EMPTY_WNDCLASSMEMBER( CWndClub, _T( "??" ) )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//EMPTY_WNDCLASSMEMBER( CWndMessage, _T( "매신저" ) )
+//EMPTY_WNDCLASSMEMBER( CWndMessage, _T( "???" ) )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//EMPTY_WNDCLASSMEMBER( CWndEMail, _T( "이메일" ) )
+//EMPTY_WNDCLASSMEMBER( CWndEMail, _T( "???" ) )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//EMPTY_WNDCLASSMEMBER( CWndBBS, _T( "게시판" ) )
+//EMPTY_WNDCLASSMEMBER( CWndBBS, _T( "???" ) )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//EMPTY_WNDCLASSMEMBER( CWndSearchPeople, _T( "사람찾기" ) )
+//EMPTY_WNDCLASSMEMBER( CWndSearchPeople, _T( "????" ) )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//EMPTY_WNDCLASSMEMBER( CWndSearchGuild, _T( "길드찾기" ) )
+//EMPTY_WNDCLASSMEMBER( CWndSearchGuild, _T( "????" ) )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//EMPTY_WNDCLASSMEMBER( CWndSearchClub, _T( "클럽찾기" ) )
+//EMPTY_WNDCLASSMEMBER( CWndSearchClub, _T( "????" ) )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//EMPTY_WNDCLASSMEMBER( CWndSearchShop, _T( "상점찾기" ) )
+//EMPTY_WNDCLASSMEMBER( CWndSearchShop, _T( "????" ) )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//EMPTY_WNDCLASSMEMBER( CWndInfoEvent, _T( "이벤트" ) )
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// 테마
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//EMPTY_WNDCLASSMEMBER( CWndInfoVersion, _T( "버전" ) )
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// 테마
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//EMPTY_WNDCLASSMEMBER( CWndInfoSchedule, _T( "개발 스케쥴" ) )
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// 테마
-//
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//EMPTY_WNDCLASSMEMBER( CWndJoinVote, _T( "전자투표" ) )
+//EMPTY_WNDCLASSMEMBER( CWndInfoEvent, _T( "???" ) )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//EMPTY_WNDCLASSMEMBER( CWndJoinEvent, _T( "이벤트 참여 신청" ) )
+//EMPTY_WNDCLASSMEMBER( CWndInfoVersion, _T( "??" ) )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 테마
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//EMPTY_WNDCLASSMEMBER( CWndSequence, _T( "시퀀스" ) )
-
+//EMPTY_WNDCLASSMEMBER( CWndInfoSchedule, _T( "?? ???" ) )
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 카드 
+// ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13832,7 +13753,47 @@ BOOL CWndEmotion::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// CWndLogOut : 계정 화면으로, 캐릭터 선택 화면으로 
+// ??
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//EMPTY_WNDCLASSMEMBER( CWndJoinVote, _T( "????" ) )
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// ??
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//EMPTY_WNDCLASSMEMBER( CWndJoinEvent, _T( "??? ?? ??" ) )
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// ??
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//EMPTY_WNDCLASSMEMBER( CWndSequence, _T( "???" ) )
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// ?? 
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// CWndLogOut : ?? ????, ??? ?? ???? 
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13841,18 +13802,18 @@ BOOL CWndLogOut::Initialize(CWndBase* pWndParent,DWORD dwWndId)
 {
 	CRect rect = m_pWndRoot->MakeCenterRect( 250, 130 );
 /*
-	Create( _T( "매시지 박스" ), MB_OKCANCEL, rect, APP_MESSAGEBOX );//dwWndId );
-	m_wndText.SetString( _T( "접속을 종료하시겠습니까?" ) );
+	Create( _T( "??? ??" ), MB_OKCANCEL, rect, APP_MESSAGEBOX );//dwWndId );
+	m_wndText.SetString( _T( "??? ?????????" ) );
 */
 	Create( _T( prj.GetText(TID_DIAG_0068) ), MB_OKCANCEL, rect, APP_MESSAGEBOX );//dwWndId );
 	m_wndText.SetString( _T( prj.GetText(TID_DIAG_0069) ) );
 	m_wndText.ResetString();
-	if( g_WndMng.m_pWndWorld && g_WndMng.m_pWndWorld->GetMouseMode() == 1 )	// FPS모드일때
+	if( g_WndMng.m_pWndWorld && g_WndMng.m_pWndWorld->GetMouseMode() == 1 )	// FPS????
 	{
 		g_WndMng.m_pWndWorld->SetMouseMode( 0 );
 	}
 
-	// 게이지 위쪽으로 나오게 하기
+	// ??? ???? ??? ??
 	CRect rectRoot = m_pWndRoot->GetLayoutRect();
 	CRect rectWindow = GetWindowRect();
 	CPoint point( ( rectRoot.right - rectWindow.Width() ) / 2, 70 );
@@ -13895,9 +13856,9 @@ BOOL CWndLogOut::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					{
 						g_WndMng.m_pLogOutWaitting = new CWndLogOutWaitting;
 #ifdef __FIX_WND_1109
-						g_WndMng.m_pLogOutWaitting->Initialize( NULL );	// 康
+						g_WndMng.m_pLogOutWaitting->Initialize( NULL );	// ?
 #else	// __FIX_WND_1109
-						g_WndMng.m_pLogOutWaitting->Initialize( this );	// 康
+						g_WndMng.m_pLogOutWaitting->Initialize( this );	// ?
 #endif	// __FIX_WND_1109
 						g_WndMng.m_pLogOutWaitting->SetIsLogOut(TRUE);
 						SetVisible(FALSE);
@@ -13971,20 +13932,20 @@ void CWndLogOutWaitting::OnInitialUpdate()
 	
 	dwTime = g_tmCurrent+SEC(TIMEWAIT_CLOSE);
 
-	// 게이지 위쪽으로 나오게 하기
+	// ??? ???? ??? ??
 	CRect rectRoot = m_pWndRoot->GetLayoutRect();
 	CRect rectWindow = GetWindowRect();
 	CPoint point( ( rectRoot.right - rectWindow.Width() ) / 2, 70 );
 	Move( point );
 
-	// 종료 패킷 서버 전송
+	// ?? ?? ?? ??
 	g_DPlay.SendReqLeave();	
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// CWndQuit  : 프로그램 종료
+// CWndQuit  : ???? ??
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13993,18 +13954,18 @@ BOOL CWndQuit::Initialize( CWndBase* pWndParent, DWORD dwWndId )
 {
 	CRect rect = m_pWndRoot->MakeCenterRect( 250, 130 );
 	/*
-	Create( _T( "매시지 박스" ), MB_OKCANCEL, rect, APP_MESSAGEBOX );//dwWndId );
-	m_wndText.SetString( _T( "프로그램을 종료하시겠습니까?" ) );
+	Create( _T( "??? ??" ), MB_OKCANCEL, rect, APP_MESSAGEBOX );//dwWndId );
+	m_wndText.SetString( _T( "????? ?????????" ) );
 	*/
 	Create( _T( prj.GetText(TID_DIAG_0068) ), MB_OKCANCEL, rect, APP_MESSAGEBOX );//dwWndId );
 	m_wndText.SetString( _T( prj.GetText(TID_DIAG_0070) ) );
 	m_wndText.ResetString();
-	if( g_WndMng.m_pWndWorld && g_WndMng.m_pWndWorld->GetMouseMode() == 1 )	// FPS모드일때
+	if( g_WndMng.m_pWndWorld && g_WndMng.m_pWndWorld->GetMouseMode() == 1 )	// FPS????
 	{
 		g_WndMng.m_pWndWorld->SetMouseMode( 0 );
 	}
 
-	// 게이지 위쪽으로 나오게 하기
+	// ??? ???? ??? ??
 	CRect rectRoot = m_pWndRoot->GetLayoutRect();
 	CRect rectWindow = GetWindowRect();
 	CPoint point( ( rectRoot.right - rectWindow.Width() ) / 2, 70 );
@@ -14050,9 +14011,9 @@ BOOL CWndQuit::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					{
 						g_WndMng.m_pLogOutWaitting = new CWndLogOutWaitting;
 #ifdef __FIX_WND_1109
-						g_WndMng.m_pLogOutWaitting->Initialize( NULL );	// 康
+						g_WndMng.m_pLogOutWaitting->Initialize( NULL );	// ?
 #else	// __FIX_WND_1109
-						g_WndMng.m_pLogOutWaitting->Initialize( this );	// 康
+						g_WndMng.m_pLogOutWaitting->Initialize( this );	// ?
 #endif	// __FIX_WND_1109
 						g_WndMng.m_pLogOutWaitting->SetIsLogOut(FALSE);
 						SetVisible(FALSE);
@@ -14067,7 +14028,7 @@ BOOL CWndQuit::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// CWndRevival : 부활 
+// CWndRevival : ?? 
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -14108,8 +14069,8 @@ void CWndRevival::OnInitialUpdate()
 #if __VER >= 9 // __S_9_ADD
 	m_pShop = (CWndButton*)GetDlgItem( WIDC_REVIVAL_SHOP );
 #endif // __S_9_ADD
-	m_pLodeLight->m_strToolTip = _T( prj.GetText(TID_GAME_TOOLTIP_LODELIGHT) );//"로드라이트는 여행자가 직접 지정한 부활 위치입니다." );
-	m_pLodeStar->m_strToolTip = _T( prj.GetText(TID_GAME_TOOLTIP_LODESTAR) );//"로드스타는 인근 마을의 부활 위치입니다." );
+	m_pLodeLight->m_strToolTip = _T( prj.GetText(TID_GAME_TOOLTIP_LODELIGHT) );//"?????? ???? ?? ??? ?? ?????." );
+	m_pLodeStar->m_strToolTip = _T( prj.GetText(TID_GAME_TOOLTIP_LODESTAR) );//"????? ?? ??? ?? ?????." );
 	m_pRevival->m_strToolTip = _T( prj.GetText(TID_GAME_TOOLTIP_OGNPOINT) );
 #if __VER >= 9 // __S_9_ADD
 	m_pShop->m_strToolTip = _T( prj.GetText(TID_GAME_TOOLTIP_SHOP) );
@@ -14172,7 +14133,7 @@ void CWndRevival::OnInitialUpdate()
 	}
 #endif // __S_9_ADD
 	
-	// 게이지 위쪽으로 나오게 하기
+	// ??? ???? ??? ??
 	CRect rectRoot = m_pWndRoot->GetLayoutRect();
 	CRect rectWindow = GetWindowRect();
 	CPoint point( ( rectRoot.right - rectWindow.Width() ) / 2, 70 );
@@ -14182,7 +14143,7 @@ BOOL CWndRevival::Initialize( CWndBase* pWndParent, DWORD dwWndId )
 { 
 	InitDialog( g_Neuz.GetSafeHwnd(), APP_REVIVAL, WBS_MODAL );
 
-	if( g_WndMng.m_pWndWorld && g_WndMng.m_pWndWorld->GetMouseMode() == 1 )	// FPS모드일때
+	if( g_WndMng.m_pWndWorld && g_WndMng.m_pWndWorld->GetMouseMode() == 1 )	// FPS????
 	{
 		g_WndMng.m_pWndWorld->SetMouseMode( 0 );
 	}
@@ -14341,7 +14302,7 @@ void CWndReWanted::OnInitialUpdate()
 
 	GetDlgItem( WIDC_STATIC_TARGETNAME )->SetTitle( m_strWanted );
 
-	MoveParentCenter();	// 윈도를 중앙으로 옮기는 부분.
+	MoveParentCenter();	// ??? ???? ??? ??.
 } 
 
 BOOL CWndReWanted::Initialize( CWndBase* pWndParent, DWORD dwWndId ) 
@@ -14417,19 +14378,19 @@ BOOL CWndReWanted::CheckWantedInfo( int nGold, LPCTSTR szMsg )
 		return FALSE;
 	}
 
-	if( nGold < MIN_INPUT_REWARD || nGold > MAX_INPUT_REWARD )			// 현상금은 최소 1000패냐에서 최대 2억 패냐까지 걸 수 있다. 
+	if( nGold < MIN_INPUT_REWARD || nGold > MAX_INPUT_REWARD )			// ???? ?? 1000???? ?? 2? ???? ? ? ??. 
 	{
 		char szWarning[256];
-//		wsprintf( szWarning, "입력한 금액이 범위(%d - %d)를 벗어났습니다.", MIN_INPUT_REWARD, MAX_INPUT_REWARD );		
+//		wsprintf( szWarning, "??? ??? ??(%d - %d)? ??????.", MIN_INPUT_REWARD, MAX_INPUT_REWARD );		
 		wsprintf( szWarning, prj.GetText(TID_PK_MONEY_RANGE), MIN_INPUT_REWARD, MAX_INPUT_REWARD );		
 		g_WndMng.OpenMessageBoxUpper( szWarning );
 		return FALSE;
 	}
 
-	int nTax = MulDiv( nGold, 10, 100 );					// 건 현상금의 10%는 수수료로 지급된다. 
+	int nTax = MulDiv( nGold, 10, 100 );					// ? ???? 10%? ???? ????. 
 	if( g_pPlayer->GetTotalGold() < (nGold + nTax) ) 
 	{
-		g_WndMng.OpenMessageBoxUpper( prj.GetText(TID_GAME_LACKMONEY) );	// 인벤에 돈이부족
+		g_WndMng.OpenMessageBoxUpper( prj.GetText(TID_GAME_LACKMONEY) );	// ??? ????
 		return FALSE;
 	}
 
@@ -14453,7 +14414,7 @@ void CWndWantedConfirm::OnDraw( C2DRender* p2DRender )
 void CWndWantedConfirm::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
 BOOL CWndWantedConfirm::Initialize( CWndBase* pWndParent, DWORD dwWndId ) 
@@ -14572,11 +14533,11 @@ void CWndWanted::OnInitialUpdate()
 
 	CString strTitle = GetTitle();
 	CTime tm( m_recvTime );
-//	strTitle += tm.Format( " - %H시 %M분 %S초의 데이타입니다." );
+//	strTitle += tm.Format( " - %H? %M? %S?? ??????." );
 	strTitle += tm.Format( prj.GetText(TID_PK_DATA_SHOWTIME) );
 	SetTitle( strTitle );
 
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
 
@@ -14599,13 +14560,13 @@ void CWndWanted::OnLButtonUp( UINT nFlags, CPoint point )
 { 
 } 
 
-// 선택된 인덱스를 얻는다.
+// ??? ???? ???.
 int CWndWanted::GetSelectIndex( const CPoint& point )
 {
 	int nBase = m_wndScrollBar.GetScrollPos();
 	int nIndex = (point.y - 32) / 18;
 
-	if( 0 <= nIndex && nIndex < MAX_WANTED_PER_PAGE ) // 0 - 19사이 
+	if( 0 <= nIndex && nIndex < MAX_WANTED_PER_PAGE ) // 0 - 19?? 
 	{
 		int nSelect = nBase + nIndex;
 		if( 0 <= nSelect && nSelect < m_nMax )
@@ -14626,14 +14587,14 @@ void CWndWanted::OnLButtonDown( UINT nFlags, CPoint point )
 
 void CWndWanted::OnLButtonDblClk( UINT nFlags, CPoint point)
 {
-	// 현재 더블클릭된 좌표가 선택된 인덱스인가?
+	// ?? ????? ??? ??? ??????
 	if( m_nSelect >= 0 && GetSelectIndex( point ) == m_nSelect )	
 	{
 		SAFE_DELETE(m_pWantedConfirm);
 		m_pWantedConfirm = new CWndWantedConfirm;
 		m_pWantedConfirm->Initialize( this, 0 );
 
-		// 표시할 이름, 현상금정보 전달
+		// ??? ??, ????? ??
 		m_pWantedConfirm->SetInfo( m_aList[m_nSelect].szName, (int)( m_aList[m_nSelect].nGold ) );
 	}
 }
@@ -14754,7 +14715,7 @@ void CWndResurrectionConfirm::OnInitialUpdate()
 	
 	m_wndTitleBar.SetVisible( FALSE );
 
-	// 게이지 위쪽으로 나오게 하기
+	// ??? ???? ??? ??
 	CRect rectRoot = m_pWndRoot->GetLayoutRect();
 	CRect rectWindow = GetWindowRect();
 	CPoint point( ( rectRoot.right - rectWindow.Width() ) / 2, 70 );
@@ -14803,7 +14764,7 @@ BOOL CWndResurrectionConfirm::OnChildNotify( UINT message, UINT nID, LRESULT* pL
 
 
 /****************************************************
-  WndId : APP_COMMITEM_DIALOG - 아이템 사용
+  WndId : APP_COMMITEM_DIALOG - ??? ??
   CtrlId : WIDC_EDIT_COMMUSE - 
   CtrlId : WIDC_BUTTON_OK - Button
 ****************************************************/
@@ -14823,12 +14784,12 @@ void CWndCommItemDlg::OnDraw( C2DRender* p2DRender )
 void CWndCommItemDlg::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	m_pWndEdit = (CWndEdit*)GetDlgItem( WIDC_EDIT_COMMUSE );
 	if( m_pWndEdit )
 		m_pWndEdit->EnableWindow( FALSE );
 
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 }
 void CWndCommItemDlg::SetItem( DWORD dwDefindText, DWORD dwObjId, DWORD dwCtrlId )
@@ -14837,10 +14798,10 @@ void CWndCommItemDlg::SetItem( DWORD dwDefindText, DWORD dwObjId, DWORD dwCtrlId
 	m_dwObjId = dwObjId;
 	m_dwCtrlId = dwCtrlId;
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndCommItemDlg::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_COMMITEM_DIALOG, 0, CPoint( 0, 0 ), pWndParent );
 } 
 
@@ -14922,13 +14883,13 @@ BOOL CWndCommItemDlg::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 } 
 
 /****************************************************
-WndId : APP_CHANGECLASS_1 - 직업변경(1차)
-CtrlId : WIDC_RADIO_MER - 머서너리
-CtrlId : WIDC_RADIO_ACR - 아크로뱃
-CtrlId : WIDC_RADIO_MAG - 매지션
-CtrlId : WIDC_RADIO_ASS - 어시스트
-CtrlId : WIDC_STATIC1 - 변경을 원하는 직업을 선택하십시요
-CtrlId : WIDC_STATIC2 - 직업 목록
+WndId : APP_CHANGECLASS_1 - ????(1?)
+CtrlId : WIDC_RADIO_MER - ????
+CtrlId : WIDC_RADIO_ACR - ????
+CtrlId : WIDC_RADIO_MAG - ???
+CtrlId : WIDC_RADIO_ASS - ????
+CtrlId : WIDC_STATIC1 - ??? ??? ??? ??????
+CtrlId : WIDC_STATIC2 - ?? ??
 CtrlId : WIDC_BUTTON_OK - Button
 CtrlId : WIDC_BUTTON_CANCEL - 
 ****************************************************/
@@ -14945,7 +14906,7 @@ void CWndChangeClass1::OnDraw( C2DRender* p2DRender )
 void CWndChangeClass1::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	nJob = g_pPlayer->GetJob();
 	SetJob();
 
@@ -14962,7 +14923,7 @@ void CWndChangeClass1::OnInitialUpdate()
 
 	pWndButton->EnableWindow( FALSE );
 	
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
 
@@ -14983,10 +14944,10 @@ void CWndChangeClass1::SetJob()
 	pWndButton = (CWndButton*)GetDlgItem( WIDC_RADIO_MAG );
 	pWndButton->SetCheck( bJob[3] );
 }
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndChangeClass1::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_CHANGECLASS_1, 0, CPoint( 0, 0 ), pWndParent );
 } 
 
@@ -15046,17 +15007,17 @@ BOOL CWndChangeClass1::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult 
 } 
 
 /****************************************************
-WndId : APP_CHANGECLASS_2 - 직업변경(2차)
-CtrlId : WIDC_STATIC1 - 변경을 원하는 직업을 선택하십시요
-CtrlId : WIDC_STATIC2 - 직업 목록
-CtrlId : WIDC_RADIO_KNI - 나이트
-CtrlId : WIDC_RADIO_BLA - 블레이드
-CtrlId : WIDC_RADIO_RIN - 링마스터
-CtrlId : WIDC_RADIO_PSY - 사이키퍼
-CtrlId : WIDC_RADIO_ELE - 엘리멘터
-CtrlId : WIDC_RADIO_JES - 제스터
-CtrlId : WIDC_RADIO_RAN - 레인저
-CtrlId : WIDC_RADIO_BIL - 빌포스터
+WndId : APP_CHANGECLASS_2 - ????(2?)
+CtrlId : WIDC_STATIC1 - ??? ??? ??? ??????
+CtrlId : WIDC_STATIC2 - ?? ??
+CtrlId : WIDC_RADIO_KNI - ???
+CtrlId : WIDC_RADIO_BLA - ????
+CtrlId : WIDC_RADIO_RIN - ????
+CtrlId : WIDC_RADIO_PSY - ????
+CtrlId : WIDC_RADIO_ELE - ????
+CtrlId : WIDC_RADIO_JES - ???
+CtrlId : WIDC_RADIO_RAN - ???
+CtrlId : WIDC_RADIO_BIL - ????
 CtrlId : WIDC_BUTTON_OK2 - Button
 CtrlId : WIDC_BUTTON_CANCEL2 - Button
 ****************************************************/
@@ -15073,7 +15034,7 @@ void CWndChangeClass2::OnDraw( C2DRender* p2DRender )
 void CWndChangeClass2::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	nJob = g_pPlayer->GetJob();
 	SetJob();
 
@@ -15098,7 +15059,7 @@ void CWndChangeClass2::OnInitialUpdate()
 	
 	pWndButton->EnableWindow( FALSE );
 	
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
 void CWndChangeClass2::SetJob()
@@ -15126,10 +15087,10 @@ void CWndChangeClass2::SetJob()
 	pWndButton = (CWndButton*)GetDlgItem( WIDC_RADIO_ELE );
 	pWndButton->SetCheck( bJob[7] );	
 }
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndChangeClass2::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_CHANGECLASS_2, 0, CPoint( 0, 0 ), pWndParent );
 } 
 BOOL CWndChangeClass2::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ) 
@@ -15248,7 +15209,7 @@ void CWndInventory::RunUpgrade( CItemBase* pItem )
 					nCount++;
 			}
 
-			// 빈곳이 없으면 중단
+			// ??? ??? ??
 			if( nCount == ( (CItemElem*)pItem )->GetPiercingSize() )
 			{
 				g_WndMng.PutString( prj.GetText(TID_PIERCING_ERROR_NOPIERCING), NULL, prj.GetTextColor(TID_PIERCING_ERROR_NOPIERCING));
@@ -15326,7 +15287,7 @@ void CWndInventory::RunUpgrade( CItemBase* pItem )
 		if( pItemProp->dwItemKind3 == IK3_DICE )
 #endif //__Y_NEW_ENCHANT
 		{
-#if __VER >= 9 // __CSC_VER9_1 //오리칼쿰, 문스톤 얼터멋 웨폰 제련 관련 변경.
+#if __VER >= 9 // __CSC_VER9_1 //????, ??? ??? ?? ?? ?? ??.
 			if(m_pWndRemoveJewelConfirm != NULL)
 			{
 				if(m_pWndRemoveJewelConfirm->m_pUpgradeItem->m_dwObjId == pItem->m_dwObjId)
@@ -15371,7 +15332,7 @@ void CWndInventory::RunUpgrade( CItemBase* pItem )
 
 		#if __VER >= 8 //__Y_NEW_ENCHANT
 		#else //__Y_NEW_ENCHANT
-			// 주사위일 경우 조건검사
+			// ???? ?? ????
 			if( pItemProp->dwID != II_GEN_MAT_DIE_TWELVE )
 			{
 				if( pItemElem->GetAbilityOption() <= 4 )
@@ -15413,7 +15374,7 @@ void CWndInventory::RunUpgrade( CItemBase* pItem )
 			return;
 		}
 #endif	// __VER
-#if __VER >= 9 // __CSC_VER9_1 //오리칼쿰, 문스톤 얼터멋 웨폰 제련 관련 변경.
+#if __VER >= 9 // __CSC_VER9_1 //????, ??? ??? ?? ?? ?? ??.
 		else
 		if( pItemProp->dwItemKind3 == IK3_PIERDICE )
 		{
@@ -15428,7 +15389,7 @@ void CWndInventory::RunUpgrade( CItemBase* pItem )
 				}
 #endif	// __SYS_COLLECTING
 
-#if __VER >= 12 // __CSC_VER12_4 //창으로 변경
+#if __VER >= 12 // __CSC_VER12_4 //??? ??
 				g_WndMng.PutString( prj.GetText( TID_GAME_NOTEQUALITEM ), NULL, prj.GetTextColor( TID_GAME_NOTEQUALITEM ) );
 				BaseMouseCursor();
 				return;			
@@ -15492,7 +15453,7 @@ void CWndInventory::RunUpgrade( CItemBase* pItem )
 			}
 		}
 #endif // __CSC_VER9_1 
-		// 인첸트가 되는 아이템 - 방어구 등등
+		// ???? ?? ??? - ??? ??
 		m_pUpgradeItem = pItem;
 		m_dwEnchantWaitTime = g_tmCurrent + SEC(1);
 	}
@@ -15518,7 +15479,7 @@ void CWndInventory::UpdateParts()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// 스킬 재분배 
+// ?? ??? 
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -15535,7 +15496,7 @@ void CWndReSkillControl::OnDraw( C2DRender* p2DRender )
 void CWndReSkillControl::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 
 	CWndText* pWndText = (CWndText*)GetDlgItem( WIDC_TEXT1 );
 	
@@ -15543,10 +15504,10 @@ void CWndReSkillControl::OnInitialUpdate()
 	m_wndTitleBar.SetVisible( FALSE );	
 	pWndText->ResetString();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndReSkillControl::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_RESKILL_CONTROL1, 0, CPoint( 0, 0 ), pWndParent );
 } 
 BOOL CWndReSkillControl::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ) 
@@ -15628,7 +15589,7 @@ void CWndReSkillWarning::OnDraw( C2DRender* p2DRender )
 void CWndReSkillWarning::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	CWndEdit* pWndEdit	= (CWndEdit*)GetDlgItem( WIDC_CONTEXT );
 	
 	if( pWndEdit )
@@ -15639,7 +15600,7 @@ void CWndReSkillWarning::OnInitialUpdate()
 
 	m_bParentDestroy = FALSE;
 
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
 BOOL CWndReSkillWarning::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
@@ -15712,7 +15673,7 @@ void CWndPostItemWarning::OnInitialUpdate()
 { 
 	CWndNeuz::OnInitialUpdate(); 
 	
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
 
@@ -15727,7 +15688,7 @@ void CWndPostItemWarning::SetString( char* string )
 	}
 }
 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndPostItemWarning::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
 	LPWNDAPPLET lpWndApplet = m_resMng.GetAt ( APP_QUEITMWARNING );
@@ -15791,7 +15752,7 @@ void CWndPost::OnInitialUpdate()
 
 	EnableWindow( FALSE );
 
-	//	여기에 코딩하면 됩니다
+	//	??? ???? ???
 	CWndTabCtrl* pWndTabCtrl = (CWndTabCtrl*)GetDlgItem( WIDC_TABCTRL1 );
 	CRect rect = GetClientRect();
 	rect.left = 5;
@@ -15819,7 +15780,7 @@ void CWndPost::OnInitialUpdate()
 
 	MoveParentCenter();	
 
-	// 도착한 편지 목록 요청
+	// ??? ?? ?? ??
 	g_DPlay.SendQueryMailBox();	
 
 #ifdef __MAIL_REQUESTING_BOX
@@ -15836,7 +15797,7 @@ void CWndPost::OnInitialUpdate()
 	m_pWndMailRequestingBox->Initialize();
 #endif // __MAIL_REQUESTING_BOX
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndPost::Initialize( CWndBase* pWndParent, DWORD dwWndId ) 
 { 
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), dwWndId, 0, CPoint( 0, 0 ), pWndParent );
@@ -16043,7 +16004,7 @@ void CWndPostSend::ClearData()
 	
 	if(pItemElem)
 	{
-		// 트레이드에 걸린 아이템은 무시
+		// ????? ?? ???? ??
 		if( !g_pPlayer->m_vtInfo.IsTrading( pItemElem ) )
 			pItemElem->SetExtra( 0 );
 	}
@@ -16129,9 +16090,9 @@ void CWndPostSend::OnInitialUpdate()
 	pNotice->AddWndStyle( EBS_WANTRETURN );
 	pNotice->AddWndStyle( EBS_AUTOVSCROLL );
 
-	// 아래는 가라로 막은것이다. CWndEdit의 SetWndRect에서 스크롤바의 visible상태에 따라 셋팅하고 나서
-	// 부모클래스인 CWndText의 OnInitialUpdate 호출되어 스크롤바의 visible상태를 설정한다. 그래서 SetWndRect를 재호출....ㅡㅡ;;;; 길드공지도 동일하게 막았다.
-	// 정상동작하는 메신저 메세지 창의 경우 OnSize에서 SetWndRect를 호출해서 정상적으로 동작했던 것.
+	// ??? ??? ?????. CWndEdit? SetWndRect?? ????? visible??? ?? ???? ??
+	// ?????? CWndText? OnInitialUpdate ???? ????? visible??? ????. ??? SetWndRect? ???....??;;;; ????? ???? ???.
+	// ?????? ??? ??? ?? ?? OnSize?? SetWndRect? ???? ????? ???? ?.
 	LPWNDCTRL pWndCtrl = GetWndCtrl( WIDC_EDIT3 );
 	if(pWndCtrl)
 		pNotice->SetWndRect(pWndCtrl->rect);
@@ -16186,7 +16147,7 @@ void CWndPostSend::OnInitialUpdate()
 
 	pWndCombo->SetFocus();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndPostSend::Initialize( CWndBase* pWndParent, DWORD dwWndId ) 
 { 
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_POST_SEND, 0, CPoint( 0, 0 ), pWndParent );
@@ -16209,7 +16170,7 @@ void CWndPostSend::OnLButtonDown( UINT nFlags, CPoint point )
 
 void CWndPostSend::SetItemId( BYTE nId )
 { 
-	// 기존 아이템이 있었으면 확장 데이타를 초기화 한다.
+	// ?? ???? ???? ?? ???? ??? ??.
 	if( nId != m_nItem && m_nItem != 0xff )
 	{
 		CItemElem* pItemElem  = (CItemElem*)g_pPlayer->m_Inventory.GetAtId( m_nItem );
@@ -16226,7 +16187,7 @@ BOOL CWndPostSend::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 {
 	CWndBase* pWndFrame =  pShortcut->m_pFromWnd->GetFrameWnd();
 	
-	// 아이템이 인벤토리에서 왔는가?
+	// ???? ?????? ????
 	if( !(pShortcut->m_dwShortcut == SHORTCUT_ITEM) && !(pWndFrame->GetWndId() == APP_INVENTORY) )
 		return FALSE;
 
@@ -16252,7 +16213,7 @@ BOOL CWndPostSend::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 	LPWNDCTRL pCustom = NULL;
 	pCustom = GetWndCtrl( WIDC_STATIC3 );
 	
-	// 아이템( 방어구, 무기구 )
+	// ???( ???, ??? )
 	if( PtInRect(&(pCustom->rect), point) )
 	{
 		if( pItemElem->IsCharged() )//&& pItemElem->GetProp()->dwItemRare == 200 || pItemElem->GetProp()->dwItemRare == 300 )
@@ -16269,7 +16230,7 @@ BOOL CWndPostSend::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 			g_WndMng.m_pWndTradeGold = new CWndTradeGold;
 			memcpy( &g_WndMng.m_pWndTradeGold->m_Shortcut, pShortcut, sizeof(SHORTCUT) );
 			g_WndMng.m_pWndTradeGold->m_dwGold = pItemElem->m_nItemNum;
-			g_WndMng.m_pWndTradeGold->m_nIdWndTo = APP_POST_SEND; // 인벤토리 인데 쓰고 있어서 Gold로 씀.
+			g_WndMng.m_pWndTradeGold->m_nIdWndTo = APP_POST_SEND; // ???? ?? ?? ??? Gold? ?.
 			g_WndMng.m_pWndTradeGold->m_pWndBase = this;
 			g_WndMng.m_pWndTradeGold->m_nSlot = 0;
 			
@@ -16279,8 +16240,8 @@ BOOL CWndPostSend::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 
 			CWndStatic* pStatic	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_STATIC );
 			CWndStatic* pStaticCount	= (CWndStatic *)g_WndMng.m_pWndTradeGold->GetDlgItem( WIDC_CONTROL1 );
-			CString strMain = prj.GetText( TID_GAME_MOVECOUNT );//"몇개를 이동하시겠습니까?";
-			CString strCount = prj.GetText(TID_GAME_NUMCOUNT);//" 갯수 : ";
+			CString strMain = prj.GetText( TID_GAME_MOVECOUNT );//"??? ?????????";
+			CString strCount = prj.GetText(TID_GAME_NUMCOUNT);//" ?? : ";
 			pStatic->m_strTitle = strMain;
 			pStaticCount->m_strTitle = strCount;
 			g_WndMng.m_pWndTradeGold->SetTitle("");
@@ -16316,7 +16277,7 @@ void CWndPostSend::OnRButtonUp( UINT nFlags, CPoint point )
 	LPWNDCTRL pCustom = NULL;
 	pCustom = GetWndCtrl( WIDC_STATIC3 );
 	
-	// 아이템( 방어구, 무기구 )
+	// ???( ???, ??? )
 	if( PtInRect(&(pCustom->rect), point) )
 	{
 		CItemElem* pItemElem;
@@ -16355,19 +16316,19 @@ BOOL CWndPostSend::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 			LPCTSTR szstr3 = pWndEdit3->GetString();
 			LPCTSTR szstr4 = pWndEdit4->GetString();
 			
-			// 제목과 받는사람이 없으면 못보냄
+			// ??? ????? ??? ???
 			if( strlen( szstr1 ) <=0 || strlen( szstr2 ) <=0 )
 			{
 				return FALSE;
 			}
 			
-			// 아이템과 페냐 두개중 하나가 없어도 못보냄
+			// ???? ?? ??? ??? ??? ???
 			if( m_nItem == NULL_ID && strlen( szstr4 ) <=0 )
 			{
 				return FALSE;
 			}
 
-			// 금액란에 숫자가 아니면 못보냄
+			// ???? ??? ??? ???
 			int nlen = strlen(szstr4);
 			BOOL bisdigit = TRUE;
 
@@ -16398,12 +16359,12 @@ BOOL CWndPostSend::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 			
 			if( strlen(szstr1) < 3 || strlen(szstr1) > 16 )
 			{
-				//이름이 너무 깁니다. 다시 입력해주십시오.
+				//??? ?? ???. ?? ???????.
 				g_WndMng.OpenMessageBoxUpper( prj.GetText(TID_DIAG_0057) );
 				return FALSE;				
 			}
 
-			if( strlen(szstr3) > ( MAX_MAILTEXT - 1 ) )		//gmpbigsun: 허용범위 오류수정 
+			if( strlen(szstr3) > ( MAX_MAILTEXT - 1 ) )		//gmpbigsun: ???? ???? 
 			{
 				CString str;
 				str.Format( prj.GetText(TID_GAME_MAILBOX_TEXT_MAX), MAX_MAILTEXT );
@@ -16411,7 +16372,7 @@ BOOL CWndPostSend::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 				return FALSE;				
 			}
 
-			if( strlen(szstr2) > ( MAX_MAILTITLE - 1 ) )	//gmpbigsun: 허용범위 오류수정
+			if( strlen(szstr2) > ( MAX_MAILTITLE - 1 ) )	//gmpbigsun: ???? ????
 			{
 				CString str;
 				str.Format( prj.GetText(TID_GAME_MAILBOX_TITLE_MAX), MAX_MAILTITLE );
@@ -16555,7 +16516,7 @@ void CWndPostRead::OnInitialUpdate()
 	
 } 
 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndPostRead::Initialize( CWndBase* pWndParent, DWORD dwWndId ) 
 { 
 	LPWNDAPPLET lpWndApplet = m_resMng.GetAt ( APP_POST_READ );
@@ -16592,7 +16553,7 @@ void CWndPostRead::OnLButtonDown( UINT nFlags, CPoint point )
 	LPWNDCTRL pCustom = NULL;
 	pCustom = GetWndCtrl( WIDC_STATIC3 );
 	
-	// 아이템( 방어구, 무기구 )
+	// ???( ???, ??? )
 	if( PtInRect(&(pCustom->rect), point) )
 	{
 		m_bDrag = TRUE;
@@ -16716,7 +16677,7 @@ void CWndPostRead::OnRButtonUp( UINT nFlags, CPoint point )
 	LPWNDCTRL pCustom = NULL;
 	pCustom = GetWndCtrl( WIDC_STATIC3 );
 	
-	// 아이템( 방어구, 무기구 )
+	// ???( ???, ??? )
 	if( PtInRect(&(pCustom->rect), point) )
 	{
 		MailReceiveItem();
@@ -16731,7 +16692,7 @@ void CWndPostRead::OnRButtonUp( UINT nFlags, CPoint point )
 }
 void CWndPostRead::MailReceiveItem()
 {
-	// 해당 아이템을 메일에서 갖고온다.
+	// ?? ???? ???? ????.
 	if( m_nMailIndex == -1 )
 		return;
 	
@@ -16742,12 +16703,12 @@ void CWndPostRead::MailReceiveItem()
 				
 	if( pMail && pMail->m_pItemElem )
 	{
-		// 기본 보관일수 지났는지를 검사하여 보관료 부과한다.
+		// ?? ???? ????? ???? ??? ????.
 		int nDay = 0;
 		DWORD dwTime = 0;
 		pMail->GetMailInfo( &nDay, &dwTime );
 
-		// 기본 보관일수가 지났다!!!
+		// ?? ????? ???!!!
 		if( (MAX_KEEP_MAX_DAY*24) - dwTime > (MAX_KEEP_BASIC_DAY*24) )
 		{
 			FLOAT fCustody = 0.0f;
@@ -16777,7 +16738,7 @@ void CWndPostRead::MailReceiveItem()
 }
 void CWndPostRead::MailReceiveGold()
 {
-	// 해당 페냐를 메일에서 갖고온다.
+	// ?? ??? ???? ????.
 	if( m_nMailIndex == -1 )
 		return;
 	
@@ -16815,10 +16776,10 @@ BOOL CWndPostRead::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 		{
 //			SAFE_DELETE(m_pDeleteConfirm);
 
-#if __VER >= 11 // __MA_VER11_05	// 케릭터 봉인 거래 기능 world,database,neuz
+#if __VER >= 11 // __MA_VER11_05	// ??? ?? ?? ?? world,database,neuz
 			if(pMail->m_pItemElem && pMail->m_pItemElem->m_dwItemId == II_SYS_SYS_SCR_SEALCHARACTER )
 				return FALSE;
-#endif // __MA_VER11_05	// 케릭터 봉인 거래 기능 world,database,neuz
+#endif // __MA_VER11_05	// ??? ?? ?? ?? world,database,neuz
 
 			m_pDeleteConfirm = new CWndPostDeleteConfirm;
 
@@ -17049,7 +17010,7 @@ void CWndPostReceive::OnDraw( C2DRender* p2DRender )
 
 	p2DRender->RenderTexture( CPoint(sx+4, sy - 4), &m_Texture[0], 150  );
 
-	// 기간 색상 변화
+	// ?? ?? ??
 	D3DXVECTOR2 v2_1 = D3DXVECTOR2( 255, 0 );
 	D3DXVECTOR2 v2_2 = D3DXVECTOR2( 0, 150 );
 	D3DXVECTOR2 v2Result;
@@ -17077,7 +17038,7 @@ void CWndPostReceive::OnDraw( C2DRender* p2DRender )
 			p2DRender->RenderFillRect( rc , D3DCOLOR_ARGB( 32, 190, 0 , 0 ) );
 		}
 		
-		// 아이템이 있으면 출력
+		// ???? ??? ??
 		if( mailbox[i]->m_pItemElem && mailbox[i]->m_pItemElem->m_pTexture )
 		{
 			p2DRender->RenderTexture( CPoint( sx + 10,  sy+2 ), mailbox[i]->m_pItemElem->m_pTexture );
@@ -17096,13 +17057,13 @@ void CWndPostReceive::OnDraw( C2DRender* p2DRender )
 			}
 		}
 		else
-		// 아이템은 없고 돈만 있으면 돈모양 출력
+		// ???? ?? ?? ??? ??? ??
 		if( mailbox[i]->m_pItemElem == NULL && mailbox[i]->m_nGold > 0 )
 		{
 			p2DRender->RenderTexture( CPoint( sx + 10,  sy+2 ), &m_Texture[2] );
 		}
 
-		// 편지를 읽었다면 읽은 표시
+		// ??? ???? ?? ??
 		if( mailbox[i]->m_byRead )
 		{
 			p2DRender->RenderTexture( CPoint( sx+10, sy+1 ), &m_Texture[1], 110 );
@@ -17141,11 +17102,11 @@ void CWndPostReceive::OnDraw( C2DRender* p2DRender )
 
 		int nDay = 0;
 		DWORD dwTime = 0;
-		mailbox[i]->GetMailInfo( &nDay, &dwTime );  // 보관일자 검사
+		mailbox[i]->GetMailInfo( &nDay, &dwTime );  // ???? ??
 
 		CString szDay;
 
-		// 하루 이하 남으면 시간으로 표시해준다.
+		// ?? ?? ??? ???? ?????.
 		if( nDay <= 1 )
 		{
 			szDay.Format( prj.GetText(TID_PK_LIMIT_HOUR), dwTime );
@@ -17310,7 +17271,7 @@ void CWndPostReceive::OnInitialUpdate()
 	m_wndScrollBar.AddWndStyle( WBS_DOCKING );
 	m_wndScrollBar.Create( WBS_VERT, rect, this, 1000 );
 	
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 	
 	m_Texture[0].LoadTexture(g_Neuz.m_pd3dDevice, MakePath( "Data\\Theme\\Default\\", "WndPostTable.tga" ), 0xffff00ff );	
@@ -17318,7 +17279,7 @@ void CWndPostReceive::OnInitialUpdate()
 	m_Texture[2].LoadTexture(g_Neuz.m_pd3dDevice, MakePath( "item\\", "itm_GolGolSeed.dds" ), 0xffff00ff );	
 	
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndPostReceive::Initialize( CWndBase* pWndParent, DWORD dwWndId ) 
 { 
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_POST_RECEIVE, 0, CPoint( 0, 0 ), pWndParent );
@@ -17414,7 +17375,7 @@ BOOL CWndGuildCombatOfferMessageBox::OnChildNotify( UINT message, UINT nID, LRES
 
 
 
-// 길드 컴뱃 신청하기
+// ?? ?? ????
 CWndGuildCombatOffer::CWndGuildCombatOffer() 
 {
 	m_dwMinGold    = 0;
@@ -17522,7 +17483,7 @@ BOOL CWndGuildCombatOffer::OnChildNotify( UINT message, UINT nID, LRESULT* pLRes
 			{
 				if( nCost <= m_dwBackupGold )
 				{
-					g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_MORE_CURRENT_REQUEST) ); //기존 페냐보다 더 많은 금액으로 신청을 하시기 바랍니다.
+					g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_MORE_CURRENT_REQUEST) ); //?? ???? ? ?? ???? ??? ??? ????.
 					return FALSE;
 				}
 				
@@ -17531,7 +17492,7 @@ BOOL CWndGuildCombatOffer::OnChildNotify( UINT message, UINT nID, LRESULT* pLRes
 			{
 				if( nCost < m_dwMinGold )
 				{
-					g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_LIMIT_MIN) ); //최소금액보다 더 많은 페냐로 신청하시기 바랍니다.
+					g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_LIMIT_MIN) ); //?????? ? ?? ??? ????? ????.
 					return FALSE;
 				}
 			}
@@ -17545,11 +17506,11 @@ BOOL CWndGuildCombatOffer::OnChildNotify( UINT message, UINT nID, LRESULT* pLRes
 
 				if( m_dwReqGold == 0 )
 				{
-					str.Format( prj.GetText(TID_GAME_GUILDCOMBAT_MORE_REQUEST), 0, nCost ); //기존에 신청된 %d페냐에서 추가로 %d페냐를 신청하겠습니까?
+					str.Format( prj.GetText(TID_GAME_GUILDCOMBAT_MORE_REQUEST), 0, nCost ); //??? ??? %d???? ??? %d??? ????????
 				}
 				else
 				{
-					str.Format( prj.GetText(TID_GAME_GUILDCOMBAT_MORE_REQUEST), m_dwBackupGold, nCost-m_dwBackupGold ); //기존에 신청된 %d페냐에서 추가로 %d페냐를 신청하겠습니까?
+					str.Format( prj.GetText(TID_GAME_GUILDCOMBAT_MORE_REQUEST), m_dwBackupGold, nCost-m_dwBackupGold ); //??? ??? %d???? ??? %d??? ????????
 				}
 
 				pMsg->SetValue( str, nCost );
@@ -17565,7 +17526,7 @@ BOOL CWndGuildCombatOffer::OnChildNotify( UINT message, UINT nID, LRESULT* pLRes
 	return CWndNeuz::OnChildNotify( message, nID, pLResult ); 
 }
 
-// 길드 정보출력
+// ?? ????
 #if __VER >= 11 // __GUILD_COMBAT_1TO1
 CWndGuildCombatBoard::CWndGuildCombatBoard(int nCombatType)
 {
@@ -17585,7 +17546,7 @@ void CWndGuildCombatBoard::PaintFrame( C2DRender* p2DRender )
 {
 	CRect rect = GetWindowRect();
 	RenderWnd();
-	// 여기는 타이틀 바의 텍스트를 출력하는 곳 
+	// ??? ??? ?? ???? ???? ? 
 	if( IsWndStyle( WBS_CAPTION ) )	
 	{
 		int y = 4;
@@ -17677,7 +17638,7 @@ void CWndGuildCombatBoard::SetString( CHAR* szChar )
 	pWndText->ResetString();	
 }
 
-// 길드컴뱃 관련 정보창...시간별 뜨는 메세지창...
+// ???? ?? ???...??? ?? ????...
 #if __VER >= 11 // __GUILD_COMBAT_1TO1
 CGuildCombatInfoMessageBox::CGuildCombatInfoMessageBox(int nCombatType)
 {
@@ -17698,7 +17659,7 @@ void CGuildCombatInfoMessageBox::PaintFrame( C2DRender* p2DRender )
 {
 	CRect rect = GetWindowRect();
 	RenderWnd();
-	// 여기는 타이틀 바의 텍스트를 출력하는 곳 
+	// ??? ??? ?? ???? ???? ? 
 	if( IsWndStyle( WBS_CAPTION ) )	
 	{
 		int y = 4;
@@ -17794,7 +17755,7 @@ void CGuildCombatInfoMessageBox::OnInitialUpdate()
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// 길드컴뱃 관련 정보창...시간별 뜨는 메세지창...
+// ???? ?? ???...??? ?? ????...
 CGuildCombatInfoMessageBox2::CGuildCombatInfoMessageBox2()
 {
 }
@@ -17843,10 +17804,10 @@ void CGuildCombatInfoMessageBox2::SetString( CHAR* szChar  )
 
 
 
-// 길드 참가자 구성 리셋 컨펌
+// ?? ??? ?? ?? ??
 BOOL CGuildCombatSelectionClearMessageBox::Initialize( CWndBase* pWndParent, DWORD dwWndId )
 {
-	return CWndMessageBox::Initialize( prj.GetText(TID_GAME_GUILDCOMBAT_REMAKE_MAKEUP), //명단작성을 다시 하시겠습니까?
+	return CWndMessageBox::Initialize( prj.GetText(TID_GAME_GUILDCOMBAT_REMAKE_MAKEUP), //????? ?? ???????
 		pWndParent, 
 		MB_OKCANCEL );
 }
@@ -17876,7 +17837,7 @@ BOOL CGuildCombatSelectionClearMessageBox::OnChildNotify( UINT message, UINT nID
 
 
 
-// 길드 컴뱃 참가자 구성
+// ?? ?? ??? ??
 CWndGuildCombatSelection::CWndGuildCombatSelection() 
 {
 	m_vecGuildList.clear();
@@ -17987,7 +17948,7 @@ void CWndGuildCombatSelection::UpDateGuildListBox()
 		CGuild* pGuild = g_pPlayer->GetGuild();
 		if( pGuild )
 		{
-			// 레벨별로 소팅
+			// ???? ??
 			CGuildMember* pMember;
 			for( map<u_long, CGuildMember*>::iterator i = pGuild->m_mapPMember.begin(); i != pGuild->m_mapPMember.end(); ++i )
 			{
@@ -18002,7 +17963,7 @@ void CWndGuildCombatSelection::UpDateGuildListBox()
 #endif	// __SYS_PLAYER_DATA
 			}
 
-			// 리스트에 추가			
+			// ???? ??			
 			CString str;
 			for( multimap<int, CGuildMember*>::iterator j = m_mapSelectPlayer.begin(); j != m_mapSelectPlayer.end(); ++j )
 			{
@@ -18106,10 +18067,10 @@ void CWndGuildCombatSelection::OnInitialUpdate()
 { 
 	CWndNeuz::OnInitialUpdate(); 
 
-	// 시간 지났는지를 판단
+	// ?? ????? ??
 	if( g_GuildCombatMng.m_nGCState != CGuildCombat::NOTENTER_COUNT_STATE )
 	{
-		g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_CANNOT_MAKEUP) ); //지금은 명단작성을 할 수 없습니다.
+		g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_CANNOT_MAKEUP) ); //??? ????? ? ? ????.
 		Destroy();
 		return;
 	}
@@ -18154,7 +18115,7 @@ void CWndGuildCombatSelection::Reset()
 
 BOOL CWndGuildCombatSelection::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult ) 
 { 
-	// 출전자 등록
+	// ??? ??
 	if( nID == WIDC_BUTTON1 )
 	{
 		CWndListBox* pWndListBox = (CWndListBox*)GetDlgItem( WIDC_LISTBOX1 );
@@ -18185,13 +18146,13 @@ BOOL CWndGuildCombatSelection::OnChildNotify( UINT message, UINT nID, LRESULT* p
 				if( pGuildMember->m_nLevel < 30 )
 #endif	// __SYS_PLAYER_DATA
 				{
-					g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_LIMIT_LEVEL_NOTICE) ); //출전자 등록은 레벨 30이상이 되어야 합니다.
+					g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_LIMIT_LEVEL_NOTICE) ); //??? ??? ?? 30??? ??? ???.
 					return FALSE;
 				}
 			}	
 			else
 			{
-				g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_NOT_GUILD_MEMBER) );	//길드대전에 참가하는 길드의 맴버가 아닙니다.			
+				g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_NOT_GUILD_MEMBER) );	//????? ???? ??? ??? ????.			
 				return FALSE;
 			}
 		}
@@ -18201,7 +18162,7 @@ BOOL CWndGuildCombatSelection::OnChildNotify( UINT message, UINT nID, LRESULT* p
 
 		if( uiPlayer != -1 )
 		{
-			g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_ALREADY_ENTRY) ); //이미 등록되어 있습니다. 다시 등록해주세요.
+			g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_ALREADY_ENTRY) ); //?? ???? ????. ?? ??????.
 			return FALSE;
 		}
  
@@ -18209,7 +18170,7 @@ BOOL CWndGuildCombatSelection::OnChildNotify( UINT message, UINT nID, LRESULT* p
 		RemoveGuildPlayer( nCurSel );		
 	}
 	else
-	// 출전자 취소
+	// ??? ??
 	if( nID == WIDC_BUTTON2 )
 	{
 		CWndListBox* pWndListBox = (CWndListBox*)GetDlgItem( WIDC_LISTBOX2 );
@@ -18223,7 +18184,7 @@ BOOL CWndGuildCombatSelection::OnChildNotify( UINT message, UINT nID, LRESULT* p
 		
 		if( uiPlayer == -1 )
 		{
-			// 길드리스트에 없다면 추가 
+			// ?????? ??? ?? 
 			AddGuildPlayer( m_vecSelectPlayer[nCurSel] );		
 			RemoveCombatPlayer( nCurSel );		
 		}
@@ -18233,7 +18194,7 @@ BOOL CWndGuildCombatSelection::OnChildNotify( UINT message, UINT nID, LRESULT* p
 		}		
 	}
 	else
-	// 출전자 순서 위로
+	// ??? ?? ??
 	if( nID == WIDC_BUTTON3 )
 	{
 		CWndListBox* pWndListBox = (CWndListBox*)GetDlgItem( WIDC_LISTBOX2 );
@@ -18258,7 +18219,7 @@ BOOL CWndGuildCombatSelection::OnChildNotify( UINT message, UINT nID, LRESULT* p
 		m_nDefenderIndex = nCurSel-1;
 	}
 	else
-	// 출전자 순서 아래
+	// ??? ?? ??
 	if( nID == WIDC_BUTTON4 )
 	{
 		CWndListBox* pWndListBox = (CWndListBox*)GetDlgItem( WIDC_LISTBOX2 );
@@ -18294,22 +18255,22 @@ BOOL CWndGuildCombatSelection::OnChildNotify( UINT message, UINT nID, LRESULT* p
 #ifndef _DEBUG
 		if( m_uidDefender == -1 || m_uidDefender == 0 )
 		{
-			g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_NOT_ASSIGN_DEFENDER) ); //디펜더가 지정되지 않았습니다. 길드마스터를 제외한 1명의 디펜더를 지정해 주세요.
+			g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_NOT_ASSIGN_DEFENDER) ); //???? ???? ?????. ?????? ??? 1?? ???? ??? ???.
 			return FALSE;
 		}
 #endif //_DEBUG
 
-		// 시간 지났는지를 판단
+		// ?? ????? ??
 		if( g_GuildCombatMng.m_nGCState != CGuildCombat::NOTENTER_COUNT_STATE )
 		{
-			g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_CANNOT_MAKEUP) ); //지금은 명단작성을 할 수 없습니다.
+			g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_CANNOT_MAKEUP) ); //??? ????? ? ? ????.
 			Destroy();
 			return FALSE;
 		}
 		
 		if( m_vecSelectPlayer.size() == 0 )
 		{
-			g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_HAVENOT_PLAYER) ); //출전자가 없습니다. 출전자를 선택해주세요.
+			g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_HAVENOT_PLAYER) ); //???? ????. ???? ??????.
 			return FALSE;
 		}
 		
@@ -18320,8 +18281,8 @@ BOOL CWndGuildCombatSelection::OnChildNotify( UINT message, UINT nID, LRESULT* p
 		{
 			BOOL bSkip = FALSE;
 
-			// 출전자 맴버중에 마스터가 킹핀이 있는지 검사를한다.
-			// 둘중 하나라도 없으면 출전 불가능...
+			// ??? ???? ???? ??? ??? ?????.
+			// ?? ???? ??? ?? ???...
 			for( int i=0; i<(int)( m_vecSelectPlayer.size() ); i++ )
 			{
 				pGuildMemberl = pGuild->GetMember( m_vecSelectPlayer[i] );
@@ -18343,13 +18304,13 @@ BOOL CWndGuildCombatSelection::OnChildNotify( UINT message, UINT nID, LRESULT* p
 			}
 			else
 			{
-				g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_HAVENOT_MASTER) ); //출전자 명단에 길드마스터나 킹핀이 존재하지 않습니다.
+				g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_HAVENOT_MASTER) ); //??? ??? ?????? ??? ???? ????.
 				return FALSE;
 			}
 		}
 	}
 	else
-	// 디펜더 지정
+	// ??? ??
 	if( nID == WIDC_BUTTON7 )
 	{
 		CWndListBox* pWndListBox = (CWndListBox*)GetDlgItem( WIDC_LISTBOX2 );
@@ -18364,7 +18325,7 @@ BOOL CWndGuildCombatSelection::OnChildNotify( UINT message, UINT nID, LRESULT* p
 		{
 			if( m_vecSelectPlayer.size() > 1 &&  pGuild->IsMaster( m_vecSelectPlayer[nCurSel] ) )
 			{
-				g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_MASTER_NOT_ASSIGN_DEFENDER) ); //길드마스터는 디펜더가 될 수 없습니다.
+				g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_MASTER_NOT_ASSIGN_DEFENDER) ); //?????? ???? ? ? ????.
 				return FALSE;
 			}
 		}
@@ -18383,7 +18344,7 @@ BOOL CWndGuildCombatSelection::OnChildNotify( UINT message, UINT nID, LRESULT* p
 
 
 
-//길드대전 참가 길드 명단 출력
+//???? ?? ?? ?? ??
 #if __VER >= 11 // __GUILD_COMBAT_1TO1
 CWndGuildCombatState::CWndGuildCombatState(int nCombatType)
 { 
@@ -18412,7 +18373,7 @@ void CWndGuildCombatState::PaintFrame( C2DRender* p2DRender )
 {
 	CRect rect = GetWindowRect();
 	RenderWnd();
-	// 여기는 타이틀 바의 텍스트를 출력하는 곳 
+	// ??? ??? ?? ???? ???? ? 
 	if( IsWndStyle( WBS_CAPTION ) )	
 	{
 		int y = 4;
@@ -18454,7 +18415,7 @@ void CWndGuildCombatState::OnInitialUpdate()
 { 
 	CWndNeuz::OnInitialUpdate(); 
 
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
 
@@ -18488,7 +18449,7 @@ void CWndGuildCombatState::OnLButtonUp( UINT nFlags, CPoint point )
 { 
 } 
 
-// 선택된 인덱스를 얻는다.
+// ??? ???? ???.
 int CWndGuildCombatState::GetSelectIndex( const CPoint& point )
 {
 	return -1;
@@ -18628,7 +18589,7 @@ void CWndGuildCombatState::SetGold( int nGold )
 
 
 
-// 길드전장 입장지역 선택 창
+// ???? ???? ?? ?
 CWndGuildCombatJoinSelection::CWndGuildCombatJoinSelection() 
 {
 	m_nMapNum = 99;
@@ -18766,7 +18727,7 @@ BOOL CWndGuildCombatJoinSelection::OnChildNotify( UINT message, UINT nID, LRESUL
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 길드대전 신청
+// ???? ??
 CWndGuildWarAppConfirm::CWndGuildWarAppConfirm() 
 {
 }
@@ -18835,7 +18796,7 @@ BOOL CWndGuildWarAppConfirm::OnChildNotify( UINT message, UINT nID, LRESULT* pLR
 	return CWndNeuz::OnChildNotify( message, nID, pLResult ); 
 }
 
-// 길드대전 취소
+// ???? ??
 #if __VER >= 11 // __GUILD_COMBAT_1TO1
 CWndGuildWarCancelConfirm::CWndGuildWarCancelConfirm(int nCombatType)
 {
@@ -18856,7 +18817,7 @@ void CWndGuildWarCancelConfirm::PaintFrame( C2DRender* p2DRender )
 {
 	CRect rect = GetWindowRect();
 	RenderWnd();
-	// 여기는 타이틀 바의 텍스트를 출력하는 곳 
+	// ??? ??? ?? ???? ???? ? 
 	if( IsWndStyle( WBS_CAPTION ) )	
 	{
 		int y = 4;
@@ -18963,7 +18924,7 @@ BOOL CWndGuildWarCancelConfirm::OnChildNotify( UINT message, UINT nID, LRESULT* 
 	return CWndNeuz::OnChildNotify( message, nID, pLResult ); 
 }
 
-// 길드대전 입장
+// ???? ??
 #if __VER >= 11 // __GUILD_COMBAT_1TO1
 CWndGuildWarJoinConfirm::CWndGuildWarJoinConfirm(int nCombatType) 
 {
@@ -18984,7 +18945,7 @@ void CWndGuildWarJoinConfirm::PaintFrame( C2DRender* p2DRender )
 {
 	CRect rect = GetWindowRect();
 	RenderWnd();
-	// 여기는 타이틀 바의 텍스트를 출력하는 곳 
+	// ??? ??? ?? ???? ???? ? 
 	if( IsWndStyle( WBS_CAPTION ) )	
 	{
 		int y = 4;
@@ -19076,7 +19037,7 @@ BOOL CWndGuildWarJoinConfirm::OnChildNotify( UINT message, UINT nID, LRESULT* pL
 		{
 			if( g_pPlayer->IsBaseJob() )
 			{
-				g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_NOTENTER_VAGRANT) ); //방랑자는 입장할수 없습니다. 1차 전직 후에 입장을 해주시기 바랍니다.
+				g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_GUILDCOMBAT_NOTENTER_VAGRANT) ); //???? ???? ????. 1? ?? ?? ??? ???? ????.
 				Destroy( TRUE );
 				return FALSE;
 			}
@@ -19105,7 +19066,7 @@ BOOL CWndGuildWarJoinConfirm::OnChildNotify( UINT message, UINT nID, LRESULT* pL
 }
 	
 
-//길드대전 참가 길드 명단 출력
+//???? ?? ?? ?? ??
 
 CWndGuildWarState::CWndGuildWarState() 
 { 
@@ -19150,7 +19111,7 @@ void CWndGuildWarState::OnInitialUpdate()
 	m_wndScrollBar.AddWndStyle( WBS_DOCKING );
 	m_wndScrollBar.Create( WBS_VERT, rect, this, 1000 );
 
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
 
@@ -19180,13 +19141,13 @@ void CWndGuildWarState::OnLButtonUp( UINT nFlags, CPoint point )
 { 
 } 
 
-// 선택된 인덱스를 얻는다.
+// ??? ???? ???.
 int CWndGuildWarState::GetSelectIndex( const CPoint& point )
 {
 	int nBase = m_wndScrollBar.GetScrollPos();
 	int nIndex = (point.y - 32) / 18;
 
-	if( 0 <= nIndex && nIndex < MAX_GUILDCOMBAT_LIST_PER_PAGE ) // 0 - 19사이 
+	if( 0 <= nIndex && nIndex < MAX_GUILDCOMBAT_LIST_PER_PAGE ) // 0 - 19?? 
 	{
 		int nSelect = nBase + nIndex;
 		if( 0 <= nSelect && nSelect < m_nMax )
@@ -19324,7 +19285,7 @@ BOOL CWndGuildWarState::OnMouseWheel( UINT nFlags, short zDelta, CPoint pt )
 
 
 
-//길드컴뱃 랭킹
+//???? ??
 
 CWndGuildCombatRanking::CWndGuildCombatRanking() 
 { 
@@ -19369,7 +19330,7 @@ void CWndGuildCombatRanking::OnInitialUpdate()
 	m_wndScrollBar.AddWndStyle( WBS_DOCKING );
 	m_wndScrollBar.Create( WBS_VERT, rect, this, 1000 );
 
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
 
@@ -19392,13 +19353,13 @@ void CWndGuildCombatRanking::OnLButtonUp( UINT nFlags, CPoint point )
 { 
 } 
 
-// 선택된 인덱스를 얻는다.
+// ??? ???? ???.
 int CWndGuildCombatRanking::GetSelectIndex( const CPoint& point )
 {
 	int nBase = m_wndScrollBar.GetScrollPos();
 	int nIndex = (point.y - 32) / 18;
 
-	if( 0 <= nIndex && nIndex < MAX_GUILDCOMBAT_LIST_PER_PAGE ) // 0 - 19사이 
+	if( 0 <= nIndex && nIndex < MAX_GUILDCOMBAT_LIST_PER_PAGE ) // 0 - 19?? 
 	{
 		int nSelect = nBase + nIndex;
 		if( 0 <= nSelect && nSelect < m_nMax )
@@ -19571,7 +19532,7 @@ void CWndGuildCombatRanking::SortRanking()
 
 
 /****************************************************
-  WndId : APP_GUILDCOMBAT_RESULT_POINT - 길드대전 결과창
+  WndId : APP_GUILDCOMBAT_RESULT_POINT - ???? ???
   CtrlId : WIDC_TABCTRL1 - TabCtrl
 ****************************************************/
 CWndGuildCombatResult::CWndGuildCombatResult() 
@@ -19587,7 +19548,7 @@ void CWndGuildCombatResult::OnDraw( C2DRender* p2DRender )
 void CWndGuildCombatResult::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	
 	CWndTabCtrl* pWndTabCtrl = (CWndTabCtrl*)GetDlgItem( WIDC_TABCTRL1 );
 	CRect rect = GetClientRect();
@@ -19612,7 +19573,7 @@ void CWndGuildCombatResult::OnInitialUpdate()
 	tabTabItem.pWndBase = &m_WndGuildCombatTabResultLog;
 	pWndTabCtrl->InsertItem( 1, &tabTabItem );
 	
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 
 	{
@@ -19694,9 +19655,9 @@ void CWndGuildCombatTabResultRate::OnDraw( C2DRender* p2DRender )
 void CWndGuildCombatTabResultRate::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
 BOOL CWndGuildCombatTabResultRate::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
@@ -19729,7 +19690,7 @@ void CWndGuildCombatTabResultLog::OnInitialUpdate()
 { 
 	CWndNeuz::OnInitialUpdate(); 
 
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
 BOOL CWndGuildCombatTabResultLog::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
@@ -19769,7 +19730,7 @@ BOOL CWndGuildCombatTabResultLog::OnChildNotify( UINT message, UINT nID, LRESULT
 
 
 /****************************************************
-  WndId : APP_GUILDCOMBAT_RANK_P - 길드대전 랭킹창
+  WndId : APP_GUILDCOMBAT_RANK_P - ???? ???
   CtrlId : WIDC_TABCTRL1 - TabCtrl
 ****************************************************/
 CWndGuildCombatRank_Person::CWndGuildCombatRank_Person() 
@@ -19786,7 +19747,7 @@ void CWndGuildCombatRank_Person::OnDraw( C2DRender* p2DRender )
 void CWndGuildCombatRank_Person::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	
 	CWndTabCtrl* pWndTabCtrl = (CWndTabCtrl*)GetDlgItem( WIDC_TABCTRL1 );
 	CRect rect = GetClientRect();
@@ -19826,7 +19787,7 @@ void CWndGuildCombatRank_Person::OnInitialUpdate()
 	pWndTabCtrl->InsertItem( 4, &tabTabItem );
 
 
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
 BOOL CWndGuildCombatRank_Person::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
@@ -19879,11 +19840,11 @@ void CWndGuildCombatRank_Person::DivisionList()
 	CWndGuildCombatRank_Class * pRankTot;
 	CWndGuildCombatRank_Class * pRank;
 
-	// 전체목록에 등록
+	// ????? ??
 	pRankTot = &(m_WndGuildCombatTabClass_Tot);
 	multimap< int, __GUILDCOMBAT_RANK_INFO >::reverse_iterator i;
 
-	// 각지업별 등록
+	// ???? ??
 	pRank = NULL;
 	for( i = m_mTotalRanking.rbegin(); i != m_mTotalRanking.rend(); ++i )
 	{ 
@@ -20104,7 +20065,7 @@ void CWndGuildCombatRank_Class::OnDraw( C2DRender* p2DRender )
 		nOldRanking = GCRankInfo.nPoint;					
 	}	
 
-	// 나의 랭킹 표시...
+	// ?? ?? ??...
 	if( bMyRanking )
 	{
 		sprintf( szNum, "%3d", nMyRanking );
@@ -20119,13 +20080,13 @@ void CWndGuildCombatRank_Class::OnDraw( C2DRender* p2DRender )
 		p2DRender->TextOut( sx + 275, 250, szCount, dwColor );
 	}
 } 
-// 선택된 인덱스를 얻는다.
+// ??? ???? ???.
 int CWndGuildCombatRank_Class::GetSelectIndex( const CPoint& point )
 {
 	int nBase = m_wndScrollBar.GetScrollPos();
 	int nIndex = (point.y - 32) / 18;
 	
-	if( 0 <= nIndex && nIndex < MAX_GUILDCOMBAT_RANK_PER_PAGE ) // 0 - 19사이 
+	if( 0 <= nIndex && nIndex < MAX_GUILDCOMBAT_RANK_PER_PAGE ) // 0 - 19?? 
 	{
 		int nSelect = nBase + nIndex;
 		if( 0 <= nSelect && nSelect < m_nMax )
@@ -20166,7 +20127,7 @@ void CWndGuildCombatRank_Class::OnLButtonDown( UINT nFlags, CPoint point )
 void CWndGuildCombatRank_Class::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 
 	CRect rect = GetWindowRect();
 	rect.top    += 30;
@@ -20191,7 +20152,7 @@ void CWndGuildCombatRank_Class::OnInitialUpdate()
 	m_wndScrollBar.AddWndStyle( WBS_DOCKING );
 	m_wndScrollBar.Create( WBS_VERT, rect, this, 1000 );
 	
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
 BOOL CWndGuildCombatRank_Class::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
@@ -20284,7 +20245,7 @@ void CWndFontEdit::OnInitialUpdate()
 
 	ReSetBar( m_fColor[0], m_fColor[1], m_fColor[2] );	
 	
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	MoveParentCenter();
 } 
 BOOL CWndFontEdit::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
@@ -20803,9 +20764,9 @@ void CWndBuffStatus::RenderBuffIcon( C2DRender *p2DRender, SKILLINFLUENCE* pSkil
 	if( pBuff->GetTotal() > 0 )
 	{	
 		dwOddTime = pBuff->GetTotal() - ( g_tmCurrent - pBuff->GetInst() );
-		bFlash = ( dwOddTime < 20 * 1000 );		// 20초 이하 남았으면 깜빡거림
+		bFlash = ( dwOddTime < 20 * 1000 );		// 20? ?? ???? ????
 		
-		if( pBuff->GetTotal() < ( g_tmCurrent - pBuff->GetInst() ) ) // - 가 되면 0으로 처리
+		if( pBuff->GetTotal() < ( g_tmCurrent - pBuff->GetInst() ) ) // - ? ?? 0?? ??
 			dwOddTime = 0;
 	}
 	
@@ -20834,8 +20795,8 @@ void CWndBuffStatus::RenderBuffIcon( C2DRender *p2DRender, SKILLINFLUENCE* pSkil
 			}
 		}
 		
-		if( pItem->nEvildoing < 0 )							// 나쁜마법은
-			color =  D3DCOLOR_ARGB( pp->second.m_nAlpha, 255, 120, 255 );		// 빨간 색 
+		if( pItem->nEvildoing < 0 )							// ?????
+			color =  D3DCOLOR_ARGB( pp->second.m_nAlpha, 255, 120, 255 );		// ?? ? 
 		else
 			color =  D3DCOLOR_ARGB( pp->second.m_nAlpha, 255, 255, 255 );
 		
@@ -20843,8 +20804,8 @@ void CWndBuffStatus::RenderBuffIcon( C2DRender *p2DRender, SKILLINFLUENCE* pSkil
 	}
 	else
 	{
-		if( pItem->nEvildoing < 0 )							// 나쁜마법은
-			color =  D3DCOLOR_ARGB( 192, 255, 120, 255 );		// 빨간 색 
+		if( pItem->nEvildoing < 0 )							// ?????
+			color =  D3DCOLOR_ARGB( 192, 255, 120, 255 );		// ?? ? 
 		else
 			color =  D3DCOLOR_ARGB( 192, 255, 255, 255 );
 		
@@ -20878,18 +20839,18 @@ void CWndBuffStatus::RenderBuffIcon( C2DRender *p2DRender, SKILLINFLUENCE* pSkil
 
 	if( pBuff->GetTotal() > 0 )
 	{
-		CTimeSpan ct( (long)(dwOddTime / 1000.0f) );		// 남은시간을 초단위로 변환해서 넘겨줌
+		CTimeSpan ct( (long)(dwOddTime / 1000.0f) );		// ????? ???? ???? ???
 				
 		if( ct.GetDays() != 0 )
 		{
-			str.Format( "\n%.2d:%.2d:%.2d:%.2d", static_cast<int>(ct.GetDays()), ct.GetHours(), ct.GetMinutes(), ct.GetSeconds() );	//시분초 
+			str.Format( "\n%.2d:%.2d:%.2d:%.2d", static_cast<int>(ct.GetDays()), ct.GetHours(), ct.GetMinutes(), ct.GetSeconds() );	//??? 
 		}
 		else
 		{
 			if( ct.GetHours() >= 1 )
-				str.Format( "\n%.2d:%.2d:%.2d", ct.GetHours(), ct.GetMinutes(), ct.GetSeconds() );	//시분초 
+				str.Format( "\n%.2d:%.2d:%.2d", ct.GetHours(), ct.GetMinutes(), ct.GetSeconds() );	//??? 
 			else
-				str.Format( "\n%.2d:%.2d", ct.GetMinutes(), ct.GetSeconds() );						// 분초
+				str.Format( "\n%.2d:%.2d", ct.GetMinutes(), ct.GetSeconds() );						// ??
 		}
 		RenderOptBuffTime( p2DRender, pInfo->pt, ct, D3DCOLOR_XRGB( 0, 255, 255 ) );//ADEILSON
 	}
@@ -20909,10 +20870,10 @@ void CWndBuffStatus::RenderBuffIcon( C2DRender *p2DRender, SKILLINFLUENCE* pSkil
 			pBuff->GetId() != SI_RIG_MASTER_BLESSING && 
 			pBuff->GetId() != SI_ASS_CHEER_STONEHAND && 
 			pBuff->GetId() != SI_MAG_EARTH_LOOTING && 
-			pBuff->GetId() != SI_ASS_HEAL_PREVENTION ) //현자의 축복, 스톤 핸드, 루팅, 프리벤션 제외
+			pBuff->GetId() != SI_ASS_HEAL_PREVENTION ) //??? ??, ?? ??, ??, ???? ??
 #else // __PREVENTION_TOOLTIP_BUG
 		if( pBuff->GetType() == BUFF_SKILL && pBuff->GetId() != SI_RIG_MASTER_BLESSING && 
-			pBuff->GetId() != SI_ASS_CHEER_STONEHAND && pBuff->GetId() != SI_MAG_EARTH_LOOTING ) //현자의 축복, 스톤 핸드, 루팅 제외
+			pBuff->GetId() != SI_ASS_CHEER_STONEHAND && pBuff->GetId() != SI_MAG_EARTH_LOOTING ) //??? ??, ?? ??, ?? ??
 #endif // __PREVENTION_TOOLTIP_BUG
 		{
 			AddSkillProp* pAddSkillProp = prj.GetAddSkillProp( pItem->dwSubDefine, pBuff->GetLevel() );
@@ -20964,9 +20925,9 @@ void CWndBuffStatus::RenderBuffIcon( C2DRender *p2DRender, SKILLINFLUENCE* pSkil
 	{	
 #endif //__Y_FLAG_SKILL_BUFF
 		dwOddTime = pSkill->tmCount - (g_tmCurrent - pSkill->tmTime);
-		bFlash = ( dwOddTime < 20 * 1000 );		// 20초 이하 남았으면 깜빡거림
+		bFlash = ( dwOddTime < 20 * 1000 );		// 20? ?? ???? ????
 		
-		if(pSkill->tmCount < (g_tmCurrent - pSkill->tmTime)) // - 가 되면 0으로 처리
+		if(pSkill->tmCount < (g_tmCurrent - pSkill->tmTime)) // - ? ?? 0?? ??
 			dwOddTime = 0;
 #if __VER >= 8 //__Y_FLAG_SKILL_BUFF
 	}
@@ -20997,8 +20958,8 @@ void CWndBuffStatus::RenderBuffIcon( C2DRender *p2DRender, SKILLINFLUENCE* pSkil
 			}
 		}
 		
-		if( pItem->nEvildoing < 0 )							// 나쁜마법은
-			color =  D3DCOLOR_ARGB( pp->second.m_nAlpha, 255, 120, 255 );		// 빨간 색 
+		if( pItem->nEvildoing < 0 )							// ?????
+			color =  D3DCOLOR_ARGB( pp->second.m_nAlpha, 255, 120, 255 );		// ?? ? 
 		else
 			color =  D3DCOLOR_ARGB( pp->second.m_nAlpha, 255, 255, 255 );
 		
@@ -21006,8 +20967,8 @@ void CWndBuffStatus::RenderBuffIcon( C2DRender *p2DRender, SKILLINFLUENCE* pSkil
 	}
 	else
 	{
-		if( pItem->nEvildoing < 0 )							// 나쁜마법은
-			color =  D3DCOLOR_ARGB( 192, 255, 120, 255 );		// 빨간 색 
+		if( pItem->nEvildoing < 0 )							// ?????
+			color =  D3DCOLOR_ARGB( 192, 255, 120, 255 );		// ?? ? 
 		else
 			color =  D3DCOLOR_ARGB( 192, 255, 255, 255 );
 		
@@ -21043,18 +21004,18 @@ void CWndBuffStatus::RenderBuffIcon( C2DRender *p2DRender, SKILLINFLUENCE* pSkil
 	if( pSkill->tmCount > 0 )
 #endif //__Y_FLAG_SKILL_BUFF
 	{
-		CTimeSpan ct( (long)(dwOddTime / 1000.0f) );		// 남은시간을 초단위로 변환해서 넘겨줌
+		CTimeSpan ct( (long)(dwOddTime / 1000.0f) );		// ????? ???? ???? ???
 				
 		if( ct.GetDays() != 0 )
 		{
-			str.Format( "\n%.2d:%.2d:%.2d:%.2d", static_cast<int>(ct.GetDays()), ct.GetHours(), ct.GetMinutes(), ct.GetSeconds() );	//시분초 
+			str.Format( "\n%.2d:%.2d:%.2d:%.2d", static_cast<int>(ct.GetDays()), ct.GetHours(), ct.GetMinutes(), ct.GetSeconds() );	//??? 
 		}
 		else
 		{
 			if( ct.GetHours() >= 1 )
-				str.Format( "\n%.2d:%.2d:%.2d", ct.GetHours(), ct.GetMinutes(), ct.GetSeconds() );	//시분초 
+				str.Format( "\n%.2d:%.2d:%.2d", ct.GetHours(), ct.GetMinutes(), ct.GetSeconds() );	//??? 
 			else
-				str.Format( "\n%.2d:%.2d", ct.GetMinutes(), ct.GetSeconds() );						// 분초
+				str.Format( "\n%.2d:%.2d", ct.GetMinutes(), ct.GetSeconds() );						// ??
 		}
 		RenderOptBuffTime( p2DRender, pInfo->pt, ct, D3DCOLOR_XRGB( 255, 255, 255 ) );//adeilson D3DCOLOR_XRGB( 0, 0, 0 ) );
 	}
@@ -21071,7 +21032,7 @@ void CWndBuffStatus::RenderBuffIcon( C2DRender *p2DRender, SKILLINFLUENCE* pSkil
 		
 	#if __VER >= 8 //__Y_FLAG_SKILL_BUFF
 		if( pSkill->wType == BUFF_SKILL && pSkill->wID != SI_RIG_MASTER_BLESSING && 
-			pSkill->wID != SI_ASS_CHEER_STONEHAND && pSkill->wID != SI_MAG_EARTH_LOOTING ) //현자의 축복, 스톤 핸드, 루팅 제외
+			pSkill->wID != SI_ASS_CHEER_STONEHAND && pSkill->wID != SI_MAG_EARTH_LOOTING ) //??? ??, ?? ??, ?? ??
 		{
 			AddSkillProp* pAddSkillProp = prj.GetAddSkillProp( pItem->dwSubDefine, pSkill->dwLevel );
 
@@ -21219,7 +21180,7 @@ void CWndMixJewel::OnDraw( C2DRender* p2DRender )
 void CWndMixJewel::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	//Ctrl Initialize.
 	m_pText = (CWndText *)GetDlgItem( WIDC_TEXT1 );
 
@@ -21266,10 +21227,10 @@ void CWndMixJewel::SetDescription( CHAR* szChar )
 	}
 }
 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndMixJewel::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_SMELT_MIXJEWEL, 0, CPoint( 0, 0 ), pWndParent );
 } 
 
@@ -21384,7 +21345,7 @@ void CWndMixJewel::SetJewel(CItemElem* pItemElem)
 				
 				if(extslotcount > 0 && usableitemnum > 0)
 				{
-					if(extslotcount > usableitemnum) //남은 Slot과 사용가능한 Item갯 수를 파악하여 한번에 넣을 갯 수를 지정.
+					if(extslotcount > usableitemnum) //?? Slot? ????? Item? ?? ???? ??? ?? ? ?? ??.
 						insertnum = usableitemnum;
 					else
 						insertnum = extslotcount;
@@ -21526,8 +21487,8 @@ int CWndMixJewel::HitTest( CPoint point )
 
 void CWndMixJewel::ReceiveResult(int nResult)
 {
-	//Server에서 결과를 받으면 초기화를 진행하고 창을 띄운다.
-	//초기화
+	//Server?? ??? ??? ???? ???? ?? ???.
+	//???
 	for(int i=0; i<MAX_JEWEL; i++)
 	{
 		m_MatJewel[i].isUse = FALSE;
@@ -21607,16 +21568,16 @@ void CWndMixJewelConfirm::OnDraw( C2DRender* p2DRender )
 void CWndMixJewelConfirm::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	CWndText* pText = (CWndText*)GetDlgItem(WIDC_TEXT1);
 	pText->SetString(prj.GetText( TID_GAME_MIXJEWEL_SUCCESS ));
 	
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndMixJewelConfirm::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_SMELT_MIXJEWEL_CONFIRM, 0, CPoint( 0, 0 ), pWndParent );
 } 
 BOOL CWndMixJewelConfirm::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ) 
@@ -21685,7 +21646,7 @@ void CWndExtraction::OnDraw( C2DRender* p2DRender )
 void CWndExtraction::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	
 	CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_START);
 
@@ -21720,10 +21681,10 @@ void CWndExtraction::OnInitialUpdate()
 */
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndExtraction::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_SMELT_EXTRACTION, 0, CPoint( 0, 0 ), pWndParent );
 } 
 BOOL CWndExtraction::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ) 
@@ -21766,7 +21727,7 @@ BOOL CWndExtraction::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 	rect = wndCtrl->rect;
 	if( rect.PtInRect( point ) )
 	{		
-		//무기 아이템만 올려놓을 수 있다.
+		//?? ???? ???? ? ??.
 		ItemProp* pItemProp;
 		CItemElem* pTempElem;
 		pTempElem  = (CItemElem*)g_pPlayer->GetItemId( pShortcut->m_dwId );
@@ -21814,7 +21775,7 @@ BOOL CWndExtraction::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 { 
 	if( nID == WIDC_START )
 	{
-		//서버로 시작을 알린다.
+		//??? ??? ???.
 		if(m_pItemElem != NULL)
 		{
 			CWndButton* pButton;
@@ -21843,17 +21804,17 @@ void CWndExtraction::SetDescription( CHAR* szChar )
 
 void CWndExtraction::ReceiveResult(int result, int nCount)
 {
-	//결과 값에 따른 처리
-	//1. 성공 : Destroy Window
-	//2. 실패 : Destroy Window
-	//3. 취소 : 인벤토리 여유 공간 부족 및 기타 에러 사항.
+	//?? ?? ?? ??
+	//1. ?? : Destroy Window
+	//2. ?? : Destroy Window
+	//3. ?? : ???? ?? ?? ?? ? ?? ?? ??.
 	
-	// ULTIMATE_SUCCESS : 성공
-	// ULTIMATE_FAILED : 실패
-	// ULTIMATE_CANCEL : 예외 처리
-	// ULTIMATE_ISULTIMATE : 무기가 아니거나 일반, 유니크가 아닐 때
-	// ULTIMATE_INVENTORY : 인벤토리가 부족 할 때
-	// ULTIMATE_ISNOTULTIMATE : 얼터멋 웨폰이 아닐 때
+	// ULTIMATE_SUCCESS : ??
+	// ULTIMATE_FAILED : ??
+	// ULTIMATE_CANCEL : ?? ??
+	// ULTIMATE_ISULTIMATE : ??? ???? ??, ???? ?? ?
+	// ULTIMATE_INVENTORY : ????? ?? ? ?
+	// ULTIMATE_ISNOTULTIMATE : ??? ??? ?? ?
 
 	
 	switch(result) 
@@ -21914,7 +21875,7 @@ CWndSmeltJewel::CWndSmeltJewel()
 
 CWndSmeltJewel::~CWndSmeltJewel()
 {
-// Todo::Model 초기화 필요
+// Todo::Model ??? ??
 //	if(m_pMainItem != NULL)
 //		SAFE_DELETE(m_pMainItem);
 }
@@ -21937,7 +21898,7 @@ void CWndSmeltJewel::OnInitialUpdate()
 { 
 	CWndNeuz::OnInitialUpdate(); 
 	
-	// 윈도를 중앙으로 옮기는 부분.
+	// ??? ???? ??? ??.
 	m_nJewelSlot[0] = WIDC_STATIC1;
 	m_nJewelSlot[1] = WIDC_STATIC2;
 	m_nJewelSlot[2] = WIDC_STATIC3;
@@ -21963,10 +21924,10 @@ void CWndSmeltJewel::OnInitialUpdate()
 	MoveParentCenter();
 } 
 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndSmeltJewel::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_SMELT_JEWEL, 0, CPoint( 0, 0 ), pWndParent );
 } 
 
@@ -22009,14 +21970,14 @@ BOOL CWndSmeltJewel::Process()
 
 	if(m_nStatus == 1) //Start!
 	{
-		if(m_nStatus == 1) //Start버튼 누를 경우 컴퓨터의 선택이 회전하도록 함.
+		if(m_nStatus == 1) //Start?? ?? ?? ???? ??? ????? ?.
 		{
 			if(m_nCount > m_nDelay)
 			{
 				m_fAddRot += 4.0f;
 				//( m_fRotate < 1 ) ? m_fRotate = 1 : m_fRotate;
 				
-				if(m_nDelay <= 25 && m_nDelay > 16) //회전이 끊기는 부분에서 플래쉬를 주자.
+				if(m_nDelay <= 25 && m_nDelay > 16) //??? ??? ???? ???? ??.
 					m_bFlash = TRUE;
 				
 				if(m_nDelay < 10)
@@ -22074,10 +22035,10 @@ void CWndSmeltJewel::OnDraw( C2DRender* p2DRender )
 	
 	CRect rect = GetClientRect();
 
-	// 뷰포트 세팅 
+	// ??? ?? 
 	D3DVIEWPORT9 viewport;
 
-	// 월드 
+	// ?? 
 	D3DXMATRIXA16 matWorld;
 	D3DXMATRIXA16 matScale;
 	D3DXMATRIXA16 matRot;
@@ -22086,7 +22047,7 @@ void CWndSmeltJewel::OnDraw( C2DRender* p2DRender )
 	// Color
 	D3DXCOLOR color;
 	
-	// 초기화
+	// ???
 	D3DXMatrixIdentity(&matScale);
 	D3DXMatrixIdentity(&matTrans);
 	D3DXMatrixIdentity(&matWorld);
@@ -22095,7 +22056,7 @@ void CWndSmeltJewel::OnDraw( C2DRender* p2DRender )
 	D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);
 	D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);
 
-	// 무기에 따른 Camera Angle조정
+	// ??? ?? Camera Angle??
 	if(m_pItemElem->GetProp()->dwItemKind3 == IK3_AXE ||
 		m_pItemElem->GetProp()->dwItemKind3 == IK3_SWD)
 	{
@@ -22157,7 +22118,7 @@ void CWndSmeltJewel::OnDraw( C2DRender* p2DRender )
 		vLookatPt.z = 0.0f;
 	}
 
-	if(m_nStatus == 1) //Start후 이미지 회전 시 시점을 당기기 위함.
+	if(m_nStatus == 1) //Start? ??? ?? ? ??? ??? ??.
 	{
 		vEyePt.y += m_nEyeYPos;
 	}
@@ -22179,7 +22140,7 @@ void CWndSmeltJewel::OnDraw( C2DRender* p2DRender )
 
 	LPWNDCTRL lpFace = GetWndCtrl( WIDC_CUSTOM1 );
 
-	// 렌더링 위치 설정
+	// ??? ?? ??
 	viewport.X      = p2DRender->m_ptOrigin.x + lpFace->rect.left;
 	viewport.Y      = p2DRender->m_ptOrigin.y + lpFace->rect.top;
 	viewport.Width  = lpFace->rect.Width();
@@ -22196,7 +22157,7 @@ void CWndSmeltJewel::OnDraw( C2DRender* p2DRender )
 	D3DXMatrixMultiply(&matWorld, &matWorld, &matTrans );
 	pd3dDevice->SetTransform( D3DTS_WORLD, &matWorld );
 	
-	// 랜더링 
+	// ??? 
 	pd3dDevice->SetRenderState( D3DRS_FOGENABLE, FALSE );
 	pd3dDevice->SetRenderState( D3DRS_LIGHTING, FALSE );
 		
@@ -22210,7 +22171,7 @@ void CWndSmeltJewel::OnDraw( C2DRender* p2DRender )
 	::SetTransformView( matView );
 	::SetTransformProj( matProj );
 	
-/*	if(m_nStatus == 1) //깜빡임.
+/*	if(m_nStatus == 1) //???.
 	{
 		if(m_bFlash)
 		{
@@ -22242,14 +22203,14 @@ void CWndSmeltJewel::OnDraw( C2DRender* p2DRender )
 		{
 			LPWNDCTRL pWndCtrl = GetWndCtrl( m_nJewelSlot[i] );
 #if __VER >= 12 // __EXT_PIERCING
-			if( i < m_pItemElem->GetUltimatePiercingSize() ) //뚫린 소켓
+			if( i < m_pItemElem->GetUltimatePiercingSize() ) //?? ??
 #else // __EXT_PIERCING
-			if( i < m_pItemElem->GetPiercingSize() ) //뚫린 소켓
+			if( i < m_pItemElem->GetPiercingSize() ) //?? ??
 #endif // __EXT_PIERCING
 			{
-				if(m_dwJewel[i] != -1) //박힌 보석
+				if(m_dwJewel[i] != -1) //?? ??
 				{
-					if(i != m_nUsableSlot) //새로 박은 보석위에는 색칠하지 않음.
+					if(i != m_nUsableSlot) //?? ?? ????? ???? ??.
 					{
 						pTexture = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "WndDisableBlue.bmp"), 0xffff00ff );
 						if(pTexture != NULL)
@@ -22267,7 +22228,7 @@ void CWndSmeltJewel::OnDraw( C2DRender* p2DRender )
 				}
 				else
 				{
-					if(i != m_nUsableSlot) //뚫린 소켓 중 보석을 박을 수 있는 첫번째 슬롯만 빼고 나머지는 회색으로.
+					if(i != m_nUsableSlot) //?? ?? ? ??? ?? ? ?? ??? ??? ?? ???? ????.
 					{
 						pTexture = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "WndDisableBlack.bmp"), 0xffff00ff );
 						if(pTexture != NULL)
@@ -22276,7 +22237,7 @@ void CWndSmeltJewel::OnDraw( C2DRender* p2DRender )
 					}
 				}
 			}
-			else //안 뚫린 소켓
+			else //? ?? ??
 			{
 				pTexture = CWndBase::m_textureMng.AddTexture( g_Neuz.m_pd3dDevice, MakePath( DIR_THEME, "WndDisableRed.bmp"), 0xffff00ff );
 				if(pTexture != NULL)
@@ -22314,7 +22275,7 @@ BOOL CWndSmeltJewel::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 	{	
 		if( wndCtrl->rect.PtInRect( point ) )
 		{
-			//초기화.
+			//???.
 			if(m_pItemElem != NULL)
 				m_pItemElem->SetExtra(0);
 
@@ -22488,23 +22449,23 @@ BOOL CWndSmeltJewel::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 
 void CWndSmeltJewel::ReceiveResult(int result)
 {
-	//결과 값에 따른 처리
-	//1. 성공 : 초기화
-	//2. 실패 : 초기화
-	//3. 취소 : 기타.
+	//?? ?? ?? ??
+	//1. ?? : ???
+	//2. ?? : ???
+	//3. ?? : ??.
 	
 	switch(result) 
 	{
 	case CUltimateWeapon::ULTIMATE_SUCCESS:
 		g_WndMng.OpenMessageBox( prj.GetText( TID_GAME_SMELTJEWEL_SUCCESS ) );
 		PLAYSND( "InfUpgradeSuccess.wav" );
-		//초기화.
+		//???.
 		InitializeJewel(m_pItemElem);
 		Destroy();
 		break;
 	case CUltimateWeapon::ULTIMATE_FAILED:
 		g_WndMng.OpenMessageBox( prj.GetText( TID_GAME_SMELTJEWEL_FAIL ) );
-		//초기화.
+		//???.
 		InitializeJewel(m_pItemElem);		
 		break;
 	case CUltimateWeapon::ULTIMATE_CANCEL:
@@ -22515,7 +22476,7 @@ void CWndSmeltJewel::ReceiveResult(int result)
 
 void CWndSmeltJewel::InitializeJewel(CItemElem* pItemElem)
 {
-	//기존 데이타 초기화.
+	//?? ??? ???.
 	m_nJewelCount = 0;
 	m_nUsableSlot = -1;
 	m_dwJewel[m_nUsableSlot] = -1;
@@ -22537,7 +22498,7 @@ void CWndSmeltJewel::InitializeJewel(CItemElem* pItemElem)
 		}
 	}
 
-	//빈 슬롯이 남았는지 확인하여 사용가능 슬롯 번호 저장.
+	//? ??? ???? ???? ???? ?? ?? ??.
 	int m_nSlot = pItemElem->GetUltimatePiercingSize();
 #else // __EXT_PIERCING
 		if(i < m_pItemElem->GetPiercingSize() )
@@ -22550,7 +22511,7 @@ void CWndSmeltJewel::InitializeJewel(CItemElem* pItemElem)
 		}
 	}
 
-	//빈 슬롯이 남았는지 확인하여 사용가능 슬롯 번호 저장.
+	//? ??? ???? ???? ???? ?? ?? ??.
 	int m_nSlot = pItemElem->GetPiercingSize();
 #endif // __EXT_PIERCING
 	if(m_nJewelCount < m_nSlot)
@@ -22643,7 +22604,7 @@ void CWndChangeWeapon::OnDraw( C2DRender* p2DRender )
 void CWndChangeWeapon::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	
 	CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_START);
 
@@ -22683,10 +22644,10 @@ void CWndChangeWeapon::OnInitialUpdate()
 */
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndChangeWeapon::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_SMELT_CHANGEWEAPON, 0, CPoint( 0, 0 ), pWndParent );
 } 
 BOOL CWndChangeWeapon::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ) 
@@ -22787,13 +22748,13 @@ BOOL CWndChangeWeapon::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 		{
 			pItemProp = pTempElem->GetProp();
 
-			if( pItemProp->dwItemKind1 == IK1_WEAPON && pItemProp->dwLimitLevel1 >= 60 ) //60레벨 제한 이상 무기만 적용
+			if( pItemProp->dwItemKind1 == IK1_WEAPON && pItemProp->dwLimitLevel1 >= 60 ) //60?? ?? ?? ??? ??
 			{
-				if(m_nWeaponType == pItemProp->dwReferStat1) //창에 따라 유니크인지 일반인지를 확인한다.
+				if(m_nWeaponType == pItemProp->dwReferStat1) //?? ?? ????? ????? ????.
 				{
 					if(m_nWeaponType == WEAPON_UNIQUE)
 					{
-						if(pTempElem->GetAbilityOption() >= 10) //유니크 무기의 경우 +10 이상인지를 확인 한다.
+						if(pTempElem->GetAbilityOption() >= 10) //??? ??? ?? +10 ????? ?? ??.
 						{
 							m_pWItemElem = pTempElem;
 							m_pWItemElem->SetExtra(m_pWItemElem->GetExtra()+1);
@@ -22845,13 +22806,13 @@ void CWndChangeWeapon::SetItem(CItemElem* pItemElem)
 		
 		if(m_pWItemElem == NULL && pProp->dwItemKind1 == IK1_WEAPON)
 		{
-			if(pProp->dwLimitLevel1 >= 60) //60레벨 제한 이상 무기만 적용
+			if(pProp->dwLimitLevel1 >= 60) //60?? ?? ?? ??? ??
 			{
-				if(m_nWeaponType == pProp->dwReferStat1) //창에 따라 유니크인지 일반인지를 확인한다.
+				if(m_nWeaponType == pProp->dwReferStat1) //?? ?? ????? ????? ????.
 				{
 					if(m_nWeaponType == WEAPON_UNIQUE)
 					{
-						if(pItemElem->GetAbilityOption() >= 10) //유니크 무기의 경우 +10 이상인지를 확인 한다.
+						if(pItemElem->GetAbilityOption() >= 10) //??? ??? ?? +10 ????? ?? ??.
 						{
 							m_pWItemElem = pItemElem;
 							m_pWItemElem->SetExtra(m_pWItemElem->GetExtra()+1);
@@ -22904,7 +22865,7 @@ BOOL CWndChangeWeapon::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult 
 { 
 	if( nID == WIDC_START )
 	{
-		//서버로 시작을 알린다.
+		//??? ??? ???.
 		if(!m_bIsSendChange && m_pWItemElem != NULL && m_pJItemElem[0] != NULL && m_pJItemElem[1] != NULL)
 		{
 			CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_START);
@@ -22952,10 +22913,10 @@ void CWndChangeWeapon::SetDescription( CHAR* szChar )
 
 void CWndChangeWeapon::ReceiveResult(int result)
 {
-	//결과 값에 따른 처리
-	//1. 성공 : Destroy Window
-	//2. 실패 : Destroy Window
-	//3. 취소 : 인벤토리 여유 공간 부족 및 기타 에러 사항.
+	//?? ?? ?? ??
+	//1. ?? : Destroy Window
+	//2. ?? : Destroy Window
+	//3. ?? : ???? ?? ?? ?? ? ?? ?? ??.
 	
 	switch(result) 
 	{
@@ -23021,17 +22982,17 @@ void CWndRemoveJewelConfirm::OnDraw( C2DRender* p2DRender )
 void CWndRemoveJewelConfirm::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	CWndText* pText = (CWndText*)GetDlgItem( WIDC_TEXT1 );
 	pText->m_string.AddParsingString( prj.GetText( TID_GAME_REMOVEJEWEL ) );
 	pText->ResetString();
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndRemoveJewelConfirm::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 {
 	m_pInventory = (CWndInventory*)pWndParent;
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_SMELT_REMOVE_CONFIRM, 0, CPoint( 0, 0 ), pWndParent );
 } 
 BOOL CWndRemoveJewelConfirm::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ) 
@@ -23054,7 +23015,7 @@ BOOL CWndRemoveJewelConfirm::OnChildNotify( UINT message, UINT nID, LRESULT* pLR
 	{
 		if(m_pInventory != NULL)
 		{
-			// 인첸트가 되는 아이템 - 방어구 등등
+			// ???? ?? ??? - ??? ??
 			m_pInventory->m_pUpgradeItem = m_pUpgradeItem;
 			m_pInventory->m_dwEnchantWaitTime = g_tmCurrent + SEC(1);
 		}
@@ -23167,7 +23128,7 @@ void CWndHeroSkillUp::OnDraw( C2DRender* p2DRender )
 void CWndHeroSkillUp::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	
 	CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_OK);
 	pButton->EnableWindow(FALSE);
@@ -23214,10 +23175,10 @@ void CWndHeroSkillUp::OnInitialUpdate()
 */
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndHeroSkillUp::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_HERO_SKILLUP, 0, CPoint( 0, 0 ), pWndParent );
 } 
 BOOL CWndHeroSkillUp::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ) 
@@ -23271,7 +23232,7 @@ BOOL CWndHeroSkillUp::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 	{
 		if(!m_bSendHeroSkillup)
 		{
-			//서버로 시작을 알린다.
+			//??? ??? ???.
 			BOOL checkall = TRUE;
 			OBJID itemobjId[5];
 			for(int i=0; i<5; i++)
@@ -23430,7 +23391,7 @@ void CWndDialogEvent::OnDraw( C2DRender* p2DRender )
 		rect = lpWndCtrl->rect;
 		rect.top += m_nChoiceNum * m_nGap + m_nListOffset;
 		rect.bottom += m_nChoiceNum * m_nGap + m_nListOffset;
-		//영어 때문에 창 크기 늘임
+		//?? ??? ? ?? ??
 		rect.right += 80;
 		p2DRender->RenderFillRect( rect, color );
 	}
@@ -23444,12 +23405,12 @@ void CWndDialogEvent::SetMMI(int mmi)
 void CWndDialogEvent::OnInitialUpdate()
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	if(m_nMMI != -1)
 	{
 		m_nVecList = prj.m_Exchange.GetListTextId(m_nMMI);
 		m_nListCount = m_nVecList.size();
-		if( !m_nListCount ) // 리스트가 없는 경우
+		if( !m_nListCount ) // ???? ?? ??
 		{	
 			Destroy();
 			return;
@@ -23461,10 +23422,10 @@ void CWndDialogEvent::OnInitialUpdate()
 
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndDialogEvent::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_DIALOG_EVENT, 0, CPoint( 0, 0 ), pWndParent );
 } 
 
@@ -23556,7 +23517,7 @@ void CWndDialogEvent::SetDescription( CHAR* szChar )
 		rect.bottom = rect.top + m_nListCount * m_nGap + 10;
 		nListBoxBottom = rect.bottom;
 		nListBoxHeight = rect.bottom - rect.top;
-		//영어 때문에 창 크기 늘임
+		//?? ??? ? ?? ??
 		rect.right += 80;
 		pWndList->SetWndRect(rect);
 		//Window
@@ -23572,7 +23533,7 @@ void CWndDialogEvent::SetDescription( CHAR* szChar )
 		nButtonHeight = rect.bottom - rect.top;
 		rect.top = nListBoxBottom + 8;
 		rect.bottom = rect.top + nButtonHeight;
-		//영어 때문에 창 크기 늘임
+		//?? ??? ? ?? ??
 		rect.left += 40;
 		rect.right += 40;
 		pWndButton->SetWndRect(rect);
@@ -23583,13 +23544,13 @@ void CWndDialogEvent::SetDescription( CHAR* szChar )
 		nButtonHeight = rect.bottom - rect.top;
 		rect.top = nListBoxBottom + 8;
 		rect.bottom = rect.top + nButtonHeight;
-		//영어 때문에 창 크기 늘임
+		//?? ??? ? ?? ??
 		rect.left += 40;
 		rect.right += 40;
 		pWndButton->SetWndRect(rect);
 	}
 
-	//영어 때문에 창 크기 늘임
+	//?? ??? ? ?? ??
 	//Window
 	rect = GetWindowRect(TRUE);
 	rect.right += 80;
@@ -23618,7 +23579,7 @@ void CWndDialogEvent::ReceiveResult(int result)
 	switch(result) 
 	{
 		case CExchange::EXCHANGE_SUCCESS:
-			// 서버에서 시스템 메세지 출력으로 변경
+			// ???? ??? ??? ???? ??
 			if( vResult.size() == 2 )
 				g_WndMng.OpenMessageBox( prj.GetText(vResult[0]) );
 			break;
@@ -23626,7 +23587,7 @@ void CWndDialogEvent::ReceiveResult(int result)
 			g_WndMng.OpenMessageBox( prj.GetText(TID_GAME_LACKSPACE) );
 			break;
 		case CExchange::EXCHANGE_CONDITION_FAILED:
-			// 서버에서 시스템 메세지 출력으로 변경
+			// ???? ??? ??? ???? ??
 			if( vResult.size() == 2 )
 				g_WndMng.OpenMessageBox( prj.GetText(vResult[1]) );
 			break;
@@ -23685,7 +23646,7 @@ void CWndHeavenTower::OnDraw( C2DRender* p2DRender )
 		rect = lpWndCtrl->rect;
 		rect.top += m_nChoiceNum * m_nGap + m_nListOffset;
 		rect.bottom += m_nChoiceNum * m_nGap + m_nListOffset;
-		//영어 때문에 창 크기 늘임
+		//?? ??? ? ?? ??
 		rect.right += 80;
 		p2DRender->RenderFillRect( rect, color );
 	}
@@ -23749,7 +23710,7 @@ void CWndHeavenTower::InitText()
 void CWndHeavenTower::OnInitialUpdate()
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 
 	InitText();
 
@@ -23762,10 +23723,10 @@ void CWndHeavenTower::OnInitialUpdate()
 
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndHeavenTower::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_HEAVEN_TOWER, 0, CPoint( 0, 0 ), pWndParent );
 } 
 
@@ -23846,7 +23807,7 @@ void CWndHeavenTower::InitWnd()
 		rect.bottom = rect.top + m_nListCount * m_nGap + 10;
 		nListBoxBottom = rect.bottom;
 		nListBoxHeight = rect.bottom - rect.top;
-		//영어 때문에 창 크기 늘임
+		//?? ??? ? ?? ??
 		rect.right += 80;
 
 		pWndList->SetWndRect(rect);
@@ -23858,7 +23819,7 @@ void CWndHeavenTower::InitWnd()
 		SetWndRect(rect);
 	}
 
-	//영어 때문에 창 크기 늘임
+	//?? ??? ? ?? ??
 	//Window
 	rect = GetWindowRect(TRUE);
 	rect.right += 80;
@@ -23966,7 +23927,7 @@ void CWndRemoveAttribute::OnDraw( C2DRender* p2DRender )
 void CWndRemoveAttribute::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 
 	CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_START);
 
@@ -23980,10 +23941,10 @@ void CWndRemoveAttribute::OnInitialUpdate()
 
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndRemoveAttribute::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_REMOVE_ATTRIBUTE, 0, CPoint( 0, 0 ), pWndParent );
 } 
 
@@ -24028,7 +23989,7 @@ BOOL CWndRemoveAttribute::OnDropIcon( LPSHORTCUT pShortcut, CPoint point )
 	rect = wndCtrl->rect;
 	if( rect.PtInRect( point ) )
 	{		
-		//속성제련이 된 무기만 올려놓을 수 있다.
+		//????? ? ??? ???? ? ??.
 		ItemProp* pItemProp;
 		CItemElem* pTempElem;
 		pTempElem  = (CItemElem*)g_pPlayer->GetItemId( pShortcut->m_dwId );
@@ -24143,16 +24104,16 @@ void CWndRemoveAttributeConfirm::OnDraw( C2DRender* p2DRender )
 void CWndRemoveAttributeConfirm::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	CWndText* pText = (CWndText*)GetDlgItem( WIDC_TEXT1 );
 	pText->m_string.AddParsingString( prj.GetText( TID_GAME_REMOVE_ATTRIBUTE ) );
 	pText->ResetString();	
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndRemoveAttributeConfirm::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 {
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_REMOVE_ATTRIBUTE_CONFIRM, 0, CPoint( 0, 0 ), pWndParent );
 } 
 BOOL CWndRemoveAttributeConfirm::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ) 
@@ -24299,7 +24260,7 @@ void CWndRemovePiercing::OnDraw( C2DRender* p2DRender )
 void CWndRemovePiercing::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 
 	CWndButton* pButton = (CWndButton*)GetDlgItem(WIDC_START);
 
@@ -24326,10 +24287,10 @@ void CWndRemovePiercing::OnInitialUpdate()
 
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndRemovePiercing::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 #if __VER >= 12 // __CSC_VER12_4
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_SMELT_REMOVE_PIERCING_EX, 0, CPoint( 0, 0 ), pWndParent );
 #else //__CSC_VER12_4
@@ -24459,7 +24420,7 @@ BOOL CWndRemovePiercing::OnChildNotify( UINT message, UINT nID, LRESULT* pLResul
 { 
 	if( nID == WIDC_START )
 	{
-		//서버로 시작을 알린다.
+		//??? ??? ???.
 		if(m_pItemElem != NULL)
 		{
 			CWndButton* pButton;
@@ -24568,47 +24529,47 @@ void CWndRemoveJewel::OnDraw( C2DRender* p2DRender )
 				CString DstText;
 				DWORD dwColorbuf;
 				
-				if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND01 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ01) //HP 상승
+				if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND01 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ01) //HP ??
 				{
 					dwColorbuf = g_WndMng.dwItemColor[g_Option.m_nToolTipText].dwAddedOpt1;
 					DstText.Format( "%s", prj.GetText(TID_TOOLTIP_DST_HP_MAX) );
 				}
-				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND02 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ02) //공격력 상승
+				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND02 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ02) //??? ??
 				{
 					dwColorbuf = g_WndMng.dwItemColor[g_Option.m_nToolTipText].dwAddedOpt2;
 					DstText.Format( "%s", prj.GetText(TID_TOOLTIP_DST_ATKPOWER) );
 				}
-				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND03 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ03) //방어력 상승
+				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND03 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ03) //??? ??
 				{
 					dwColorbuf = g_WndMng.dwItemColor[g_Option.m_nToolTipText].dwAddedOpt3;
 					DstText.Format( "%s", prj.GetText(TID_TOOLTIP_DST_MONSTER_DMG) );
 				}
-				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND04 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ04) //흡혈
+				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND04 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ04) //??
 				{
 					dwColorbuf = g_WndMng.dwItemColor[g_Option.m_nToolTipText].dwAddedOpt4;
 					DstText.Format( "%s", prj.GetText(TID_TOOLTIP_DST_MELEE_STEALHP) );
 				}
-				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND05 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ05) //PvP시 대미지 증가
+				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND05 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ05) //PvP? ??? ??
 				{
 					dwColorbuf = g_WndMng.dwItemColor[g_Option.m_nToolTipText].dwAddedOpt5;
 					DstText.Format( "%s", prj.GetText(TID_TOOLTIP_DST_PVP_DMG) );
 				}
-				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND06 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ06) //힘증가
+				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND06 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ06) //???
 				{
 					dwColorbuf = g_WndMng.dwItemColor[g_Option.m_nToolTipText].dwAddedOpt6;
 					DstText.Format( "%s", prj.GetText(TID_TOOLTIP_STR) );
 				}
-				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND07 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ07) //체력증가
+				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND07 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ07) //????
 				{
 					dwColorbuf = g_WndMng.dwItemColor[g_Option.m_nToolTipText].dwAddedOpt7;
 					DstText.Format( "%s", prj.GetText(TID_TOOLTIP_STA) );
 				}
-				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND08 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ08) //민첩증가
+				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND08 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ08) //????
 				{
 					dwColorbuf = g_WndMng.dwItemColor[g_Option.m_nToolTipText].dwAddedOpt8;
 					DstText.Format( "%s", prj.GetText(TID_TOOLTIP_DEX) );
 				}
-				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND09 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ09) //지능증가
+				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND09 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ09) //????
 				{
 					dwColorbuf = g_WndMng.dwItemColor[g_Option.m_nToolTipText].dwAddedOpt9;
 					DstText.Format( "%s", prj.GetText(TID_TOOLTIP_INT) );
@@ -24624,7 +24585,7 @@ void CWndRemoveJewel::OnDraw( C2DRender* p2DRender )
 void CWndRemoveJewel::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 
 	ItemProp* pItemProp = prj.GetItemProp( II_GEN_MAT_MOONSTONE );
 	if(pItemProp)
@@ -24654,10 +24615,10 @@ void CWndRemoveJewel::OnInitialUpdate()
 
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndRemoveJewel::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_SMELT_REMOVE_JEWEL, 0, CPoint( 0, 0 ), pWndParent );
 } 
 BOOL CWndRemoveJewel::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ) 
@@ -24863,7 +24824,7 @@ BOOL CWndRemoveJewel::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 { 
 	if( nID == WIDC_START )
 	{
-		//서버로 시작을 알린다.
+		//??? ??? ???.
 		if(m_pItemElem != NULL && m_pMoonstone != NULL)
 		{
 			CWndButton* pButton;
@@ -24931,7 +24892,7 @@ CWndChangeAttribute::~CWndChangeAttribute()
 void CWndChangeAttribute::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	m_pText = (CWndText *)GetDlgItem( WIDC_TEXT1 );
 	
 	CScript scanner;
@@ -24963,7 +24924,7 @@ void CWndChangeAttribute::OnInitialUpdate()
 
 BOOL CWndChangeAttribute::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_CHANGE_ATTRIBUTE, 0, CPoint( 0, 0 ), pWndParent );
 }
 
@@ -25264,7 +25225,7 @@ HRESULT CWndCoupleTabInfo::DeleteDeviceObjects()
 void CWndCoupleTabInfo::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 #ifdef __GAUGE_V19
 	m_texGauEmptyNormal.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "BarBg.tga" ), 0xffff00ff, TRUE );
 	m_texGauFillNormal.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "BarSky.tga" ), 0xffff00ff, TRUE );
@@ -25290,7 +25251,7 @@ void CWndCoupleTabInfo::OnInitialUpdate()
 
 BOOL CWndCoupleTabInfo::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_COUPLE_TAB_INFO, 0, CPoint( 0, 0 ), pWndParent );
 }
 
@@ -25300,7 +25261,7 @@ BOOL CWndCoupleTabInfo::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult
 	{
 		if(m_pCouple)
 		{
-			// 프러포즈 해제 메세지 창 출력
+			// ???? ?? ??? ? ??
 			if(g_WndMng.m_pWndCoupleMessage)
 				SAFE_DELETE(g_WndMng.m_pWndCoupleMessage);
 
@@ -25378,7 +25339,7 @@ void CWndCoupleTabInfo::OnDraw(C2DRender* p2DRender)
 				if( prj.m_aJob[ pData->data.nJob ].dwJobType == JTYPE_MASTER )
 				{
 					int nMasterIndex = 27;
-					if(/*m_nLevel >= 60 && */pData->data.nLevel < 70) //Level Down될 경우를 생각해서 주석처리.
+					if(/*m_nLevel >= 60 && */pData->data.nLevel < 70) //Level Down? ??? ???? ????.
 						nMasterIndex = 27;
 					else if(pData->data.nLevel >= 70 && pData->data.nLevel < 80)
 						nMasterIndex = 28;
@@ -25402,7 +25363,7 @@ void CWndCoupleTabInfo::OnDraw(C2DRender* p2DRender)
 
 		float fRate = CCoupleProperty::Instance()->GetExperienceRate( m_pCouple->GetLevel(), m_pCouple->GetExperience() );
 
-		//처음에 게이지 안차서 보정
+		//??? ??? ??? ??
 		if(fRate > 0.00f && fRate < 0.04f)
 			fRate = 0.05f;
 		else if(fRate >= 0.04f && fRate <= 0.075f)
@@ -25457,7 +25418,7 @@ CWndCoupleTabSkill::~CWndCoupleTabSkill()
 void CWndCoupleTabSkill::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	m_pText = (CWndText *)GetDlgItem( WIDC_TEXT1 );
 	
 	CScript scanner;
@@ -25478,7 +25439,7 @@ void CWndCoupleTabSkill::OnInitialUpdate()
 
 BOOL CWndCoupleTabSkill::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_COUPLE_TAB_SKILL, 0, CPoint( 0, 0 ), pWndParent );
 }
 
@@ -25575,7 +25536,7 @@ CWndCoupleManager::~CWndCoupleManager()
 void CWndCoupleManager::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 	CWndTabCtrl* pWndTabCtrl = (CWndTabCtrl*)GetDlgItem( WIDC_TABCTRL1 );
 	CRect rect = GetClientRect();
 	rect.left = 5;
@@ -25600,7 +25561,7 @@ void CWndCoupleManager::OnInitialUpdate()
 
 BOOL CWndCoupleManager::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_COUPLE_MAIN, 0, CPoint( 0, 0 ), pWndParent );
 }
 
@@ -25628,7 +25589,7 @@ CWndFunnyCoinConfirm::~CWndFunnyCoinConfirm()
 void CWndFunnyCoinConfirm::OnInitialUpdate() 
 { 
 	CWndNeuz::OnInitialUpdate(); 
-	// 여기에 코딩하세요
+	// ??? ?????
 
 	if(m_pItemElem != NULL)
 	{
@@ -25648,10 +25609,10 @@ void CWndFunnyCoinConfirm::OnInitialUpdate()
 
 	MoveParentCenter();
 } 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndFunnyCoinConfirm::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_FUNNYCOIN_CONFIRM, 0, CPoint( 0, 0 ), pWndParent );
 } 
 
@@ -25745,17 +25706,17 @@ CWndSmeltSafety::~CWndSmeltSafety()
 	}
 }
 
-// 처음 이 함수를 부르면 윈도가 열린다.
+// ?? ? ??? ??? ??? ???.
 BOOL CWndSmeltSafety::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ )
 {
-	// Daisy에서 설정한 리소스로 윈도를 연다.
+	// Daisy?? ??? ???? ??? ??.
 	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_SMELT_SAFETY, 0, CPoint( 0, 0 ), pWndParent );
 }
 
 void CWndSmeltSafety::OnInitialUpdate()
 {
 	CWndNeuz::OnInitialUpdate();
-	// 여기에 코딩하세요
+	// ??? ?????
 
 	int StaticMaterialID[SMELT_MAX] = {WIDC_STATIC11, WIDC_STATIC12, WIDC_STATIC13, WIDC_STATIC14, WIDC_STATIC15, WIDC_STATIC16,
 								WIDC_STATIC17, WIDC_STATIC18, WIDC_STATIC19, WIDC_STATIC20};
@@ -26120,7 +26081,7 @@ BOOL CWndSmeltSafety::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 
 			if(m_pItemElem == NULL)
 			{
-				// 먼저 안전 제련을 시도할 아이템을 등록해야 합니다.
+				// ?? ?? ??? ??? ???? ???? ???.
 				g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR07), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR07));
 				break;
 			}
@@ -26155,12 +26116,12 @@ BOOL CWndSmeltSafety::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 
 				if(GetNowSmeltValue() == GetDefaultMaxSmeltValue())
 				{
-					// 이미 최대치까지 제련되어 더 이상 제련할 수 없습니다.
+					// ?? ????? ???? ? ?? ??? ? ????.
 					g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR13), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR13));
 				}
 				else if(m_nCurrentSmeltNumber >= SMELT_MAX)
 				{
-					// 제련 공간이 부족합니다. 계속 제련하기를 원하시면 Reset 버튼을 눌러 초기화해야 합니다.
+					// ?? ??? ?????. ?? ????? ???? Reset ??? ?? ????? ???.
 					g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR15), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR15));
 				}
 				else if(m_nMaterialCount <= m_nCurrentSmeltNumber || m_nScroll1Count <= m_nCurrentSmeltNumber)
@@ -26171,32 +26132,32 @@ BOOL CWndSmeltSafety::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 						{
 							if(m_pItemElem->GetProp()->dwReferStat1 != WEAPON_ULTIMATE)
 							{
-								// 오리칼쿰과 일반 보호의 두루마리가 하나라도 등록된 상태가 아니면 수행할 수 없습니다.
+								// ????? ?? ??? ????? ???? ??? ??? ??? ??? ? ????.
 								g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR08), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR08));
 							}
 							else
 							{
-								// 빛나는 오리칼쿰과 최상급 보호의 두루마리가 하나라도 등록된 상태가 아니면 수행할 수 없습니다.
+								// ??? ????? ??? ??? ????? ???? ??? ??? ??? ??? ? ????.
 								g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR09), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR09));
 							}
 							break;
 						}
 					case WND_ACCESSARY:
 						{
-							// 문스톤과 액세서리 보호의 두루마리가 하나라도 등록된 상태가 아니면 수행할 수 없습니다.
+							// ???? ???? ??? ????? ???? ??? ??? ??? ??? ? ????.
 							g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR10), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR10));
 							break;
 						}
 					case WND_PIERCING:
 						{
-							// 문스톤과 피어싱 보호의 두루마리가 하나라도 등록된 상태가 아니면 수행할 수 없습니다.
+							// ???? ??? ??? ????? ???? ??? ??? ??? ??? ? ????.
 							g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR11), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR11));
 							break;
 						}
 #if __VER >= 15 // __15_5TH_ELEMENTAL_SMELT_SAFETY
 					case WND_ELEMENT:
 						{
-							// 속성 카드와 일반 보호의 두루마리가 하나라도 등록된 상태가 아니면 수행할 수 없습니다.
+							// ?? ??? ?? ??? ????? ???? ??? ??? ??? ??? ? ????.
 							g_WndMng.PutString( prj.GetText( TID_GAME_SMELT_SAFETY_ERROR20 ), NULL, prj.GetTextColor( TID_GAME_SMELT_SAFETY_ERROR20 ) );
 							break;
 						}
@@ -26205,7 +26166,7 @@ BOOL CWndSmeltSafety::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 				}
 				else if(GetNowSmeltValue() >= atoi(pWndEdit->GetString()))
 				{
-					// 제련을 수행할 수 없는 조건입니다.
+					// ??? ??? ? ?? ?????.
 					g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR14), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR14));
 				}
 			}
@@ -26318,7 +26279,7 @@ void CWndSmeltSafety::OnLButtonDblClk( UINT nFlags, CPoint point )
 	CRect rect = pWndStatic->GetWndRect();
 	if(rect.PtInRect(point))
 	{
-		// 제련 아이템을 더블클릭하면 Reset 버튼으로 포커스를 강제로 옮긴다
+		// ?? ???? ?????? Reset ???? ???? ??? ???
 		CWndBase* pWndResetButtonBase = GetDlgItem(WIDC_BUTTON_RESET);
 		assert(pWndResetButtonBase != NULL);
 		pWndResetButtonBase->SetFocus();
@@ -26491,7 +26452,7 @@ void CWndSmeltSafety::SetItem(CItemElem* pItemElem)
 
 	if(m_bStart != FALSE)
 	{
-		// 안전 제련 도중에는 아이템을 등록할 수 없습니다.
+		// ?? ?? ???? ???? ??? ? ????.
 		g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR12), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR12));
 		return;
 	}
@@ -26500,7 +26461,7 @@ void CWndSmeltSafety::SetItem(CItemElem* pItemElem)
 	if(pItemProp == NULL)
 		return;
 
-	if(m_pItemElem == NULL) // 제련 아이템이 올려져 있지 않으면
+	if(m_pItemElem == NULL) // ?? ???? ??? ?? ???
 	{
 		BOOL bAcceptableItem = FALSE;
 		switch(m_eWndMode)
@@ -26513,7 +26474,7 @@ void CWndSmeltSafety::SetItem(CItemElem* pItemElem)
 				}
 				else
 				{
-					// 제련할 수 없는 아이템입니다.
+					// ??? ? ?? ??????.
 					g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR01), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR01));
 				}
 				break;
@@ -26526,7 +26487,7 @@ void CWndSmeltSafety::SetItem(CItemElem* pItemElem)
 				}
 				else
 				{
-					// 제련할 수 없는 아이템입니다.
+					// ??? ? ?? ??????.
 					g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR01), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR01));
 				}
 				break;
@@ -26539,7 +26500,7 @@ void CWndSmeltSafety::SetItem(CItemElem* pItemElem)
 				}
 				else
 				{
-					// 피어싱 할 수 없는 아이템입니다.
+					// ??? ? ? ?? ??????.
 					g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR02), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR02));
 				}
 				break;
@@ -26551,7 +26512,7 @@ void CWndSmeltSafety::SetItem(CItemElem* pItemElem)
 					bAcceptableItem = TRUE;
 				else
 				{
-					// 제련할 수 없는 아이템입니다.
+					// ??? ? ?? ??????.
 					g_WndMng.PutString( prj.GetText( TID_GAME_SMELT_SAFETY_ERROR01 ), NULL, prj.GetTextColor( TID_GAME_SMELT_SAFETY_ERROR01 ) );
 				}
 				break;
@@ -26630,12 +26591,12 @@ void CWndSmeltSafety::SetItem(CItemElem* pItemElem)
 					{
 						if(m_pItemElem->GetProp()->dwReferStat1 != WEAPON_ULTIMATE)
 						{
-							// 먼저 오리칼쿰을 등록해야 합니다.
+							// ?? ????? ???? ???.
 							g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR03), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR03));
 						}
 						else
 						{
-							// 먼저 빛나는 오리칼쿰을 등록해야 합니다.
+							// ?? ??? ????? ???? ???.
 							g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR04), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR04));
 						}
 						break;
@@ -26643,14 +26604,14 @@ void CWndSmeltSafety::SetItem(CItemElem* pItemElem)
 				case WND_ACCESSARY:
 				case WND_PIERCING:
 					{
-						// 먼저 문스톤을 등록해야 합니다.
+						// ?? ???? ???? ???.
 						g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR05), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR05));
 						break;
 					}
 #if __VER >= 15 // __15_5TH_ELEMENTAL_SMELT_SAFETY
 				case WND_ELEMENT:
 					{
-						// 먼저 속성 카드를 등록해야 합니다.
+						// ?? ?? ??? ???? ???.
 						g_WndMng.PutString( prj.GetText( TID_GAME_SMELT_SAFETY_ERROR17 ), NULL, prj.GetTextColor( TID_GAME_SMELT_SAFETY_ERROR17 ) );
 						break;
 					}
@@ -26693,12 +26654,12 @@ void CWndSmeltSafety::SetItem(CItemElem* pItemElem)
 					{
 						if(m_pItemElem->GetProp()->dwReferStat1 != WEAPON_ULTIMATE)
 						{
-							// 먼저 오리칼쿰을 등록해야 합니다.
+							// ?? ????? ???? ???.
 							g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR03), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR03));
 						}
 						else
 						{
-							// 먼저 빛나는 오리칼쿰을 등록해야 합니다.
+							// ?? ??? ????? ???? ???.
 							g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR04), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR04));
 						}
 						break;
@@ -26706,14 +26667,14 @@ void CWndSmeltSafety::SetItem(CItemElem* pItemElem)
 				case WND_ACCESSARY:
 				case WND_PIERCING:
 					{
-						// 먼저 문스톤을 등록해야 합니다.
+						// ?? ???? ???? ???.
 						g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR05), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR05));
 						break;
 					}
 #if __VER >= 15 // __15_5TH_ELEMENTAL_SMELT_SAFETY
 				case WND_ELEMENT:
 					{
-						// 먼저 속성 카드를 등록해야 합니다.
+						// ?? ?? ??? ???? ???.
 						g_WndMng.PutString( prj.GetText( TID_GAME_SMELT_SAFETY_ERROR17 ), NULL, prj.GetTextColor( TID_GAME_SMELT_SAFETY_ERROR17 ) );
 						break;
 					}
@@ -26728,22 +26689,22 @@ void CWndSmeltSafety::SetItem(CItemElem* pItemElem)
 			{
 				if( m_pItemElem->GetItemResist() != SAI79::NO_PROP )
 				{
-					// 이미 아이템에 속성 제련이 되어 있습니다. 한 아이템에 두 속성이 들어갈 수 없습니다.
+					// ?? ???? ?? ??? ?? ????. ? ???? ? ??? ??? ? ????.
 					g_WndMng.PutString( prj.GetText( TID_GAME_SMELT_SAFETY_ERROR18 ), NULL, prj.GetTextColor( TID_GAME_SMELT_SAFETY_ERROR18 ) );
 				}
 				else if( pItemProp != m_pSelectedElementalCardItemProp )
 				{
-					// 이미 다른 종류의 속성 카드가 등록되어 있습니다.
+					// ?? ?? ??? ?? ??? ???? ????.
 					g_WndMng.PutString( prj.GetText( TID_GAME_SMELT_SAFETY_ERROR19 ), NULL, prj.GetTextColor( TID_GAME_SMELT_SAFETY_ERROR19 ) );
 				}
 			}
 			else
 			{
-				// 제련 아이템에 맞는 재료나 두루마리가 아닙니다.
+				// ?? ???? ?? ??? ????? ????.
 				g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR06), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR06));
 			}
 #else // __15_5TH_ELEMENTAL_SMELT_SAFETY
-			// 제련 아이템에 맞는 재료나 두루마리가 아닙니다.
+			// ?? ???? ?? ??? ????? ????.
 			g_WndMng.PutString(prj.GetText(TID_GAME_SMELT_SAFETY_ERROR06), NULL, prj.GetTextColor(TID_GAME_SMELT_SAFETY_ERROR06));
 #endif // __15_5TH_ELEMENTAL_SMELT_SAFETY
 		}
@@ -26775,7 +26736,7 @@ void CWndSmeltSafety::RefreshText(void)
 
 void CWndSmeltSafety::RefreshValidSmeltCounter(void)
 {
-	// 유효한 제련 카운터를 (다시) 계산하여 갱신하는 코드
+	// ??? ?? ???? (??) ???? ???? ??
 	m_nValidSmeltCounter = m_nMaterialCount;
 	m_nValidSmeltCounter = (m_nScroll1Count < m_nValidSmeltCounter) ? m_nScroll1Count : m_nValidSmeltCounter;
 	m_nValidSmeltCounter -= m_nCurrentSmeltNumber;
@@ -27619,7 +27580,7 @@ void CWndCampusInvitationConfirm::OnInitialUpdate( void )
 	if( pWndText )
 	{
 		CString strMessage = _T( "" );
-		strMessage.Format( prj.GetText( TID_GAME_CAMPUS_INVITATION_CONFIRM ), m_strSenderName ); // %s 님이 사제 신청을 하셨습니다. 수락하시겠습니까?
+		strMessage.Format( prj.GetText( TID_GAME_CAMPUS_INVITATION_CONFIRM ), m_strSenderName ); // %s ?? ?? ??? ?????. ?????????
 		pWndText->AddString( strMessage );
 	}
 	CWndButton* pOk = ( CWndButton* )GetDlgItem( WIDC_BUTTON1 );
@@ -27628,7 +27589,7 @@ void CWndCampusInvitationConfirm::OnInitialUpdate( void )
 	AddWndStyle( WBS_MODAL );
 	pOk->SetDefault( TRUE );
 
-	//에디트창을 안 보이는 곳으로 보내 버리고 ENTER 받을 준비
+	//????? ? ??? ??? ?? ??? ENTER ?? ??
 	pEdit->Move( -100, -100 );
 	pEdit->SetFocus( );
 
@@ -27685,7 +27646,7 @@ void CWndCampusSeveranceConfirm::OnInitialUpdate( void )
 	if( pWndText )
 	{
 		CString strMessage = _T( "" );
-		strMessage.Format( prj.GetText( TID_GAME_CAMPUS_SEVERANCE_CONFIRM ), m_strTargetName ); // %s 님과 사제 관계를 끊겠습니까?
+		strMessage.Format( prj.GetText( TID_GAME_CAMPUS_SEVERANCE_CONFIRM ), m_strTargetName ); // %s ?? ?? ??? ??????
 		pWndText->AddString( strMessage );
 	}
 	CWndButton* pOk = ( CWndButton* )GetDlgItem( WIDC_BUTTON1 );
@@ -27694,7 +27655,7 @@ void CWndCampusSeveranceConfirm::OnInitialUpdate( void )
 	AddWndStyle( WBS_MODAL );
 	pOk->SetDefault( TRUE );
 
-	//에디트창을 안 보이는 곳으로 보내 버리고 ENTER 받을 준비
+	//????? ? ??? ??? ?? ??? ENTER ?? ??
 	pEdit->Move( -100, -100 );
 	pEdit->SetFocus( );
 
@@ -27968,7 +27929,7 @@ void CWndBarunaNPC::OnDraw(C2DRender* p2DRender)
 
 	float fModelScale = pModel->m_pModelElem->m_fScale;
 	if( fModelScale < 1.0f && fModelScale > 0.001f )
-		vecPos *= ( fModelScale - fModelScale * (0.5f + ( 1.0f - fModelScale ) * 0.01f ) );	//스케일 변동치가 클수록 
+		vecPos *= ( fModelScale - fModelScale * (0.5f + ( 1.0f - fModelScale ) * 0.01f ) );	//??? ???? ??? 
 	else if ( fModelScale > 1.0f )
 		vecPos *= ( fModelScale  - fModelScale * (0.9f + fModelScale * 0.01f) );
 	m_fRadius = pModel->GetRadius( );

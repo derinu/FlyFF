@@ -1091,7 +1091,7 @@ void CDPClient::OnDDomQueueList( CAr & ar )
 	CWndWorld* pWndWorld = (CWndWorld*)g_WndMng.GetWndBase( APP_WORLD );
 	if( pWndWorld )
 	{
-		pWndWorld->m_bDomRender = TRUE;
+		//pWndWorld->m_bDomRender = TRUE;
 	}
 }
 		
@@ -1179,7 +1179,7 @@ void CDPClient::OnJoin( CAr & ar )
 	CWndWorld* pWndWorld = (CWndWorld*)g_WndMng.GetWndBase( APP_WORLD );
 	if( pWndWorld )
 	{
-		pWndWorld->m_bDomRender = FALSE;
+		//pWndWorld->m_bDomRender = FALSE;
 		//pWndWorld->m_dwJoinWelcome = GetTickCount() + SEC( 6  );
 	}
 	MasterPacket( MASTER_BYTE_ARENA );  //snippet_221
@@ -2685,7 +2685,7 @@ void CDPClient::OnReplace( CAr & ar )
 		CWndWorld* pWndWorld = (CWndWorld*)g_WndMng.GetWndBase( APP_WORLD );
 		if( pWndWorld ) 
 		{
-			pWndWorld->m_bDomRender = FALSE;
+			//pWndWorld->m_bDomRender = FALSE;
 		}
 	}
 #endif
@@ -4550,13 +4550,14 @@ void CDPClient::OnGameJoin( CAr & ar )
 	g_WndMng.PutString( strMessage, NULL, 0xffff0000 );	
 
 #ifdef __FASTJOBCHANGE
-	if( g_pPlayer->GetLevel() == MAX_JOB_LEVEL || g_pPlayer->GetLevel() == (MAX_JOB_LEVEL+MAX_EXP_LEVEL) || g_pPlayer->GetLevel() == MAX_LEGEND_LEVEL )
-	{
-		SAFE_DELETE( g_WndMng.m_pJobChangeEx );
-		g_WndMng.m_pJobChangeEx = new CWndJobChangeEx;
-		g_WndMng.m_pJobChangeEx->Initialize();
-	}
-	if( (g_pPlayer->GetLevel() == MAX_GENERAL_LEVEL) && g_pPlayer->GetExpPercent() == 9999 )
+	if
+	(
+		(g_pPlayer->GetLevel() == 15 && g_pPlayer->GetJob() == JOB_VAGRANT) || // 1st Job Change
+		(g_pPlayer->GetLevel() == 60 && g_pPlayer->GetJob() >= JOB_MERCENARY && g_pPlayer->GetJob() <= JOB_MAGICIAN) || // 2nd Job Change
+		(g_pPlayer->GetLevel() == 120 && g_pPlayer->GetJob() >= JOB_KNIGHT && g_pPlayer->GetJob() <= JOB_ELEMENTOR && g_pPlayer->GetExpPercent() == 9999) || // Master Job Change
+		(g_pPlayer->GetLevel() == 120 && g_pPlayer->GetJob() >= JOB_KNIGHT_MASTER && g_pPlayer->GetJob() <= JOB_ELEMENTOR_MASTER && g_pPlayer->GetExpPercent() == 9999) || // Hero Job Change
+		(g_pPlayer->GetLevel() == 130 && g_pPlayer->GetJob() >= JOB_KNIGHT_HERO && g_pPlayer->GetJob() <= JOB_ELEMENTOR_HERO) // 3rd Job Change
+	)
 	{
 		SAFE_DELETE( g_WndMng.m_pJobChangeEx );
 		g_WndMng.m_pJobChangeEx = new CWndJobChangeEx;

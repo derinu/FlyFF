@@ -32,6 +32,7 @@
 	#define __GAUGE_V19
 	#define __NEW_ADV_BUTTON
 	#define __OPTION_EX
+	//#define __NEW_TASKBAR_V19
 #endif // __VER >= 19
 
 #define	__ENVIRONMENT_EFFECT

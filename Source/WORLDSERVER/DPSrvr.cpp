@@ -2430,7 +2430,7 @@ void CDPSrvr::OnPlayerMoved( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 	if( pUser->m_pActMover->IsFly() )	return;		// 비행상태인데 일로 들어왔다면 취소시키자.
 
 	D3DXVECTOR3 vDistance	= pUser->GetPos() - v;
-	if( D3DXVec3LengthSq( &vDistance ) > 125.0F )
+	if( D3DXVec3LengthSq( &vDistance ) > 125.0F && pUser->m_dwAuthorization <= AUTH_GENERAL )
 	{
 		pUser->REPLACE( g_uIdofMulti, pUser->GetWorld()->GetID(), pUser->GetPos(), REPLACE_NORMAL, pUser->GetLayer() );
 		return;
