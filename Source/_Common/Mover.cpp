@@ -2224,6 +2224,10 @@ int   CMover::SetLevel( int nSetLevel )
 	( (CUser *)this )->AddSetExperience( GetExp1(), (WORD)m_nLevel,  m_nSkillPoint, m_nSkillLevel, m_nDeathExp, (WORD)m_nDeathLevel );		// 해당유저에게 exp1,exp2변경된 정보를 보냄.
 	g_UserMng.AddSetLevel( this, (WORD)m_nLevel );
 	g_dpDBClient.SendLogLevelUp( this, 1 );	// 레벨업 로그
+
+	//Log Dave's Event
+	if(nSetLevel == 80 || (nSetLevel == 60 && IsMaster()) || (nSetLevel == 121 && IsHero()) || nSetLevel == 130)
+		::Error("[EVENT] %s has hit level %d.", GetName(), nSetLevel);
 	#endif//__LEGEND	//	9차 전승시스템	Neuz, World, Trans
 #endif
 	return 0; 

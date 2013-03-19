@@ -1122,6 +1122,32 @@ BOOL CMover::AddExperience( EXPINTEGER nExp, BOOL bFirstCall, BOOL bMultiPly, BO
 {
 	if(IsPlayer() && this->HasBuffByIk3(IK3_NOEXP))
 		nExp = 0;
+#ifdef __WORLDSERVER
+	if(!bFirstCall)
+	{
+		switch(GetLevel())
+		{
+			case 80:
+				if(!IsMaster())
+				::Error("[EVENT] %s has hit level %d.", GetName(), GetLevel());
+			break;
+			case 120:
+				if(this->GetExpPercent() == 9999)
+					::Error("[EVENT] %s has hit level %d.", GetName(), GetLevel());
+			break;
+			case 60:
+				if(IsMaster())
+					::Error("[EVENT] %s has hit level %d.", GetName(), GetLevel());
+			break;
+			case 61:
+				if(IsMaster())
+					::Error("[EVENT] %s has hit level %d.", GetName(), GetLevel());
+			case 130:
+				::Error("[EVENT] %s has hit level %d.", GetName(), GetLevel());
+			break;
+		}
+	}
+#endif
 
 #ifdef __VTN_TIMELIMIT
 	//	mulcom	BEGIN100315	베트남 시간 제한

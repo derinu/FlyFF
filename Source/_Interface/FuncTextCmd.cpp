@@ -397,6 +397,13 @@ BOOL	TextCmd_PetLevel( CScanner & s )
 {
 #ifdef __WORLDSERVER
 	CUser* pUser	= (CUser*)s.dwValue;
+
+	if(g_eLocal.GetState(EVE_STAFFLIMIT))
+	{
+		pUser->AddText("Unable to set pet, staff limitations are enabled.");
+		return FALSE;
+	}
+
 	CPet* pPet	= pUser->GetPet();
 	if( pPet && pPet->GetExpPercent() == 100 )
 		pUser->PetLevelup();
@@ -437,6 +444,13 @@ BOOL TextCmd_Pet( CScanner & s )
 	// /pet 1 100
 #ifdef __WORLDSERVER
 	CUser* pUser	= (CUser*)s.dwValue;
+
+	if(g_eLocal.GetState(EVE_STAFFLIMIT))
+	{
+		pUser->AddText("Unable to set pet, staff limitations are enabled.");
+		return FALSE;
+	}
+
 	s.GetToken();
 	if( s.tok == FINISHED )
 		return TRUE;
