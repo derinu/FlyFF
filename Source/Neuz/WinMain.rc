@@ -1777,7 +1777,7 @@ END
 // Cursor
 //
 
-IDC_BASE                CURSOR                  "res\\curBase.cur"
+IDC_BASE                CURSOR                  "res\\cursorNew.cur"
 IDC_ATTACK              CURSOR                  "res\\curAttack.cur"
 IDC_NPC                 CURSOR                  "res\\curNPC.cur"
 IDC_CONTROL             CURSOR                  "res\\curControl.cur"

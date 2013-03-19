@@ -1220,7 +1220,7 @@ BOOL CGuildHouseMng::IsBuyAble( CUser* pUser )
 			return FALSE;
 		}
 
-		if( pUser->GetGold() < BUY_PENYA )
+		if( pUser->GetTotalGold() < BUY_PENYA )
 		{
 			pUser->AddDefinedText( TID_GAME_GUILDHOUSE_BUY_EXPENSE );
 			return FALSE;

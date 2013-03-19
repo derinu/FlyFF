@@ -668,12 +668,13 @@ int CMover::CalcLinkAttackDamage( int nDamage )
 				float fDist;
 				D3DXVECTOR3	vDist;
 #if __VER >= 12 // __PARSKILL1001	//12차 파스킬 아이템 수정  world,core,neuz
-				if( pParty->m_nModeTime[PARTY_PARSKILL_MODE] )
+				/*if( pParty->m_nModeTime[PARTY_PARSKILL_MODE] )
 				{
-					nJoinMember = pParty->m_nSizeofMember;
+					//nJoinMember = pParty->m_nSizeofMember;
+					nJoinMember = 1;
 				}
 				else
-				{
+				{*/
 					for( int i = 0 ; i < pParty->m_nSizeofMember ; i++ )
 					{
 						pMemberUser = g_UserMng.GetUserByPlayerID( pParty->m_aMember[i].m_uPlayerId );
@@ -689,7 +690,7 @@ int CMover::CalcLinkAttackDamage( int nDamage )
 							}
 						}
 					}
-				}
+				//}
 #else	//__PARSKILL1001	//12차 파스킬 아이템 수정  world,core,neuz
 				for( int i = 0 ; i < pParty->m_nSizeofMember ; i++ )
 				{

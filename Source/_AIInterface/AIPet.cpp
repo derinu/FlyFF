@@ -127,7 +127,7 @@ BOOL CAIPet::SubItemLoot( void )
 	int* itemPriority = pOwner->m_dwPetFilter;
 
 	// 근처의 아이템을 검색함. - 주인님꺼만 검색해야할듯...
-	for(int Priority = 1; Priority <= 4; Priority++)
+	for(int Priority = 1; Priority < 4; Priority++)
 	{
 		FOR_LINKMAP( pWorld, vPos, pObj, nRange, CObj::linkDynamic, pMover->GetLayer() )
 		{
@@ -146,8 +146,6 @@ BOOL CAIPet::SubItemLoot( void )
 
 						if(pOwner->m_dwPetFilter[ItemType] == Priority)
 						{
-							//HighestPriority = pOwner->m_dwPetFilter[ItemType];
-
 							if( pOwner->IsLoot( pItem, TRUE) )// 루팅되는아이템인지 검사함.
 							{
 								vDist = pObj->GetPos() - pMover->GetPos();

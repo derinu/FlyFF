@@ -29762,3 +29762,857 @@ BOOL CWndFashionCombine::OnChildNotify( UINT message, UINT nID, LRESULT* pLResul
 #endif // __FASHION_COMBINE
 #ifdef __COLOSSEUM
 #endif // __COLOSSEUM
+
+CWndPetFilter::CWndPetFilter()
+{
+
+}
+
+CWndPetFilter::~CWndPetFilter() 
+{ 
+
+} 
+
+BOOL CWndPetFilter::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
+{ 
+	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_PETFILTER, WBS_MOVE, CPoint( 0, 0 ), pWndParent );
+} 
+
+void CWndPetFilter::OnDraw( C2DRender* p2DRender ) 
+{ 
+
+}
+
+void CWndPetFilter::OnInitialUpdate() 
+{ 
+	CWndNeuz::OnInitialUpdate(); 
+	SetRadioButtons();
+} 
+
+void CWndPetFilter::ChangeFilter(int Type, int Priority)
+{
+	g_DPlay.SendPetFilter(Type, Priority);
+}
+
+void CWndPetFilter::SetRadioButtons()
+{
+	CWndButton* pWndGroup1Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP1_RADIO0 );
+	CWndButton* pWndGroup1Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP1_RADIO1 );
+	CWndButton* pWndGroup1Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP1_RADIO2 );
+	CWndButton* pWndGroup1Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP1_RADIO3 );
+
+	CWndButton* pWndGroup2Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP2_RADIO0 );
+	CWndButton* pWndGroup2Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP2_RADIO1 );
+	CWndButton* pWndGroup2Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP2_RADIO2 );
+	CWndButton* pWndGroup2Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP2_RADIO3 );
+
+	CWndButton* pWndGroup3Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP3_RADIO0 );
+	CWndButton* pWndGroup3Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP3_RADIO1 );
+	CWndButton* pWndGroup3Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP3_RADIO2 );
+	CWndButton* pWndGroup3Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP3_RADIO3 );
+
+	CWndButton* pWndGroup4Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP4_RADIO0 );
+	CWndButton* pWndGroup4Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP4_RADIO1 );
+	CWndButton* pWndGroup4Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP4_RADIO2 );
+	CWndButton* pWndGroup4Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP4_RADIO3 );
+
+	CWndButton* pWndGroup5Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP5_RADIO0 );
+	CWndButton* pWndGroup5Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP5_RADIO1 );
+	CWndButton* pWndGroup5Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP5_RADIO2 );
+	CWndButton* pWndGroup5Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP5_RADIO3 );
+
+	CWndButton* pWndGroup6Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP6_RADIO0 );
+	CWndButton* pWndGroup6Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP6_RADIO1 );
+	CWndButton* pWndGroup6Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP6_RADIO2 );
+	CWndButton* pWndGroup6Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP6_RADIO3 );
+
+	CWndButton* pWndGroup7Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP7_RADIO0 );
+	CWndButton* pWndGroup7Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP7_RADIO1 );
+	CWndButton* pWndGroup7Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP7_RADIO2 );
+	CWndButton* pWndGroup7Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP7_RADIO3 );
+
+	CWndButton* pWndGroup8Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP8_RADIO0 );
+	CWndButton* pWndGroup8Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP8_RADIO1 );
+	CWndButton* pWndGroup8Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP8_RADIO2 );
+	CWndButton* pWndGroup8Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP8_RADIO3 );
+
+	CWndButton* pWndGroup9Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP9_RADIO0 );
+	CWndButton* pWndGroup9Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP9_RADIO1 );
+	CWndButton* pWndGroup9Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP9_RADIO2 );
+	CWndButton* pWndGroup9Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP9_RADIO3 );
+
+	CWndButton* pWndGroup10Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP10_RADIO0 );
+	CWndButton* pWndGroup10Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP10_RADIO1 );
+	CWndButton* pWndGroup10Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP10_RADIO2 );
+	CWndButton* pWndGroup10Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP10_RADIO3 );
+
+	CWndButton* pWndGroup11Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP11_RADIO0 );
+	CWndButton* pWndGroup11Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP11_RADIO1 );
+	CWndButton* pWndGroup11Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP11_RADIO2 );
+	CWndButton* pWndGroup11Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP11_RADIO3 );
+
+	CWndButton* pWndGroup0Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP0_RADIO0 );
+	CWndButton* pWndGroup0Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP0_RADIO1 );
+	CWndButton* pWndGroup0Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP0_RADIO2 );
+	CWndButton* pWndGroup0Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP0_RADIO3 );
+
+	switch(g_pPlayer->m_dwPetFilter[0])
+	{
+		case 0:
+			pWndGroup0Radio0->SetCheck(TRUE);
+			pWndGroup0Radio1->SetCheck(FALSE);
+			pWndGroup0Radio2->SetCheck(FALSE);
+			pWndGroup0Radio3->SetCheck(FALSE);
+		break;
+		case 1:
+			pWndGroup0Radio0->SetCheck(FALSE);
+			pWndGroup0Radio1->SetCheck(TRUE);
+			pWndGroup0Radio2->SetCheck(FALSE);
+			pWndGroup0Radio3->SetCheck(FALSE);
+		break;
+		case 2:
+			pWndGroup0Radio0->SetCheck(FALSE);
+			pWndGroup0Radio1->SetCheck(FALSE);
+			pWndGroup0Radio2->SetCheck(TRUE);
+			pWndGroup0Radio3->SetCheck(FALSE);
+		break;
+		case 3:
+			pWndGroup0Radio0->SetCheck(FALSE);
+			pWndGroup0Radio1->SetCheck(FALSE);
+			pWndGroup0Radio2->SetCheck(FALSE);
+			pWndGroup0Radio3->SetCheck(TRUE);
+		break;
+	}
+
+	switch(g_pPlayer->m_dwPetFilter[1])
+	{
+		case 0:
+			pWndGroup1Radio0->SetCheck(TRUE);
+			pWndGroup1Radio1->SetCheck(FALSE);
+			pWndGroup1Radio2->SetCheck(FALSE);
+			pWndGroup1Radio3->SetCheck(FALSE);
+		break;
+		case 1:
+			pWndGroup1Radio0->SetCheck(FALSE);
+			pWndGroup1Radio1->SetCheck(TRUE);
+			pWndGroup1Radio2->SetCheck(FALSE);
+			pWndGroup1Radio3->SetCheck(FALSE);
+		break;
+		case 2:
+			pWndGroup1Radio0->SetCheck(FALSE);
+			pWndGroup1Radio1->SetCheck(FALSE);
+			pWndGroup1Radio2->SetCheck(TRUE);
+			pWndGroup1Radio3->SetCheck(FALSE);
+		break;
+		case 3:
+			pWndGroup1Radio0->SetCheck(FALSE);
+			pWndGroup1Radio1->SetCheck(FALSE);
+			pWndGroup1Radio2->SetCheck(FALSE);
+			pWndGroup1Radio3->SetCheck(TRUE);
+		break;
+	}
+
+	switch(g_pPlayer->m_dwPetFilter[2])
+	{
+		case 0:
+			pWndGroup2Radio0->SetCheck(TRUE);
+			pWndGroup2Radio1->SetCheck(FALSE);
+			pWndGroup2Radio2->SetCheck(FALSE);
+			pWndGroup2Radio3->SetCheck(FALSE);
+		break;
+		case 1:
+			pWndGroup2Radio0->SetCheck(FALSE);
+			pWndGroup2Radio1->SetCheck(TRUE);
+			pWndGroup2Radio2->SetCheck(FALSE);
+			pWndGroup2Radio3->SetCheck(FALSE);
+		break;
+		case 2:
+			pWndGroup2Radio0->SetCheck(FALSE);
+			pWndGroup2Radio1->SetCheck(FALSE);
+			pWndGroup2Radio2->SetCheck(TRUE);
+			pWndGroup2Radio3->SetCheck(FALSE);
+		break;
+		case 3:
+			pWndGroup2Radio0->SetCheck(FALSE);
+			pWndGroup2Radio1->SetCheck(FALSE);
+			pWndGroup2Radio2->SetCheck(FALSE);
+			pWndGroup2Radio3->SetCheck(TRUE);
+		break;
+	}
+
+	switch(g_pPlayer->m_dwPetFilter[3])
+	{
+		case 0:
+			pWndGroup3Radio0->SetCheck(TRUE);
+			pWndGroup3Radio1->SetCheck(FALSE);
+			pWndGroup3Radio2->SetCheck(FALSE);
+			pWndGroup3Radio3->SetCheck(FALSE);
+		break;
+		case 1:
+			pWndGroup3Radio0->SetCheck(FALSE);
+			pWndGroup3Radio1->SetCheck(TRUE);
+			pWndGroup3Radio2->SetCheck(FALSE);
+			pWndGroup3Radio3->SetCheck(FALSE);
+		break;
+		case 2:
+			pWndGroup3Radio0->SetCheck(FALSE);
+			pWndGroup3Radio1->SetCheck(FALSE);
+			pWndGroup3Radio2->SetCheck(TRUE);
+			pWndGroup3Radio3->SetCheck(FALSE);
+		break;
+		case 3:
+			pWndGroup3Radio0->SetCheck(FALSE);
+			pWndGroup3Radio1->SetCheck(FALSE);
+			pWndGroup3Radio2->SetCheck(FALSE);
+			pWndGroup3Radio3->SetCheck(TRUE);
+		break;
+	}
+
+	switch(g_pPlayer->m_dwPetFilter[4])
+	{
+		case 0:
+			pWndGroup4Radio0->SetCheck(TRUE);
+			pWndGroup4Radio1->SetCheck(FALSE);
+			pWndGroup4Radio2->SetCheck(FALSE);
+			pWndGroup4Radio3->SetCheck(FALSE);
+		break;
+		case 1:
+			pWndGroup4Radio0->SetCheck(FALSE);
+			pWndGroup4Radio1->SetCheck(TRUE);
+			pWndGroup4Radio2->SetCheck(FALSE);
+			pWndGroup4Radio3->SetCheck(FALSE);
+		break;
+		case 2:
+			pWndGroup4Radio0->SetCheck(FALSE);
+			pWndGroup4Radio1->SetCheck(FALSE);
+			pWndGroup4Radio2->SetCheck(TRUE);
+			pWndGroup4Radio3->SetCheck(FALSE);
+		break;
+		case 3:
+			pWndGroup4Radio0->SetCheck(FALSE);
+			pWndGroup4Radio1->SetCheck(FALSE);
+			pWndGroup4Radio2->SetCheck(FALSE);
+			pWndGroup4Radio3->SetCheck(TRUE);
+		break;
+	}
+
+	switch(g_pPlayer->m_dwPetFilter[5])
+	{
+		case 0:
+			pWndGroup5Radio0->SetCheck(TRUE);
+			pWndGroup5Radio1->SetCheck(FALSE);
+			pWndGroup5Radio2->SetCheck(FALSE);
+			pWndGroup5Radio3->SetCheck(FALSE);
+		break;
+		case 1:
+			pWndGroup5Radio0->SetCheck(FALSE);
+			pWndGroup5Radio1->SetCheck(TRUE);
+			pWndGroup5Radio2->SetCheck(FALSE);
+			pWndGroup5Radio3->SetCheck(FALSE);
+		break;
+		case 2:
+			pWndGroup5Radio0->SetCheck(FALSE);
+			pWndGroup5Radio1->SetCheck(FALSE);
+			pWndGroup5Radio2->SetCheck(TRUE);
+			pWndGroup5Radio3->SetCheck(FALSE);
+		break;
+		case 3:
+			pWndGroup5Radio0->SetCheck(FALSE);
+			pWndGroup5Radio1->SetCheck(FALSE);
+			pWndGroup5Radio2->SetCheck(FALSE);
+			pWndGroup5Radio3->SetCheck(TRUE);
+		break;
+	}
+
+	switch(g_pPlayer->m_dwPetFilter[6])
+	{
+		case 0:
+			pWndGroup6Radio0->SetCheck(TRUE);
+			pWndGroup6Radio1->SetCheck(FALSE);
+			pWndGroup6Radio2->SetCheck(FALSE);
+			pWndGroup6Radio3->SetCheck(FALSE);
+		break;
+		case 1:
+			pWndGroup6Radio0->SetCheck(FALSE);
+			pWndGroup6Radio1->SetCheck(TRUE);
+			pWndGroup6Radio2->SetCheck(FALSE);
+			pWndGroup6Radio3->SetCheck(FALSE);
+		break;
+		case 2:
+			pWndGroup6Radio0->SetCheck(FALSE);
+			pWndGroup6Radio1->SetCheck(FALSE);
+			pWndGroup6Radio2->SetCheck(TRUE);
+			pWndGroup6Radio3->SetCheck(FALSE);
+		break;
+		case 3:
+			pWndGroup6Radio0->SetCheck(FALSE);
+			pWndGroup6Radio1->SetCheck(FALSE);
+			pWndGroup6Radio2->SetCheck(FALSE);
+			pWndGroup6Radio3->SetCheck(TRUE);
+		break;
+	}
+
+	switch(g_pPlayer->m_dwPetFilter[7])
+	{
+		case 0:
+			pWndGroup7Radio0->SetCheck(TRUE);
+			pWndGroup7Radio1->SetCheck(FALSE);
+			pWndGroup7Radio2->SetCheck(FALSE);
+			pWndGroup7Radio3->SetCheck(FALSE);
+		break;
+		case 1:
+			pWndGroup7Radio0->SetCheck(FALSE);
+			pWndGroup7Radio1->SetCheck(TRUE);
+			pWndGroup7Radio2->SetCheck(FALSE);
+			pWndGroup7Radio3->SetCheck(FALSE);
+		break;
+		case 2:
+			pWndGroup7Radio0->SetCheck(FALSE);
+			pWndGroup7Radio1->SetCheck(FALSE);
+			pWndGroup7Radio2->SetCheck(TRUE);
+			pWndGroup7Radio3->SetCheck(FALSE);
+		break;
+		case 3:
+			pWndGroup7Radio0->SetCheck(FALSE);
+			pWndGroup7Radio1->SetCheck(FALSE);
+			pWndGroup7Radio2->SetCheck(FALSE);
+			pWndGroup7Radio3->SetCheck(TRUE);
+		break;
+	}
+
+	switch(g_pPlayer->m_dwPetFilter[8])
+	{
+		case 0:
+			pWndGroup8Radio0->SetCheck(TRUE);
+			pWndGroup8Radio1->SetCheck(FALSE);
+			pWndGroup8Radio2->SetCheck(FALSE);
+			pWndGroup8Radio3->SetCheck(FALSE);
+		break;
+		case 1:
+			pWndGroup8Radio0->SetCheck(FALSE);
+			pWndGroup8Radio1->SetCheck(TRUE);
+			pWndGroup8Radio2->SetCheck(FALSE);
+			pWndGroup8Radio3->SetCheck(FALSE);
+		break;
+		case 2:
+			pWndGroup8Radio0->SetCheck(FALSE);
+			pWndGroup8Radio1->SetCheck(FALSE);
+			pWndGroup8Radio2->SetCheck(TRUE);
+			pWndGroup8Radio3->SetCheck(FALSE);
+		break;
+		case 3:
+			pWndGroup8Radio0->SetCheck(FALSE);
+			pWndGroup8Radio1->SetCheck(FALSE);
+			pWndGroup8Radio2->SetCheck(FALSE);
+			pWndGroup8Radio3->SetCheck(TRUE);
+		break;
+	}
+
+	switch(g_pPlayer->m_dwPetFilter[9])
+	{
+		case 0:
+			pWndGroup9Radio0->SetCheck(TRUE);
+			pWndGroup9Radio1->SetCheck(FALSE);
+			pWndGroup9Radio2->SetCheck(FALSE);
+			pWndGroup9Radio3->SetCheck(FALSE);
+		break;
+		case 1:
+			pWndGroup9Radio0->SetCheck(FALSE);
+			pWndGroup9Radio1->SetCheck(TRUE);
+			pWndGroup9Radio2->SetCheck(FALSE);
+			pWndGroup9Radio3->SetCheck(FALSE);
+		break;
+		case 2:
+			pWndGroup9Radio0->SetCheck(FALSE);
+			pWndGroup9Radio1->SetCheck(FALSE);
+			pWndGroup9Radio2->SetCheck(TRUE);
+			pWndGroup9Radio3->SetCheck(FALSE);
+		break;
+		case 3:
+			pWndGroup9Radio0->SetCheck(FALSE);
+			pWndGroup9Radio1->SetCheck(FALSE);
+			pWndGroup9Radio2->SetCheck(FALSE);
+			pWndGroup9Radio3->SetCheck(TRUE);
+		break;
+	}
+
+	switch(g_pPlayer->m_dwPetFilter[10])
+	{
+		case 0:
+			pWndGroup10Radio0->SetCheck(TRUE);
+			pWndGroup10Radio1->SetCheck(FALSE);
+			pWndGroup10Radio2->SetCheck(FALSE);
+			pWndGroup10Radio3->SetCheck(FALSE);
+		break;
+		case 1:
+			pWndGroup10Radio0->SetCheck(FALSE);
+			pWndGroup10Radio1->SetCheck(TRUE);
+			pWndGroup10Radio2->SetCheck(FALSE);
+			pWndGroup10Radio3->SetCheck(FALSE);
+		break;
+		case 2:
+			pWndGroup10Radio0->SetCheck(FALSE);
+			pWndGroup10Radio1->SetCheck(FALSE);
+			pWndGroup10Radio2->SetCheck(TRUE);
+			pWndGroup10Radio3->SetCheck(FALSE);
+		break;
+		case 3:
+			pWndGroup10Radio0->SetCheck(FALSE);
+			pWndGroup10Radio1->SetCheck(FALSE);
+			pWndGroup10Radio2->SetCheck(FALSE);
+			pWndGroup10Radio3->SetCheck(TRUE);
+		break;
+	}
+
+	switch(g_pPlayer->m_dwPetFilter[11])
+	{
+		case 0:
+			pWndGroup11Radio0->SetCheck(TRUE);
+			pWndGroup11Radio1->SetCheck(FALSE);
+			pWndGroup11Radio2->SetCheck(FALSE);
+			pWndGroup11Radio3->SetCheck(FALSE);
+		break;
+		case 1:
+			pWndGroup11Radio0->SetCheck(FALSE);
+			pWndGroup11Radio1->SetCheck(TRUE);
+			pWndGroup11Radio2->SetCheck(FALSE);
+			pWndGroup11Radio3->SetCheck(FALSE);
+		break;
+		case 2:
+			pWndGroup11Radio0->SetCheck(FALSE);
+			pWndGroup11Radio1->SetCheck(FALSE);
+			pWndGroup11Radio2->SetCheck(TRUE);
+			pWndGroup11Radio3->SetCheck(FALSE);
+		break;
+		case 3:
+			pWndGroup11Radio0->SetCheck(FALSE);
+			pWndGroup11Radio1->SetCheck(FALSE);
+			pWndGroup11Radio2->SetCheck(FALSE);
+			pWndGroup11Radio3->SetCheck(TRUE);
+		break;
+	}
+}
+
+BOOL CWndPetFilter::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase ) 
+{ 
+	return CWndNeuz::OnCommand( nID, dwMessage, pWndBase ); 
+} 
+
+void CWndPetFilter::OnSize( UINT nType, int cx, int cy )
+{ 
+	CWndNeuz::OnSize( nType, cx, cy ); 
+} 
+
+void CWndPetFilter::OnLButtonUp( UINT nFlags, CPoint point ) 
+{ 
+
+} 
+void CWndPetFilter::OnLButtonDown( UINT nFlags, CPoint point ) 
+{ 
+
+} 
+
+BOOL CWndPetFilter::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult ) 
+{ 
+	CWndButton* pWndGroup1Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP1_RADIO0 );
+	CWndButton* pWndGroup1Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP1_RADIO1 );
+	CWndButton* pWndGroup1Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP1_RADIO2 );
+	CWndButton* pWndGroup1Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP1_RADIO3 );
+
+	CWndButton* pWndGroup2Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP2_RADIO0 );
+	CWndButton* pWndGroup2Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP2_RADIO1 );
+	CWndButton* pWndGroup2Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP2_RADIO2 );
+	CWndButton* pWndGroup2Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP2_RADIO3 );
+
+	CWndButton* pWndGroup3Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP3_RADIO0 );
+	CWndButton* pWndGroup3Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP3_RADIO1 );
+	CWndButton* pWndGroup3Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP3_RADIO2 );
+	CWndButton* pWndGroup3Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP3_RADIO3 );
+
+	CWndButton* pWndGroup4Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP4_RADIO0 );
+	CWndButton* pWndGroup4Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP4_RADIO1 );
+	CWndButton* pWndGroup4Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP4_RADIO2 );
+	CWndButton* pWndGroup4Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP4_RADIO3 );
+
+	CWndButton* pWndGroup5Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP5_RADIO0 );
+	CWndButton* pWndGroup5Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP5_RADIO1 );
+	CWndButton* pWndGroup5Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP5_RADIO2 );
+	CWndButton* pWndGroup5Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP5_RADIO3 );
+
+	CWndButton* pWndGroup6Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP6_RADIO0 );
+	CWndButton* pWndGroup6Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP6_RADIO1 );
+	CWndButton* pWndGroup6Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP6_RADIO2 );
+	CWndButton* pWndGroup6Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP6_RADIO3 );
+
+	CWndButton* pWndGroup7Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP7_RADIO0 );
+	CWndButton* pWndGroup7Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP7_RADIO1 );
+	CWndButton* pWndGroup7Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP7_RADIO2 );
+	CWndButton* pWndGroup7Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP7_RADIO3 );
+
+	CWndButton* pWndGroup8Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP8_RADIO0 );
+	CWndButton* pWndGroup8Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP8_RADIO1 );
+	CWndButton* pWndGroup8Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP8_RADIO2 );
+	CWndButton* pWndGroup8Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP8_RADIO3 );
+
+	CWndButton* pWndGroup9Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP9_RADIO0 );
+	CWndButton* pWndGroup9Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP9_RADIO1 );
+	CWndButton* pWndGroup9Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP9_RADIO2 );
+	CWndButton* pWndGroup9Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP9_RADIO3 );
+
+	CWndButton* pWndGroup10Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP10_RADIO0 );
+	CWndButton* pWndGroup10Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP10_RADIO1 );
+	CWndButton* pWndGroup10Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP10_RADIO2 );
+	CWndButton* pWndGroup10Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP10_RADIO3 );
+
+	CWndButton* pWndGroup11Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP11_RADIO0 );
+	CWndButton* pWndGroup11Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP11_RADIO1 );
+	CWndButton* pWndGroup11Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP11_RADIO2 );
+	CWndButton* pWndGroup11Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP11_RADIO3 );
+
+	CWndButton* pWndGroup0Radio0 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP0_RADIO0 );
+	CWndButton* pWndGroup0Radio1 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP0_RADIO1 );
+	CWndButton* pWndGroup0Radio2 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP0_RADIO2 );
+	CWndButton* pWndGroup0Radio3 = (CWndButton*)GetDlgItem( WIDC_PF_GROUP0_RADIO3 );
+
+	switch(nID)
+	{
+		case WIDC_PF_GROUP1_RADIO0:
+			pWndGroup1Radio0->SetCheck(TRUE);
+			pWndGroup1Radio1->SetCheck(FALSE);
+			pWndGroup1Radio2->SetCheck(FALSE);
+			pWndGroup1Radio3->SetCheck(FALSE);
+			ChangeFilter(1, 0);
+		break;
+		case WIDC_PF_GROUP1_RADIO1:
+			pWndGroup1Radio0->SetCheck(FALSE);
+			pWndGroup1Radio1->SetCheck(TRUE);
+			pWndGroup1Radio2->SetCheck(FALSE);
+			pWndGroup1Radio3->SetCheck(FALSE);
+			ChangeFilter(1, 1);
+		break;
+		case WIDC_PF_GROUP1_RADIO2:
+			pWndGroup1Radio0->SetCheck(FALSE);
+			pWndGroup1Radio1->SetCheck(FALSE);
+			pWndGroup1Radio2->SetCheck(TRUE);
+			pWndGroup1Radio3->SetCheck(FALSE);
+			ChangeFilter(1, 2);
+		break;
+		case WIDC_PF_GROUP1_RADIO3:
+			pWndGroup1Radio0->SetCheck(FALSE);
+			pWndGroup1Radio1->SetCheck(FALSE);
+			pWndGroup1Radio2->SetCheck(FALSE);
+			pWndGroup1Radio3->SetCheck(TRUE);
+			ChangeFilter(1, 3);
+		break;
+		case WIDC_PF_GROUP2_RADIO0:
+			pWndGroup2Radio0->SetCheck(TRUE);
+			pWndGroup2Radio1->SetCheck(FALSE);
+			pWndGroup2Radio2->SetCheck(FALSE);
+			pWndGroup2Radio3->SetCheck(FALSE);
+			ChangeFilter(2, 0);
+		break;
+		case WIDC_PF_GROUP2_RADIO1:
+			pWndGroup2Radio0->SetCheck(FALSE);
+			pWndGroup2Radio1->SetCheck(TRUE);
+			pWndGroup2Radio2->SetCheck(FALSE);
+			pWndGroup2Radio3->SetCheck(FALSE);
+			ChangeFilter(2, 1);
+		break;
+		case WIDC_PF_GROUP2_RADIO2:
+			pWndGroup2Radio0->SetCheck(FALSE);
+			pWndGroup2Radio1->SetCheck(FALSE);
+			pWndGroup2Radio2->SetCheck(TRUE);
+			pWndGroup2Radio3->SetCheck(FALSE);
+			ChangeFilter(2, 2);
+		break;
+		case WIDC_PF_GROUP2_RADIO3:
+			pWndGroup2Radio0->SetCheck(FALSE);
+			pWndGroup2Radio1->SetCheck(FALSE);
+			pWndGroup2Radio2->SetCheck(FALSE);
+			pWndGroup2Radio3->SetCheck(TRUE);
+			ChangeFilter(2, 3);
+		break;
+		case WIDC_PF_GROUP3_RADIO0:
+			pWndGroup3Radio0->SetCheck(TRUE);
+			pWndGroup3Radio1->SetCheck(FALSE);
+			pWndGroup3Radio2->SetCheck(FALSE);
+			pWndGroup3Radio3->SetCheck(FALSE);
+			ChangeFilter(3, 0);
+		break;
+		case WIDC_PF_GROUP3_RADIO1:
+			pWndGroup3Radio0->SetCheck(FALSE);
+			pWndGroup3Radio1->SetCheck(TRUE);
+			pWndGroup3Radio2->SetCheck(FALSE);
+			pWndGroup3Radio3->SetCheck(FALSE);
+			ChangeFilter(3, 1);
+		break;
+		case WIDC_PF_GROUP3_RADIO2:
+			pWndGroup3Radio0->SetCheck(FALSE);
+			pWndGroup3Radio1->SetCheck(FALSE);
+			pWndGroup3Radio2->SetCheck(TRUE);
+			pWndGroup3Radio3->SetCheck(FALSE);
+			ChangeFilter(3, 2);
+		break;
+		case WIDC_PF_GROUP3_RADIO3:
+			pWndGroup3Radio0->SetCheck(FALSE);
+			pWndGroup3Radio1->SetCheck(FALSE);
+			pWndGroup3Radio2->SetCheck(FALSE);
+			pWndGroup3Radio3->SetCheck(TRUE);
+			ChangeFilter(3, 3);
+		break;
+		case WIDC_PF_GROUP4_RADIO0:
+			pWndGroup4Radio0->SetCheck(TRUE);
+			pWndGroup4Radio1->SetCheck(FALSE);
+			pWndGroup4Radio2->SetCheck(FALSE);
+			pWndGroup4Radio3->SetCheck(FALSE);
+			ChangeFilter(4, 0);
+		break;
+		case WIDC_PF_GROUP4_RADIO1:
+			pWndGroup4Radio0->SetCheck(FALSE);
+			pWndGroup4Radio1->SetCheck(TRUE);
+			pWndGroup4Radio2->SetCheck(FALSE);
+			pWndGroup4Radio3->SetCheck(FALSE);
+			ChangeFilter(4, 1);
+		break;
+		case WIDC_PF_GROUP4_RADIO2:
+			pWndGroup4Radio0->SetCheck(FALSE);
+			pWndGroup4Radio1->SetCheck(FALSE);
+			pWndGroup4Radio2->SetCheck(TRUE);
+			pWndGroup4Radio3->SetCheck(FALSE);
+			ChangeFilter(4, 2);
+		break;
+		case WIDC_PF_GROUP4_RADIO3:
+			pWndGroup4Radio0->SetCheck(FALSE);
+			pWndGroup4Radio1->SetCheck(FALSE);
+			pWndGroup4Radio2->SetCheck(FALSE);
+			pWndGroup4Radio3->SetCheck(TRUE);
+			ChangeFilter(4, 3);
+		break;
+		case WIDC_PF_GROUP5_RADIO0:
+			pWndGroup5Radio0->SetCheck(TRUE);
+			pWndGroup5Radio1->SetCheck(FALSE);
+			pWndGroup5Radio2->SetCheck(FALSE);
+			pWndGroup5Radio3->SetCheck(FALSE);
+			ChangeFilter(5, 0);
+		break;
+		case WIDC_PF_GROUP5_RADIO1:
+			pWndGroup5Radio0->SetCheck(FALSE);
+			pWndGroup5Radio1->SetCheck(TRUE);
+			pWndGroup5Radio2->SetCheck(FALSE);
+			pWndGroup5Radio3->SetCheck(FALSE);
+			ChangeFilter(5, 1);
+		break;
+		case WIDC_PF_GROUP5_RADIO2:
+			pWndGroup5Radio0->SetCheck(FALSE);
+			pWndGroup5Radio1->SetCheck(FALSE);
+			pWndGroup5Radio2->SetCheck(TRUE);
+			pWndGroup5Radio3->SetCheck(FALSE);
+			ChangeFilter(5, 2);
+		break;
+		case WIDC_PF_GROUP5_RADIO3:
+			pWndGroup5Radio0->SetCheck(FALSE);
+			pWndGroup5Radio1->SetCheck(FALSE);
+			pWndGroup5Radio2->SetCheck(FALSE);
+			pWndGroup5Radio3->SetCheck(TRUE);
+			ChangeFilter(5, 3);
+		break;
+		case WIDC_PF_GROUP6_RADIO0:
+			pWndGroup6Radio0->SetCheck(TRUE);
+			pWndGroup6Radio1->SetCheck(FALSE);
+			pWndGroup6Radio2->SetCheck(FALSE);
+			pWndGroup6Radio3->SetCheck(FALSE);
+			ChangeFilter(6, 0);
+		break;
+		case WIDC_PF_GROUP6_RADIO1:
+			pWndGroup6Radio0->SetCheck(FALSE);
+			pWndGroup6Radio1->SetCheck(TRUE);
+			pWndGroup6Radio2->SetCheck(FALSE);
+			pWndGroup6Radio3->SetCheck(FALSE);
+			ChangeFilter(6, 1);
+		break;
+		case WIDC_PF_GROUP6_RADIO2:
+			pWndGroup6Radio0->SetCheck(FALSE);
+			pWndGroup6Radio1->SetCheck(FALSE);
+			pWndGroup6Radio2->SetCheck(TRUE);
+			pWndGroup6Radio3->SetCheck(FALSE);
+			ChangeFilter(6, 2);
+		break;
+		case WIDC_PF_GROUP6_RADIO3:
+			pWndGroup6Radio0->SetCheck(FALSE);
+			pWndGroup6Radio1->SetCheck(FALSE);
+			pWndGroup6Radio2->SetCheck(FALSE);
+			pWndGroup6Radio3->SetCheck(TRUE);
+			ChangeFilter(6, 3);
+		break;
+		case WIDC_PF_GROUP7_RADIO0:
+			pWndGroup7Radio0->SetCheck(TRUE);
+			pWndGroup7Radio1->SetCheck(FALSE);
+			pWndGroup7Radio2->SetCheck(FALSE);
+			pWndGroup7Radio3->SetCheck(FALSE);
+			ChangeFilter(7, 0);
+		break;
+		case WIDC_PF_GROUP7_RADIO1:
+			pWndGroup7Radio0->SetCheck(FALSE);
+			pWndGroup7Radio1->SetCheck(TRUE);
+			pWndGroup7Radio2->SetCheck(FALSE);
+			pWndGroup7Radio3->SetCheck(FALSE);
+			ChangeFilter(7, 1);
+		break;
+		case WIDC_PF_GROUP7_RADIO2:
+			pWndGroup7Radio0->SetCheck(FALSE);
+			pWndGroup7Radio1->SetCheck(FALSE);
+			pWndGroup7Radio2->SetCheck(TRUE);
+			pWndGroup7Radio3->SetCheck(FALSE);
+			ChangeFilter(7, 2);
+		break;
+		case WIDC_PF_GROUP7_RADIO3:
+			pWndGroup7Radio0->SetCheck(FALSE);
+			pWndGroup7Radio1->SetCheck(FALSE);
+			pWndGroup7Radio2->SetCheck(FALSE);
+			pWndGroup7Radio3->SetCheck(TRUE);
+			ChangeFilter(7, 3);
+		break;
+		case WIDC_PF_GROUP8_RADIO0:
+			pWndGroup8Radio0->SetCheck(TRUE);
+			pWndGroup8Radio1->SetCheck(FALSE);
+			pWndGroup8Radio2->SetCheck(FALSE);
+			pWndGroup8Radio3->SetCheck(FALSE);
+			ChangeFilter(8, 0);
+		break;
+		case WIDC_PF_GROUP8_RADIO1:
+			pWndGroup8Radio0->SetCheck(FALSE);
+			pWndGroup8Radio1->SetCheck(TRUE);
+			pWndGroup8Radio2->SetCheck(FALSE);
+			pWndGroup8Radio3->SetCheck(FALSE);
+			ChangeFilter(8, 1);
+		break;
+		case WIDC_PF_GROUP8_RADIO2:
+			pWndGroup8Radio0->SetCheck(FALSE);
+			pWndGroup8Radio1->SetCheck(FALSE);
+			pWndGroup8Radio2->SetCheck(TRUE);
+			pWndGroup8Radio3->SetCheck(FALSE);
+			ChangeFilter(8, 2);
+		break;
+		case WIDC_PF_GROUP8_RADIO3:
+			pWndGroup8Radio0->SetCheck(FALSE);
+			pWndGroup8Radio1->SetCheck(FALSE);
+			pWndGroup8Radio2->SetCheck(FALSE);
+			pWndGroup8Radio3->SetCheck(TRUE);
+			ChangeFilter(8, 3);
+		break;
+		case WIDC_PF_GROUP9_RADIO0:
+			pWndGroup9Radio0->SetCheck(TRUE);
+			pWndGroup9Radio1->SetCheck(FALSE);
+			pWndGroup9Radio2->SetCheck(FALSE);
+			pWndGroup9Radio3->SetCheck(FALSE);
+			ChangeFilter(9, 0);
+		break;
+		case WIDC_PF_GROUP9_RADIO1:
+			pWndGroup9Radio0->SetCheck(FALSE);
+			pWndGroup9Radio1->SetCheck(TRUE);
+			pWndGroup9Radio2->SetCheck(FALSE);
+			pWndGroup9Radio3->SetCheck(FALSE);
+			ChangeFilter(9, 1);
+		break;
+		case WIDC_PF_GROUP9_RADIO2:
+			pWndGroup9Radio0->SetCheck(FALSE);
+			pWndGroup9Radio1->SetCheck(FALSE);
+			pWndGroup9Radio2->SetCheck(TRUE);
+			pWndGroup9Radio3->SetCheck(FALSE);
+			ChangeFilter(9, 2);
+		break;
+		case WIDC_PF_GROUP9_RADIO3:
+			pWndGroup9Radio0->SetCheck(FALSE);
+			pWndGroup9Radio1->SetCheck(FALSE);
+			pWndGroup9Radio2->SetCheck(FALSE);
+			pWndGroup9Radio3->SetCheck(TRUE);
+			ChangeFilter(9, 3);
+		break;
+		case WIDC_PF_GROUP10_RADIO0:
+			pWndGroup10Radio0->SetCheck(TRUE);
+			pWndGroup10Radio1->SetCheck(FALSE);
+			pWndGroup10Radio2->SetCheck(FALSE);
+			pWndGroup10Radio3->SetCheck(FALSE);
+			ChangeFilter(10, 0);
+		break;
+		case WIDC_PF_GROUP10_RADIO1:
+			pWndGroup10Radio0->SetCheck(FALSE);
+			pWndGroup10Radio1->SetCheck(TRUE);
+			pWndGroup10Radio2->SetCheck(FALSE);
+			pWndGroup10Radio3->SetCheck(FALSE);
+			ChangeFilter(10, 1);
+		break;
+		case WIDC_PF_GROUP10_RADIO2:
+			pWndGroup10Radio0->SetCheck(FALSE);
+			pWndGroup10Radio1->SetCheck(FALSE);
+			pWndGroup10Radio2->SetCheck(TRUE);
+			pWndGroup10Radio3->SetCheck(FALSE);
+			ChangeFilter(10, 2);
+		break;
+		case WIDC_PF_GROUP10_RADIO3:
+			pWndGroup10Radio0->SetCheck(FALSE);
+			pWndGroup10Radio1->SetCheck(FALSE);
+			pWndGroup10Radio2->SetCheck(FALSE);
+			pWndGroup10Radio3->SetCheck(TRUE);
+			ChangeFilter(10, 3);
+		break;
+		case WIDC_PF_GROUP11_RADIO0:
+			pWndGroup11Radio0->SetCheck(TRUE);
+			pWndGroup11Radio1->SetCheck(FALSE);
+			pWndGroup11Radio2->SetCheck(FALSE);
+			pWndGroup11Radio3->SetCheck(FALSE);
+			ChangeFilter(11, 0);
+		break;
+		case WIDC_PF_GROUP11_RADIO1:
+			pWndGroup11Radio0->SetCheck(FALSE);
+			pWndGroup11Radio1->SetCheck(TRUE);
+			pWndGroup11Radio2->SetCheck(FALSE);
+			pWndGroup11Radio3->SetCheck(FALSE);
+			ChangeFilter(11, 1);
+		break;
+		case WIDC_PF_GROUP11_RADIO2:
+			pWndGroup11Radio0->SetCheck(FALSE);
+			pWndGroup11Radio1->SetCheck(FALSE);
+			pWndGroup11Radio2->SetCheck(TRUE);
+			pWndGroup11Radio3->SetCheck(FALSE);
+			ChangeFilter(11, 2);
+		break;
+		case WIDC_PF_GROUP11_RADIO3:
+			pWndGroup11Radio0->SetCheck(FALSE);
+			pWndGroup11Radio1->SetCheck(FALSE);
+			pWndGroup11Radio2->SetCheck(FALSE);
+			pWndGroup11Radio3->SetCheck(TRUE);
+			ChangeFilter(11, 3);
+		break;
+		case WIDC_PF_GROUP0_RADIO0:
+			pWndGroup0Radio0->SetCheck(TRUE);
+			pWndGroup0Radio1->SetCheck(FALSE);
+			pWndGroup0Radio2->SetCheck(FALSE);
+			pWndGroup0Radio3->SetCheck(FALSE);
+			ChangeFilter(0, 0);
+		break;
+		case WIDC_PF_GROUP0_RADIO1:
+			pWndGroup0Radio0->SetCheck(FALSE);
+			pWndGroup0Radio1->SetCheck(TRUE);
+			pWndGroup0Radio2->SetCheck(FALSE);
+			pWndGroup0Radio3->SetCheck(FALSE);
+			ChangeFilter(0, 1);
+		break;
+		case WIDC_PF_GROUP0_RADIO2:
+			pWndGroup0Radio0->SetCheck(FALSE);
+			pWndGroup0Radio1->SetCheck(FALSE);
+			pWndGroup0Radio2->SetCheck(TRUE);
+			pWndGroup0Radio3->SetCheck(FALSE);
+			ChangeFilter(0, 2);
+		break;
+		case WIDC_PF_GROUP0_RADIO3:
+			pWndGroup0Radio0->SetCheck(FALSE);
+			pWndGroup0Radio1->SetCheck(FALSE);
+			pWndGroup0Radio2->SetCheck(FALSE);
+			pWndGroup0Radio3->SetCheck(TRUE);
+			ChangeFilter(0, 3);
+		break;
+	}
+
+	return CWndNeuz::OnChildNotify( message, nID, pLResult ); 
+}

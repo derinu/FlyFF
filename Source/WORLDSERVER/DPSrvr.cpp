@@ -609,11 +609,8 @@ void CDPSrvr::OnPetFilter(CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf,
 		ar >> ItemType;
 		ar >> ItemPriority; 
 
-		if(ItemType >= 0 && ItemType <= 11 && ItemPriority >= 0 && ItemPriority <= 4)
-		{
+		if(ItemType >= 0 && ItemType <= 11 && ItemPriority >= 0 && ItemPriority < 4)
 			pUser->m_dwPetFilter[ItemType] = ItemPriority;
-			pUser->AddText("Successfully set item priority!");
-		}
 	}
 }
 

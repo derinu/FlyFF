@@ -258,7 +258,7 @@ CWndMgr::CWndMgr()
 #if __VER >= 8 //__CSC_VER8_5
 	m_pWndSummonAngel = NULL;
 #endif //__CSC_VER8_5
-
+	m_pWndPetFilter = NULL;
 	m_pWndDropConfirm = NULL;
 	m_nAlphaCount = m_nAlpha;
 	m_pWndBank = NULL;
@@ -740,6 +740,7 @@ void CWndMgr::Free()
 	SAFE_DELETE( m_pWndDialog );
 	SAFE_DELETE( m_pWndShop );
 	SAFE_DELETE( m_pWndRevival );
+	SAFE_DELETE( m_pWndPetFilter );
 
 	SAFE_DELETE(m_pReWanted);
 	SAFE_DELETE(m_pWanted);
@@ -2022,6 +2023,11 @@ void CWndMgr::OnDestroyChildWnd( CWndBase* pWndChild )
 	}
 #endif //__GUILD_HOUSE_MIDDLE
 
+	if( m_pWndPetFilter == pWndChild )
+	{
+		SAFE_DELETE( m_pWndPetFilter );
+		pWndChild = NULL;
+	}
 
 #ifdef	__COLOSSEUM
 
@@ -8082,7 +8088,10 @@ void CWndMgr::ClearAllWnd()
 			pWndQuestQuickInfo->SetVisible( FALSE );
 #endif // __IMPROVE_QUEST_INTERFACE
 
-
+		CWndPetFilter* pWndPetFilter = (CWndPetFilter*)g_WndMng.GetWndBase( APP_PETFILTER );
+		if(pWndPetFilter!= NULL)
+			pWndPetFilter->SetVisible(FALSE);
+		
 #if __VER >= 12 // __SECRET_ROOM
 		CWndSecretRoomQuick* pWndSecretRoomQuick = (CWndSecretRoomQuick*)g_WndMng.GetWndBase( APP_SECRETROOM_QUICK );
 		if(pWndSecretRoomQuick != NULL)
@@ -8134,7 +8143,9 @@ void CWndMgr::RestoreWnd()
 		if(pWndBuffPetStatus != NULL)
 			pWndBuffPetStatus->SetVisible(TRUE);
 #endif
-
+			CWndPetFilter* pWndPetFilter = (CWndPetFilter*)g_WndMng.GetWndBase( APP_PETFILTER );
+			if(pWndPetFilter!= NULL)
+				pWndPetFilter->SetVisible(TRUE);
 #endif //__CSC_VER9_1
 
 #if __VER >= 12 // __SECRET_ROOM

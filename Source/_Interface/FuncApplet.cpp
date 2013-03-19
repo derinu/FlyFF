@@ -100,6 +100,7 @@ DECLAREAPPLET( AppMain_WndLogin        , new CWndLogin        );
 DECLAREAPPLET( AppMain_WndSelectServer , new CWndSelectServer );
 DECLAREAPPLET( AppMain_WndCreateChar   , new CWndCreateChar   );
 DECLAREAPPLET( AppMain_WndSelectChar   , new CWndSelectChar   );
+DECLAREAPPLET( AppMain_WndPetFilter	   , new CWndPetFilter    );
 
 #if __VER >= 9  // __INSERT_MAP
 #ifdef __IMPROVE_MAP_SYSTEM
@@ -214,6 +215,8 @@ void CWndMgr::AddAllApplet()
 	AddAppletFunc( AppMain_WndQuest        , APP_QUEST                   , _T( "WndQuest"     )    , _T( "Icon_Quest.dds"     )    , GETTEXT( TID_TIP_QUEST          ), g_Neuz.Key.chQuest );
 #endif // __IMPROVE_QUEST_INTERFACE
 	AddAppletFunc( AppMain_WndParty        , APP_PARTY                   , _T( "WndParty"     )    , _T( "Icon_Troupe.dds"    )    , GETTEXT( TID_TIP_PARTY          ),  'P' );
+
+	AddAppletFunc( AppMain_WndPetFilter	   , APP_PETFILTER				 , _T( "WndPetFilter" )	   , _T( "Icon_Applet.dds"    )	   , _T( "PetFilter" ),  'U' );
 
 	AddAppletFunc( AppMain_WndGuild        , APP_GUILD                   , _T( "WndGuild"     )    , _T( "Icon_Troupe.dds"    )    , GETTEXT( TID_TIP_COMPANY          ),  'G' );
 
