@@ -13031,10 +13031,11 @@ void CDPSrvr::OnUpdateJob( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_lo
 {
     CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
         
-    if( IsValidObj( pUser ) == TRUE )
+    if(IsValidObj(pUser))
     {
 		int nJob, nLevel;
            	ar >> nJob;
+
 		if( pUser->m_nJob >= nJob )
 			return;
 		if( nJob < MAX_EXPERT && pUser->m_nLevel != MAX_JOB_LEVEL )

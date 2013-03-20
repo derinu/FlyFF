@@ -29791,6 +29791,7 @@ void CWndPetFilter::OnInitialUpdate()
 
 void CWndPetFilter::ChangeFilter(int Type, int Priority)
 {
+	g_pPlayer->m_dwPetFilter[Type] = Priority;
 	g_DPlay.SendPetFilter(Type, Priority);
 }
 
