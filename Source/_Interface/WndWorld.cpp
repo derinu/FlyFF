@@ -4008,7 +4008,7 @@ void CWndWorld::OnInitialUpdate()
 	m_bDomRender = FALSE;
 	m_TexBoard.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "domScoreboard.tga" ), D3DCOLOR_ARGB( 0, 0, 0, 0 ) );
 	m_TextDomination.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "domsplash.dds" ), D3DCOLOR_ARGB( 0, 0, 0, 0 ) );
-	m_TexQBackground.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "domqueuebg.dds" ), D3DCOLOR_ARGB( 0, 0, 0, 0 ) );
+	//m_TexQBackground.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "domqueuebg.dds" ), D3DCOLOR_ARGB( 0, 0, 0, 0 ) );
 	m_TexDomScore.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "domscore.png" ), D3DCOLOR_ARGB( 0, 0, 0, 0 ) );
 	m_TexDomNumber.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "domcircle.png" ), D3DCOLOR_ARGB( 0, 0, 0, 0 ) );
 	m_TexDomBase.LoadTexture( m_pApp->m_pd3dDevice, MakePath( DIR_THEME, "dombase.png" ), D3DCOLOR_ARGB( 0, 0, 0, 0 ) );
