@@ -1127,6 +1127,24 @@ BOOL CMover::AddExperience( EXPINTEGER nExp, BOOL bFirstCall, BOOL bMultiPly, BO
 	{
 		switch(GetLevel())
 		{
+			case 15:
+				switch(this->m_nJob)
+				{
+					case JOB_MERCENARY:
+						
+					break;
+
+					case JOB_ACROBAT:
+					break;
+
+					case JOB_ASSIST:
+					break;
+
+					case JOB_MAGICIAN:
+					break;
+				}
+				
+			break;
 			case 80:
 				if(!IsMaster())
 				::Error("[EVENT] %s has hit level %d.", GetName(), GetLevel());

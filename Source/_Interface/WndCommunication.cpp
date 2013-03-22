@@ -285,7 +285,7 @@ void CWndChat::OnInitialUpdate()
 	CWndButton* pWndMoveLock = (CWndButton*)GetDlgItem( WIDC_MOVELOCK );
 	CWndButton* pWndHelp = (CWndButton*)GetDlgItem( WIDC_HELP );
 	pWndLock->SetVisible( false );
-	pWndLog->SetVisible( false );
+	pWndLog->SetVisible( true );
 	pWndMoveLock->SetVisible( false );
 	pWndHelp->SetVisible( false );
 #endif //__CHAT_V19

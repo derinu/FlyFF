@@ -286,8 +286,8 @@
 
 	#define		__ADD_RESTATE_LOW			// 상용화 아이템 생성( 리스테트 하급 힘, 민첩, 체력, 지능 )
 
-	#define		__YS_CHATTING_BLOCKING_SYSTEM	// 캐릭터 채팅 차단 시스템
-	#define		__BAN_CHATTING_SYSTEM			// 연속 채팅 금지 시스템
+	//#define		__YS_CHATTING_BLOCKING_SYSTEM	// 캐릭터 채팅 차단 시스템
+	//#define		__BAN_CHATTING_SYSTEM			// 연속 채팅 금지 시스템
 
 
 	#define __ENCRYPT_PASSWORD	//	mulcom	BEGIN100218	패스워드 암호화

@@ -119,7 +119,7 @@ extern	CGuildCombat		g_GuildCombatMng;
 BOOL TextCmd_outall( CScanner& scanner )            
 { 
 #ifdef __WORLDSERVER
-    g_DPCoreClient.SendSystem( "Alle Spieler wurden vom Server verwiesen." );
+    g_DPCoreClient.SendSystem( "The server is being restarted.." );
     g_UserMng.RemoveAllUsers();
 #endif    // __WORLDSERVER
     return TRUE;
@@ -2068,8 +2068,8 @@ BOOL TextCmd_shout( CScanner& scanner )
 	if( stringBack != string || timerDobe.TimeOut() )
 	{
 		if( !g_pPlayer->IsShoutFull()
-			|| ( ::GetLanguage() == LANG_USA && ::GetSubLanguage() == LANG_SUB_USA )
-			|| ( ::GetLanguage() == LANG_USA && ::GetSubLanguage() == LANG_SUB_IND )
+//			|| ( ::GetLanguage() == LANG_USA && ::GetSubLanguage() == LANG_SUB_USA )
+//			|| ( ::GetLanguage() == LANG_USA && ::GetSubLanguage() == LANG_SUB_IND )
 			|| ::GetLanguage() == LANG_GER
 			|| ::GetLanguage() == LANG_FRE
 			|| ::GetLanguage() == LANG_JAP

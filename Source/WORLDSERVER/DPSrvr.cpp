@@ -2427,11 +2427,11 @@ void CDPSrvr::OnPlayerMoved( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 	if( pUser->m_pActMover->IsFly() )	return;		// 비행상태인데 일로 들어왔다면 취소시키자.
 
 	D3DXVECTOR3 vDistance	= pUser->GetPos() - v;
-	if( D3DXVec3LengthSq( &vDistance ) > 125.0F && pUser->m_dwAuthorization <= AUTH_GENERAL )
+	/*if( D3DXVec3LengthSq( &vDistance ) > 125.0F && pUser->m_dwAuthorization <= AUTH_GENERAL )
 	{
 		pUser->REPLACE( g_uIdofMulti, pUser->GetWorld()->GetID(), pUser->GetPos(), REPLACE_NORMAL, pUser->GetLayer() );
 		return;
-	}
+	}*/
 
 	int delay	= (int)( (float)g_TickCount.GetOffset( nTickCount ) / 66.6667f );
 
@@ -10532,6 +10532,15 @@ void CDPSrvr::OnMakePetFeed( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 	CUser* pUser	=	g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
+		/*if(pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+		{
+		}
+		else
+		{
+			pUser->AddText("Making pet feed is disabled at the moment, sorry for the inconvenience.");
+			return;
+		}*/
+
 		DWORD dwMaterialId, dwToolId;
 		short nNum;
 
@@ -10605,8 +10614,18 @@ void CDPSrvr::OnMakePetFeed( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 			}
 			nTotalFeed	+= nFeed;
 		}
-		itemElem.m_nItemNum		= nTotalFeed;
+
+		//pet feed fix because this should be done anyway...?
+		if(nTotalFeed < 0)
+			nTotalFeed = 1;
+
+		if(nTotalFeed > 32,767)
+			nTotalFeed = 32,767;
+
+		itemElem.m_nItemNum		= static_cast<short>(nTotalFeed);
 		itemElem.m_nHitPoint	= -1;
+
+		::Error("Making %d pet feed.", nTotalFeed);
 
 		int nResult = pUser->CreateItem( &itemElem );
 		if( nResult )

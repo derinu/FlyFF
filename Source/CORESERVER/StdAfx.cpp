@@ -12,7 +12,7 @@
 CTickCount	g_TickCount;
 CGameTimer	g_GameTimer;
 
-FLOAT	s_fPartyExpRate		= 1.0f;
+FLOAT	s_fPartyExpRate		= 4.0f;
 
 #ifdef __EVENT0913
 BOOL	s_bEvent0913	= FALSE;
