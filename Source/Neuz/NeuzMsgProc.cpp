@@ -88,7 +88,8 @@ LRESULT CALLBACK LowLevelKeyboardProc (INT nCode, WPARAM wParam, LPARAM lParam)
                 return 1;
 			if( pkbhs->vkCode == VK_LWIN || pkbhs->vkCode == VK_RWIN )
 				return 1;
-			
+			if( pkbhs->vkCode == VK_F10)
+				return 1;
             break;
         }
 		

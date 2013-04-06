@@ -19,6 +19,7 @@ CRandomOptionProperty* CRandomOptionProperty::GetInstance()
 
 void CRandomOptionProperty::LoadScriptBlock( CScript & s, int nRandomOptionKind )
 {
+	
 	int nTotalProb1		= 0;
 	for( int i = 0; i < 3; i++ )	// 3	// 랜덤 옵션이 몇개 부여될 것인가에 대한 확률
 	{
@@ -46,7 +47,7 @@ void CRandomOptionProperty::LoadScriptBlock( CScript & s, int nRandomOptionKind 
 			nAdj	= s.GetNumber();
 		}
 		if( dwTotalProb3 != 1000000000 )
-			Error( "Awakening: nDst = %d, dwTotalProb = %d", ro.nDst, dwTotalProb3 );
+			Error( "Awakening: nDst = %d, dwTotalProb = %d Kind = %d", ro.nDst, dwTotalProb3, nRandomOptionKind );
 		m_aRandomOption[nRandomOptionKind].push_back( ro );
 		ro.aAdjData.clear();
 		ro.nDst		= s.GetNumber();

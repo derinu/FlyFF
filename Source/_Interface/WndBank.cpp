@@ -124,14 +124,14 @@ void CWndBank::OnInitialUpdate()
 
 void CWndBank::ReSetBank( )
 {
-	for( int i = 0 ; i < 3 ; ++i )
+	/*for( int i = 0 ; i < 3 ; ++i )
 	{
 		if( g_pPlayer->m_nSlot == i )
 		{
 			bUse[i] = TRUE;
 		}
 		else
-		if( g_pPlayer->m_idPlayerBank[i] == 0 || !g_pPlayer->IsCommBank() )
+		if( g_pPlayer->m_idPlayerBank[i] == 0 && !g_pPlayer->IsCommBank() )
 		{
 			m_wndItemCtrl[i].SetScrollBarVisible( FALSE );
 			m_wndItemCtrl[i].EnableWindow( FALSE );
@@ -146,7 +146,51 @@ void CWndBank::ReSetBank( )
 			bUse[i] = TRUE;
 		}
 		RectGold[i] = pCost[i]->m_rectClient;
-	}	
+	}*/
+
+	//0 1 2
+	
+	for(int i = 0; i < 3; ++i)
+	{
+		if(g_pPlayer->IsCommBank())
+		{
+			if( g_pPlayer->m_nSlot == i )
+			{
+				bUse[i] = TRUE;
+			}
+			else
+			if( g_pPlayer->m_idPlayerBank[i] == 0 )
+			{
+				m_wndItemCtrl[i].SetScrollBarVisible( FALSE );
+				m_wndItemCtrl[i].EnableWindow( FALSE );
+				m_wndGold[i].EnableWindow( FALSE );
+				bUse[i] = FALSE;
+			}
+			else
+			{
+				m_wndItemCtrl[i].SetScrollBarVisible( TRUE );
+				m_wndItemCtrl[i].EnableWindow( TRUE );
+				m_wndGold[i].EnableWindow( TRUE );
+				bUse[i] = TRUE;
+			}
+		}
+		else
+		{
+			if( g_pPlayer->m_nSlot == i )
+			{
+				bUse[i] = TRUE;
+			}
+			else 
+			{
+				m_wndItemCtrl[i].SetScrollBarVisible( FALSE );
+				m_wndItemCtrl[i].EnableWindow( FALSE );
+				m_wndGold[i].EnableWindow( FALSE );
+				bUse[i] = FALSE;
+			}
+		}
+
+		RectGold[i] = pCost[i]->m_rectClient;
+	}
 }
 
 // 처음 이 함수를 부르면 윈도가 열린다.
@@ -289,9 +333,13 @@ BOOL CWndBank::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					{
 						nPutSolt = 1;
 					}
-					else
+					else if( pWndPut == &(m_wndItemCtrl[2]) )
 					{
 						nPutSolt = 2;
+					}
+					else
+					{
+						nPutSolt = 3;
 					}
 
 					CWndItemCtrl* pWndItemCtrl = (CWndItemCtrl*)lpShortcut->m_pFromWnd;

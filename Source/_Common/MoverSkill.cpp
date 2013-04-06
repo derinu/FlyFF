@@ -2271,14 +2271,18 @@ int	CMover::DoUseItemSystem( ItemProp *pItemProp, CItemElem* pItemElem, int nPar
 				nResult = 2;
 		}
 		break;
-#if __VER < 8 // __S8_PK
+#if __VER > 8 // __S8_PK
 	case II_SYS_SYS_SCR_FORGIVE:
 		if( IsPlayer() )
 		{
 			if( IsChaotic() )
 			{
-				UpgradeKarma();
-				((CUser*)this)->AddDefinedText( TID_GAME_GETKARMA );	// 카르마가 1단계 회복되었습니다						
+				//UpgradeKarma();
+				//this->m_dwPKPropensity -= 100;
+				SetPKPropensity(0);
+				g_UserMng.AddPKPropensity( ((CUser*)this) );
+				//((CUser*)this)->AddDefinedText( TID_GAME_GETPKPOINT, "%d", this->GetPKPropensity() );
+				//((CUser*)this)->AddDefinedText( TID_GAME_GETKARMA );	// 카르마가 1단계 회복되었습니다						
 			}
 			else
 			{
@@ -3343,9 +3347,9 @@ BOOL	CMover::DoUseItemFood( ItemProp *pItemProp, CItemElem* pItemElem )
 									case DST_FP:	dwParam = TID_GAME_LIMITFP;		break;
 									}
 									
-									((CUser*)this)->AddDefinedText( dwParam, "" );
+									//((CUser*)this)->AddDefinedText( dwParam, "" );
 								}
-								nPoint = (int)( nPoint * 0.3f );
+								//nPoint = (int)( nPoint * 0.3f );
 								nHP = nHP + nPoint;
 							}
 						}

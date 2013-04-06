@@ -5379,9 +5379,9 @@ void CWndMgr::PutMedicine( CItemElem* pItemElem, DWORD dwParam, LONG nParamVal, 
 
 		if( pItemElem->GetProp()->dwAbilityMin != 0xffffffff )
 		{	// 최대회복량
-			strTemp.Format( prj.GetText(TID_GAME_TOOLTIP_MAXRECOVER), pItemElem->GetProp()->dwAbilityMin );
-			pEdit->AddString( "\n" );
-			pEdit->AddString( strTemp, dwItemColor[g_Option.m_nToolTipText].dwGeneral );
+			//strTemp.Format( prj.GetText(TID_GAME_TOOLTIP_MAXRECOVER), pItemElem->GetProp()->dwAbilityMin );
+			//pEdit->AddString( "\n" );
+			//pEdit->AddString( strTemp, dwItemColor[g_Option.m_nToolTipText].dwGeneral );
 		}
 	}
 }
@@ -5490,7 +5490,7 @@ void CWndMgr::PutAddedOpt( CItemElem* pItemElem, CEditString* pEdit )
 
 	//DST 정의되는대로 아래 수정.
 	nAddedOptDST[0] = DST_HP_MAX;
-	nAddedOptDST[1] = DST_ATKPOWER;
+	nAddedOptDST[1] = DST_MP_MAX;
 	nAddedOptDST[2] = DST_MONSTER_DMG;
 	nAddedOptDST[3] = DST_MELEE_STEALHP;
 	nAddedOptDST[4] = DST_PVP_DMG;

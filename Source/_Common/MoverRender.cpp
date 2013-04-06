@@ -1402,6 +1402,8 @@ void CMover::RenderName( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dw
 		else
 		{
 			strName = "";
+			//strName = "[GM] ";
+			//dwColor = 0xFFEE9A00;
 		}
 
 		strName += szName;

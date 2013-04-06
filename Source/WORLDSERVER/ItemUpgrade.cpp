@@ -1713,7 +1713,7 @@ void CItemUpgrade::BarunaWakeUp( CUser* pUser, CItemElem* pWarpon )
             return;
         if( pWarpon->GetRandomOptItemId() <= 0 )
             return;
-        if( pUser->GetGold() >= nGold )
+        if( pUser->GetTotalGold() >= nGold )
         {
             pUser->UpdateItemEx( (BYTE)( pWarpon->m_dwObjId ), UI_RANDOMOPTITEMID, pWarpon->GetRandomOptItemId() );
             pUser->AddPlaySound( SND_INF_UPGRADESUCCESS );

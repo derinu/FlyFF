@@ -3100,7 +3100,7 @@ void CWndWorld::RenderSelectObj( C2DRender* p2DRender, CObj* pObj )
 #if __VER >= 8 // __S8_PK
 							string.Format( prj.GetText( TID_GAME_SELECT_OBJECT_INFORMATION_PLAYER ), pMover->GetHitPoint(), pMover->GetMaxHitPoint(), pMover->GetTotalGold(), (float)pMover->GetExpPercent()/100.0f, pMover->GetExp1(), pMover->GetMaxExp1() );
 #else // __VER >= 8 // __S8_PK
-							string.Format( "HP(%d/%d),Gold(%d),Karma(%d)", pMover->GetHitPoint(), pMover->GetMaxHitPoint(), pMover->GetGold(), pMover->GetKarma() );
+							string.Format( "HP(%d/%d),Gold(%d),Karma(%d)", pMover->GetHitPoint(), pMover->GetMaxHitPoint(), pMover->GetTotalGold(), pMover->GetKarma() );
 #endif // __VER >= 8 // __S8_PK
 						else
 							string.Format( prj.GetText( TID_GAME_SELECT_OBJECT_INFORMATION_MONSTER ), pMover->GetHitPoint(), pMover->GetMaxHitPoint() );
@@ -4136,6 +4136,10 @@ BOOL CWndWorld::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase )
 	{
 		switch( nID )
 		{
+			case MMI_CHRISTMASFAIRY05:
+				g_DPlay.SendTeleporterReq(pFocusMover->m_szCharacterKey, 1);
+				::OUTPUTDEBUGSTRING("Teleporting??\n");
+			break;
 #ifdef __DDOM
 		case MMI_CHRISTMASFAIRY03:
 		{

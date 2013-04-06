@@ -6654,7 +6654,7 @@ BOOL CWndSkillTreeEx::CheckSkill( int i )
 
 	if( pSkillProp == NULL || pSkillProp->nLog == 1 )
 		return FALSE;
-	if( g_pPlayer->GetLevel() < (int)( pSkillProp->dwReqDisLV ) )
+	if( !g_pPlayer->IsMaster() && g_pPlayer->GetLevel() < (int)( pSkillProp->dwReqDisLV ) )
 		return FALSE;
 				
 	if( pSkillProp->dwReSkill1 != 0xffffffff )
@@ -24537,7 +24537,7 @@ void CWndRemoveJewel::OnDraw( C2DRender* p2DRender )
 				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND02 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ02) //??? ??
 				{
 					dwColorbuf = g_WndMng.dwItemColor[g_Option.m_nToolTipText].dwAddedOpt2;
-					DstText.Format( "%s", prj.GetText(TID_TOOLTIP_DST_ATKPOWER) );
+					DstText.Format( "%s", "MP" );
 				}
 				else if(m_nJewelID[i] >= II_GEN_MAT_DIAMOND03 && m_nJewelID[i] <= II_GEN_MAT_TOPAZ03) //??? ??
 				{
@@ -25927,12 +25927,15 @@ BOOL CWndSmeltSafety::Process()
 			assert(pWndInventory != NULL);
 			CWndStatic* pGoldNumberStatic = (CWndStatic*)pWndInventory->GetDlgItem(WIDC_GOLD_NUM);
 			assert(pGoldNumberStatic != NULL);
-			int nGoldNumber(atoi(pGoldNumberStatic->GetTitle()));
+			//int nGoldNumber(atoi(pGoldNumberStatic->GetTitle()));
+			__int64 nGoldNumber = g_pPlayer->GetTotalGold();
+			::OUTPUTDEBUGSTRING("before check");
 			if(nGoldNumber < 100000)
 			{
 				g_WndMng.PutString(prj.GetText(TID_GAME_LACKMONEY), NULL, prj.GetTextColor(TID_GAME_LACKMONEY));
 				StopSmelting();
 			}
+			::OUTPUTDEBUGSTRING("hi made it past check client sided");
 		}
 		if(m_dwEnchantTimeEnd < g_tmCurrent)
 		{
@@ -26094,7 +26097,8 @@ BOOL CWndSmeltSafety::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 					assert(pWndInventory != NULL);
 					CWndStatic* pGoldNumberStatic = (CWndStatic*)pWndInventory->GetDlgItem(WIDC_GOLD_NUM);
 					assert(pGoldNumberStatic != NULL);
-					int nGoldNumber(atoi(pGoldNumberStatic->GetTitle()));
+					//int nGoldNumber(atoi(pGoldNumberStatic->GetTitle()));
+					__int64 nGoldNumber = g_pPlayer->GetTotalGold();
 					if(nGoldNumber < 100000)
 					{
 						g_WndMng.PutString(prj.GetText(TID_GAME_LACKMONEY), NULL, prj.GetTextColor(TID_GAME_LACKMONEY));
@@ -29194,7 +29198,8 @@ BOOL CWndBarunaWakeUp::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult 
 			assert(pWndInventory != NULL);
 			CWndStatic* pGoldNumberStatic = (CWndStatic*)pWndInventory->GetDlgItem(WIDC_GOLD_NUM);
 			assert(pGoldNumberStatic != NULL);
-			int nGoldNumber(atoi(pGoldNumberStatic->GetTitle()));
+			//int nGoldNumber(atoi(pGoldNumberStatic->GetTitle()));
+			__int64 nGoldNumber = g_pPlayer->GetTotalGold();
 			if(nGoldNumber < 100000)
 					{
 						g_WndMng.PutString(prj.GetText(TID_GAME_LACKMONEY), NULL, prj.GetTextColor(TID_GAME_LACKMONEY));

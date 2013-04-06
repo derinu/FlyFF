@@ -403,7 +403,7 @@ int CAttackArbiter::OnAfterDamage( ATTACK_INFO* pInfo, int nDamage )
 
 	if( pDefender->GetAdjParam( DST_CHRSTATE) & CHS_ATK_COUNTERATTACK  ) // 공격당했을때 : 데미지 없음
 	{
-		if( pDefender->IsRangeObj( pAttacker->GetPos(), 3.0f ) )
+		if( pDefender->IsRangeObj( pAttacker->GetPos(), 9.0f ) )
 		{
 			pDefender->RemoveChrStateBuffs( CHS_ATK_COUNTERATTACK );
 
@@ -428,6 +428,7 @@ int CAttackArbiter::OnAfterDamage( ATTACK_INFO* pInfo, int nDamage )
 
 			nDamage = 0;
 			pInfo->dwAtkFlags = AF_MISS;
+			//pAttacker->Ad
 		}
 	}
 	else
@@ -519,8 +520,9 @@ int CAttackArbiter::PostCalcDamage( int nATK, ATTACK_INFO* pInfo )
 
 	if( nDamage <= 0 )
 		return 0;
-
-	nDamage += pAttacker->CalcLinkAttackDamage( nDamage );						// 링크어택 스킬을 적용한다.
+	
+	if(!pDefender->IsPlayer())
+		nDamage += pAttacker->CalcLinkAttackDamage( nDamage );						// 링크어택 스킬을 적용한다.
 	if( pInfo->GetSkill() == SI_BIL_PST_ASALRAALAIKUM )
 		nDamage += PostAsalraalaikum();
 

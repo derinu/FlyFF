@@ -841,7 +841,7 @@ void CToolTip::Paint(C2DRender* p2DRender)
 					else if(m_nAddedJewel[i] >= II_GEN_MAT_DIAMOND02 && m_nAddedJewel[i] <= II_GEN_MAT_TOPAZ02) //°ø°Ý·Â »ó½Â
 					{
 						dwColorbuf = g_WndMng.dwItemColor[g_Option.m_nToolTipText].dwAddedOpt2;
-						DstText.Format( "%s", prj.GetText(TID_TOOLTIP_DST_ATKPOWER) );
+						DstText.Format( "%s", "MP" );
 					}
 					else if(m_nAddedJewel[i] >= II_GEN_MAT_DIAMOND03 && m_nAddedJewel[i] <= II_GEN_MAT_TOPAZ03) //¹æ¾î·Â »ó½Â
 					{

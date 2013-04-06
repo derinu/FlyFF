@@ -10603,29 +10603,56 @@ void CDPSrvr::OnMakePetFeed( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 		CItemElem itemElem;
 		itemElem.m_dwItemId		= II_SYS_SYS_FEED_01;
 		int nTotalFeed	= 0;
-		int nPackMax	= itemElem.GetProp()->dwPackMax;
-		for( int i = 0; i < nNum; i++ )
+		int nPackMax	= 9999;
+		/*for( int i = 0; i < nNum; i++ )
 		{
-			int nFeed	= CPetProperty::GetInstance()->GetFeedEnergy( pProp->dwCost, (int)bTool );
+			::Error("bTool %d", bTool);
+			WORD nFeed	= CPetProperty::GetInstance()->GetFeedEnergy( pProp->dwCost, (int)bTool );
+			::Error("nFeed %d");
 			if( nTotalFeed + nFeed > nPackMax )
 			{
 				nNum	= i;
 				break;
 			}
 			nTotalFeed	+= nFeed;
+		}*/
+
+		int nFeed = 0;
+		short Counter = 0;
+
+		/*do
+		{
+			nFeed = CPetProperty::GetInstance()->GetFeedEnergy( pProp->dwCost, (int)bTool );
+
+
+			nTotalFeed += nFeed;
+			Counter++;
+			::Error("feed %d totalfeed %d counter %d", nFeed, nTotalFeed, Counter);
+		} 
+		while ( nTotalFeed + nFeed < nPackMax && Counter < nNum);*/
+
+		while(Counter < nNum)
+		{
+			nFeed = CPetProperty::GetInstance()->GetFeedEnergy( pProp->dwCost, (int)bTool );
+
+			if(nTotalFeed + nFeed > nPackMax)
+				break;
+
+			nTotalFeed += nFeed;
+			Counter++;
 		}
 
 		//pet feed fix because this should be done anyway...?
-		if(nTotalFeed < 0)
+		/*if(nTotalFeed < 0)
 			nTotalFeed = 1;
 
 		if(nTotalFeed > 32,767)
-			nTotalFeed = 32,767;
+			nTotalFeed = 32,767;*/
 
-		itemElem.m_nItemNum		= static_cast<short>(nTotalFeed);
+		itemElem.m_nItemNum		= nTotalFeed;
 		itemElem.m_nHitPoint	= -1;
 
-		::Error("Making %d pet feed.", nTotalFeed);
+		//::Error("Making %d pet feed.", nTotalFeed);
 
 		int nResult = pUser->CreateItem( &itemElem );
 		if( nResult )
@@ -10642,7 +10669,7 @@ void CDPSrvr::OnMakePetFeed( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 			aLogItem.RecvName = "PET_FOOD_CREATE";
 			OnLogItem( aLogItem, &itemElem, itemElem.m_nItemNum );
 
-			pUser->UpdateItem( (BYTE)( pMaterial->m_dwObjId ), UI_NUM, pMaterial->m_nItemNum - nNum );
+			pUser->UpdateItem( (BYTE)( pMaterial->m_dwObjId ), UI_NUM, pMaterial->m_nItemNum - Counter);
 			if( bTool )
 				pUser->UpdateItem( (BYTE)( pTool->m_dwObjId ), UI_NUM, pTool->m_nItemNum - 1 );
 		}
@@ -12573,7 +12600,8 @@ void CDPSrvr::OnTeleporterReq( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, 
 		LPCHARACTER lpChar = prj.GetCharacter( m_szKey );
 		if( lpChar )
 		{
-			if( !CNpcChecker::GetInstance()->IsCloseNpc( MMI_TELEPORTER, pUser->GetWorld(), pUser->GetPos() ) )
+			//MMI_CHRISTMASFAIRY03
+			if( !CNpcChecker::GetInstance()->IsCloseNpc( MMI_TELEPORTER, pUser->GetWorld(), pUser->GetPos() ))
 				return;
 
 			if( (int)( lpChar->m_vecTeleportPos.size() ) <= nIndex )

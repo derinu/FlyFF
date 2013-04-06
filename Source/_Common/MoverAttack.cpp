@@ -65,7 +65,7 @@ enum
 // GLOBAL FUNCTION
 //////////////////////////////////////////////////////////////////////////
 
-// 공속 가중치를 구한다. n - 가중치를 구하기 위한 중간 계산값 
+// ?? ???? ???. n - ???? ??? ?? ?? ??? 
 float GetAttackSpeedPlusValue( int n )
 {
 	const MAX_ATTACK_SPEED_PLUSVALUE = 18;
@@ -84,7 +84,7 @@ float GetAttackSpeedPlusValue( int n )
 	return fPlusValue[nIndex];
 }
 
-// 충전레벨에 의한 공격력 증폭값을 얻는다.
+// ????? ?? ??? ???? ???.
 float GetChargeMultiplier( int nLevel )
 {
 	//TRACE("GetChargeMultiplier(%d)\n", nLevel );
@@ -97,7 +97,7 @@ float GetChargeMultiplier( int nLevel )
 	return 1.0f;
 }
 
-// 충전레벨( nLevel )에 의한 완드공격력 증폭값을 얻는다.
+// ????( nLevel )? ?? ????? ???? ???.
 float GetWandATKMultiplier( int nLevel )
 {
 	switch( nLevel )  
@@ -116,11 +116,11 @@ float GetWandATKMultiplier( int nLevel )
 //////////////////////////////////////////////////////////////////////////
 int GetWeaponPlusDamage( int nDamage, BOOL bRandom, ItemProp* pItemProp , int nOption )
 {
-	return 0; // 방어력 무시가 아니라 공격력을 높이는 방향으로 수정되었음 
+	return 0; // ??? ??? ??? ???? ??? ???? ????? 
 }
 
 
-// 들고있는 무기의 옵션에 의한 추가 데미지를 구한다. ( bRandom = TRUE )
+// ???? ??? ??? ?? ?? ???? ???. ( bRandom = TRUE )
 int CMover::GetWeaponPlusDamage( int nDamage, BOOL bRandom )
 {
 	int nPlus = 0;
@@ -130,29 +130,29 @@ int CMover::GetWeaponPlusDamage( int nDamage, BOOL bRandom )
 		int nOption = pWeapon->GetAbilityOption();	
 		if( nOption > 10 )
 			return nPlus;
-		
+
 		ItemProp* pItemProp = GetActiveHandItemProp();
 		return ::GetWeaponPlusDamage( nDamage, bRandom, pItemProp, nOption ); 
 	}
 	return nPlus;
 }
 
-// 공격에 의해서 날아갈 수 있는가?
+// ??? ??? ??? ? ????
 BOOL CMover::CanFlyByAttack()
 {
 	if( IsFlyingNPC() || m_pActMover->IsFly() )
 		return FALSE;
 
 	BOOL bFly = FALSE;
-	if( (m_pActMover->GetState() & OBJSTA_DMG_FLY_ALL) == 0 )	// 데미지플라잉 동안엔 추가로 날아가지 않는다.
+	if( (m_pActMover->GetState() & OBJSTA_DMG_FLY_ALL) == 0 )	// ?????? ??? ??? ???? ???.
 	{
 		MoverProp* pProp = GetProp();
-		if( pProp->dwClass != RANK_SUPER && pProp->dwClass != RANK_MATERIAL && pProp->dwClass != RANK_MIDBOSS )	// 슈퍼/자원 몬스터는 날아가지 않음.
+		if( pProp->dwClass != RANK_SUPER && pProp->dwClass != RANK_MATERIAL && pProp->dwClass != RANK_MIDBOSS )	// ??/?? ???? ???? ??.
 			bFly = TRUE;
 	}
 	return bFly;
 }
-// 공속을 구한다.
+// ??? ???.
 float CMover::GetAttackSpeed()
 {
 	float fSpeed = 1.0f;
@@ -165,8 +165,8 @@ float CMover::GetAttackSpeed()
 	JobProp* pProperty = prj.GetJobProp( GetJob() ); 
 	ASSERT( pProperty );
 
-	// A = int( 캐릭터의 공속 + ( 무기의 공속 * ( 4 * 덱스 + ( 레벨 / 8 ) ) ) - 3 )
-	// 공격속도 = ( ( 50 / 200 - A ) / 2 ) + 가중치 
+	// A = int( ???? ?? + ( ??? ?? * ( 4 * ?? + ( ?? / 8 ) ) ) - 3 )
+	// ???? = ( ( 50 / 200 - A ) / 2 ) + ??? 
 	int A = int( pProperty->fAttackSpeed + ( fItem * ( 4.0f * GetDex() + GetLevel() / 8.0f ) ) - 3.0f );
 //	TRACE( "A =%d\n", A );
 	if( 187.5f <= A )
@@ -175,10 +175,10 @@ float CMover::GetAttackSpeed()
 
 	float fDstParam = GetParam( DST_ATTACKSPEED, 0 ) / 1000.0f;
 	fSpeed += fDstParam;
-	
+
 	if( 0 < GetParam( DST_ATTACKSPEED_RATE, 0 ) )
 		fSpeed = fSpeed + ( fSpeed * GetParam( DST_ATTACKSPEED_RATE, 0 ) / 100 );
-	
+
 	if( fSpeed < 0.1f )
 		fSpeed = 0.1f;
 	if( fSpeed > 2.0f )
@@ -208,9 +208,9 @@ int CMover::GetCastingTime( int nCastingTime )
 	return nTime;
 }
 
-// 아이템에의한 방어력 얻기 
-// bRandom: TRUE  - random 값으로 얻기 
-//          FALSE - 평균값으로 defense값 얻기 
+// ?????? ??? ?? 
+// bRandom: TRUE  - random ??? ?? 
+//          FALSE - ????? defense? ?? 
 int CMover::GetDefenseByItem( BOOL bRandom )
 {
 	int nValue = m_nDefenseMax - m_nDefenseMin;
@@ -226,7 +226,7 @@ int	CMover::GetShowDefense( BOOL bRandom )
 	memset( &info, 0x00, sizeof(info) );
 	info.dwAtkFlags = AF_GENERIC;
 
-	return CalcDefense( &info, FALSE );   // FALSE - 방어 최대/최소의 평균값을 얻겠다.      
+	return CalcDefense( &info, FALSE );   // FALSE - ?? ??/??? ???? ???.      
 }
 
 // Hit rating
@@ -280,7 +280,7 @@ BOOL CMover::GetAttackResult( CMover* pDefender, DWORD dwOption )
 	return ( (int)( xRandom( 100 ) ) < nHitRate );
 }
 
-// 무기의 추가 공격력를 구한다.
+// ??? ?? ???? ???.
 int CMover::GetPlusWeaponATK( DWORD dwWeaponType )
 {
 	int nATK = 0;
@@ -295,14 +295,14 @@ int CMover::GetPlusWeaponATK( DWORD dwWeaponType )
 	case WT_MELEE_KNUCKLE:
 		nATK = GetParam( DST_KNUCKLE_DMG, 0 );		
 		break;
-	case WT_MELEE_YOYO:				// 요요 
+	case WT_MELEE_YOYO:				// ?? 
 		nATK = GetParam( DST_YOY_DMG, 0 );		
 		break;
-	case WT_RANGE_BOW:				// 보우 
+	case WT_RANGE_BOW:				// ?? 
 		nATK = GetParam( DST_BOW_DMG, 0 );		
 		break;
 	}
-#if __VER >= 10 // __LEGEND		//10차 전승 마스터스킬
+#if __VER >= 10 // __LEGEND		//10? ?? ?????
 	if(IsDualWeapon() == TRUE )
 		nATK += GetParam( DST_ONEHANDMASTER_DMG, 0 );
 	else
@@ -312,10 +312,10 @@ int CMover::GetPlusWeaponATK( DWORD dwWeaponType )
 		case WT_MELEE_KNUCKLE:
 			nATK += GetParam( DST_KNUCKLEMASTER_DMG, 0 );
 			break;
-		case WT_MELEE_YOYO:				// 요요 
+		case WT_MELEE_YOYO:				// ?? 
 			nATK += GetParam( DST_YOYOMASTER_DMG, 0 );
 			break;
-		case WT_RANGE_BOW:				// 보우 
+		case WT_RANGE_BOW:				// ?? 
 			nATK += GetParam( DST_BOWMASTER_DMG, 0 );
 			break;
 		case WT_MELEE_SWD:	
@@ -324,14 +324,14 @@ int CMover::GetPlusWeaponATK( DWORD dwWeaponType )
 			break;
 		}
 	}
-#endif //__LEGEND		//10차 전승 마스터스킬
+#endif //__LEGEND		//10? ?? ?????
 
 	return nATK;
 }
 
 
 
-// 직업에 따른 factor를 구한다.
+// ??? ?? factor? ???.
 float CMover::GetJobPropFactor( JOB_PROP_TYPE type )
 {
 	if( IsPlayer() == FALSE )
@@ -360,14 +360,14 @@ float CMover::GetJobPropFactor( JOB_PROP_TYPE type )
 		return pProperty->fBlocking;
 	case JOB_PROP_CRITICAL:
 		return pProperty->fCritical;	
-	// TODO 나머지 
+	// TODO ??? 
 	default:
 		ASSERT( 0 );
 		return 1.0f;
 	}
 }
 
-// 무기의 공격력를 구한다.
+// ??? ???? ???.
 int CMover::GetWeaponATK( DWORD dwWeaponType )
 {
 	int nATK = 0;
@@ -403,12 +403,12 @@ int CMover::GetWeaponATK( DWORD dwWeaponType )
 		break;
 	}
 
-	nATK += GetPlusWeaponATK( dwWeaponType );	// 무기의 추가 공격력를 구한다.
+	nATK += GetPlusWeaponATK( dwWeaponType );	// ??? ?? ???? ???.
 	return nATK;
 }
 
 
-// 공격력Min,Max를 구한다.
+// ???Min,Max? ???.
 void CMover::GetHitMinMax( int* pnMin, int* pnMax, ATTACK_INFO *pInfo )
 {
 	int nParts = PARTS_RWEAPON;
@@ -465,10 +465,10 @@ void CMover::GetHitMinMax( int* pnMin, int* pnMax, ATTACK_INFO *pInfo )
 
 		*pnMin = GetParam( DST_ABILITY_MIN, *pnMin );
 		*pnMax = GetParam( DST_ABILITY_MAX, *pnMax );
-		
+
 		*pnMin = GetParam( DST_CHR_DMG, *pnMin );
 		*pnMax = GetParam( DST_CHR_DMG, *pnMax );		
-		
+
 		DWORD dwAtk = pMoverProp->dwAtk1;
 		if( pInfo )
 		{
@@ -476,8 +476,8 @@ void CMover::GetHitMinMax( int* pnMin, int* pnMax, ATTACK_INFO *pInfo )
 			if( dwValue != 0 && dwValue != NULL_ID )
 				dwAtk = dwValue;
 		}
-	
-		if( dwAtk != NULL_ID )		// 들고있는 무기가 있을땐 그 무기의 min,max 값까지 더한다.
+
+		if( dwAtk != NULL_ID )		// ???? ??? ??? ? ??? min,max ??? ???.
 		{
 			ItemProp* pItemProp = prj.GetItemProp( dwAtk );
 			if( pItemProp )
@@ -489,7 +489,7 @@ void CMover::GetHitMinMax( int* pnMin, int* pnMax, ATTACK_INFO *pInfo )
 	}
 }
 
-// 방어력증폭값을 얻는다.    this는 방어자
+// ??????? ???.    this? ???
 float CMover::GetDEFMultiplier( ATTACK_INFO* pInfo )
 {
 	float fFactor = 1.0f;
@@ -500,17 +500,17 @@ float CMover::GetDEFMultiplier( ATTACK_INFO* pInfo )
 	#endif //	__S1108_BACK_END_SYSTEM
 	}
 
-	// 아머 페너트레이트는 맞는순간 방어력을 50%로 계산.
+	// ?? ??????? ???? ???? 50%? ??.
 	if( pInfo->GetSkill() == SI_BLD_DOUBLE_ARMORPENETRATE )	
 		fFactor *= 0.5f;
 
-//	fFactor		*= (  ( 100.0f + (float)GetParam( DST_ADJDEF_RATE, 0 ) ) / 100.0f ) ;		// 최종 반환된 방어력 값에 방어력 상승 비율을 곱한다.
-	fFactor		*= (  1.0f + (float)GetParam( DST_ADJDEF_RATE, 0 ) / 100.0f ) ;		// 최종 반환된 방어력 값에 방어력 상승 비율을 곱한다.
+//	fFactor		*= (  ( 100.0f + (float)GetParam( DST_ADJDEF_RATE, 0 ) ) / 100.0f ) ;		// ?? ??? ??? ?? ??? ?? ??? ???.
+	fFactor		*= (  1.0f + (float)GetParam( DST_ADJDEF_RATE, 0 ) / 100.0f ) ;		// ?? ??? ??? ?? ??? ?? ??? ???.
 
 	return fFactor;
 }
 
-// 방어력을 계산한다.
+// ???? ????.
 int CMover::CalcDefense( ATTACK_INFO* pInfo, BOOL bRandom )
 {
 	int nDefense = CalcDefenseCore( pInfo->pAttacker, pInfo->dwAtkFlags, bRandom );
@@ -522,11 +522,11 @@ int CMover::CalcDefense( ATTACK_INFO* pInfo, BOOL bRandom )
 	return nDefense;
 }
 
-// 몬스터 방어력을 계산한다. ( generic과 magicskill은 계산됨 )
+// ??? ???? ????. ( generic? magicskill? ??? )
 int CMover::CalcDefenseNPC( CMover* pAttacker, DWORD dwAtkFlags )
 {
 	float	fDefense = 0.0f;
-	
+
 	MoverProp* pProp = GetProp();
 	if( dwAtkFlags & AF_MAGIC ) 
 	{
@@ -541,11 +541,11 @@ int CMover::CalcDefenseNPC( CMover* pAttacker, DWORD dwAtkFlags )
 	return (int)fDefense;
 }
 
-// 플레이어 방어력을 계산한다. ( generic, magicskill은 상위에서 계산됨 )
+// ???? ???? ????. ( generic, magicskill? ???? ??? )
 int CMover::CalcDefensePlayer( CMover* pAttacker, DWORD dwAtkFlags )
 {	
 	int nDefense = 0;
-	if( pAttacker->IsPlayer() )		// 플레이어 공격 
+	if( pAttacker->IsPlayer() )		// ???? ?? 
 	{			
 		if( dwAtkFlags & AF_MAGIC )  
 		{
@@ -557,7 +557,7 @@ int CMover::CalcDefensePlayer( CMover* pAttacker, DWORD dwAtkFlags )
 			nDefense = (int)( (float(nDEF * 2.3f ) + (float(GetLevel()+(GetSta()/2)+GetDex()) / 2.8f ) - 4 + GetLevel() * 2 ) );
 		}
 	}
-	else							// 몹공격
+	else							// ???
 	{		
 		nDefense =(int)(  ((GetDefenseByItem() / 4 + GetParam( DST_ADJDEF, 0 )) + 
 			(float(GetLevel()+(GetSta()/2)+GetDex()) / 2.8f ) - 4 + GetLevel() * 2 ) );
@@ -569,10 +569,10 @@ int CMover::CalcDefensePlayer( CMover* pAttacker, DWORD dwAtkFlags )
 	return nDefense;
 }
 
-// CalcDefense에서 호출되는 sub함수 
+// CalcDefense?? ???? sub?? 
 int CMover::CalcDefenseCore( CMover* pAttacker, DWORD dwAtkFlags, BOOL bRandom )
 {
-	if( dwAtkFlags & AF_MAGICSKILL )		// 예외처리:속성 매직스킬의 방어력을 구한다.
+	if( dwAtkFlags & AF_MAGICSKILL )		// ????:?? ????? ???? ???.
 		return GetResistMagic();
 
 	BOOL bGeneric = (dwAtkFlags & AF_GENERIC);
@@ -589,8 +589,8 @@ int CMover::CalcDefenseCore( CMover* pAttacker, DWORD dwAtkFlags, BOOL bRandom )
 			fFactor = pProperty->fFactorDef;
 		}
 		int nDefense = (int)( ((((GetLevel()*2) + (GetSta()/2)) / 2.8f ) - 4) + ((GetSta()-14) * fFactor) );
-		nDefense += (GetDefenseByItem( bRandom ) / 4);	// 아이템에 의한 디펜스   
-		nDefense += GetParam( DST_ADJDEF, 0 );	// 디펜스 수정치가 있다면 그것을 더함.
+		nDefense += (GetDefenseByItem( bRandom ) / 4);	// ???? ?? ???   
+		nDefense += GetParam( DST_ADJDEF, 0 );	// ??? ???? ??? ??? ??.
 #ifdef __JEFF_11
 		if( nDefense < 0 )
 			nDefense	= 0;
@@ -611,15 +611,15 @@ int CMover::GetCriticalProb( void )
 	int nProb;
 	nProb = (GetDex() / 10);
 	nProb	= (int)( nProb *  GetJobPropFactor( JOB_PROP_CRITICAL ) );
-	nProb = GetParam( DST_CHR_CHANCECRITICAL, nProb );	// 크리티컬 확률을 높여주는 스킬관련 
+	nProb = GetParam( DST_CHR_CHANCECRITICAL, nProb );	// ???? ??? ???? ???? 
 #ifdef __JEFF_11
 	if( nProb < 0 )
 		nProb	= 0;
 #endif	// __JEFF_11
-	
+
 	if( IsPlayer() )
 	{
-		if( m_idparty && (m_dwFlag & MVRF_CRITICAL) )	// 파티 && 1회 크리티컬 발동?
+		if( m_idparty && (m_dwFlag & MVRF_CRITICAL) )	// ?? && 1? ???? ???
 		{
 #ifdef __WORLDSERVER
 			CParty* pParty = g_PartyMng.GetParty( m_idparty );
@@ -633,11 +633,11 @@ int CMover::GetCriticalProb( void )
 		}
 
 #if __VER < 9 // __S_9_ADD
-		if( IsAfterDeath() )							// 죽음 이후 상태라면?
+		if( IsAfterDeath() )							// ?? ?? ?????
 			nProb += CRITICAL_AFTER_DEATH;
-		
+
 		int nHitPercent = GetHitPointPercent( 100 );
-		if( nHitPercent < CRITICAL_BERSERK_HP )			// HP가 MAX대비 30% 미만? 
+		if( nHitPercent < CRITICAL_BERSERK_HP )			// HP? MAX?? 30% ??? 
 		{
 			// CRITICAL_BERSERK_HP : nHitPercent = CRITICAL_BERSERK_PROB : x
 			// 30 : 15 = 20 : x
@@ -653,28 +653,28 @@ int CMover::GetCriticalProb( void )
 int CMover::CalcLinkAttackDamage( int nDamage )
 {
 	int nAdd = 0;
-	if( IsPlayer() && m_idparty && nDamage > 0 ) // 내가 파티에 참여 여부
+	if( IsPlayer() && m_idparty && nDamage > 0 ) // ?? ??? ?? ??
 	{
 		CParty* pParty = g_PartyMng.GetParty( m_idparty );
 		if( pParty && pParty->IsMember( m_idPlayer ) )
 		{
-			// 순회극단이며 링크어택중이며 단장만 데미지를 높여준다
+			// ?????? ??????? ??? ???? ????
 			if( pParty->m_nKindTroup == 1 && pParty->m_nModeTime[PARTY_LINKATTACK_MODE] )
 			{
-				int nJoinMember = 0; // 참여한 단원수
+				int nJoinMember = 0; // ??? ???
 				CUser* pLeader = (CUser*)this;
 				CUser* pMemberUser;
-				
+
 				float fDist;
 				D3DXVECTOR3	vDist;
-#if __VER >= 12 // __PARSKILL1001	//12차 파스킬 아이템 수정  world,core,neuz
-				/*if( pParty->m_nModeTime[PARTY_PARSKILL_MODE] )
+#if __VER >= 12 // __PARSKILL1001	//12? ??? ??? ??  world,core,neuz
+				if( pParty->m_nModeTime[PARTY_PARSKILL_MODE] )
 				{
-					//nJoinMember = pParty->m_nSizeofMember;
-					nJoinMember = 1;
+					nJoinMember = pParty->m_nSizeofMember;
+					//nJoinMember = 1;
 				}
 				else
-				{*/
+				{
 					for( int i = 0 ; i < pParty->m_nSizeofMember ; i++ )
 					{
 						pMemberUser = g_UserMng.GetUserByPlayerID( pParty->m_aMember[i].m_uPlayerId );
@@ -684,14 +684,14 @@ int CMover::CalcLinkAttackDamage( int nDamage )
 								&& ( pLeader->m_idSetTarget != NULL_ID && pMemberUser->m_idSetTarget != NULL_ID ) )
 							{
 								vDist = pMemberUser->GetPos() - GetPos();
-								fDist = D3DXVec3LengthSq( &vDist );		// 아이템 줍는사람과 멤버간의 거리.
-								if( fDist < 255.0f * 255.0f )		// xx미터보다 작으면
-									nJoinMember++; // 참여한 단원수										
+								fDist = D3DXVec3LengthSq( &vDist );		// ??? ????? ???? ??.
+								if( fDist < 255.0f * 255.0f )		// xx???? ???
+									nJoinMember++; // ??? ???										
 							}
 						}
 					}
-				//}
-#else	//__PARSKILL1001	//12차 파스킬 아이템 수정  world,core,neuz
+				}
+#else	//__PARSKILL1001	//12? ??? ??? ??  world,core,neuz
 				for( int i = 0 ; i < pParty->m_nSizeofMember ; i++ )
 				{
 					pMemberUser = g_UserMng.GetUserByPlayerID( pParty->m_aMember[i].m_uPlayerId );
@@ -700,19 +700,19 @@ int CMover::CalcLinkAttackDamage( int nDamage )
 						if( pLeader->m_idSetTarget == pMemberUser->m_idSetTarget
 							&& ( pLeader->m_idSetTarget != NULL_ID && pMemberUser->m_idSetTarget != NULL_ID ) )
 						{
-							if( pLeader->IsSMMode( SM_PARTYSKILL1 ) || pLeader->IsSMMode( SM_PARTYSKILL15 ) || pLeader->IsSMMode( SM_PARTYSKILL30 ) )	// 여기서 유료 아이템 사용중인지 확인
-								nJoinMember++; // 참여한 단원수										
+							if( pLeader->IsSMMode( SM_PARTYSKILL1 ) || pLeader->IsSMMode( SM_PARTYSKILL15 ) || pLeader->IsSMMode( SM_PARTYSKILL30 ) )	// ??? ?? ??? ????? ??
+								nJoinMember++; // ??? ???										
 							else
 							{
 								vDist = pMemberUser->GetPos() - GetPos();
-								fDist = D3DXVec3LengthSq( &vDist );		// 아이템 줍는사람과 멤버간의 거리.
-								if( fDist < 255.0f * 255.0f )		// xx미터보다 작으면
-									nJoinMember++; // 참여한 단원수										
+								fDist = D3DXVec3LengthSq( &vDist );		// ??? ????? ???? ??.
+								if( fDist < 255.0f * 255.0f )		// xx???? ???
+									nJoinMember++; // ??? ???										
 							}
 						}
 					}
 				}
-#endif //__PARSKILL1001	//12차 파스킬 아이템 수정  world,core,neuz
+#endif //__PARSKILL1001	//12? ??? ??? ??  world,core,neuz
 				nAdd = ( nDamage * nJoinMember / 10 ); 
 			}
 		}
@@ -720,10 +720,10 @@ int CMover::CalcLinkAttackDamage( int nDamage )
 	return nAdd;
 }
 
-// 크리티컬 공격인가?
+// ???? ?????
 BOOL CMover::IsCriticalAttack( CMover* pDefender, DWORD dwAtkFlags )
 {
-	if( IsSkillAttack( dwAtkFlags ) )	// 스킬이면 critical 없음 
+	if( IsSkillAttack( dwAtkFlags ) )	// ???? critical ?? 
 		return FALSE;
 
 	return ( (int)( xRandom(100) ) < GetCriticalProb() );		
@@ -735,9 +735,9 @@ float CMover::GetBlockFactor( CMover* pAttacker, ATTACK_INFO* pInfo )
 	{
 		int r = xRandom( 80 );
 		if( r <= 5 )
-			return 1.0f;	// Blocking 실패
+			return 1.0f;	// Blocking ??
 		if( r >= 75 )
-			return 0.1f;	// 10으로 나눈다.
+			return 0.1f;	// 10?? ???.
 
 		float fBlockA = GetLevel() / ( (GetLevel()+pAttacker->GetLevel())*15.0f );
 		float fBlockB = (GetDex()+pAttacker->GetDex()+2) * ( (GetDex()-pAttacker->GetDex()) / 800.0f );
@@ -746,34 +746,34 @@ float CMover::GetBlockFactor( CMover* pAttacker, ATTACK_INFO* pInfo )
 		float fAdd = fBlockA + fBlockB;
 		if( fAdd < 0.0f )
 			fAdd = 0.0f;
-		
-		if( pInfo->IsRangeAttack() )	// 원거리평타일때는 
-			fAdd += GetParam( DST_BLOCK_RANGE, 0 );		// 원거리블럭율 보정치를 가져다 씀
+
+		if( pInfo->IsRangeAttack() )	// ???????? 
+			fAdd += GetParam( DST_BLOCK_RANGE, 0 );		// ?????? ???? ??? ?
 		else
-			fAdd += GetParam( DST_BLOCK_MELEE, 0 );		// 원거리가 아닐땐 근거리 블럭율보정치를 가져다 씀
-		
+			fAdd += GetParam( DST_BLOCK_MELEE, 0 );		// ???? ??? ??? ??????? ??? ?
+
 		int nBR = (int)( ( GetDex() / 8.0f ) * GetJobPropFactor( JOB_PROP_BLOCKING ) + fAdd );
 		if( nBR < 0 )
 			nBR = 0; 
 
-		if ( nBR > r )		// R이 6 ~ 74사이의 값이면 ->  BR > R인 경우 Blocking 성공
+		if ( nBR > r )		// R? 6 ~ 74??? ??? ->  BR > R? ?? Blocking ??
 			return 0.0f;
 	}
 	else
 	{
 		int r = xRandom( 100 );
-	
-		if( r <= 5 )			// R이 0 ~ 5의 값이면 Blocking 실패
+
+		if( r <= 5 )			// R? 0 ~ 5? ??? Blocking ??
 			return 1.0f;
-		if( r >= 95 )			// R이 95 ~ 100의 값이면 Blocking 성공
+		if( r >= 95 )			// R? 95 ~ 100? ??? Blocking ??
 			return 0.1f;
 
 		int	nBR = (int)( ( GetParrying() - GetLevel() ) * 0.5f );  // GetParrying == ER
 		if( nBR < 0 )
 			nBR = 0; 
 
-		if ( nBR > r )		// R이 6 ~ 94사이의 값이면 ->  BR > R인 경우 Blocking 성공
-			return 0.2f;	// 5로 나눈다.
+		if ( nBR > r )		// R? 6 ~ 94??? ??? ->  BR > R? ?? Blocking ??
+			return 0.2f;	// 5? ???.
 	}
 	return 1.0f;
 }
@@ -781,20 +781,20 @@ float CMover::GetBlockFactor( CMover* pAttacker, ATTACK_INFO* pInfo )
 BOOL CMover::IsBlocking( CMover* pAttacker )
 {
 	int r = xRandom( 100 );
-	
-	if( r <= 5 )			// R이 0 ~ 5의 값이면 Blocking 실패
+
+	if( r <= 5 )			// R? 0 ~ 5? ??? Blocking ??
 		return FALSE;
-	if( r >= 95 )			// R이 95 ~ 100의 값이면 Blocking 성공
+	if( r >= 95 )			// R? 95 ~ 100? ??? Blocking ??
 		return TRUE;
 
-	//몬스터 Br = (몬스터ER - 몬스터LV)*0.5
-	//플레이어 BR = ((캐릭터Dex - 30) / (2 * Lv)) + (① + ②)
+	//??? Br = (???ER - ???LV)*0.5
+	//???? BR = ((???Dex - 30) / (2 * Lv)) + (? + ?)
 	int nBR = 0;
 
 	if( IsPlayer() )
 	{
-		// ① : 방패의 블록 수치
-		// ② : 아이템과 스킬 추가치의 합(정수, 아이템에 블록킹 값이 정수로 더해진다.)
+		// ? : ??? ?? ??
+		// ? : ???? ?? ???? ?(??, ???? ??? ?? ??? ????.)
 		CItemElem* pShield = GetEquipItem( PARTS_SHIELD );	
 		if( pShield )
 		{
@@ -802,7 +802,7 @@ BOOL CMover::IsBlocking( CMover* pAttacker )
 			ItemProp* pProp = pShield->GetProp();
 			nBR += pProp->dwblockRating;
 
-			//최소 2에서 최대65 사이의 값을 가진다
+			//?? 2?? ??65 ??? ?? ???
 			if( nBR < 2 )
 				nBR = 2;
 			else if( nBR > 65 )
@@ -818,14 +818,14 @@ BOOL CMover::IsBlocking( CMover* pAttacker )
 			nBR = 0; 
 	}
 
-	return ( nBR > r );		// R이 6 ~ 94사이의 값이면 ->  BR > R인 경우 Blocking 성공
+	return ( nBR > r );		// R? 6 ~ 94??? ??? ->  BR > R? ?? Blocking ??
 }
 
 // this -> attacker
-// 스피릿밤(SI_PSY_PSY_SPRITBOMB) 
-// 자신의 MP가 90% 이상 일경우 공격력의 1.5배
-// 자신의 MP가 50% 이상일경우 공격력의 1.2배
-// 자신의 MP가 50% 미만일 경우 기본 데미지
+// ????(SI_PSY_PSY_SPRITBOMB) 
+// ??? MP? 90% ?? ??? ???? 1.5?
+// ??? MP? 50% ????? ???? 1.2?
+// ??? MP? 50% ??? ?? ?? ???
 float CMover::GetDamageMultiplier( ATTACK_INFO* pInfo )
 {
 	float factor = 1.0f;
@@ -837,7 +837,7 @@ float CMover::GetDamageMultiplier( ATTACK_INFO* pInfo )
 
 	if( nSkill )
 	{
-		pSkillProp	= prj.GetSkillProp( nSkill );		// 스킬의 프로퍼티꺼냄
+		pSkillProp	= prj.GetSkillProp( nSkill );		// ??? ??????
 		if( pSkillProp )
 		{
 			pAddSkillProp	= prj.GetAddSkillProp( pSkillProp->dwSubDefine, pInfo->GetSkillLevel() );
@@ -848,19 +848,19 @@ float CMover::GetDamageMultiplier( ATTACK_INFO* pInfo )
 				if( pInfo->pAttacker->IsPlayer() && pInfo->pDefender->IsPlayer() )
 					dwProbability	= pAddSkillProp->nProbabilityPVP;
 #endif	// __SKILL_0706
-				if( pAddSkillProp->nSkillCount > 0 )	//  발사체 개수가 있는건
-					factor	/= (float)pAddSkillProp->nSkillCount;	// 발사체 개수만큼 데미지를 나눠서 줌.
+				if( pAddSkillProp->nSkillCount > 0 )	//  ??? ??? ???
+					factor	/= (float)pAddSkillProp->nSkillCount;	// ??? ???? ???? ??? ?.
 			}
 		}
 	}
 
-	// 싸이런트샷이면 데미지 2배, 다크일루젼상태이면 해제한다.
+	// ??????? ??? 2?, ????????? ????.
 	if( HasBuff( BUFF_SKILL, SI_ACR_SUP_DARKILLUSION ) )
 	{
 		switch( nSkill )
 		{
-		case SI_JST_YOYO_BACKSTAB:   //최대 2배
-		case SI_JST_YOYO_VATALSTAB:  //최대 4배
+		case SI_JST_YOYO_BACKSTAB:   //?? 2?
+		case SI_JST_YOYO_VATALSTAB:  //?? 4?
 		case SI_ACR_BOW_SILENTSHOT:
 			{
 				factor *= 1.4f;
@@ -879,7 +879,7 @@ float CMover::GetDamageMultiplier( ATTACK_INFO* pInfo )
 		if( xRandom( 100 ) < dwProbability )
 			factor = 4.0f; // Tom: factor 4 is way better, else the shot just suxx!
 		break;		
-	case SI_ACR_BOW_JUNKBOW:		// 엉터리 화살은 확률로 데미지를 준다.
+	case SI_ACR_BOW_JUNKBOW:		// ??? ??? ??? ???? ??.
 		if( xRandom( 100 ) > dwProbability )
 			factor = 0.0f;
 		break;		
@@ -887,7 +887,7 @@ float CMover::GetDamageMultiplier( ATTACK_INFO* pInfo )
 		factor	*= ( pAddSkillProp->nDestData1[0] / 100.0f );
 		break;		
 	}
-	
+
 
 	    if( nSkill == SI_PSY_PSY_SPRITBOMB )
     {
@@ -903,7 +903,7 @@ float CMover::GetDamageMultiplier( ATTACK_INFO* pInfo )
             factor = factor * 1.5f * (fPercent / 100.0f);
     }
 
-	if( IsNPC() )	// 버서커AI가 있다.
+	if( IsNPC() )	// ???AI? ??.
 	{
 		int nBerserkHP = GetProp()->m_nBerserkHP;
 		if( nBerserkHP > 0 && GetHitPointPercent( 100 ) <= nBerserkHP )
@@ -911,20 +911,20 @@ float CMover::GetDamageMultiplier( ATTACK_INFO* pInfo )
 	}
 	else
 	{
-		if( pInfo->pDefender->IsPlayer() )		// 플레이어와 플레이어의 공격은 데미지 감소 
+		if( pInfo->pDefender->IsPlayer() )		// ????? ????? ??? ??? ?? 
 			factor *= 0.60f;
 
-		if( pInfo->nParts == PARTS_LWEAPON )	// 왼손은 공격력이 75프로로 
+		if( pInfo->nParts == PARTS_LWEAPON )	// ??? ???? 75??? 
 			factor *= 0.75f;
 	}
 
 	if( pInfo->pAttacker->IsPlayer() )
-		if( pInfo->pDefender->GetAdjParam( DST_CHRSTATE ) & CHS_DOUBLE )		// 더블데미지 상태 걸렸다
+		if( pInfo->pDefender->GetAdjParam( DST_CHRSTATE ) & CHS_DOUBLE )		// ????? ?? ???
 			factor *= 2.0f;
 
 	int nDelta = pInfo->pDefender->GetLevel() - pInfo->pAttacker->GetLevel(); 	
 
-	// 예외처리: 클락워크와 경비병은 레벨차 페널티 skip
+	// ????: ????? ???? ??? ??? skip
 	if( pInfo->pAttacker->IsNPC() )
 	{
 		DWORD dwClass = pInfo->pAttacker->GetProp()->dwClass;
@@ -932,7 +932,7 @@ float CMover::GetDamageMultiplier( ATTACK_INFO* pInfo )
 		{
 		case RANK_GUARD:
 		case RANK_SUPER:
-//		case RANK_MIDBOSS:		중간보스들은 레벨차 페널티가 있는게 맞지 않나 싶다.
+//		case RANK_MIDBOSS:		?????? ??? ???? ??? ?? ?? ??.
 			nDelta = 0;
 			break;
 		}
@@ -945,13 +945,13 @@ float CMover::GetDamageMultiplier( ATTACK_INFO* pInfo )
 		{
 			const int MAX_OVER_ATK = 16;
 			nDelta = min( nDelta, (MAX_OVER_ATK-1) ); 
-			
+
 			const double pi = 3.1415926535;
 			double radian = ( pi * nDelta ) / (float)(MAX_OVER_ATK * 2);
 			factor *= (float)cos( radian );
 		}
 #else //__PVPDEMAGE0608	//	9th PVP DEMAGE edit 
-		if( pInfo->pAttacker->IsPlayer() && pInfo->pDefender->IsPlayer()/* && GetWorld()->GetID() == WI_WORLD_GUILDWAR */)	// 길드대전맵인가? && PVP인가?
+		if( pInfo->pAttacker->IsPlayer() && pInfo->pDefender->IsPlayer()/* && GetWorld()->GetID() == WI_WORLD_GUILDWAR */)	// ???????? && PVP???
 		{
 			nDelta = min( nDelta, 25 ); 
 			factor *= 25.0f / (25.0f + nDelta*2);
@@ -960,7 +960,7 @@ float CMover::GetDamageMultiplier( ATTACK_INFO* pInfo )
 		{
 			const int MAX_OVER_ATK = 16;
 			nDelta = min( nDelta, (MAX_OVER_ATK-1) ); 
-			
+
 			const double pi = 3.1415926535;
 			double radian = ( pi * nDelta ) / (float)(MAX_OVER_ATK * 2);
 			factor *= (float)cos( radian );
@@ -975,26 +975,26 @@ float CMover::GetDamageMultiplier( ATTACK_INFO* pInfo )
 
 
 
-// 일반(AF_MAGICSKILL를 제외한) 속성데미지를 계산한다.
+// ??(AF_MAGICSKILL? ???) ?????? ????.
 int CMover::CalcPropDamage( CMover* pDefender, DWORD dwAtkFlags )
 {
 	int nAdd = 0;
 	SAI79::ePropType type = SAI79::NO_PROP;
 	int nATK = 0;
 
-	if( IsNPC() )	// 공격자가 NPC일 경우	
+	if( IsNPC() )	// ???? NPC? ??	
 	{			
 		type = GetProp()->eElementType;
 		nATK = GetProp()->wElementAtk; 
 	}
-	else		    // 공격자가 플레이어일 경우
+	else		    // ???? ????? ??
 	{		
 		CItemElem* pItemElem = GetWeaponItem();
 		if( pItemElem && pItemElem->m_bItemResist != SAI79::NO_PROP )
 		{
 			type = (SAI79::ePropType)pItemElem->m_bItemResist;
 			nATK = pItemElem->m_nResistAbilityOption;
-		
+
 			if( ::GetLanguage() == LANG_THA )
 			{
 				float fResult = ((float)nATK+3.5f)*(0.5f+((float)nATK*0.01f));
@@ -1015,7 +1015,7 @@ int CMover::CalcPropDamage( CMover* pDefender, DWORD dwAtkFlags )
 		}
 	}
 
-	if( type != SAI79::NO_PROP )	// 속성공격 ?
+	if( type != SAI79::NO_PROP )	// ???? ?
 	{
 		nAdd = (int)( nATK  * (1.0f - pDefender->GetResist(type)) );
 	}
@@ -1023,15 +1023,15 @@ int CMover::CalcPropDamage( CMover* pDefender, DWORD dwAtkFlags )
 }
 
 
-// AF_MAGICSKILL 속성데미지를 계산한다.
+// AF_MAGICSKILL ?????? ????.
 int CMover::GetMagicSkillPower( ATTACK_INFO* pInfo )
 {
 	CMover* pDefender = pInfo->pDefender; 
 	int nSkill = pInfo->GetSkill();
 	int nATK = GetMeleeSkillPower( pInfo );
-	nATK = GetParam( DST_ADDMAGIC, nATK );		// 추가마법력 수정치.
+	nATK = GetParam( DST_ADDMAGIC, nATK );		// ????? ???.
 
-	ItemProp* pSkillProp = prj.GetSkillProp( nSkill );		// 스킬의 프로퍼티꺼냄
+	ItemProp* pSkillProp = prj.GetSkillProp( nSkill );		// ??? ??????
 	if( !pSkillProp )
 		return nATK;
 
@@ -1069,12 +1069,12 @@ float CMover::GetMagicSkillFactor( CMover* pDefender, SAI79::ePropType skillType
 	SAI79::ePropType itemType;
 	CItemElem* pWeapon	= GetWeaponItem();
 	if( pWeapon && pWeapon->m_bItemResist != SAI79::NO_PROP )
-		itemType = (SAI79::ePropType)pWeapon->m_bItemResist;	// 제련속성 
+		itemType = (SAI79::ePropType)pWeapon->m_bItemResist;	// ???? 
 	else
 	{
 		ItemProp* pItemProp = GetActiveHandItemProp();
 		if( pItemProp ) 
-			itemType = pItemProp->eItemType;					// 아이템 속성
+			itemType = pItemProp->eItemType;					// ??? ??
 		else
 			return 1.0f;
 	}
@@ -1106,7 +1106,7 @@ int CMover::PostCalcMagicSkill( int nATK, ATTACK_INFO* pInfo )
 		return 0;
 	else
 		skillType = pSkillProp->eItemType;
-	
+
 	float a, b;
 #if __VER >= 9    // 	__PVPDEMAGE0608	//	9th PVP DEMAGE edit 
 	if( IsNPC() || pDefender->IsNPC() )
@@ -1122,7 +1122,7 @@ int CMover::PostCalcMagicSkill( int nATK, ATTACK_INFO* pInfo )
 
 	int nDEF = pDefender->CalcDefense( pInfo );
 #if __VER >= 10    // 	__LEGEND
-	if( pInfo->dwAtkFlags & AF_MAGICSKILL )		// 예외처리:속성 매직스킬의 방어력을 구한다.
+	if( pInfo->dwAtkFlags & AF_MAGICSKILL )		// ????:?? ????? ???? ???.
 		nATK = nATK - nATK * pDefender->GetParam( DST_RESIST_MAGIC_RATE, 0 ) / 100 ;
 #endif	//__LEGEND
 	a = ( nATK-nDEF ) * (1.0f - pDefender->GetResist(skillType) );
@@ -1130,12 +1130,12 @@ int CMover::PostCalcMagicSkill( int nATK, ATTACK_INFO* pInfo )
 	return	( (int)( (int)a*GetMagicSkillFactor( pDefender, skillType ) ) );
 }
 
-// 순수공격력을 증폭한다.
+// ?????? ????.
 float CMover::GetATKMultiplier( CMover* pDefender, DWORD dwAtkFlags )
 {
 	float fMultiplier = 1.0f;
 
-	int nParam = GetParam( DST_ATKPOWER_RATE, 0 );		// 공격력 증가 수정치
+	int nParam = GetParam( DST_ATKPOWER_RATE, 0 );		// ??? ?? ???
 	FLOAT fRate = 1.0f + (nParam / 100.0f);
 	fMultiplier *= fRate;
 
@@ -1168,11 +1168,11 @@ float CMover::GetATKMultiplier( CMover* pDefender, DWORD dwAtkFlags )
 	return fMultiplier;
 }
 
-// 속성의 공격 추가퍼센트를구한다.
+// ??? ?? ?????????.
 int CMover::GetPropATKPlus( int nParts )
 {
 	int nPlusATK = 0;
-	
+
 	switch( nParts )
 	{
 	case PARTS_RWEAPON:
@@ -1187,7 +1187,7 @@ int CMover::GetPropATKPlus( int nParts )
 	return nPlusATK;
 }
 
-// 속성의 방어 추가퍼센트를구한다.
+// ??? ?? ?????????.
 int CMover::GetPropDEFPlus()
 {
 	int nPlusDEF = 0;
@@ -1196,15 +1196,15 @@ int CMover::GetPropDEFPlus()
 	return nPlusDEF;
 }
 
-// GetHitPower함수에서 사용할 ATK, DEF의 증감 Factor를 구한다.
+// GetHitPower???? ??? ATK, DEF? ?? Factor? ???.
 void CMover::GetDamagePropertyFactor( CMover* pDefender, int* pnATKFactor, int* pnDEFFactor, int nParts )
 {
 #if __VER >= 14 // __EXT_ATTRIBUTE
-	*pnATKFactor = 10000;	// 14차 부터는 n/10000 factor로 변경
-	*pnDEFFactor = 10000;	// 14차 부터는 n/10000 factor로 변경
+	*pnATKFactor = 10000;	// 14? ??? n/10000 factor? ??
+	*pnDEFFactor = 10000;	// 14? ??? n/10000 factor? ??
 #else // __EXT_ATTRIBUTE
-	*pnATKFactor = 100;		// 속성 적용이 없으면 ATK를 100% 그대로 사용 
-	*pnDEFFactor = 100;		// 속성 적용이 없으면 DEF를 100% 그대로 사용 
+	*pnATKFactor = 100;		// ?? ??? ??? ATK? 100% ??? ?? 
+	*pnDEFFactor = 100;		// ?? ??? ??? DEF? 100% ??? ?? 
 #endif // __EXT_ATTRIBUTE
 
 	SAI79::ePropType atkType, defType; 
@@ -1248,7 +1248,7 @@ void CMover::GetDamagePropertyFactor( CMover* pDefender, int* pnATKFactor, int* 
 
 	if( pDefender->IsPlayer() )
 	{
-		CItemElem* pItemElem = pDefender->GetEquipItem( PARTS_UPPER_BODY );	//슈트의 속성을 구한다.
+		CItemElem* pItemElem = pDefender->GetEquipItem( PARTS_UPPER_BODY );	//??? ??? ???.
 		if( pItemElem )
 		{
 			defType = (SAI79::ePropType)pItemElem->m_bItemResist;
@@ -1273,14 +1273,14 @@ void CMover::GetDamagePropertyFactor( CMover* pDefender, int* pnATKFactor, int* 
 		return;
 #endif // __EXT_ATTRIBUTE
 
-	// 속성ENUM을 인덱스로 갖는 테이블 
+	// ??ENUM? ???? ?? ??? 
 	static int table[SAI79::END_PROP][SAI79::END_PROP] = {
-		{0, 0, 0, 0, 0, 0}, // 속성없음 
-		{0, 1, 2, 0, 3, 0},	// 불   속성
-		{0, 3, 1, 2, 0, 0},	// 물   속성
-		{0, 0, 3, 1, 0, 2},	// 전기 속성
-		{0, 2, 0, 0, 1, 3},	// 바람 속성
-		{0, 0, 0, 3, 2, 1}	// 땅   속성			
+		{0, 0, 0, 0, 0, 0}, // ???? 
+		{0, 1, 2, 0, 3, 0},	// ?   ??
+		{0, 3, 1, 2, 0, 0},	// ?   ??
+		{0, 0, 3, 1, 0, 2},	// ?? ??
+		{0, 2, 0, 0, 1, 3},	// ?? ??
+		{0, 0, 0, 3, 2, 1}	// ?   ??			
 	};
 
 	int result = table[ atkType ][ defType ];
@@ -1288,32 +1288,32 @@ void CMover::GetDamagePropertyFactor( CMover* pDefender, int* pnATKFactor, int* 
 	int nFactor = 0, nLevel = 0;
 	switch( result )
 	{
-		case 0 : // 상성 없음
-		case 1 : // 같음
+		case 0 : // ?? ??
+		case 1 : // ??
 			{
 				if( atkLevel > 0 && defLevel == 0 )
 					nFactor += CItemUpgrade::GetInstance()->GetAttributeDamageFactor( atkLevel );
 				else if( atkLevel == 0 && defLevel > 0 )
-					nFactor -= CItemUpgrade::GetInstance()->GetAttributeDefenseFactor( defLevel - 3 );	// 방어력
+					nFactor -= CItemUpgrade::GetInstance()->GetAttributeDefenseFactor( defLevel - 3 );	// ???
 				else if( atkLevel > 0 && defLevel > 0 )
 					nLevel = atkLevel - defLevel;
 				break;
 			}
 
-		case 2 : // 방어자 우성
+		case 2 : // ??? ??
 				nLevel = ( atkLevel - 5 ) - defLevel;
 				break;
-		
-		case 3 : // 공격자 우성
+
+		case 3 : // ??? ??
 				nLevel = atkLevel - ( defLevel > 5 ? defLevel - 5 : 0 );
 				if( nLevel > 0 )
-					nFactor += CItemUpgrade::GetInstance()->GetAttributeAddAtkDmgFactor( nLevel ); // 속성관계 보정치
+					nFactor += CItemUpgrade::GetInstance()->GetAttributeAddAtkDmgFactor( nLevel ); // ???? ???
 				break;
 	}
-	
+
 	if( nLevel != 0 )
 		nFactor += ( nLevel > 0 )	?	CItemUpgrade::GetInstance()->GetAttributeDamageFactor( nLevel )
-									:	-( CItemUpgrade::GetInstance()->GetAttributeDefenseFactor( -nLevel ) );	// 방어력
+									:	-( CItemUpgrade::GetInstance()->GetAttributeDefenseFactor( -nLevel ) );	// ???
 	*pnATKFactor += nFactor;
 	*pnDEFFactor += nFactor;
 #else // __EXT_ATTRIBUTE	
@@ -1325,7 +1325,7 @@ void CMover::GetDamagePropertyFactor( CMover* pDefender, int* pnATKFactor, int* 
 			*pnATKFactor = 0;
 #endif // __EXT_ENCHANT
 		break;
-	case 2:				//공격자 열성
+	case 2:				//??? ??
 #if __VER >= 13 // __EXT_ENCHANT
 		*pnATKFactor -= CItemUpgrade::GetInstance()->GetAttributeDamageFactor( defLevel );
 		*pnDEFFactor -= CItemUpgrade::GetInstance()->GetAttributeDamageFactor( defLevel );
@@ -1334,7 +1334,7 @@ void CMover::GetDamagePropertyFactor( CMover* pDefender, int* pnATKFactor, int* 
 		*pnDEFFactor += (defLevel + 5 + nPlusDEF );
 #endif // __EXT_ENCHANT
 		break;
-	case 3:				//공격자 우성 
+	case 3:				//??? ?? 
 #if __VER >= 13 // __EXT_ENCHANT
 		*pnATKFactor += CItemUpgrade::GetInstance()->GetAttributeDamageFactor( atkLevel );
 		*pnDEFFactor += CItemUpgrade::GetInstance()->GetAttributeDamageFactor( atkLevel );
@@ -1347,7 +1347,7 @@ void CMover::GetDamagePropertyFactor( CMover* pDefender, int* pnATKFactor, int* 
 #endif // __EXT_ATTRIBUTE
 }
 
-// 일반 공격 데미지를 구한다.
+// ?? ?? ???? ???.
 int CMover::GetHitPower( ATTACK_INFO* pInfo  )
 {
 	int nMin, nMax, nATKFactor, nATK;
@@ -1388,7 +1388,7 @@ int CMover::GetHitPower( ATTACK_INFO* pInfo  )
 
 #if __VER >= 9		// 	__FLYBYATTACK0608	//	9th FlyByAttack edit
 		BOOL bFlyByAttack = xRandom(100) < 15;
-		ItemProp* pItemProp = GetActiveHandItemProp();			//요요공격이나 반사류는 날리지 않음 
+		ItemProp* pItemProp = GetActiveHandItemProp();			//?????? ???? ??? ?? 
 		if( pItemProp && pItemProp->dwWeaponType == WT_MELEE_YOYO || (pInfo->dwAtkFlags & AF_FORCE) )
 			bFlyByAttack = FALSE;
 		if(pInfo->pDefender->IsPlayer() )
@@ -1398,7 +1398,7 @@ int CMover::GetHitPower( ATTACK_INFO* pInfo  )
 			pInfo->dwAtkFlags |= AF_FLYING;
 #else //__FLYBYATTACK0608	//	9th FlyByAttack edit
 		BOOL bFlyByAttack = xRandom(100) < 30;
-		ItemProp* pItemProp = GetActiveHandItemProp();			//요요공격이나 반사류는 날리지 않음 
+		ItemProp* pItemProp = GetActiveHandItemProp();			//?????? ???? ??? ?? 
 		if( pItemProp && pItemProp->dwWeaponType == WT_MELEE_YOYO || (pInfo->dwAtkFlags & AF_FORCE) )
 			bFlyByAttack = FALSE;
 		if( pInfo->pDefender->CanFlyByAttack() && bFlyByAttack )
@@ -1406,14 +1406,14 @@ int CMover::GetHitPower( ATTACK_INFO* pInfo  )
 #endif	//__FLYBYATTACK0608	//	9th FlyByAttack edit
 	}		
 
-	nATK = xRandom( nMin, nMax );						// 공격력에 랜덤적용  
+	nATK = xRandom( nMin, nMax );						// ???? ????  
 #if __VER >= 14 // __EXT_ATTRIBUTE
-	nATK = MulDiv( nATK, nATKFactor, 10000 );				// 14차 부터는 n/10000 값으로 변경
+	nATK = MulDiv( nATK, nATKFactor, 10000 );				// 14? ??? n/10000 ??? ??
 #else // __EXT_ATTRIBUTE
-	nATK = MulDiv( nATK, nATKFactor, 100 );				// 속성 상성에의한 팩터를 곱한다. nATKFactor 0-100사이의 퍼센트값  
+	nATK = MulDiv( nATK, nATKFactor, 100 );				// ?? ????? ??? ???. nATKFactor 0-100??? ????  
 #endif // __EXT_ATTRIBUTE
-	if( pInfo->IsRangeAttack() )						// 플레이어의 원거리 공격의 경우 
-		nATK	= (int)( nATK * GetChargeMultiplier( pInfo->GetChargeLevel() ) );		// 충전레벨에 의한 증폭처리 
+	if( pInfo->IsRangeAttack() )						// ????? ??? ??? ?? 
+		nATK	= (int)( nATK * GetChargeMultiplier( pInfo->GetChargeLevel() ) );		// ????? ?? ???? 
 
 //	TRACE("nMin:%d nMax:%d nATK:%d nATKFactor:%d\n", nMin, nMax, nATK, nATKFactor ); 
 	return nATK;
@@ -1423,7 +1423,7 @@ int CMover::PostCalcGeneric( int nATK, ATTACK_INFO* pInfo )
 {
 	int nDEF = pInfo->pDefender->CalcDefense( pInfo );  
 #if __VER >= 14 // __EXT_ATTRIBUTE
-	nDEF = MulDiv( nDEF, pInfo->nDEFFactor, 10000 );	// 14차부터 n/10000으로 변경
+	nDEF = MulDiv( nDEF, pInfo->nDEFFactor, 10000 );	// 14??? n/10000?? ??
 #else // __EXT_ATTRIBUTE
 	nDEF = MulDiv( nDEF, pInfo->nDEFFactor, 100 );
 #endif // __EXT_ATTRIBUTE
@@ -1443,14 +1443,14 @@ int CMover::PostCalcGeneric( int nATK, ATTACK_INFO* pInfo )
 		nDamage = 0;
 	}
 
-	// NPC의 경우 최소 데미지가 들어가게 한다.
+	// NPC? ?? ?? ???? ???? ??.
 	if( pInfo->pAttacker->IsNPC() && pInfo->pDefender->IsPlayer() )	
 	{
-		int nMin = (int)( max( 0, nATK * 0.1f ) );	// 몬스터 공격력의 10% 데미지가 무조건 들어갈 수 있게 해 준다.
+		int nMin = (int)( max( 0, nATK * 0.1f ) );	// ??? ???? 10% ???? ??? ??? ? ?? ? ??.
 		nDamage = max( nDamage, nMin );
 	}
 
-	nDamage += GetWeaponPlusDamage( nDamage );	// 인첸트 옵션 데미지( 방어력 무관 ) 
+	nDamage += GetWeaponPlusDamage( nDamage );	// ??? ?? ???( ??? ?? ) 
 	if( nDamage == 0 )
 	{
 		pInfo->dwAtkFlags &= ~AF_CRITICAL;
@@ -1463,9 +1463,9 @@ int	CMover::GetMeleeSkillPower( ATTACK_INFO* pInfo )
 {
 	int nSkill = pInfo->GetSkill();
 	int nSkillLv = pInfo->GetSkillLevel();
-	//int(무기의AbilityMinMax * (기술의AbilityMinMax + 10) / 6 + 무기의AbilityMinMax)
-	ItemProp* pItemProp = GetActiveHandItemProp();			// 들고있는 무기의 프로퍼티 꺼냄
-	ItemProp* pSkillProp = prj.GetSkillProp( nSkill );		// 스킬의 프로퍼티꺼냄
+	//int(???AbilityMinMax * (???AbilityMinMax + 10) / 6 + ???AbilityMinMax)
+	ItemProp* pItemProp = GetActiveHandItemProp();			// ???? ??? ???? ??
+	ItemProp* pSkillProp = prj.GetSkillProp( nSkill );		// ??? ??????
 	if( !pItemProp || !pSkillProp )
 	{
 		Error( "CMover::GetMeleeSkillPower() - nSkill : %d, Name : %s, Item : %d",
@@ -1476,7 +1476,7 @@ int	CMover::GetMeleeSkillPower( ATTACK_INFO* pInfo )
 	if( !pAddSkillProp )
 		return 1;
 
-	CItemElem *pWeapon = GetWeaponItem();		// 손에든 아이템의 포인터.
+	CItemElem *pWeapon = GetWeaponItem();		// ??? ???? ???.
 	int nMin, nMax;
 	GetItemATKPower( &nMin, &nMax, pItemProp, pWeapon ); 
 
@@ -1495,7 +1495,7 @@ int	CMover::GetMeleeSkillPower( ATTACK_INFO* pInfo )
 	case DST_INT:		nReferStat2 = GetInt();		break;
 	case DST_STA:		nReferStat2 = GetSta();		break;
 	}
-	
+
 	if( pSkillProp->dwReferTarget1 == RT_ATTACK )
 		if( pSkillProp->dwReferValue1 != NULL_ID )
 			nReferStat1 = (int)( ((pSkillProp->dwReferValue1/10.0f)*nReferStat1) + (pAddSkillProp->dwSkillLvl * FLOAT(nReferStat1/50.0f)) );
@@ -1542,12 +1542,12 @@ int	CMover::GetMeleeSkillPower( ATTACK_INFO* pInfo )
 }
 
 //
-// 완드(매직)공격 데미지계산.
+// ??(??)?? ?????.
 //
 int CMover::GetMagicHitPower( int nChargeLevel )
 {
-	ItemProp* pItemProp = GetActiveHandItemProp();			// 들고있는 무기의 프로퍼티 꺼냄
-	CItemElem *pWeapon = GetWeaponItem();		// 손에든 아이템의 포인터.
+	ItemProp* pItemProp = GetActiveHandItemProp();			// ???? ??? ???? ??
+	CItemElem *pWeapon = GetWeaponItem();		// ??? ???? ???.
 
 	int nMin, nMax;
 	GetItemATKPower( &nMin, &nMax, pItemProp, pWeapon ); 
@@ -1566,9 +1566,9 @@ int CMover::GetMagicHitPower( int nChargeLevel )
 
 
 
-// 디펜스, 페리, 크리티컬을 적용한다.
-// nATK : 공격자의 공격력
-// nDamage : 최종 데미지 = 공격력 - 방어력
+// ???, ??, ????? ????.
+// nATK : ???? ???
+// nDamage : ?? ??? = ??? - ???
 int CMover::ApplyDPC( int nATK, ATTACK_INFO* pInfo )
 {	
 	int nDamage;
@@ -1583,14 +1583,14 @@ int CMover::ApplyDPC( int nATK, ATTACK_INFO* pInfo )
 	if( nDamage < 0 )	
 		nDamage = 0;
 
-	// 크리티컬 처리.
+	// ???? ??.
 	if( pInfo->pAttacker->IsCriticalAttack( this, pInfo->dwAtkFlags ) )		
 	{
 		pInfo->dwAtkFlags |= AF_CRITICAL;
 
-		int nChargeLevel = pInfo->GetChargeLevel();		// 완드충전량	
+		int nChargeLevel = pInfo->GetChargeLevel();		// ?????	
 		if( (pInfo->pAttacker->m_pActMover->GetState() & OBJSTA_ATK4) || 
-			nChargeLevel == MAX_CHARGE_LEVEL )	// 4패턴공격에 발생한 크리티컬.
+			nChargeLevel == MAX_CHARGE_LEVEL )	// 4????? ??? ????.
 		{
 			nDamage = (int)(nDamage * 2.6f);
 			if( CanFlyByAttack() && xRandom(100) < 50 )
@@ -1626,14 +1626,14 @@ void CMover::ReSetDuelTime( CMover* pAttacker, CMover* pDefender )
 	{
 		CMover* pLeader;
 		CParty* pParty	= g_PartyMng.GetParty( pDefender->m_idparty );
-		
+
 		if( pParty )
 		{
 			pLeader = pParty->GetLeader();
 			if( IsValidObj( pLeader ) )
 				pLeader->m_dwTickEndDuel = ::timeGetTime() + NEXT_TICK_ENDDUEL;
 		}
-		
+
 		CParty* pParty2		= g_PartyMng.GetParty( pAttacker->m_idDuelParty );
 		if( pParty2 )
 		{
@@ -1644,35 +1644,35 @@ void CMover::ReSetDuelTime( CMover* pAttacker, CMover* pDefender )
 	}
 }
 
-// 공격자가 변경되면 경험치 지급률을 변경
+// ???? ???? ??? ???? ??
 void CMover::ChangeExpRatio( CMover* pAttacker, CMover* pDefender )
 {
 	BOOL bDiffer = FALSE;
-	if( pDefender->m_idAttacker != pAttacker->GetId() )	// 공격자가 변경되면?
+	if( pDefender->m_idAttacker != pAttacker->GetId() )	// ???? ?????
 	{
-		if( pAttacker->m_idparty )	// 날 친놈이 파티가 있는가.
+		if( pAttacker->m_idparty )	// ? ??? ??? ???.
 		{
 			CMover *pLastAttacker = prj.GetMover( pDefender->m_idAttacker );
-			if( IsValidObj( (CObj*)pLastAttacker ) && pLastAttacker->m_idparty != pAttacker->m_idparty )	// 다른파티가 쳤으면 지급률 바꿈.
+			if( IsValidObj( (CObj*)pLastAttacker ) && pLastAttacker->m_idparty != pAttacker->m_idparty )	// ????? ??? ??? ??.
 				bDiffer = TRUE;
 		} else
-			bDiffer = TRUE;			// 날 마지막으로 쳤던놈이 파티가 없으면 지급률 바꿈.
+			bDiffer = TRUE;			// ? ????? ???? ??? ??? ??? ??.
 	}
-	
-	if( bDiffer )	// 다른 상대(파티도 다른)가 쳤으면 지급률을 변경 
+
+	if( bDiffer )	// ?? ??(??? ??)? ??? ???? ?? 
 	{
-		if( pDefender->GetProp()->dwClass != RANK_SUPER )		// 보스몹일경우 이 적용을 받지 않음.
+		if( pDefender->GetProp()->dwClass != RANK_SUPER )		// ?????? ? ??? ?? ??.
 			pDefender->m_fExpRatio = (float)pDefender->GetHitPoint() / pDefender->GetMaxHitPoint();
 	}
 }
 
-// 스킬이나 물리적 공격을 당할 경우 
+// ???? ??? ??? ?? ?? 
 void CMover::OnAttacked( CMover* pAttacker, int nDamage, BOOL bTarget, int nReflect )
 {
 	CMover* pDefender = this;
 	if( pDefender == pAttacker )
 	{
-//		ASSERT( FALSE );	// 일단 현 기획에서 자신을 공격하는 경우는 없다. 
+//		ASSERT( FALSE );	// ?? ? ???? ??? ???? ??? ??. 
 		return;
 	}
 
@@ -1686,8 +1686,8 @@ void CMover::OnAttacked( CMover* pAttacker, int nDamage, BOOL bTarget, int nRefl
 #endif	// __JEFF_11_4
 		)
 		bAddEnemy = FALSE;
-	
-	if( bAddEnemy )		// TODO_raiders: HITTYPE_PK와 HITTYPE_GENERIC인 경우로 수정해야 함  
+
+	if( bAddEnemy )		// TODO_raiders: HITTYPE_PK? HITTYPE_GENERIC? ??? ???? ?  
 	{
 		dwLast = pDefender->AddEnemy( pAttacker->GetId(), nDamage );
 		pAttacker->AddEnemy( pDefender->GetId(), 0 );
@@ -1700,7 +1700,7 @@ void CMover::OnAttacked( CMover* pAttacker, int nDamage, BOOL bTarget, int nRefl
 #if __VER >= 8 // __S8_PK
 			if( nReflect )
 				break;
-			
+
 			if( pAttacker->IsChaotic() || pDefender->IsChaotic() )
 				break;
 
@@ -1716,11 +1716,11 @@ void CMover::OnAttacked( CMover* pAttacker, int nDamage, BOOL bTarget, int nRefl
 				pAttacker->SetPKPink( GetTickCount() + SEC(prj.m_PKSetting.nGeneralAttack) );
 			g_UserMng.AddPKPink( pAttacker, 1 );
 #else // __VER >= 8 // __S8_PK
-			// PK세션을 시작하기 위해서 플레이어간의 적대관계 시작을 보낸다.
+			// PK??? ???? ??? ?????? ???? ??? ???.
 			((CUser*)pAttacker)->UpdatePlayerEnemy( ADD_PLAYER_ENEMY, pDefender->GetId() );
 			((CUser*)pDefender)->UpdatePlayerEnemy( ADD_PLAYER_ENEMY, pAttacker->GetId() );
-			// 첫 PK시도이면 슬로터 포인트를 감소한다. 
-			if( dwLast == 0 || (GetTickCount() - dwLast) > MIN(1) )		//첫타 or 세션이 1분을 지났는가?
+			// ? PK???? ??? ???? ????. 
+			if( dwLast == 0 || (GetTickCount() - dwLast) > MIN(1) )		//?? or ??? 1?? ?????
 			{
 				pAttacker->ChangeSlaughter( CHANGE_SLAUGHTER_ATTACK, pDefender );
 			}
@@ -1734,24 +1734,24 @@ void CMover::OnAttacked( CMover* pAttacker, int nDamage, BOOL bTarget, int nRefl
 
 	if( pAttacker->IsPlayer() && pDefender->IsNPC() )		
 	{
-		if( pDefender->m_idAttacker != NULL_ID )			// 누군가가 한번 친건가?
+		if( pDefender->m_idAttacker != NULL_ID )			// ???? ?? ????
 		{
 			if( nDamage > 0 )
 				ChangeExpRatio( pAttacker, pDefender );		 
 		}
 		else
 		{
-			((CUser *)pAttacker)->AddCorrReq( pDefender );	// 공격자유저에게 몹 좌표한번 보정.
+			((CUser *)pAttacker)->AddCorrReq( pDefender );	// ??????? ? ???? ??.
 		}
-		pDefender->m_idAttacker = pAttacker->GetId();		// 피격자는 공격자를 기억 
+		pDefender->m_idAttacker = pAttacker->GetId();		// ???? ???? ?? 
 	}
-	pAttacker->m_idLastHitMover = pDefender->GetId();		// PK시 아이템 권리처리를 위해서 기억해둠 ( NPP에서 사용하지 않음 )
+	pAttacker->m_idLastHitMover = pDefender->GetId();		// PK? ??? ????? ??? ???? ( NPP?? ???? ?? )
 }
 
 
 
-// 좋은 버프일때만 여기 들어옴
-// return HITTYPE_GENERIC이면 안드러감
+// ?? ????? ?? ???
+// return HITTYPE_GENERIC?? ????
 #if __VER >= 8 // __S8_PK
 HITTYPE	CMover::GetHitType2( CMover* pMover, BOOL bTarget, BOOL bGood )
 #else // __VER >= 8 // __S8_PK
@@ -1760,19 +1760,19 @@ HITTYPE	CMover::GetHitType2( CMover* pMover, BOOL bTarget )
 {
 	if( !IsValidObj( (CObj*)this ) || !IsValidObj( (CObj*)pMover ) )
 		return HITTYPE_GENERIC;
-	if( IsDie() || pMover->IsDie() )					// 죽은상태
+	if( IsDie() || pMover->IsDie() )					// ????
 		return HITTYPE_FAIL;
-	if( m_nDead || pMover->m_nDead )					// 죽은후 무적상태
+	if( m_nDead || pMover->m_nDead )					// ??? ????
 		return HITTYPE_GENERIC;
 
 	if( IsPlayer() && pMover->IsPlayer() )
 	{
-#if __VER < 8 // 8차 듀얼 061226 ma
+#if __VER < 8 // 8? ?? 061226 ma
 		if( !g_eLocal.GetState( EVE_18 ) )
 			return HITTYPE_FAIL;
-#endif // __VER >= 8 // 8차 듀얼 061226 ma
+#endif // __VER >= 8 // 8? ?? 061226 ma
 
-		if( m_pActMover->IsFly() || pMover->m_pActMover->IsFly() )	// 공중에 있으면 불가 
+		if( m_pActMover->IsFly() || pMover->m_pActMover->IsFly() )	// ??? ??? ?? 
 			return HITTYPE_FAIL;
 		if( IsPVPTarget( pMover ) )
 			return HITTYPE_PVP;
@@ -1790,7 +1790,7 @@ HITTYPE	CMover::GetHitType2( CMover* pMover, BOOL bTarget )
 		if( g_eLocal.GetState( EVE_PK ) )
 		{
 #if __VER >= 8 // __S8_PK
-			if( bGood )		// 선한 마법이면 모두 들어가게 하자
+			if( bGood )		// ?? ???? ?? ???? ??
 				return HITTYPE_FAIL;
 			else if( GetLevel() <= prj.m_PKSetting.nLimitLevel || pMover->GetLevel() <= prj.m_PKSetting.nLimitLevel )
 				return HITTYPE_FAIL;
@@ -1798,7 +1798,7 @@ HITTYPE	CMover::GetHitType2( CMover* pMover, BOOL bTarget )
 #else // __VER >= 8 // __S8_PK
 			DWORD dwLast;										
 			GetEnemyHit( pMover->GetId(), &dwLast );
-			if( dwLast == 0 || (GetTickCount() - dwLast) > MIN(1) )		//PK세션 검사 
+			if( dwLast == 0 || (GetTickCount() - dwLast) > MIN(1) )		//PK?? ?? 
 				return HITTYPE_FAIL;
 			else
 				return HITTYPE_PK;		
@@ -1811,23 +1811,23 @@ HITTYPE	CMover::GetHitType2( CMover* pMover, BOOL bTarget )
 	}
 	else
 	{
-		return HITTYPE_GENERIC;		// NPC에게는 좋은 버프를 줄수 없다.
+		return HITTYPE_GENERIC;		// NPC??? ?? ??? ?? ??.
 	}
 }
 
-// this - 공격자, pMover - 방어자  
+// this - ???, pMover - ???  
 HITTYPE	CMover::GetHitType( CMover* pMover, BOOL bTarget, int nReflect )
 {
 	if( !IsValidObj( (CObj*)this ) || !IsValidObj( (CObj*)pMover ) )
 		return HITTYPE_FAIL;
-	if( IsDie() || pMover->IsDie() )					// 죽은상태
+	if( IsDie() || pMover->IsDie() )					// ????
 		return HITTYPE_FAIL;
-	if( m_nDead || pMover->m_nDead )					// 죽은후 무적상태
+	if( m_nDead || pMover->m_nDead )					// ??? ????
 		return HITTYPE_FAIL;
 
 #if __VER >= 9	//__AI_0509
-	// 자기 자신을 공격하는 경우가 아님
-	// 디버프 상태에서 재로그인 하면 공격자 대신 자신이 공격자로 설정됨.
+	// ?? ??? ???? ??? ??
+	// ??? ???? ???? ?? ??? ?? ??? ???? ???.
 	if( this == pMover )	
 		return HITTYPE_GENERIC;
 #endif	// __AI_0509
@@ -1837,12 +1837,12 @@ HITTYPE	CMover::GetHitType( CMover* pMover, BOOL bTarget, int nReflect )
 		if( IsGuildCombatTarget( pMover ) )
 			return HITTYPE_GUILDCOMBAT;
 
-#if __VER < 8 // 8차 듀얼 061226 ma
+#if __VER < 8 // 8? ?? 061226 ma
 		if( !g_eLocal.GetState( EVE_18 ) )
 			return HITTYPE_FAIL;
-#endif // __VER >= 8 // 8차 듀얼 061226 ma		
+#endif // __VER >= 8 // 8? ?? 061226 ma		
 
-		if( m_pActMover->IsFly() || pMover->m_pActMover->IsFly() )	// 공중에 있으면 불가 
+		if( m_pActMover->IsFly() || pMover->m_pActMover->IsFly() )	// ??? ??? ?? 
 			return HITTYPE_FAIL;
 		if( IsPVPTarget( pMover ) )
 			return HITTYPE_PVP;
@@ -1869,29 +1869,29 @@ HITTYPE	CMover::GetHitType( CMover* pMover, BOOL bTarget, int nReflect )
 
 		if( IsBaseJob() || pMover->IsBaseJob() )
 			return HITTYPE_FAIL;
-		if( g_eLocal.GetState( EVE_GUILDWAR ) )			// 길드전 상태에서는 PK불가 
+		if( g_eLocal.GetState( EVE_GUILDWAR ) )			// ??? ????? PK?? 
 		{
 			if( m_idWar > 0 || pMover->m_idWar > 0 )	
 				return HITTYPE_FAIL;
 		}
-		
+
 		if( g_eLocal.GetState( EVE_PK ) )
 		{
 #if __VER >= 8 // __S8_PK
 			if( GetLevel() <= prj.m_PKSetting.nLimitLevel || pMover->GetLevel() <= prj.m_PKSetting.nLimitLevel )
 				return HITTYPE_FAIL;
 #else // __VER >= 8 // __S8_PK
-			if( pMover->IsChaotic() )						// 카오        - PK가능 
+			if( pMover->IsChaotic() )						// ??        - PK?? 
 				return HITTYPE_PK;
-			if( GetTickCount() >= m_dwPKTargetLimit )		// PK선공불가시간동안에는 선공이 안됨  
+			if( GetTickCount() >= m_dwPKTargetLimit )		// PK?????????? ??? ??  
 			{
-				if( bTarget )								// 타켓유저    - PK가능 
+				if( bTarget )								// ????    - PK?? 
 					return HITTYPE_PK;
 			}
-			
+
 			DWORD dwLast;										
 			GetEnemyHit( pMover->GetId(), &dwLast );
-			if( dwLast == 0 || (GetTickCount() - dwLast) > MIN(1) )		//PK세션 검사 
+			if( dwLast == 0 || (GetTickCount() - dwLast) > MIN(1) )		//PK?? ?? 
 				return HITTYPE_FAIL;
 #endif // __VER >= 8 // __S8_PK
 			return HITTYPE_PK;
@@ -1903,19 +1903,19 @@ HITTYPE	CMover::GetHitType( CMover* pMover, BOOL bTarget, int nReflect )
 	}
 	else
 	{
-		if( IsNPC() && GetProp()->dwClass == RANK_GUARD )			// 예외처리: 경비병은 공중에 있는 녀석도 공격가능 
+		if( IsNPC() && GetProp()->dwClass == RANK_GUARD )			// ????: ???? ??? ?? ??? ???? 
 			return HITTYPE_GENERIC;
-	
-		if( pMover->IsNPC() && IsAttackAbleNPC( pMover ) == FALSE )	// bKillable, IsPeaceful, RANK_GUARD를 검사 
+
+		if( pMover->IsNPC() && IsAttackAbleNPC( pMover ) == FALSE )	// bKillable, IsPeaceful, RANK_GUARD? ?? 
 			return HITTYPE_FAIL;
 
-		//TODO: IsFly()로 통합 
+		//TODO: IsFly()? ?? 
 		bool bAttackerFly = ( IsNPC() && IsFlyingNPC() ) || ( IsPlayer() && IsFly() );
 		bool bDefenderFly = ( pMover->IsNPC() && pMover->IsFlyingNPC() ) || ( pMover->IsPlayer() && pMover->IsFly() );
 
 
-#ifdef __JHMA_VER_8_6     // 8차 몬스터가 저공비행유저를 공격가능하게함   World
-	
+#ifdef __JHMA_VER_8_6     // 8? ???? ??????? ???????   World
+
 		if( bAttackerFly != bDefenderFly && bAttackerFly )
 			return HITTYPE_FAIL;
 
@@ -1996,7 +1996,7 @@ BOOL CMover::IsGuildCombatTarget( CMover* pMover )
 		)
 		return FALSE;
 #endif // __WORLDSERVER
-	
+
 	if( m_nGuildCombatState != 1 || pMover->m_nGuildCombatState != 1 )
 		return FALSE;
 
@@ -2006,14 +2006,14 @@ BOOL CMover::IsGuildCombatTarget( CMover* pMover )
 	return TRUE;
 }
 
-// 맞는 모션을 취한다.
+// ?? ??? ???.
 void CMover::SetDamagedMotion( CMover* pAttacker, DWORD dwAtkFlags )
 {
-	if((m_pActMover->GetState() & OBJSTA_DMG_FLY_ALL))			// 데미지플라잉이 아닐때만 아래 처리.
+	if((m_pActMover->GetState() & OBJSTA_DMG_FLY_ALL))			// ??????? ???? ?? ??.
 		return;
 
 	m_pActMover->ResetState( OBJSTA_JUMP_ALL );
-	if( dwAtkFlags & AF_FLYING )									// 맞고 날아가야 하는가?
+	if( dwAtkFlags & AF_FLYING )									// ?? ???? ????
 	{
 		if( (m_pActMover->GetState() != OBJSTA_STUN) )
 		{			
@@ -2021,27 +2021,27 @@ void CMover::SetDamagedMotion( CMover* pAttacker, DWORD dwAtkFlags )
 			SetMotion( MTI_DMGFLY, ANILOOP_CONT );
 			if( pAttacker )
 			{ 
-				pAttacker->SendActMsg( OBJMSG_STOP );					// 플라잉다운이 일어났을때 어태커는 일단 세우자.
-				m_pActMover->DoDamageFly( pAttacker->GetAngle(), 145.0f, 0.18f );	// 어태커가 보는쪽으로 날려보냄.
+				pAttacker->SendActMsg( OBJMSG_STOP );					// ?????? ????? ???? ?? ???.
+				m_pActMover->DoDamageFly( pAttacker->GetAngle(), 145.0f, 0.18f );	// ???? ????? ????.
 			}
 		}
 	} 
 	else
 		m_pActMover->SetState( OBJSTA_DMG_ALL, OBJSTA_DMG );
-	
+
 #if __VER >= 10 // __LEGEND
 	DWORD	dwTmpTick = GetTickCount();
 	int	nTmpSkillID = m_pActMover->GetCastingSKillID();
 	if( m_pActMover->GetCastingEndTick() > dwTmpTick && ( nTmpSkillID == SI_KNT_HERO_DRAWING || nTmpSkillID == SI_RIG_HERO_RETURN ) )
 	{
 		m_pActMover->SetCastingEndTick(0);
-		m_pActMover->ClearState();				// 상태 클리어하고 다시 맞춤.
+		m_pActMover->ClearState();				// ?? ????? ?? ??.
 	}
 #endif  //#if __VER >= 10 // __LEGEND
 
-	if( m_pActMover->IsActJump() || m_pActMover->IsActAttack() )	// 점프중 or 공격중 엔 데미지 모션 안냄.
+	if( m_pActMover->IsActJump() || m_pActMover->IsActAttack() )	// ??? or ??? ? ??? ?? ??.
 		return;
-	if( m_pActMover->IsAction() )		// 일반액션 중이면 데미지 모션 안냄.
+	if( m_pActMover->IsAction() )		// ???? ??? ??? ?? ??.
 		return;
 
 	m_dwMotion = -1;
@@ -2058,12 +2058,12 @@ void CMover::SetDamagedMotion( CMover* pAttacker, DWORD dwAtkFlags )
 }
 
 
-// 아이템의 효능 곱하기 팩터를 구한다.
+// ???? ?? ??? ??? ???.
 float CMover::GetItemMultiplier( CItemElem* pItemElem )
 {
 #if __VER < 8 // __S8_PK
 	if( IsChaotic() == FALSE && (pItemElem->GetProp()->nEvildoing < 0) )
-		return 0.0f;	// 선한자가 카오 아이템을 사용하면 효능이 없다.
+		return 0.0f;	// ???? ?? ???? ???? ??? ??.
 #endif // __VER < 8 // __S8_PK
 
 	if( pItemElem->IsFlag( CItemElem::expired ) )
@@ -2077,8 +2077,8 @@ float CMover::GetItemMultiplier( CItemElem* pItemElem )
 #else // __REMOVE_ENDURANCE
 	float fValue = CMover::GetItemEnduranceInfluence( ( pItemElem->m_nHitPoint * 100 ) / pItemProp->dwEndurance );
 #endif // __REMOVE_ENDURANCE
-	
-	// 康 - 2007-08-27
+
+	// ? - 2007-08-27
 	int nOption		= pItemElem->GetAbilityOption();
 	if( pItemProp->dwReferStat1 == WEAPON_ULTIMATE )
 		nOption	= 10;
@@ -2087,7 +2087,7 @@ float CMover::GetItemMultiplier( CItemElem* pItemElem )
 	{
 		int nValue = prj.GetExpUpItem( pItemProp->dwItemKind3, nOption );
 		nValue += 100;
-		fValue = fValue * nValue / 100.0f;		// 제련수치가 곱해진다.
+		fValue = fValue * nValue / 100.0f;		// ????? ????.
 	}
 	return fValue;
 }
@@ -2099,7 +2099,7 @@ void CMover::GetItemATKPower( int *pnMin, int *pnMax, ItemProp* pItemProp, CItem
 	nAdd = nOption = 0;
 
 	if( pWeapon )
-		nOption = pWeapon->GetAbilityOption();	// 제련수치 
+		nOption = pWeapon->GetAbilityOption();	// ???? 
 
 	if( nOption > 0 )
 		nAdd = (int)( pow( (float)( nOption ), 1.5f ) );
@@ -2168,7 +2168,7 @@ void CMover::OnAttackSFX( OBJID	idTarget, int nMagicPower, DWORD dwSkill, int nD
 #endif // __VER >= 8 // __S8_PK
 {
 #ifdef __WORLDSERVER
-//	if( dwSkill == SI_MAG_FIRE_HOTAIR )		// 康	// 06-10-23
+//	if( dwSkill == SI_MAG_FIRE_HOTAIR )		// ?	// 06-10-23
 //		return;
 
 #if __VER >= 8 // __S8_PK
@@ -2256,7 +2256,7 @@ BOOL AttackBySFX( CMover* pAttacker, SFXHIT_INFO & info )
 	if( pTarget->IsLive() == FALSE )
 		return FALSE;
 
-	//몬스터가 원거리 발사체를 경우도 공격성공률을 적용하여 계산한다.
+	//???? ??? ???? ??? ?????? ???? ????.
 	if( info.dwAtkFlags & AF_GENERIC )
 	{						
 		if( pAttacker->GetAttackResult( pTarget, 0 ) == FALSE )
@@ -2268,8 +2268,8 @@ BOOL AttackBySFX( CMover* pAttacker, SFXHIT_INFO & info )
 
 	if( IsSkillAttack( info.dwAtkFlags ) )
 	{
-		// 스킬 효과를 적용.(내부에 데미지도 포함되어 있다)
-		LPSKILL pSkill = pAttacker->GetSkill( info.dwSkill );		// 공격자의 스킬레벨을 알기 위해...
+		// ?? ??? ??.(??? ???? ???? ??)
+		LPSKILL pSkill = pAttacker->GetSkill( info.dwSkill );		// ???? ????? ?? ??...
 		if( pSkill )
 		{
 			ItemProp *pSkillProp;
@@ -2287,15 +2287,15 @@ BOOL AttackBySFX( CMover* pAttacker, SFXHIT_INFO & info )
 #endif // __VER >= 8 // __S8_PK
 		} 
 		else
-			Error( "OnSfxHit : skill=%d를 가지지 않음", info.dwSkill );
+			Error( "OnSfxHit : skill=%d? ??? ??", info.dwSkill );
 	} 
 	else
 		pTarget->m_pActMover->SendDamage( info.dwAtkFlags, pAttacker->GetId(), nParam );
 
-	if( info.fDmgPower )	// 밀리는 속성이 있는거면.
+	if( info.fDmgPower )	// ??? ??? ????.
 		AngleToVectorXZ( &pTarget->m_pActMover->m_vDeltaE, info.fDmgAngle, info.fDmgPower );   
 
-	if( pTarget->IsLive() == FALSE )	// 위 공격의 결과로 대상이 사망 하였다.
+	if( pTarget->IsLive() == FALSE )	// ? ??? ??? ??? ?? ???.
 		return FALSE;
 
 	return TRUE;

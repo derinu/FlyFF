@@ -175,7 +175,7 @@ BOOL CWndTotalOption::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 			{
 					g_DPlay.SendQueryEquipSetting(TRUE);
 			}else
-			if( m_OptTabGame.pWndButton8[1]->IsPush())
+			if( m_OptTabGame.pWndButton8[1]->GetCheck())
 			{
 					g_DPlay.SendQueryEquipSetting(FALSE);	
 			}

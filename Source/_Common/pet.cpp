@@ -69,8 +69,12 @@ WORD	CPetProperty::GetFeedEnergy( DWORD dwCost, int nIndex )
 	vector<FEEDENERGY>* pArr	= &m_aFeedEnergy[nIndex];
 	for( vector<FEEDENERGY>::iterator i = pArr->begin(); i != pArr->end(); ++i )
 	{
+		//::Error("[ForLoop]%d %d %d %d", i, dwCost, i->dwCostMin, i->dwCostMax);
 		if( dwCost >= i->dwCostMin && dwCost <= i->dwCostMax )
-			return (WORD)xRandom( i->wEnergyMin, i->wEnergyMax + 1 );	// wEnergyMin ~ wEnergyMax
+		{
+			WORD retVal = (WORD)xRandom( i->wEnergyMin, i->wEnergyMax + 1 );
+			return 	retVal;// wEnergyMin ~ wEnergyMax
+		}
 	}
 	return 0;
 }

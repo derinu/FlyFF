@@ -1131,7 +1131,13 @@ BOOL CMover::AddExperience( EXPINTEGER nExp, BOOL bFirstCall, BOOL bMultiPly, BO
 				switch(this->m_nJob)
 				{
 					case JOB_MERCENARY:
-						
+						{
+						//CItemElem itemElem;
+						//itemElem.m_dwItemId		= II_SYS_SYS_FEED_01;
+						//itemElem.m_nItemNum		= 1;
+						//itemElem.m_nHitPoint	= -1;
+						//((CUser*)this)->CreateItem( &itemElem );
+						}
 					break;
 
 					case JOB_ACROBAT:
@@ -1798,6 +1804,7 @@ BOOL CMover::AddChangeJob( int nJob )
 			ItemProp* pSkillProp = apSkillProp[ i ];
 			lpSkill = &m_aJobSkill[ i + MAX_JOB_SKILL ];
 			lpSkill->dwSkill = pSkillProp->dwID;
+			lpSkill->dwLevel = pSkillProp->dwExpertMax;
 		}
 		bResult = TRUE;
 	}
@@ -1812,6 +1819,7 @@ BOOL CMover::AddChangeJob( int nJob )
 			ItemProp* pSkillProp = apSkillProp[ i ];
 			lpSkill = &m_aJobSkill[ i + MAX_JOB_SKILL + MAX_EXPERT_SKILL ];
 			lpSkill->dwSkill = pSkillProp->dwID;
+			lpSkill->dwLevel = pSkillProp->dwExpertMax;
 		}
 		bResult = TRUE;
 	}
@@ -1827,7 +1835,7 @@ BOOL CMover::AddChangeJob( int nJob )
 			ItemProp* pSkillProp = apSkillProp[ i ];
 			lpSkill = &m_aJobSkill[ i + MAX_JOB_SKILL + MAX_EXPERT_SKILL + MAX_PRO_SKILL];
 			lpSkill->dwSkill = pSkillProp->dwID;
-			lpSkill->dwLevel = 1;	//master스킬은 1부터 준다.
+			lpSkill->dwLevel = pSkillProp->dwExpertMax;
 		}
 		bResult = TRUE;
 	}
@@ -1843,6 +1851,7 @@ BOOL CMover::AddChangeJob( int nJob )
 			ItemProp* pSkillProp = apSkillProp[ i ];
 			lpSkill = &m_aJobSkill[ i + MAX_JOB_SKILL + MAX_EXPERT_SKILL + MAX_PRO_SKILL + MAX_MASTER_SKILL ];
 			lpSkill->dwSkill = pSkillProp->dwID;
+			lpSkill->dwLevel = pSkillProp->dwExpertMax;
 		}
 		bResult = TRUE;
 	}
@@ -1858,6 +1867,7 @@ BOOL CMover::AddChangeJob( int nJob )
 			ItemProp* pSkillProp = apSkillProp[ i ];
 			lpSkill = &m_aJobSkill[ i + MAX_JOB_SKILL + MAX_EXPERT_SKILL + MAX_PRO_SKILL + MAX_MASTER_SKILL + MAX_HERO_SKILL ];
 			lpSkill->dwSkill = pSkillProp->dwID;
+			lpSkill->dwLevel = pSkillProp->dwExpertMax;
 		}
 		bResult = TRUE;
 	}
@@ -3488,6 +3498,11 @@ FLOAT CMover::GetSpeed(FLOAT fSrcSpeed)
 	int nAdjValue	= GetAdjParam( DST_SPEED );
 	if( nAdjValue != 0 )
 	{
+		if( nAdjValue > 400 )
+			nAdjValue = 400;
+		else if( nChgValue > 400 )
+			nChgValue = 400;
+
 #ifdef __JEFF_11
 		fSrcSpeed = fSrcSpeed + ( fSrcSpeed * (nAdjValue / 100.0f) );
 		if( fSrcSpeed < 0.0F )
@@ -3499,7 +3514,6 @@ FLOAT CMover::GetSpeed(FLOAT fSrcSpeed)
 	if( fSrcSpeed < 0.0F )
 		fSrcSpeed	= 0.0F;
 #endif	// __JEFF_11
-
 	return fSrcSpeed;
 }
 

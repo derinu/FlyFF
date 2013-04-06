@@ -2485,19 +2485,21 @@ BOOL TextCmd_Kill( CScanner& scanner )
 		if(pUser->m_dwAuthorization <= pUserTarget->m_dwAuthorization)
 			return FALSE;
 
-		int nDamage = pUserTarget->GetHitPoint();
-		pUserTarget->SetHitPoint(0);
-		g_UserMng.AddDamage( pUserTarget, GETID( pUser ), nDamage, AF_FORCE );
-		pUserTarget->DoDie( pUser, OBJMSG_DAMAGE );	
-		
-		CString Message;
-		Message.Format(_T("%s is dead"), pUserTarget->GetName());
+		if(pUser)
+		{
+			int nDamage = pUserTarget->GetHitPoint();
+			pUserTarget->SetHitPoint(0);
+			g_UserMng.AddDamage( pUserTarget, GETID( pUser ), nDamage, AF_FORCE );
+			pUserTarget->DoDie( pUser, OBJMSG_DAMAGE );	
+			
+			CString Message;
+			Message.Format(_T("%s is dead"), pUserTarget->GetName());
+			pUser->AddText(Message);
 
-		CString Message2;
-		Message2.Format(_T("%s has killed you"), pUser->GetName());
-
-		pUser->AddText(Message);
-		pUserTarget->AddText(Message2);
+			CString Message2;
+			Message2.Format(_T("%s has killed you"), pUser->GetName());
+			pUserTarget->AddText(Message2);
+		}
 	}
 	else
 	{
@@ -3796,6 +3798,17 @@ BOOL TextCmd_count( CScanner& scanner )
 	sprintf( szCount, "Players online: %d", g_UserMng.GetCount() );
 	pUser->AddText( szCount );
 #endif	// __WORLDSERVER
+	return TRUE;
+}
+
+BOOL TextCmd_ping(CScanner& scanner)
+{
+#ifndef __WORLDSERVER
+	CString strPing;
+	strPing.Format("Ping: %dMS", g_Neuz.m_dwPingTime);
+	g_WndMng.PutString( strPing, NULL, 0xff00ff00 );
+#endif
+
 	return TRUE;
 }
 
@@ -5354,6 +5367,7 @@ BEGINE_TEXTCMDFUNC_MAP
 	ON_TEXTCMDFUNC( TextCmd_NoInvisible,           "noinvisible",       "noinv",          "투명해제",       "투해",    TCM_SERVER, AUTH_GAMEMASTER   , "투명화 해제" )
 	ON_TEXTCMDFUNC( TextCmd_Summon,                "summon",            "su",             "소환",           "소환",    TCM_SERVER, AUTH_GAMEMASTER   , "유저소환" )
 	ON_TEXTCMDFUNC( TextCmd_count,                 "count",             "cnt",            "접속자수",       "접속자수",TCM_SERVER, AUTH_GENERAL   , "접속자 카운트" )
+	ON_TEXTCMDFUNC( TextCmd_ping,                 "ping",             "png",            "접속자수",       "접속자수",TCM_CLIENT, AUTH_GENERAL   , "접속자 카운트" )
 	
 	// GM_LEVEL_2
 	ON_TEXTCMDFUNC( TextCmd_Out,                   "out",               "out",            "퇴출",           "퇴출",    TCM_SERVER, AUTH_GAMEMASTER2   , "퇴출" )

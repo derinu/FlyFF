@@ -284,10 +284,12 @@ void CWndChat::OnInitialUpdate()
 	CWndButton* pWndLog = (CWndButton*)GetDlgItem( WIDC_CHECK3 );
 	CWndButton* pWndMoveLock = (CWndButton*)GetDlgItem( WIDC_MOVELOCK );
 	CWndButton* pWndHelp = (CWndButton*)GetDlgItem( WIDC_HELP );
+	CWndButton* pWndCheck = (CWndButton*)GetDlgItem( WIDC_RADIO6 );
 	pWndLock->SetVisible( false );
 	pWndLog->SetVisible( true );
 	pWndMoveLock->SetVisible( false );
 	pWndHelp->SetVisible( false );
+	pWndCheck->SetVisible(false);
 #endif //__CHAT_V19
 
 	//AddWndStyle( WBS_THICKFRAME );
@@ -1087,7 +1089,7 @@ void CWndChat::OnSize(UINT nType, int cx, int cy)
 	CWndButton* pWndRadio4 = (CWndButton*)GetDlgItem( WIDC_RADIO4 );
 	CWndButton* pWndRadio5 = (CWndButton*)GetDlgItem( WIDC_RADIO5 );
 #ifdef __CHAT_V19
-	CWndButton* pWndRadio6 = (CWndButton*)GetDlgItem( WIDC_RADIO6 );
+	CWndButton* pWndRadio6 = (CWndButton*)GetDlgItem( WIDC_CHECK3 );
 #else
 	CWndButton* pWndCheck  = (CWndButton*)GetDlgItem( WIDC_CHECK1 );
 	CWndButton* pWndCheck2  = (CWndButton*)GetDlgItem( WIDC_MOVELOCK );
@@ -1150,7 +1152,7 @@ void CWndChat::OnSize(UINT nType, int cx, int cy)
 #endif //__CHAT_V19
 
 	rectEdit.left = rect.right - 100;
-	pWndCheck3->Move( rectEdit.TopLeft()  ); 	
+	//pWndCheck3->Move( rectEdit.TopLeft()  ); 	
 #else //__Y_CHAT_SYSTEM_8
 	rectEdit.left = rect.right - 150;
 	pWndCheck->Move( rectEdit.TopLeft()  ); 

@@ -2057,13 +2057,137 @@ void CMover::InitLevelPumbaaa( int nJob, LONG nLevel, BOOL bGamma )
 		}
 		int nPoint = 0;
 		if( m_nJob == JOB_MERCENARY )
+		{
 			nPoint += 40;
+
+			CItemElem itemElemAxe;
+			itemElemAxe.m_dwItemId		= II_WEA_AXE_FALL;
+			itemElemAxe.m_nItemNum		= 1;
+			itemElemAxe.m_nHitPoint	= -1;
+			((CUser*)this)->CreateItem( &itemElemAxe );
+
+			CItemElem itemElemSwd;
+			itemElemSwd.m_dwItemId		= II_WEA_SWO_FALL;
+			itemElemSwd.m_nItemNum		= 1;
+			itemElemSwd.m_nHitPoint	= -1;
+			((CUser*)this)->CreateItem( &itemElemSwd );
+
+			if(GetSex() == SEX_MALE)
+			{
+				CItemElem itemElemSet;
+				itemElemSet.m_dwItemId		= II_SYS_SYS_EVE_BXMMERCENARY15;
+				itemElemSet.m_nItemNum		= 1;
+				itemElemSet.m_nHitPoint	= -1;
+				((CUser*)this)->CreateItem( &itemElemSet );
+			}
+			else
+			{
+				CItemElem itemElemSet;
+				itemElemSet.m_dwItemId		= II_SYS_SYS_EVE_BXFMERCENARY15;
+				itemElemSet.m_nItemNum		= 1;
+				itemElemSet.m_nHitPoint	= -1;
+				((CUser*)this)->CreateItem( &itemElemSet );
+			}
+		}
 		else if( m_nJob == JOB_ACROBAT )
+		{
 			nPoint += 50;
+            
+			CItemElem itemElemAxe;
+			itemElemAxe.m_dwItemId		= II_WEA_BOW_BOW15;
+			itemElemAxe.m_nItemNum		= 1;
+			itemElemAxe.m_nHitPoint	= -1;
+			((CUser*)this)->CreateItem( &itemElemAxe );
+
+			CItemElem itemElemSwd;
+			itemElemSwd.m_dwItemId		= II_WEA_YOY_YOY15;
+			itemElemSwd.m_nItemNum		= 1;
+			itemElemSwd.m_nHitPoint	= -1;
+			((CUser*)this)->CreateItem( &itemElemSwd );
+
+			if(GetSex() == SEX_MALE)
+			{
+				CItemElem itemElemSet;
+				itemElemSet.m_dwItemId		= II_SYS_SYS_EVE_BXMACROBAT15;
+				itemElemSet.m_nItemNum		= 1;
+				itemElemSet.m_nHitPoint	= -1;
+				((CUser*)this)->CreateItem( &itemElemSet );
+			}
+			else
+			{
+				CItemElem itemElemSet;
+				itemElemSet.m_dwItemId		= II_SYS_SYS_EVE_BXFACROBAT15;
+				itemElemSet.m_nItemNum		= 1;
+				itemElemSet.m_nHitPoint	= -1;
+				((CUser*)this)->CreateItem( &itemElemSet );
+			}
+		}
 		else if( m_nJob == JOB_ASSIST )
+		{
 			nPoint += 60;
+
+            CItemElem itemElemAxe;
+			itemElemAxe.m_dwItemId		= II_WEA_CHEE_CHE15;
+			itemElemAxe.m_nItemNum		= 1;
+			itemElemAxe.m_nHitPoint	= -1;
+			((CUser*)this)->CreateItem( &itemElemAxe );
+
+			CItemElem itemElemSwd;
+			itemElemSwd.m_dwItemId		= II_WEA_KNU_FALL;
+			itemElemSwd.m_nItemNum		= 1;
+			itemElemSwd.m_nHitPoint	= -1;
+			((CUser*)this)->CreateItem( &itemElemSwd );
+
+			if(GetSex() == SEX_MALE)
+			{
+				CItemElem itemElemSet;
+				itemElemSet.m_dwItemId		= II_SYS_SYS_EVE_BXMASSIST15;
+				itemElemSet.m_nItemNum		= 1;
+				itemElemSet.m_nHitPoint	= -1;
+				((CUser*)this)->CreateItem( &itemElemSet );
+			}
+			else
+			{
+				CItemElem itemElemSet;
+				itemElemSet.m_dwItemId		= II_SYS_SYS_EVE_BXFASSIST15;
+				itemElemSet.m_nItemNum		= 1;
+				itemElemSet.m_nHitPoint	= -1;
+				((CUser*)this)->CreateItem( &itemElemSet );
+			}
+		}
 		else if( m_nJob == JOB_MAGICIAN )
+		{
 			nPoint += 90;
+            
+			CItemElem itemElemAxe;
+			itemElemAxe.m_dwItemId		= II_WEA_WAN_WAN15;
+			itemElemAxe.m_nItemNum		= 1;
+			itemElemAxe.m_nHitPoint	= -1;
+			((CUser*)this)->CreateItem( &itemElemAxe );
+
+			CItemElem itemElemSwd;
+			itemElemSwd.m_dwItemId		= II_WEA_STA_STA15;
+			itemElemSwd.m_nItemNum		= 1;
+			itemElemSwd.m_nHitPoint	= -1;
+			((CUser*)this)->CreateItem( &itemElemSwd );
+
+			if(GetSex() == SEX_MALE)
+			{
+				CItemElem itemElemSet;
+				itemElemSet.m_dwItemId		= II_SYS_SYS_EVE_BXMMAGICIAN15;
+				itemElemSet.m_nItemNum		= 1;
+				itemElemSet.m_nHitPoint	= -1;
+				((CUser*)this)->CreateItem( &itemElemSet );
+			}
+			else
+			{
+				CItemElem itemElemSet;
+				itemElemSet.m_dwItemId		= II_SYS_SYS_EVE_BXFMAGICIAN15;
+				itemElemSet.m_nItemNum		= 1;
+				itemElemSet.m_nHitPoint	= -1;
+				((CUser*)this)->CreateItem( &itemElemSet );
+			}
+		}
 		else if( m_nJob ==  JOB_KNIGHT || m_nJob ==  JOB_BLADE )
 			nPoint += 120;
 		else if( m_nJob ==  JOB_JESTER || m_nJob ==  JOB_RANGER )

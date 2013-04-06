@@ -311,7 +311,8 @@ CGuildCombat::CGuildCombat()
 	m_bMutex     = FALSE;
 	m_bMutexMsg  = FALSE;
 
-	memset( __AutoOpen, 0, sizeof(__AUTO_OPEN) * 7 );	
+	//memset( __AutoOpen, 0, sizeof(__AUTO_OPEN) * 7 );	
+	__AutoOpen.clear();
 
 	m_nDay	= 0;
 #endif // __WORLDSERVER
@@ -1567,7 +1568,7 @@ void CGuildCombat::GuildCombatResultRanking()
 
 		CItemElem itemElem;
 		itemElem.m_dwItemId = II_CHP_RED;
-		float fChipNum = m_nJoinPanya * vecGCRanking.size() * 0.9f * 0.00001f * 0.1f;
+		/*float fChipNum = m_nJoinPanya * vecGCRanking.size() * 0.9f * 0.00001f * 0.1f;
 		switch( i )
 		{
 			case 0 :	// 1위 
@@ -1582,7 +1583,7 @@ void CGuildCombat::GuildCombatResultRanking()
 		}
 		itemElem.m_nItemNum = (int)fChipNum;
 		if( itemElem.m_nItemNum < 1 )
-			itemElem.m_nItemNum		= 1;
+			itemElem.m_nItemNum		= 1;*/
 		itemElem.m_bCharged = itemElem.GetProp()->bCharged;
 
 		LogItemInfo aLogItem;
@@ -1597,6 +1598,8 @@ void CGuildCombat::GuildCombatResultRanking()
 				Error( "GuildCombatResultRanking() - pJoinPlayer is NULL" );
 				continue;
 			}
+
+			itemElem.m_nItemNum = 3 * pJoinPlayer->nPoint;
 
 			CUser* pUsertmp = (CUser*)prj.GetUserByID( pJoinPlayer->uidPlayer );
 			if( IsValidObj( pUsertmp ) )
@@ -2097,25 +2100,18 @@ DWORD CGuildCombat::GetRequstPenya( u_long uidGuild )
 CTime CGuildCombat::GetNextGuildCobmatTime()
 {
 	CTime tCurrentTime = CTime::GetCurrentTime();
+	CTime tTemp;
 	CTime tNextCombat;
-	int nDayofWeek = m_nDay - tCurrentTime.GetDayOfWeek();
-	if( 0 < nDayofWeek )
-		tNextCombat = tCurrentTime + CTimeSpan( nDayofWeek, 0, 0, 0 ); 
-	else if( 0 == nDayofWeek )
+
+	for(vector<__AUTO_OPEN>::iterator it = __AutoOpen.begin(); it != __AutoOpen.end(); ++it)
 	{
-		CTimeSpan tCTime = CTimeSpan( 0, tCurrentTime.GetHour(), tCurrentTime.GetMinute(), tCurrentTime.GetSecond() );
-		CTimeSpan tNTime = CTimeSpan( 0, __AutoOpen[m_nDay-1].nHour, __AutoOpen[m_nDay-1].nMinute, 0 );
-		if( tCTime <= tNTime )
-			tNextCombat = tCurrentTime;
-		else
-			tNextCombat = tCurrentTime + CTimeSpan( m_nDay, 0, 0, 0 );
+		tTemp = tCurrentTime;
+		tTemp += CTimeSpan( it->nDay-tCurrentTime.GetDayOfWeek(), it->nHour-tCurrentTime.GetHour(), it->nMinute-tCurrentTime.GetMinute(), 0 );
+
+		if( tTemp > tCurrentTime && (tTemp < tNextCombat || tNextCombat == NULL) )
+		tNextCombat = tTemp;
 	}
-	else if( 0 > nDayofWeek )
-	{
-		nDayofWeek = 7 + nDayofWeek;
-		tNextCombat = tCurrentTime + CTimeSpan( nDayofWeek, 0, 0, 0 ); 
-	}
-	tNextCombat = CTime( tNextCombat.GetYear(), tNextCombat.GetMonth(), tNextCombat.GetDay(), __AutoOpen[m_nDay-1].nHour, __AutoOpen[m_nDay-1].nMinute, 0 );
+
 	return tNextCombat;
 }
 
@@ -2764,35 +2760,41 @@ void CGuildCombat::Process()
 	{
 		CTime ctime = CTime::GetCurrentTime();
 
-		if( __AutoOpen[ctime.GetDayOfWeek()-1].bUseing )
+		for(vector<__AUTO_OPEN>::iterator it = __AutoOpen.begin(); it != __AutoOpen.end(); ++it)
 		{
-			// 스킵 될 수 있으므로 수정을 필요로 함
-			if( __AutoOpen[ctime.GetDayOfWeek()-1].nHour == ctime.GetHour() &&
-				__AutoOpen[ctime.GetDayOfWeek()-1].nMinute == ctime.GetMinute() && m_bMutex == FALSE )
+			if(it->nDay == ctime.GetDayOfWeek() && it->bUseing)
 			{
-#ifdef __S_BUG_GC
-				if( (int)( m_vecGuildCombatMem.size() ) >= m_nMinGuild )
-#else // __S_BUG_GC
-				if( m_GuildCombatMem.size() > 1 )
-#endif // __S_BUG_GC
-				{				
-					GuildCombatOpen();
-				}
-				else
+				CTimeSpan ts( 0, it->nHour-ctime.GetHour(), it->nMinute-ctime.GetMinute(), 0 );
+				
+				//if( ts.GetTotalSeconds() == GW_TIME_ANNOUNCE*60 )
+					//g_DPCoreClient.SendSystem( "fuck yo couch" );
+			
+				if( it->nHour == ctime.GetHour() && it->nMinute == ctime.GetMinute() && m_bMutex == FALSE )
 				{
-					m_ctrMutexOut.Set( SEC(60) );
-					m_bMutexMsg = TRUE;
-					g_DPCoreClient.SendSystem( prj.GetText( TID_GAME_GUILDCOMBAT_NEXT_COMBAT ) );	
-					g_DPCoreClient.SendSystem( prj.GetText( TID_GAME_GUILDCOMBAT_ENJOY ) );	
+#ifdef __S_BUG_GC
+					if( (int)( m_vecGuildCombatMem.size() ) >= m_nMinGuild )
+#else // __S_BUG_GC
+					if( m_GuildCombatMem.size() > 1 )
+#endif // __S_BUG_GC
+					{
+						GuildCombatOpen();
+					}
+					else
+					{
+						m_ctrMutexOut.Set( SEC(60) );
+						m_bMutexMsg = TRUE;
+						g_DPCoreClient.SendSystem( prj.GetText( TID_GAME_GUILDCOMBAT_NEXT_COMBAT ) );
+						g_DPCoreClient.SendSystem( prj.GetText( TID_GAME_GUILDCOMBAT_ENJOY ) );
+					}
+
+					m_bMutex = TRUE;
 				}
 
-				m_bMutex = TRUE;				
-			}
-
-			if( m_bMutexMsg && m_ctrMutexOut.IsTimeOut() )
-			{
-				m_bMutexMsg = FALSE;
-				m_bMutex    = FALSE;
+				if( m_bMutexMsg && m_ctrMutexOut.IsTimeOut() )
+				{
+					m_bMutexMsg = FALSE;
+					m_bMutex = FALSE;
+				}
 			}
 		}
 	}
@@ -2997,22 +2999,29 @@ BOOL CGuildCombat::LoadScript( LPCSTR lpszFileName )
 					return FALSE;
 				}
 
+				__AUTO_OPEN tmp;
+
 				nDay = atoi( s.Token );
 				m_nDay = nDay;
+
 				if( nDay <= 0 || nDay > 7 )
 				{
 					Error( "CGuildCombat::LoadScript() Day Error = %d", nDay );
 					return FALSE;
 				}
-				__AutoOpen[nDay-1].bUseing = TRUE;
+				
+				tmp.bUseing = TRUE;
+				tmp.nDay = nDay;
 
 				nTime1 = s.GetNumber();
+
 				if( nTime1 < 0 || nTime1 > 24 )
 				{
 					Error( "CGuildCombat::LoadScript() Time Error = %d", nTime1 );
 					return FALSE;
 				}
-				__AutoOpen[nDay-1].nHour = nTime1;
+				
+				tmp.nHour = nTime1;
 				
 				nTime2 = s.GetNumber();
 				if( nTime2 < 0 || nTime2 > 59 )
@@ -3020,9 +3029,13 @@ BOOL CGuildCombat::LoadScript( LPCSTR lpszFileName )
 					Error( "CGuildCombat::LoadScript() Time Error = %d", nTime2 );
 					return FALSE;
 				}
-				__AutoOpen[nDay-1].nMinute = nTime2;
+				tmp.nMinute = nTime2;
 
-				nAutoOpenCnt++;
+				__AutoOpen.push_back ( tmp );
+
+				::Error("Loaded Guild Siege Time Day=%d Hour=%d Minute=%d", tmp.nDay, tmp.nHour, tmp.nMinute);
+				CTime CNow = CTime::GetCurrentTime();
+				::Error("Now Day=%d Hour=%d Minute=%d", CNow.GetDayOfWeek(), CNow.GetHour(), CNow.GetMinute());
 
 				s.GetToken();
 			}		

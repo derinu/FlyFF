@@ -18,7 +18,7 @@ extern	CGuildMng	g_GuildMng;
 ****************************************************/
 CWndGuild::CWndGuild() 
 { 
-	Error( "CWndGuild::CWndGuild()" );
+	
 } 
 CWndGuild::~CWndGuild() 
 { 
@@ -41,10 +41,7 @@ void CWndGuild::UpdateDataAll()
 
 void CWndGuild::OnInitialUpdate() 
 { 
-	Error( "CWndGuild::OnInitialUpdate() - IN" );
-	Error( "CWndGuild::OnInitialUpdate(CWndNeuz::OnInitialUpdate()) - IN" );
 	CWndNeuz::OnInitialUpdate(); 
-	Error( "CWndGuild::OnInitialUpdate(CWndNeuz::OnInitialUpdate()) - OUT" );
 	// 여기에 코딩하세요
 	
 	CWndTabCtrl* pWndTabCtrl = (CWndTabCtrl*)GetDlgItem( WIDC_TABCTRL1 );
@@ -108,8 +105,6 @@ void CWndGuild::OnInitialUpdate()
 		CRect r = GetWindowRect( TRUE );
 		m_WndGuildTabMember.m_rectParent = r;
 	}	
-
-	Error( "CWndGuild::OnInitialUpdate() - OUT" );
 } 
 // 처음 이 함수를 부르면 윈도가 열린다.
 BOOL CWndGuild::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
@@ -118,9 +113,9 @@ BOOL CWndGuild::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ )
 		return FALSE;
 
 	// Daisy에서 설정한 리소스로 윈도를 연다.
-	Error( "CWndGuild::Initialize() - IN" );
+	
 	BOOL bFlag = CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_GUILD, 0, CPoint( 0, 0 ), pWndParent );
-	Error( "CWndGuild::Initialize() - OUT" );
+	
 
 	return bFlag;
 } 

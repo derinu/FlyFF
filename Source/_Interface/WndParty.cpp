@@ -25,7 +25,7 @@ CWndParty::CWndParty()
 #if __VER >= 8 //__CSC_VER8_2
 	m_pWndPartyQuick = NULL;
 #endif //__CSC_VER8_2
-	Error( "CWndParty::CWndParty()" );
+	
 } 
 CWndParty::~CWndParty() 
 { 
@@ -36,7 +36,7 @@ CWndParty::~CWndParty()
 } 
 void CWndParty::SerializeRegInfo( CAr& ar, DWORD& dwVersion )
 {
-	//Error( "CWndParty::SerializeRegInfo() - IN" );
+	
 
 	CWndNeuz::SerializeRegInfo( ar, dwVersion );
 	CWndTabCtrl* lpTabCtrl = (CWndTabCtrl*)GetDlgItem( WIDC_TABCTRL1 );
@@ -58,8 +58,6 @@ void CWndParty::SerializeRegInfo( CAr& ar, DWORD& dwVersion )
 		dwVersion = 1;
 		ar << lpTabCtrl->GetCurSel();
 	}
-
-	//Error( "CWndParty::SerializeRegInfo() - OUT" );
 }
 void CWndParty::OnDraw( C2DRender* p2DRender ) 
 { 
@@ -214,8 +212,6 @@ void CWndParty::OnDraw( C2DRender* p2DRender )
 } 
 void CWndParty::OnInitialUpdate() 
 { 
-	//Error( "CWndParty::OnInitialUpdate() - IN" );
-
 	CWndNeuz::OnInitialUpdate(); 
 	// 여기에 코딩하세요
 	
@@ -245,13 +241,8 @@ void CWndParty::OnInitialUpdate()
 	rect.top = 15;
 
 	//gmpbigsun( 100416 ) : Error 제거 
-	//Error( "CWndParty::OnInitialUpdate() - m_wndPartyInfo.Create - IN" );
 	m_wndPartyInfo.Create( WBS_CHILD | WBS_NOFRAME | WBS_NODRAWFRAME, rect, pWndTabCtrl, APP_PARTY_INFO );
-	//Error( "CWndParty::OnInitialUpdate() - m_wndPartyInfo.Create - OUT" );
-
-	//Error( "CWndParty::OnInitialUpdate() - m_wndPartySkill.Create - IN" );
 	m_wndPartySkill.Create( WBS_CHILD | WBS_NOFRAME | WBS_NODRAWFRAME , rect, pWndTabCtrl, APP_PARTY_SKILL );
-	//Error( "CWndParty::OnInitialUpdate() - m_wndPartySkill.Create - OUT" );
 
 	WTCITEM tabTabItem;
 	
@@ -265,15 +256,11 @@ void CWndParty::OnInitialUpdate()
 	pWndTabCtrl->InsertItem( 1, &tabTabItem );
 
 	MoveParentCenter();
-
-	//Error( "CWndParty::OnInitialUpdate() - OUT" );
 } 
 // 처음 이 함수를 부르면 윈도가 열린다.
 BOOL CWndParty::Initialize( CWndBase* pWndParent, DWORD /*dwWndId*/ ) 
 { 
-	//Error( "CWndParty::Initialize() - IN" );
 	BOOL bFlag = CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_PARTY, 0, CPoint( 0, 0 ), pWndParent );
-	//Error( "CWndParty::Initialize() - OUT" );
 
 	// Daisy에서 설정한 리소스로 윈도를 연다.
 	return bFlag;

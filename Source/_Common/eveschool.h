@@ -60,14 +60,16 @@ public:
 typedef struct __AUTO_OPEN
 {
 	BOOL bUseing;
+	BYTE nDay;
 	BYTE nHour;	
-	BYTE nMinute;		
+	BYTE nMinute;
 } __AUTO_OPEN;
 
 class CGuildCombat
 {
-#ifdef __WORLDSERVER 	
-	__AUTO_OPEN		__AutoOpen[7];
+#ifdef __WORLDSERVER 
+	vector<__AUTO_OPEN> __AutoOpen;
+	//__AUTO_OPEN		__AutoOpen[7];
 #endif // __WORLDSERVER
 	
 public:
