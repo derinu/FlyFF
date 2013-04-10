@@ -39,6 +39,17 @@
 class CParty;
 extern	CParty		g_Party;
 
+struct _PartyInfo
+{
+	u_long	m_uPartyId;
+	char	m_sParty[33];
+	int		m_nSizeofMember;
+	LONG	m_nLevel;
+	LONG	m_nPoint;
+	LPCTSTR	m_szName;
+
+};
+
 typedef	struct	_PartyMember	// 플레이어 아이디만 가지고 있음
 {
 	u_long	m_uPlayerId;
@@ -85,6 +96,7 @@ public:
 	int		m_nModeTime[MAX_PARTYMODE];				// 모드 시간
 	int		m_nGetItemPlayerId;						// 아이템 얻은 캐릭터
 	u_long	m_idDuelParty;							// 파티 듀얼중이면 상대방 파티의 ID, 아니면 0
+	BOOL	m_bAllowEnter;
 	//ADEILSON
 	DWORD   m_dwColor;
 #ifdef __WORLDSERVER
@@ -192,7 +204,6 @@ class CPartyMng
 private:
 	u_long		m_id;	// 새로 생성되는 파티에 순차적으로 아이디를 할당하기 위한 변수다.
 //	CMapParty	m_2Party;
-	C2PartyPtr	m_2PartyPtr;
 #ifdef __WORLDSERVER
 	int			m_nSecCount;
 #endif // __WORLDSERVER
@@ -212,6 +223,7 @@ public:
 	CPartyMng();
 	~CPartyMng();
 	void	Clear( void );
+	C2PartyPtr	m_2PartyPtr;
 //	Operations
 	u_long	NewParty( u_long uLeaderId, LONG nLeaderLevel, LONG nLeaderJob, BYTE nLeaderSex, LPSTR szLeaderName, u_long uMemberId, LONG nMemberLevel, LONG nMemberJob, BYTE nMemberSex, LPSTR szMembername, u_long uPartyId = 0 );
 	BOOL	DeleteParty( u_long uPartyId );

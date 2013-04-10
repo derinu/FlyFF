@@ -906,6 +906,13 @@ void CDPClient::SendPetFilter(int ItemType, int ItemPriority)
 	SEND( ar, this, DPID_SERVERPLAYER );
 }
 
+void CDPClient::SendJoinParty(u_long PartyId)
+{
+	BEFORESENDSOLE( ar, PACKETTYPE_PTYJOINREQ, DPID_UNKNOWN );
+	ar << PartyId;
+	SEND( ar, this, DPID_SERVERPLAYER );
+}
+
 #ifdef __DDOM
 #include "DomScore.h"
 #include "DomWidget.h"

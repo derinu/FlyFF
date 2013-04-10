@@ -827,6 +827,7 @@ private:
 	void			RemoveUserFromCacheMsg( CUser *pUser );
 
 public:
+	vector<char*>	GetGMList(void);
 #ifdef __DDOM //double-system ( Chrono Cross reference ) LINK-ATTACK!
 	void			AddDominationWireframe( void );
 #endif

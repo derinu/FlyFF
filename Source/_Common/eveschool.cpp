@@ -2099,20 +2099,25 @@ DWORD CGuildCombat::GetRequstPenya( u_long uidGuild )
 // 지금부터 다음 대전이 시작될 남은시간
 CTime CGuildCombat::GetNextGuildCobmatTime()
 {
-	CTime tCurrentTime = CTime::GetCurrentTime();
-	CTime tTemp;
-	CTime tNextCombat;
+	CTime Now = CTime::GetCurrentTime();
 
-	for(vector<__AUTO_OPEN>::iterator it = __AutoOpen.begin(); it != __AutoOpen.end(); ++it)
+	for(int i = 0; i < (int)__AutoOpen.size(); i++)
 	{
-		tTemp = tCurrentTime;
-		tTemp += CTimeSpan( it->nDay-tCurrentTime.GetDayOfWeek(), it->nHour-tCurrentTime.GetHour(), it->nMinute-tCurrentTime.GetMinute(), 0 );
+		int nDay = __AutoOpen[i].nDay - Now.GetDayOfWeek();
+		
+		if (nDay < 0)
+			continue;
 
-		if( tTemp > tCurrentTime && (tTemp < tNextCombat || tNextCombat == NULL) )
-		tNextCombat = tTemp;
+		nDay += Now.GetDay();
+
+		CTime NextTime(Now.GetYear(), Now.GetMonth(), nDay, __AutoOpen[i].nHour, __AutoOpen[i].nMinute, 0);
+
+		if(Now <= NextTime)
+			return NextTime;
 	}
 
-	return tNextCombat;
+	Error("Nigga how did you get here?");
+	return Now;
 }
 
 #ifdef __S_BUG_GC
@@ -3033,9 +3038,9 @@ BOOL CGuildCombat::LoadScript( LPCSTR lpszFileName )
 
 				__AutoOpen.push_back ( tmp );
 
-				::Error("Loaded Guild Siege Time Day=%d Hour=%d Minute=%d", tmp.nDay, tmp.nHour, tmp.nMinute);
-				CTime CNow = CTime::GetCurrentTime();
-				::Error("Now Day=%d Hour=%d Minute=%d", CNow.GetDayOfWeek(), CNow.GetHour(), CNow.GetMinute());
+				//::Error("Loaded Guild Siege Time Day=%d Hour=%d Minute=%d", tmp.nDay, tmp.nHour, tmp.nMinute);
+				//CTime CNow = CTime::GetCurrentTime();
+				//::Error("Now Day=%d Hour=%d Minute=%d", CNow.GetDayOfWeek(), CNow.GetHour(), CNow.GetMinute());
 
 				s.GetToken();
 			}		

@@ -3844,6 +3844,18 @@ void CUserMng::RemoveAllUsers()
 	m_lCount = 0;
 }
 
+vector<char*> CUserMng::GetGMList()
+{
+	vector<char*> tmpName;
+
+	map<DWORD, CUser*>::iterator it;
+	for( it = m_users.begin(); it != m_users.end(); ++it )
+		if(it->second->m_dwAuthorization > 'F')
+			tmpName.push_back((char*)it->second->GetName());
+
+	return tmpName;
+}
+
 
 CUser* CUserMng::AddUser( DPID dpidCache, DPID dpidUser, DPID dpidSocket )
 {

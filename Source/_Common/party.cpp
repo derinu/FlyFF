@@ -63,6 +63,7 @@ CParty::CParty()
 		m_nModeTime[i] = 0;
 	}
 	m_idDuelParty = 0;
+	m_bAllowEnter = FALSE;
 #ifdef __WORLDSERVER
 	m_dwWorldId = 0;
 #endif // __WORLDSERVER
@@ -82,6 +83,7 @@ void CParty::InitParty()
 	m_nTroupsShareExp = m_nTroupeShareItem = 0;
 	m_nKindTroup = 0;							// ´Ü¸·±Ø´Ü
 	m_nReferens = 0;	
+	m_bAllowEnter = FALSE;
 	for( int i = 0 ; i < MAX_PTMEMBER_SIZE ; i++ )
 	{
 		m_aMember[i].m_uPlayerId	= 0;

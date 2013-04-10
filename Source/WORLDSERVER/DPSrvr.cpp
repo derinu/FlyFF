@@ -591,6 +591,8 @@ CDPSrvr::CDPSrvr()
 	ON_MSG( MASTER_PACKET_ONJOIN, MasterPacket );
 #endif
 	ON_MSG( PACKETTYPE_PETFILTER, OnPetFilter );
+	ON_MSG( PACKETTYPE_PTYJOINREQ, JoinPartyByFinder );
+	ON_MSG( PACKETTYPE_PTYALLOW, TogglePartyAllow );
 }
 
 CDPSrvr::~CDPSrvr()
@@ -611,6 +613,52 @@ void CDPSrvr::OnPetFilter(CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf,
 
 		if(ItemType >= 0 && ItemType <= 11 && ItemPriority >= 0 && ItemPriority < 4)
 			pUser->m_dwPetFilter[ItemType] = ItemPriority;
+	}
+}
+
+void CDPSrvr::JoinPartyByFinder(CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
+{
+	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+
+	u_long PartyId;
+	ar >> PartyId;
+
+	if(IsValidObj(pUser))
+	{
+		//check and make sure player isnt in duel
+
+		CParty* pParty	= g_PartyMng.GetParty( PartyId );
+
+		//check and make sure world isn't siege worlds
+
+		if(pParty)
+			if(pParty->m_bAllowEnter)
+				this->InviteParty(pParty->GetLeader()->m_idPlayer, pUser->m_idPlayer, FALSE);
+				/*if(pParty->NewMember(pUser->m_idPlayer))
+				{
+					pUser->AddPartyMember(pParty, pUser->m_idPlayer, (char*)pParty->GetLeader()->GetName(), (char*)pUser->GetName());
+					this->InviteParty(
+					//pUser->m_idparty = pParty->m_uPartyId;
+				}*/
+	}
+}
+
+void CDPSrvr::TogglePartyAllow(CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
+{
+	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+
+	if(IsValidObj(pUser))
+	{
+		CParty* pParty	= g_PartyMng.GetParty( pUser->m_idparty );
+
+		if(pParty)
+		{
+			if(pParty->IsLeader(pUser->m_idPlayer))
+			{
+				pParty->m_bAllowEnter = !pParty->m_bAllowEnter;
+				pUser->AddText("Changed party allow mode.");
+			}
+		}
 	}
 }
 

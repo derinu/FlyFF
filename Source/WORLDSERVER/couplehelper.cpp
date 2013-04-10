@@ -66,8 +66,8 @@ void CCoupleHelper::OnPropose( CUser* pUser, const char* szPlayer )
 	}
 	if( pUser->GetSex() == pTarget->GetSex() )
 	{
-		pUser->AddDefinedText( TID_GAME_COUPLE_E01 );	// 대상이 부적합 합니다. 커플이 아닌 이성 캐릭터에게만 가능합니다.
-		return;
+		//pUser->AddDefinedText( TID_GAME_COUPLE_E01 );	// 대상이 부적합 합니다. 커플이 아닌 이성 캐릭터에게만 가능합니다.
+		//return;
 	}
 	m_pdpClient->SendPropose( pUser->m_idPlayer, pTarget->m_idPlayer );
 }

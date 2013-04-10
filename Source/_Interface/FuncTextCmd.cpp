@@ -125,6 +125,109 @@ BOOL TextCmd_outall( CScanner& scanner )
     return TRUE;
 }  
 
+BOOL TextCmd_PartyId( CScanner& scanner )
+{
+#ifdef __WORLDSERVER
+	CUser* pUser = (CUser*)scanner.dwValue;
+	pUser->AddText("Attempting to get party id.");
+
+	if(pUser->m_idparty > 0)
+	{
+		CString str;
+		str.Format("%d", pUser->m_idparty);
+		
+		pUser->AddText(str);
+	}
+
+#endif
+	return TRUE;
+}
+
+BOOL TextCmd_PartyAllow( CScanner& scanner )
+{
+#ifdef __WORLDSERVER
+	CUser* pUser = (CUser*)scanner.dwValue;
+	pUser->AddText("Attempting to toggle party allow.");
+
+	if(pUser->GetPartyId() > 0)
+	{
+		CParty* pParty = g_PartyMng.GetParty( pUser->GetPartyId() );
+
+		if(pParty)
+			pParty->m_bAllowEnter = !pParty->m_bAllowEnter;
+	}
+#endif
+	return TRUE;
+}
+
+BOOL TextCmd_JoinParty( CScanner& scanner )
+{
+#ifndef __WORLDSERVER
+	g_DPlay.SendJoinParty(scanner.GetNumber());
+#endif
+	return TRUE;
+}
+
+BOOL TextCmd_PartyList( CScanner& scanner )
+{
+#ifdef __WORLDSERVER
+	CUser* pUser = (CUser*)scanner.dwValue;
+	vector<_PartyInfo> PartyList;
+
+	map<DWORD, CParty*>::iterator it;
+	for( it = g_PartyMng.m_2PartyPtr.begin(); it != g_PartyMng.m_2PartyPtr.end(); ++it )
+	{
+		if(it->second->m_bAllowEnter)
+		{
+			_PartyInfo partyInfo;
+			
+			partyInfo.m_nLevel = it->second->m_nLevel;
+			partyInfo.m_nPoint = it->second->m_nPoint;
+			partyInfo.m_nSizeofMember = it->second->m_nSizeofMember;
+			partyInfo.m_uPartyId = it->second->m_uPartyId;
+
+			strcpy(partyInfo.m_sParty, it->second->m_sParty);
+			//strcpy((char*)partyInfo.m_szName, (char*)it->second->GetLeader()->GetName());
+
+			PartyList.push_back(partyInfo);
+			::Error("Added party");
+		}
+	}
+
+	if(PartyList.size() > 0)
+	{
+		pUser->AddText("Panties:");
+
+		for(int i = 0; i < (int)PartyList.size(); i++)
+		{
+			CString PartyInfoStr;
+			PartyInfoStr.Format("%d - %s - %d", PartyList[i].m_nLevel, PartyList[i].m_sParty, PartyList[i].m_nPoint);
+			pUser->AddText(PartyInfoStr);
+		}
+	}
+	else
+	{
+		pUser->AddText("Sorry there are no open parties at this time.");
+	}
+
+#endif
+	return TRUE;
+}
+
+BOOL TextCmd_GMList( CScanner& scanner )
+{
+#ifdef __WORLDSERVER
+	CUser* pUser = (CUser*)scanner.dwValue;
+	pUser->AddText("GM characters online: ");
+	vector<char*> GMList = g_UserMng.GetGMList();
+
+	for(int i = 0; i < (int)GMList.size(); ++i)
+		pUser->AddText((LPCSTR)GMList[i]);
+
+#endif
+	return TRUE;
+}
+
 BOOL TextCmd_InvenClear( CScanner& scanner )       
 { 
 #ifdef __WORLDSERVER
@@ -5333,6 +5436,11 @@ BEGINE_TEXTCMDFUNC_MAP
 	ON_TEXTCMDFUNC( TextCmd_GuildChat,             "GuildChat",         "g",              "길드말",         "길말",    TCM_BOTH, AUTH_GENERAL      , "길드말" )
 	ON_TEXTCMDFUNC( TextCmd_PartyInvite,           "PartyInvite",       "partyinvite",    "극단초청",       "극초",    TCM_SERVER, AUTH_GENERAL      , "극단 초청" )
 	ON_TEXTCMDFUNC( TextCmd_GuildInvite,           "GuildInvite",       "guildinvite",    "길드초청",       "길초",    TCM_SERVER, AUTH_GENERAL      , "길드 초청" )
+	ON_TEXTCMDFUNC( TextCmd_GMList,				   "gmlist",			"gml",			"채팅차단목록a",   "채차목a",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록a" )
+	ON_TEXTCMDFUNC( TextCmd_PartyId,				   "partyid",			"pid",			"채팅차단목록a",   "채차목a",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록a" )
+	ON_TEXTCMDFUNC( TextCmd_PartyAllow,				   "partyallow",			"pall",			"채팅차단목록a",   "채차목a",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록a" )
+	ON_TEXTCMDFUNC( TextCmd_JoinParty,				   "partyjoin",			"pjoin",			"채팅차단목록a",   "채차목a",  TCM_CLIENT, AUTH_GENERAL      , "채팅 차단 목록a" )
+	ON_TEXTCMDFUNC( TextCmd_PartyList,				   "partylist",			"plist",			"채팅차단목록a",   "채차목a",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록a" )
 #if __VER >= 15 // __CAMPUS
 	ON_TEXTCMDFUNC( TextCmd_CampusInvite,          "CampusInvite",		"campusinvite",   "사제초청",		"사초",    TCM_SERVER, AUTH_GENERAL      , "사제 초청" )
 #endif // __CAMPUS
@@ -5354,7 +5462,7 @@ BEGINE_TEXTCMDFUNC_MAP
 	ON_TEXTCMDFUNC( TextCmd_CancelBlockedUser,     "unignore",           "uig",            "채팅차단해제",   "채차해",  TCM_CLIENT, AUTH_GENERAL      , "채팅차단해제 [/명령 아이디]" )
 	ON_TEXTCMDFUNC( TextCmd_IgnoreList,            "ignorelist",         "igl",            "채팅차단목록",   "채차목",  TCM_CLIENT, AUTH_GENERAL      , "채팅 차단 목록" )
 #endif // __YS_CHATTING_BLOCKING_SYSTEM
-	ON_TEXTCMDFUNC( TextCmd_PetFilter,            "petfilter",         "pf",            "채팅차단목록",   "채차목",  TCM_CLIENT, AUTH_GENERAL      , "채팅 차단 목록" )
+	ON_TEXTCMDFUNC( TextCmd_PetFilter,             "petfilter",         "pf",            "채팅차단목록",   "채차목",  TCM_CLIENT, AUTH_GENERAL      , "채팅 차단 목록" )
 #endif //__CLIENT
 	//ON_TEXTCMDFUNC( TextCmd_PartyList,            "PartyList",         "plst",            "채팅차단목록",   "채차목",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록" )
 ////////////////////////////////////////////////// AUTH_GENERAL end/////////////////////////////////////////////////////
