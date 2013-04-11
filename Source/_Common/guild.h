@@ -496,7 +496,7 @@ public:
 
 		for ( int i=R1; i<RANK_END; ++i )
 		{
-			sprintf(const_cast<char*>(p_strQuery), "RANKING.RANKING_DBF.dbo.RANKING_STR 'R%d','%02d'", i+1, g_appInfo.dwSys );
+			sprintf(const_cast<char*>(p_strQuery), "RANKING_DBF.dbo.RANKING_STR 'R%d','%02d'", i+1, g_appInfo.dwSys );
 			if( FALSE == pQuery->Exec( p_strQuery ) )
 			{
 				Error( "CDbManager::UpdateGuildRanking에서 (%s) 실패", p_strQuery );
