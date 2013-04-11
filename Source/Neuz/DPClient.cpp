@@ -17430,7 +17430,10 @@ void CDPClient::OnGuildBankLogList( CAr & ar )
 	CGuild* pGuild = g_pPlayer->GetGuild();
 
 	if(pWndGuildBankLog == NULL || pGuild == NULL)
+	{
+		::OUTPUTDEBUGSTRING("Log window is null or guild is null");
 		return;
+	}
 
 	ar >> byListType;
 	ar >> nLogCount;

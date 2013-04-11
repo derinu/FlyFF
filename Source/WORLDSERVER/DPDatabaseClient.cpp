@@ -3120,6 +3120,7 @@ void CDPDatabaseClient::SendQueryGetGuildBankLogList( u_long idReceiver, DWORD i
 
 void CDPDatabaseClient::OnGuildBankLogViewFromDB( CAr & ar, DPID, DPID )
 {
+	::Error("OnGuildBankLogViewFromDB()");
 	u_long idReceiver;
 	int	nCount = 0;
 	BYTE	byListType = 0;
@@ -3128,7 +3129,10 @@ void CDPDatabaseClient::OnGuildBankLogViewFromDB( CAr & ar, DPID, DPID )
 	ar >> idReceiver;	
 
 	if( nCount > GUILDBANKLOGVIEW_MAX )
+	{
+		::Error("Too much data in guild log");
 		return;
+	}
 
 	CUser* pUser	= g_UserMng.GetUserByPlayerID( idReceiver );
 	if( IsValidObj( pUser ) )

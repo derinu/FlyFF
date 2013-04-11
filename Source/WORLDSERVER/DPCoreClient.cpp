@@ -2613,6 +2613,12 @@ BOOL CDPCoreClient::Contribute( CUser* pUser, DWORD dwPxpCount, DWORD dwPenya )
 	idGuild = pUser->m_idGuild;
 	idPlayer = pUser->m_idPlayer;
 
+	if(g_eLocal.GetState(EVE_STAFFLIMIT) && pUser->m_dwAuthorization >= AUTH_GAMEMASTER)
+	{
+		pUser->AddText("Unable to contribute due to staff limitations.");
+		return FALSE;
+	}
+
 	CGuild* pGuild = g_GuildMng.GetGuild( idGuild );
 	if( pGuild == NULL )
 		return FALSE;

@@ -1363,6 +1363,12 @@ BOOL TextCmd_GuildStat( CScanner & scanner )
 #ifdef __WORLDSERVER
 	CUser* pUser	= (CUser*)scanner.dwValue;
 
+	if(g_eLocal.GetState(EVE_STAFFLIMIT))
+	{
+		pUser->AddText("Unable to use GuildStat due to staff limitations.");
+		return FALSE;
+	}
+
 	scanner.GetToken();
 	CString strstat = scanner.Token;
 	
@@ -4212,7 +4218,7 @@ BOOL TextCmd_PetFilter( CScanner & scanner )
 	int itemType = scanner.GetNumber();
 	int Priority = scanner.GetNumber();
 	g_DPlay.SendPetFilter(itemType, Priority);
-	::OUTPUTDEBUGSTRING("Sending itemtype=%d Priority=%d\n", itemType, Priority);
+	//::OUTPUTDEBUGSTRING("Sending itemtype=%d Priority=%d\n", itemType, Priority);
 	return TRUE;
 }
 

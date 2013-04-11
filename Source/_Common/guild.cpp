@@ -584,6 +584,7 @@ BOOL CGuild::AddContribution( DWORD dwPxp, DWORD dwPenya, u_long idPlayer )
 		return FALSE;
 
 	CGuildMember* pMember = GetMember( idPlayer );
+
 	pMember->m_dwGivePxpCount += dwPxp;
 	pMember->m_nGiveGold += (int)dwPenya;
 
