@@ -19882,6 +19882,8 @@ CWndGuildCombatRank_Class* CWndGuildCombatRank_Person::__GetJobKindWnd(int nJob)
 	case JOB_BLADE_MASTER:
 	case JOB_KNIGHT_HERO:
 	case JOB_BLADE_HERO:
+	case JOB_LORDTEMPLER_HERO:
+	case JOB_STORMBLADE_HERO:	
 		return &m_WndGuildCombatTabClass_Mer;
 		break;
 		
@@ -19892,6 +19894,8 @@ CWndGuildCombatRank_Class* CWndGuildCombatRank_Person::__GetJobKindWnd(int nJob)
 	case JOB_RANGER_MASTER:
 	case JOB_JESTER_HERO:
 	case JOB_RANGER_HERO:
+	case JOB_WINDLURKER_HERO:
+	case JOB_CRACKSHOOTER_HERO:
 		return &m_WndGuildCombatTabClass_Acr;
 		break;
 		
@@ -19902,6 +19906,8 @@ CWndGuildCombatRank_Class* CWndGuildCombatRank_Person::__GetJobKindWnd(int nJob)
 	case JOB_BILLPOSTER_MASTER:
 	case JOB_RINGMASTER_HERO:
 	case JOB_BILLPOSTER_HERO:
+	case JOB_FLORIST_HERO:
+	case JOB_FORCEMASTER_HERO:
 		return &m_WndGuildCombatTabClass_Ass;
 		break;
 		
@@ -19912,6 +19918,8 @@ CWndGuildCombatRank_Class* CWndGuildCombatRank_Person::__GetJobKindWnd(int nJob)
 	case JOB_ELEMENTOR_MASTER:
 	case JOB_PSYCHIKEEPER_HERO:
 	case JOB_ELEMENTOR_HERO:
+	case JOB_MENTALIST_HERO:
+	case JOB_ELEMENTORLORD_HERO:
 		return &m_WndGuildCombatTabClass_Mag;
 		break;
 		
@@ -19937,7 +19945,7 @@ CWndGuildCombatRank_Class::~CWndGuildCombatRank_Class()
 } 
 void CWndGuildCombatRank_Class::OnDraw( C2DRender* p2DRender ) 
 { 
-	DWORD dwColor = D3DCOLOR_XRGB(0, 0, 0);
+	DWORD dwColor = D3DCOLOR_XRGB(255, 255, 255);
 	int	sx, sy;
 	char szNum[8], szCount[8];
 	
@@ -20020,7 +20028,7 @@ void CWndGuildCombatRank_Class::OnDraw( C2DRender* p2DRender )
 		if( i == 0 )
 			dwColor = D3DCOLOR_XRGB( 200, 0, 0 );
 		else
-			dwColor = D3DCOLOR_XRGB( 0, 0, 0 );		
+			dwColor = D3DCOLOR_XRGB( 255, 255, 255 );		
 		
 		if( nOldRanking != GCRankInfo.nPoint )
 		{
