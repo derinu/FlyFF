@@ -1297,9 +1297,11 @@ void CWndMessage::AddMessage( LPCTSTR lpszFrom, LPCTSTR lpszMessage )
 
 	if( !strcmp( lpszFrom, g_pPlayer->GetName() ) )
 		strMessage.Format( "#cffff0000%s%s :#nc\n  %s\n", lpszFrom, prj.GetText(TID_GAME_FROM3), lpszMessage );
+		//strMessage.Format( "#cfff9c43f%s%s :#nc\n  %s\n", lpszFrom, prj.GetText(TID_GAME_FROM3), lpszMessage );
 	//  	strMessage.Format( "#cffff0000%s´ÔÀÇ ¸» :#nc\n  %s\n", lpszFrom, lpszMessage );
 	else
-		strMessage.Format( "#cff0000ff%s%s :#nc\n  %s\n", lpszFrom, prj.GetText(TID_GAME_FROM3), lpszMessage );
+		//strMessage.Format( "#cff0000ff%s%s :#nc\n  %s\n", lpszFrom, prj.GetText(TID_GAME_FROM3), lpszMessage );
+		strMessage.Format( "#cfff9c43f%s%s :#nc\n  %s\n", lpszFrom, prj.GetText(TID_GAME_FROM3), lpszMessage );
 	//  	strMessage.Format( "#cff0000ff%s´ÔÀÇ ¸» :#nc\n  %s\n", lpszFrom, lpszMessage );
 	
 	pWndText->AddString( strMessage );
