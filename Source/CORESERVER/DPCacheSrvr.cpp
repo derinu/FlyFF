@@ -1231,7 +1231,7 @@ void CDPCacheSrvr::OnDestroyGuild( CAr & ar, DPID dpidCache, DPID dpidUser, u_lo
 		{
 			pPlayer->m_idGuild	= 0;
 			pPlayer->m_tGuildMember = CTime::GetCurrentTime();
-			pPlayer->m_tGuildMember += CTimeSpan( 2, 0, 0, 0 );
+			pPlayer->m_tGuildMember += CTimeSpan( 1, 0, 0, 0 );
 		}
 		
 	}
@@ -1419,7 +1419,7 @@ void CDPCacheSrvr::OnRemoveGuildMember( CAr & ar, DPID dpidCache, DPID dpidUser,
 		if( pPlayer )
 		{
 			pPlayer->m_tGuildMember = CTime::GetCurrentTime();
-			pPlayer->m_tGuildMember += CTimeSpan( 2, 0, 0, 0 );
+			pPlayer->m_tGuildMember += CTimeSpan( 1, 0, 0, 0 );
 			pPlayer->m_idGuild	= 0;
 			SendRemoveGuildMember( idPlayer, pGuild->m_idGuild, pPlayer );
 		}

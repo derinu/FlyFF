@@ -384,7 +384,7 @@ void CDPDatabaseClient::OnDelPlayer( CAr & ar )
 			if( pPlayer )
 			{
 				pPlayer->m_tGuildMember = CTime::GetCurrentTime();
-				pPlayer->m_tGuildMember += CTimeSpan( 2, 0, 0, 0 );
+				pPlayer->m_tGuildMember += CTimeSpan( 1, 0, 0, 0 );
 				pPlayer->m_idGuild	= 0;
 			}
 		}
