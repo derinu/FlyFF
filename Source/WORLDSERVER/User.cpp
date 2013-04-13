@@ -492,6 +492,14 @@ void CUser::Process()
 
 	if( dwTick > m_dwTickSFS )					// 1초마다 
 	{
+		CTime Now = CTime::GetCurrentTime();
+		CTimeSpan timeSpan = Now - m_ctLastAction;
+
+		if(timeSpan.GetMinutes() >= 1 && !isAFK)
+		{
+			isAFK = TRUE;
+			g_UserMng.AddAFKToggle(this, isAFK);
+		}
 //		m_dwTickSFS = dwTick + 1000;
 		m_dwTickSFS	+= 1000;	// 초당 오차가 평균 33 ms	- 康
 #if __VER >= 11 // __CHIPI_071210
@@ -4871,6 +4879,23 @@ void CUserMng::AddAttackSP( CMover* pMover, DWORD dwAtkMsg, OBJID objid, int nPa
 		NEXT_VISIBILITYRANGE( pMover )
 }
 
+void CUserMng::AddAFKToggle(CMover* pMover, BOOL isAFK)
+{
+	CAr ar;
+	ar << GETID( pMover ) << SNAPSHOTTYPE_AFKCHANGE;
+	ar << isAFK;
+
+	//::Error("Setting afk for %s to %d", pMover->GetName isAFK);
+	//::Error("Toggle AFK to %d for %s", pMover->GetName(), isAFK);
+
+	GETBLOCK( ar, lpBuf, nBufSize );
+
+	FOR_VISIBILITYRANGE( pMover )
+		//if( USERPTR != pMover )
+			USERPTR->AddBlock( lpBuf, nBufSize );
+	NEXT_VISIBILITYRANGE( pMover )
+}
+
 void CUserMng::AddMoverMoved( CMover* pMover, D3DXVECTOR3 & v, D3DXVECTOR3 &vd, float f,
 		DWORD dwState, DWORD dwStateFlag, DWORD dwMotion, int nMotionEx,
 		int nLoop, DWORD dwMotionOption, __int64 nTickCount )
@@ -4880,7 +4905,10 @@ void CUserMng::AddMoverMoved( CMover* pMover, D3DXVECTOR3 & v, D3DXVECTOR3 &vd, 
 	ar << v << vd << f;
 	ar << dwState << dwStateFlag << dwMotion << nMotionEx;
 	ar << nLoop << dwMotionOption << nTickCount;
-	
+
+	//CTime Now = CTime::GetCurrentTime();
+	//ar << Now.GetDay() << Now.GetHour() << Now.GetMinute() << Now.GetSecond();
+
 	GETBLOCK( ar, lpBuf, nBufSize );
 
 	FOR_VISIBILITYRANGE( pMover )
@@ -4918,6 +4946,9 @@ void CUserMng::AddMoverMoved2( CMover* pMover, D3DXVECTOR3 & v, D3DXVECTOR3 &vd,
 	ar << dwState << dwStateFlag << dwMotion << nMotionEx;
 	ar << nLoop << dwMotionOption << nTickCount;
 	ar << nFrame;
+
+	//CTime Now = CTime::GetCurrentTime();
+	//ar << Now.GetDay() << Now.GetHour() << Now.GetMinute() << Now.GetSecond();
 	
 	GETBLOCK( ar, lpBuf, nBufSize );
 

@@ -163,6 +163,8 @@ CMover::CMover()
 	m_dwDonor = 0;
 	m_dwPetFilter = new int[12];
 
+	isAFK = FALSE;
+
 	m_nJob	= -1;
 	
 	m_nStr	= m_nSta	= m_nDex	= m_nInt	= 15;

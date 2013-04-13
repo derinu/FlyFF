@@ -1401,7 +1401,10 @@ void CMover::RenderName( LPDIRECT3DDEVICE9 pd3dDevice, CD3DFont* pFont, DWORD dw
 		}
 		else
 		{
-			strName = "";
+			if(isAFK)
+				strName = "[AFK] ";
+			else
+				strName = "";
 			//strName = "[GM] ";
 			//dwColor = 0xFFEE9A00;
 		}

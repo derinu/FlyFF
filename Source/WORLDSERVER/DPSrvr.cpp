@@ -2515,6 +2515,17 @@ void CDPSrvr::OnPlayerMoved( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 			pUser->m_CorrAction.fValid	= TRUE;
 
 			pUser->SetDestPos( v, ( dwState & OBJSTA_MOVE_ALL ) != OBJSTA_BMOVE );
+			
+			CTime Now = CTime::GetCurrentTime();
+
+			CMover* cMover = (CMover*)pUser;
+			cMover->m_ctLastAction = Now;
+
+			if(cMover->isAFK)
+			{
+				cMover->isAFK = FALSE;
+				g_UserMng.AddAFKToggle(cMover, cMover->isAFK); 
+			}
 		}
 	}
 
@@ -2631,6 +2642,17 @@ void CDPSrvr::OnPlayerMoved2( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lp
 				int nRemnant	= (int)nFrame - delay;
 				pUser->m_uRemnantCorrFrm	= nRemnant;
 				pUser->SetDestPos( v );
+
+				CTime Now = CTime::GetCurrentTime();
+
+				CMover* cMover = (CMover*)pUser;
+				cMover->m_ctLastAction = Now;
+
+				if(cMover->isAFK)
+				{
+					cMover->isAFK = FALSE;
+					g_UserMng.AddAFKToggle(cMover, cMover->isAFK); 
+				}
 			}
 
 			g_UserMng.AddMoverMoved2

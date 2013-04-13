@@ -579,6 +579,9 @@ public:
 	DWORD			m_dwTickRecovery;			/// 앉은 상태의 hp, mp 복구 timer
 	DWORD			m_dwTickRecoveryStand;		/// stand 상태의 hp, mp 복구 timer
 
+	CTime			m_ctLastAction;
+	BOOL			isAFK;
+
 #ifdef __VTN_TIMELIMIT
 	int				m_nAccountPlayTime;		//ms단위 계정 플레이 시간
 #endif // __VTN_TIMELIMIT

@@ -435,6 +435,7 @@ void CMover::Init()
 
 	m_dwTickRecovery = ::timeGetTime() + NEXT_TICK_RECOVERY;
 	m_dwTickRecoveryStand = ::timeGetTime() + NEXT_TICK_RECOVERYSTAND;
+
 	m_dwTickDuel = ::timeGetTime() + NEXT_TICK_DUEL;
 	m_dwTickEndDuel = ::timeGetTime() + NEXT_TICK_ENDDUEL;
 	m_nDuelState = 0;
@@ -451,6 +452,9 @@ void CMover::Init()
 	for(int j = 0; j < 10; j++)
 		m_dwPetFilter[ j ] = 1;
 	//m_dwPetFilter = new int[10];
+
+	m_ctLastAction = CTime::GetCurrentTime();
+	isAFK = FALSE;
 
 	for( int i = 0; i < MAX_VENDOR_INVENTORY_TAB; i++ )
 		m_ShopInventory[ i ] = 0;

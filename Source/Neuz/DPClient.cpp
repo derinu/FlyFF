@@ -369,6 +369,7 @@ void CDPClient::OnSnapshot( CAr & ar )
 
 		switch( hdr )
 		{
+			case SNAPSHOTTYPE_AFKCHANGE:	OnAFKToggle( objid, ar );
 			case SNAPSHOTTYPE_MOVERMOVED:	OnMoverMoved( objid, ar );	break;
 			case SNAPSHOTTYPE_MOVERBEHAVIOR:		OnMoverBehavior( objid, ar );	break;
 			case SNAPSHOTTYPE_MOVERMOVED2:	OnMoverMoved2( objid, ar );	break;
@@ -8879,6 +8880,17 @@ void CDPClient::OnMoverSetDestObj( OBJID objid, CAr & ar )
 
 const	int	nRevision	= 35;
 
+void CDPClient::OnAFKToggle( OBJID objid, CAr & ar )
+{
+	BOOL isAFK;
+	ar >> isAFK;
+
+	CMover* pMover	= prj.GetMover( objid );
+
+	if( IsValidObj( (CObj*)pMover ) ) 
+		pMover->isAFK = isAFK;
+}
+
 void CDPClient::OnMoverMoved( OBJID objid, CAr & ar )
 {
 	TRACE( "OnMoverMoved()\n" );
@@ -8888,15 +8900,23 @@ void CDPClient::OnMoverMoved( OBJID objid, CAr & ar )
 	int nMotionEx	= 0, nLoop;
 	DWORD dwMotionOption;
 	__int64 nTickCount;
+	
+	//int day = 0, hour = 0, minute = 0, second = 0;
 
 	ar >> v >> vd >> f;
 	ar >> dwState >> dwStateFlag;
 	ar >> dwMotion >> nMotionEx;
 	ar >> nLoop >> dwMotionOption;
 	ar >> nTickCount;
+	//ar >> day >> hour >> minute >> second;
 
 	CMover* pMover	= prj.GetMover( objid );
-	if( IsValidObj( (CObj*)pMover ) ) {
+	if( IsValidObj( (CObj*)pMover ) ) 
+	{
+		//CTime Now = CTime::GetCurrentTime();
+		//pMover->m_ctLastAction = CTime(Now.GetYear(), Now.GetMonth(), day, hour, minute, second);
+		//::OUTPUTDEBUGSTRING("%s %s\n", pMover->GetName(), pMover->m_ctLastAction);
+
 		if( pMover->m_pActMover->IsFly() )		return;
 		int delay	= (int)( (float)g_TickCount.GetOffset( nTickCount ) / 16.6667f );
 		// 2
@@ -9035,6 +9055,7 @@ void CDPClient::OnMoverMoved2( OBJID objid, CAr & ar )
 	DWORD dwMotionOption;
 	__int64 nTickCount;
 	BYTE nFrame;
+	//int day = 0, hour = 0, minute = 0, second = 0;
 
 	ar >> v >> vd >> f >> fAngleX >> fAccPower >> fTurnAngle;
 	ar >> dwState >> dwStateFlag;
@@ -9042,9 +9063,15 @@ void CDPClient::OnMoverMoved2( OBJID objid, CAr & ar )
 	ar >> nLoop >> dwMotionOption;
 	ar >> nTickCount;
 	ar >> nFrame;
+	//ar >> day >> hour >> minute >> second;
+
 
 	CMover* pMover	= prj.GetMover( objid );
-	if( IsValidObj( (CObj*)pMover ) ) {
+	if( IsValidObj( (CObj*)pMover ) ) 
+	{
+		//CTime Now = CTime::GetCurrentTime();
+		//pMover->m_ctLastAction = CTime(Now.GetYear(), Now.GetMonth(), day, hour, minute, second);
+		//::OUTPUTDEBUGSTRING("%s %s\n", pMover->GetName(), pMover->m_ctLastAction);
 		if( pMover->m_pActMover->IsFly() == FALSE )		return;
 		// 2
 		// 3

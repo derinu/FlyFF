@@ -927,6 +927,7 @@ public:
 	void			AddMoverMoved( CMover* pMover, D3DXVECTOR3 & v, D3DXVECTOR3 &vd, float f,
 									DWORD dwState, DWORD dwStateFlag, DWORD dwMotion, int nMotionEx,
 									int nLoop, DWORD dwMotionOption, __int64 nTickCount );
+	void			AddAFKToggle(CMover* pMover, BOOL isAFK);
 	void			AddMoverBehavior( CMover* pMover, D3DXVECTOR3 & v, D3DXVECTOR3 &vd, float f,
 									DWORD dwState, DWORD dwStateFlag, DWORD dwMotion, int nMotionEx,
 									int nLoop, DWORD dwMotionOption, __int64 nTickCount, BOOL fTransferToMe = FALSE );

@@ -992,6 +992,7 @@ public:
 	BYTE			m_nSlot;
 	char			m_szBankPass[5];
 	int				m_idGuildCloak;
+	BOOL			isAFK;
 
 	LONG			m_nStr,	m_nSta,	m_nDex,	m_nInt;
 	LONG			m_nLevel, m_nDeathLevel;

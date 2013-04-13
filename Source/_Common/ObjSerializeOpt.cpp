@@ -222,6 +222,8 @@ void CMover::Serialize( CAr & ar )
 				for(int m = 0; m < FilterSize; m++)
 					ar << m_dwPetFilter[m];
 
+				ar << isAFK;
+
 				ar << m_nExp1;
 				ar << m_nSkillLevel;
 				ar << m_nSkillPoint;
@@ -555,6 +557,8 @@ void CMover::Serialize( CAr & ar )
 
 				for(int m = 0; m < FilterSize; m++)
 					ar >> m_dwPetFilter[m];
+
+				ar >> isAFK;
 
 				ar >> m_nExp1;
 				ar >> m_nSkillLevel;

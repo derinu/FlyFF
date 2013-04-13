@@ -858,6 +858,7 @@ public:
 	void	OnSetFuel( OBJID objid, CAr & ar );
 		
 		//________________________________________________________________________________
+	void	OnAFKToggle( OBJID objid, CAr & ar );
 	void	OnMoverMoved( OBJID objid, CAr & ar );
 	void	OnMoverBehavior( OBJID objid, CAr & ar );
 	void	OnMoverMoved2( OBJID objid, CAr & ar );
