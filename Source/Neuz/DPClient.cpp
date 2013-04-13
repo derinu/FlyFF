@@ -369,7 +369,7 @@ void CDPClient::OnSnapshot( CAr & ar )
 
 		switch( hdr )
 		{
-			case SNAPSHOTTYPE_AFKCHANGE:	OnAFKToggle( objid, ar );
+			case SNAPSHOTTYPE_AFKCHANGE:	OnAFKToggle( objid, ar ); break;
 			case SNAPSHOTTYPE_MOVERMOVED:	OnMoverMoved( objid, ar );	break;
 			case SNAPSHOTTYPE_MOVERBEHAVIOR:		OnMoverBehavior( objid, ar );	break;
 			case SNAPSHOTTYPE_MOVERMOVED2:	OnMoverMoved2( objid, ar );	break;
@@ -8882,13 +8882,13 @@ const	int	nRevision	= 35;
 
 void CDPClient::OnAFKToggle( OBJID objid, CAr & ar )
 {
-	BOOL isAFK;
-	ar >> isAFK;
+	BOOL isAfk = FALSE;
+	ar >> isAfk;
 
 	CMover* pMover	= prj.GetMover( objid );
 
 	if( IsValidObj( (CObj*)pMover ) ) 
-		pMover->isAFK = isAFK;
+		pMover->isAFK = isAfk;
 }
 
 void CDPClient::OnMoverMoved( OBJID objid, CAr & ar )

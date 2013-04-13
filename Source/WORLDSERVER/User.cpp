@@ -369,6 +369,15 @@ void CUser::Process()
 
 	DWORD dwTick	= g_tmCurrent;
 
+	CTime Now = CTime::GetCurrentTime();
+	CTimeSpan timeSpan = Now - m_ctLastAction;
+
+	if(timeSpan.GetMinutes() >= 1 && !isAFK)
+	{
+		isAFK = TRUE;
+		g_UserMng.AddAFKToggle(this, isAFK);
+	}
+
 	if( IsMode( MODE_OUTOF_PARTYQUESTRGN ) )
 	{
 		SetNotMode( MODE_OUTOF_PARTYQUESTRGN );
@@ -492,14 +501,6 @@ void CUser::Process()
 
 	if( dwTick > m_dwTickSFS )					// 1초마다 
 	{
-		CTime Now = CTime::GetCurrentTime();
-		CTimeSpan timeSpan = Now - m_ctLastAction;
-
-		if(timeSpan.GetMinutes() >= 1 && !isAFK)
-		{
-			isAFK = TRUE;
-			g_UserMng.AddAFKToggle(this, isAFK);
-		}
 //		m_dwTickSFS = dwTick + 1000;
 		m_dwTickSFS	+= 1000;	// 초당 오차가 평균 33 ms	- 康
 #if __VER >= 11 // __CHIPI_071210
