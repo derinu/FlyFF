@@ -143,18 +143,42 @@ BOOL TextCmd_PartyId( CScanner& scanner )
 	return TRUE;
 }
 
+BOOL TextCmd_ShowConsole( CScanner& scanner )
+{
+//	gConsole()->Show( );
+	return TRUE;
+}
+
 BOOL TextCmd_PartyAllow( CScanner& scanner )
 {
 #ifdef __WORLDSERVER
 	CUser* pUser = (CUser*)scanner.dwValue;
-	pUser->AddText("Attempting to toggle party allow.");
 
 	if(pUser->GetPartyId() > 0)
 	{
 		CParty* pParty = g_PartyMng.GetParty( pUser->GetPartyId() );
 
 		if(pParty)
-			pParty->m_bAllowEnter = !pParty->m_bAllowEnter;
+		{
+			if(pParty->IsLeader(pUser->m_idPlayer))
+			{
+				if(pParty->GetLevel() >= 10)
+				{
+					pParty->m_bAllowEnter = !pParty->m_bAllowEnter;
+
+					if(pParty->m_bAllowEnter)
+						pUser->AddText("The party auto join is now on.");
+					else
+						pUser->AddText("The party auto join is now off.");
+				}
+				else
+					pUser->AddText("The party must be advanced.");
+			}
+			else
+			{
+				pUser->AddText("You are not the party leader.");
+			}
+		}
 	}
 #endif
 	return TRUE;
@@ -3935,7 +3959,7 @@ CString strName;
     strcpy( szString, scanner.token );
     StringTrimRight( szString );
 
-    g_DPCoreClient.SendSystem( "[" + strName + "]" +   szString );
+    g_DPCoreClient.SendSystem( "[" + strName + "] " +   szString );
 
 #endif    // __WORLDSERVER
     return TRUE;
@@ -5443,10 +5467,11 @@ BEGINE_TEXTCMDFUNC_MAP
 	ON_TEXTCMDFUNC( TextCmd_PartyInvite,           "PartyInvite",       "partyinvite",    "극단초청",       "극초",    TCM_SERVER, AUTH_GENERAL      , "극단 초청" )
 	ON_TEXTCMDFUNC( TextCmd_GuildInvite,           "GuildInvite",       "guildinvite",    "길드초청",       "길초",    TCM_SERVER, AUTH_GENERAL      , "길드 초청" )
 	ON_TEXTCMDFUNC( TextCmd_GMList,				   "gmlist",			"gml",			"채팅차단목록a",   "채차목a",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록a" )
-	ON_TEXTCMDFUNC( TextCmd_PartyId,				   "partyid",			"pid",			"채팅차단목록a",   "채차목a",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록a" )
-	ON_TEXTCMDFUNC( TextCmd_PartyAllow,				   "partyallow",			"pall",			"채팅차단목록a",   "채차목a",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록a" )
-	ON_TEXTCMDFUNC( TextCmd_JoinParty,				   "partyjoin",			"pjoin",			"채팅차단목록a",   "채차목a",  TCM_CLIENT, AUTH_GENERAL      , "채팅 차단 목록a" )
-	ON_TEXTCMDFUNC( TextCmd_PartyList,				   "partylist",			"plist",			"채팅차단목록a",   "채차목a",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록a" )
+	//ON_TEXTCMDFUNC( TextCmd_PartyId,				   "partyid",			"pid",			"채팅차단목록a",   "채차목a",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록a" )
+	ON_TEXTCMDFUNC( TextCmd_PartyAllow,				   "partytoggle",			"ptog",			"채팅차단목록a",   "채차목a",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록a" )
+	//ON_TEXTCMDFUNC( TextCmd_ShowConsole,				   "consoleshow",			"conshow",			"채팅차단목록a",   "채차목a",  TCM_CLIENT, AUTH_ADMINISTRATOR      , "채팅 차단 목록a" )
+	//ON_TEXTCMDFUNC( TextCmd_JoinParty,				   "partyjoin",			"pjoin",			"채팅차단목록a",   "채차목a",  TCM_CLIENT, AUTH_GENERAL      , "채팅 차단 목록a" )
+	//ON_TEXTCMDFUNC( TextCmd_PartyList,				   "partylist",			"plist",			"채팅차단목록a",   "채차목a",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록a" )
 #if __VER >= 15 // __CAMPUS
 	ON_TEXTCMDFUNC( TextCmd_CampusInvite,          "CampusInvite",		"campusinvite",   "사제초청",		"사초",    TCM_SERVER, AUTH_GENERAL      , "사제 초청" )
 #endif // __CAMPUS
@@ -5468,7 +5493,7 @@ BEGINE_TEXTCMDFUNC_MAP
 	ON_TEXTCMDFUNC( TextCmd_CancelBlockedUser,     "unignore",           "uig",            "채팅차단해제",   "채차해",  TCM_CLIENT, AUTH_GENERAL      , "채팅차단해제 [/명령 아이디]" )
 	ON_TEXTCMDFUNC( TextCmd_IgnoreList,            "ignorelist",         "igl",            "채팅차단목록",   "채차목",  TCM_CLIENT, AUTH_GENERAL      , "채팅 차단 목록" )
 #endif // __YS_CHATTING_BLOCKING_SYSTEM
-	ON_TEXTCMDFUNC( TextCmd_PetFilter,             "petfilter",         "pf",            "채팅차단목록",   "채차목",  TCM_CLIENT, AUTH_GENERAL      , "채팅 차단 목록" )
+	//ON_TEXTCMDFUNC( TextCmd_PetFilter,             "petfilter",         "pf",            "채팅차단목록",   "채차목",  TCM_CLIENT, AUTH_GENERAL      , "채팅 차단 목록" )
 #endif //__CLIENT
 	//ON_TEXTCMDFUNC( TextCmd_PartyList,            "PartyList",         "plst",            "채팅차단목록",   "채차목",  TCM_BOTH, AUTH_GENERAL      , "채팅 차단 목록" )
 ////////////////////////////////////////////////// AUTH_GENERAL end/////////////////////////////////////////////////////

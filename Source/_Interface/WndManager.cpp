@@ -259,6 +259,7 @@ CWndMgr::CWndMgr()
 	m_pWndSummonAngel = NULL;
 #endif //__CSC_VER8_5
 	m_pWndPetFilter = NULL;
+	m_pWndPartyFinder = NULL;
 	m_pWndDropConfirm = NULL;
 	m_nAlphaCount = m_nAlpha;
 	m_pWndBank = NULL;
@@ -741,6 +742,7 @@ void CWndMgr::Free()
 	SAFE_DELETE( m_pWndShop );
 	SAFE_DELETE( m_pWndRevival );
 	SAFE_DELETE( m_pWndPetFilter );
+	SAFE_DELETE( m_pWndPartyFinder );
 
 	SAFE_DELETE(m_pReWanted);
 	SAFE_DELETE(m_pWanted);
@@ -2026,6 +2028,12 @@ void CWndMgr::OnDestroyChildWnd( CWndBase* pWndChild )
 	if( m_pWndPetFilter == pWndChild )
 	{
 		SAFE_DELETE( m_pWndPetFilter );
+		pWndChild = NULL;
+	}
+
+	if( m_pWndPartyFinder == pWndChild )
+	{
+		SAFE_DELETE( m_pWndPartyFinder );
 		pWndChild = NULL;
 	}
 
@@ -3737,9 +3745,9 @@ BOOL CWndMgr::Process()
 #ifdef __Y_INTERFACE_VER3
 		if( g_Option.m_nInterface == 2 )
 		{
-			if( g_bKeyTable[ VK_F1 ] )
+			if( g_bKeyTable[ VK_F2 ] )
 			{
-				g_bKeyTable[ VK_F1 ] = 0;
+				g_bKeyTable[ VK_F2 ] = 0;
 				m_pWndTaskBar->SetItemSlot( 0 );
 			}
 			if( g_bKeyTable[ VK_F2 ] )
@@ -8091,6 +8099,10 @@ void CWndMgr::ClearAllWnd()
 		CWndPetFilter* pWndPetFilter = (CWndPetFilter*)g_WndMng.GetWndBase( APP_PETFILTER );
 		if(pWndPetFilter!= NULL)
 			pWndPetFilter->SetVisible(FALSE);
+
+		CWndPartyFinder* pWndPartyFinder = (CWndPartyFinder*)g_WndMng.GetWndBase( APP_PARTY_FINDER );
+		if(pWndPartyFinder!= NULL)
+			pWndPartyFinder->SetVisible(FALSE);
 		
 #if __VER >= 12 // __SECRET_ROOM
 		CWndSecretRoomQuick* pWndSecretRoomQuick = (CWndSecretRoomQuick*)g_WndMng.GetWndBase( APP_SECRETROOM_QUICK );
@@ -8146,6 +8158,10 @@ void CWndMgr::RestoreWnd()
 			CWndPetFilter* pWndPetFilter = (CWndPetFilter*)g_WndMng.GetWndBase( APP_PETFILTER );
 			if(pWndPetFilter!= NULL)
 				pWndPetFilter->SetVisible(TRUE);
+
+			CWndPartyFinder* pWndPartyFinder = (CWndPartyFinder*)g_WndMng.GetWndBase( APP_PARTY_FINDER );
+			if(pWndPartyFinder!= NULL)
+				pWndPartyFinder->SetVisible(TRUE);
 #endif //__CSC_VER9_1
 
 #if __VER >= 12 // __SECRET_ROOM

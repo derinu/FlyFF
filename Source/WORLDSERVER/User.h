@@ -434,6 +434,7 @@ public:
 	void			AddGuildInvite( u_long idGuild, u_long idMaster );
 	void			AddMyGuildWar();
 	void			SendGuildRank();
+	void			SendPartyList();
 	void			AddSMMode( int nType, DWORD dwTime );
 	void			AddSMModeAll();
 	void			AddResistSMMode( BYTE nAttackResistLeft, BYTE nAttackResistRight, BYTE nDefenceResist );

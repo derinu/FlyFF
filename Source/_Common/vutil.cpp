@@ -497,7 +497,7 @@ BOOL LoadBMP( LPCTSTR lpszFileName, LPIMAGE lpImage ) //LPBYTE* lppData, SIZE* p
 		lpImage->lpData = NULL;
 		lpImage->nImgBit = IMGBIT_24;
 		safe_delete_array( lpDataDelete );
-		::OUTPUTDEBUGSTRING("biCompression");
+		//::OUTPUTDEBUGSTRING("biCompression");
 		return FALSE;
 	}
 	int nLgHeight = infoHeader.biHeight;

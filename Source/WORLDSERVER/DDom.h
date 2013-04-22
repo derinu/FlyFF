@@ -25,8 +25,9 @@ namespace DoubleDom
 {
 	namespace Queue
 	{
-		static unsigned int nAmount = 12;
+		//static unsigned int nAmount = 12;
 		static unsigned int nRounds = 3;
+		static unsigned int nAmount = 2;
 	};
 };
 

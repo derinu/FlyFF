@@ -372,12 +372,6 @@ void CUser::Process()
 	CTime Now = CTime::GetCurrentTime();
 	CTimeSpan timeSpan = Now - m_ctLastAction;
 
-	if(timeSpan.GetMinutes() >= 1 && !isAFK)
-	{
-		isAFK = TRUE;
-		g_UserMng.AddAFKToggle(this, isAFK);
-	}
-
 	if( IsMode( MODE_OUTOF_PARTYQUESTRGN ) )
 	{
 		SetNotMode( MODE_OUTOF_PARTYQUESTRGN );
@@ -512,6 +506,12 @@ void CUser::Process()
 #ifdef __EVENTLUA_KEEPCONNECT
 		prj.m_EventLua.SetKeepConnectEvent( this, dwTick );
 #endif // __EVENTLUA_KEEPCONNECT
+		
+		if(timeSpan.GetMinutes() >= 15 && !isAFK)
+		{
+			isAFK = TRUE;
+			g_UserMng.AddAFKToggle(this, isAFK);
+		}
 
 		CWorld* pWorld = GetWorld();
 		if( pWorld )
@@ -2059,6 +2059,40 @@ void CUser::SendGuildRank()
 	m_Snapshot.ar << SNAPSHOTTYPE_REQUEST_GUILDRANK;
 	CGuildRank::Instance()->Serialize( m_Snapshot.ar );
 	
+}
+
+void CUser::SendPartyList()
+{
+	if( IsDelete() )	return;
+
+	m_Snapshot.cb++;
+	m_Snapshot.ar << NULL_ID;
+	m_Snapshot.ar << SNAPSHOTTYPE_PARTYLIST;
+
+	u_long uOffset	= m_Snapshot.ar.GetOffset();
+	int nPartyCount = 0;
+
+	m_Snapshot.ar << (int)0;	// nPartyCount
+
+	map<DWORD, CParty*>::iterator it;
+
+	for( it = g_PartyMng.m_2PartyPtr.begin(); it != g_PartyMng.m_2PartyPtr.end(); ++it )
+	{
+		if(it->second->m_bAllowEnter && it->second->m_nSizeofMember < 8)
+		{
+			m_Snapshot.ar << it->second->m_nLevel;
+			m_Snapshot.ar << it->second->m_nPoint;
+			m_Snapshot.ar << it->second->m_nSizeofMember;
+			m_Snapshot.ar << it->second->m_uPartyId;
+			m_Snapshot.ar.WriteString(it->second->m_sParty);
+			m_Snapshot.ar.WriteString(it->second->GetLeader()->GetName());
+			
+			nPartyCount++;
+		}
+	}
+
+	GETBLOCK( m_Snapshot.ar, lpBlock, nBlockSize );
+	*(UNALIGNED int*)( lpBlock + uOffset )	= nPartyCount;
 }
 
 void CUser::AddSMMode( int nType, DWORD dwTime )

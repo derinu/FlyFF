@@ -28,12 +28,18 @@ void CDDomWidget::PaintWidget( C2DRender* p2DRender )
 	CRect rect;
 	rect.left = x - 96;
 	rect.right = x;
-	rect.top =  y / 2 - 30;
-	rect.bottom = y / 2 - 10;
+	rect.top =  y / 2 - 80;
+	rect.bottom = y / 2 + 152;
 	p2DRender->RenderFillRect( rect, D3DCOLOR_ARGB( 30, 0, 0, 0 ) );
 	CString strList;
-	strList.Format( "Queued: %u/16", m_vecDomPlayer.size() );
+	strList.Format( "Queued: %u/%d\n\n", m_vecDomPlayer.size(), 8 );
+	//strList.AppendFormat(
+	for(int j = 0; j < (int)m_vecDomPlayer.size(); ++j)
+		strList.AppendFormat("%s\n", m_vecDomPlayer[j].szName);
+
 	p2DRender->TextOut( rect.left + 4, rect.top + 2, strList, 0xFFFFFFFF, 0xFF000000 );
+	//for(int j = 0; j < (int)m_vecDomPlayer.size(); ++j)
+		//::OUTPUTDEBUGSTRING("%s\n", m_vecDomPlayer[j].szName);
 
 /*	int x = g_Option.m_nResWidth;
 	int y = g_Option.m_nResHeight;

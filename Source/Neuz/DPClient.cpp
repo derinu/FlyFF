@@ -369,6 +369,7 @@ void CDPClient::OnSnapshot( CAr & ar )
 
 		switch( hdr )
 		{
+			case SNAPSHOTTYPE_PARTYLIST:	OnRecievePartyList( ar ); break;
 			case SNAPSHOTTYPE_AFKCHANGE:	OnAFKToggle( objid, ar ); break;
 			case SNAPSHOTTYPE_MOVERMOVED:	OnMoverMoved( objid, ar );	break;
 			case SNAPSHOTTYPE_MOVERBEHAVIOR:		OnMoverBehavior( objid, ar );	break;
@@ -914,6 +915,13 @@ void CDPClient::SendJoinParty(u_long PartyId)
 	SEND( ar, this, DPID_SERVERPLAYER );
 }
 
+void CDPClient::SendRequestPartyList()
+{
+	BEFORESENDSOLE( ar, PACKETTYPE_PTYLIST, DPID_UNKNOWN );
+	//::OUTPUTDEBUGSTRING("Sending request for party list\n");
+	SEND( ar, this, DPID_SERVERPLAYER );
+}
+
 #ifdef __DDOM
 #include "DomScore.h"
 #include "DomWidget.h"
@@ -1089,7 +1097,7 @@ void CDPClient::OnDDomQueueList( CAr & ar )
 		DOMQPL domPlayer;
 		ar >> domPlayer.nJob;
 		ar >> domPlayer.nLevel;
-		ar >> domPlayer.nRebirth;
+		//ar >> domPlayer.nRebirth;
 		ar >> domPlayer.WorldId;
 		ar.ReadString( szDDomQueue );
 		domPlayer.szName = CString( szDDomQueue );
@@ -1099,7 +1107,7 @@ void CDPClient::OnDDomQueueList( CAr & ar )
 	CWndWorld* pWndWorld = (CWndWorld*)g_WndMng.GetWndBase( APP_WORLD );
 	if( pWndWorld )
 	{
-		//pWndWorld->m_bDomRender = TRUE;
+		pWndWorld->m_bDomRender = TRUE;
 	}
 }
 		
@@ -1124,7 +1132,7 @@ void CDPClient::OnWorldMsg( OBJID objid, CAr & ar )
 
 void CDPClient::OnJoin( CAr & ar )
 {
-	::OUTPUTDEBUGSTRING("OnJoin()");
+	//::OUTPUTDEBUGSTRING("OnJoin()");
 
 	CNetwork::GetInstance().OnEvent( CACHE_ACK_JOIN );
 	
@@ -1196,6 +1204,8 @@ void CDPClient::OnJoin( CAr & ar )
 #ifdef __GAME_GRADE_SYSTEM
 	g_Neuz.m_dwTimeGameGradeMarkRendering = g_tmCurrent + SEC( CNeuzApp::GAME_GRADE_MARK_RENDERING_INTERVAL_SECOND );
 #endif // __GAME_GRADE_SYSTEM
+
+	//gConsole()->Show( );
 }
 
 void CDPClient::OnKeepAlive( CAr & ar )
@@ -8880,10 +8890,39 @@ void CDPClient::OnMoverSetDestObj( OBJID objid, CAr & ar )
 
 const	int	nRevision	= 35;
 
+void CDPClient::OnRecievePartyList( CAr & ar )
+{
+	int PartyCount = 0;
+	ar >> PartyCount;
+
+	CWndPartyFinder* pWndPartyFinder = (CWndPartyFinder*)g_WndMng.GetWndBase( APP_PARTY_FINDER );
+
+	for(int i = 0; i < PartyCount; i++)
+	{
+		_PartyInfo partyInfo;
+
+		ar >> partyInfo.m_nLevel;
+		ar >> partyInfo.m_nPoint;
+		ar >> partyInfo.m_nSizeofMember;
+		ar >> partyInfo.m_uPartyId;
+
+		ar.ReadString(partyInfo.m_sParty);
+		ar.ReadString(partyInfo.m_szName);
+
+		if(pWndPartyFinder)
+			pWndPartyFinder->AddParty(partyInfo);
+	}
+
+	if(pWndPartyFinder)
+		pWndPartyFinder->LoadParties();
+}
+
 void CDPClient::OnAFKToggle( OBJID objid, CAr & ar )
 {
 	BOOL isAfk = FALSE;
 	ar >> isAfk;
+	
+	//::OUTPUTDEBUGSTRING("Toggling AFK to %d\n", isAfk);
 
 	CMover* pMover	= prj.GetMover( objid );
 
@@ -17458,7 +17497,7 @@ void CDPClient::OnGuildBankLogList( CAr & ar )
 
 	if(pWndGuildBankLog == NULL || pGuild == NULL)
 	{
-		::OUTPUTDEBUGSTRING("Log window is null or guild is null");
+		//::OUTPUTDEBUGSTRING("Log window is null or guild is null");
 		return;
 	}
 

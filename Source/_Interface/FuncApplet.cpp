@@ -101,6 +101,7 @@ DECLAREAPPLET( AppMain_WndSelectServer , new CWndSelectServer );
 DECLAREAPPLET( AppMain_WndCreateChar   , new CWndCreateChar   );
 DECLAREAPPLET( AppMain_WndSelectChar   , new CWndSelectChar   );
 DECLAREAPPLET( AppMain_WndPetFilter	   , new CWndPetFilter    );
+DECLAREAPPLET( AppMain_WndPartyFinder	   , new CWndPartyFinder    );
 
 #if __VER >= 9  // __INSERT_MAP
 #ifdef __IMPROVE_MAP_SYSTEM
@@ -165,10 +166,10 @@ void CWndMgr::AddAllApplet()
 #endif // __IMPROVE_MAP_SYSTEM
 #endif
 #if __VER >= 12 // __LORD
-	if( ::GetLanguage() == LANG_FRE )
+	/*if( ::GetLanguage() == LANG_FRE )
 		AddAppletFunc( AppMain_LordSkill       , APP_LORD_SKILL             , _T( "WndLordSkill" )       , _T( "Icon_Infopang.dds"    )    , GETTEXT(TID_TIP_INFOPANG), 'A' );
 	else
-		AddAppletFunc( AppMain_LordSkill       , APP_LORD_SKILL             , _T( "WndLordSkill" )       , _T( "Icon_Infopang.dds"    )    , GETTEXT(TID_TIP_INFOPANG), 'L' );
+		AddAppletFunc( AppMain_LordSkill       , APP_LORD_SKILL             , _T( "WndLordSkill" )       , _T( "Icon_Infopang.dds"    )    , GETTEXT(TID_TIP_INFOPANG), 'L' );*/
 #endif	// __LORD
 #if __VER >= 12 // __MOD_TUTORIAL
 	AddAppletFunc( AppMain_InfoPang       , APP_INFOPANG                , _T( "WndInfoPang" )       , _T( "Icon_Infopang.dds"    )    , GETTEXT(TID_TIP_INFOPANG), 0 );
@@ -217,7 +218,7 @@ void CWndMgr::AddAllApplet()
 	AddAppletFunc( AppMain_WndParty        , APP_PARTY                   , _T( "WndParty"     )    , _T( "Icon_Troupe.dds"    )    , GETTEXT( TID_TIP_PARTY          ),  'P' );
 
 	AddAppletFunc( AppMain_WndPetFilter	   , APP_PETFILTER				 , _T( "WndPetFilter" )	   , _T( "Icon_Applet.dds"    )	   , _T( "PetFilter" ),  'U' );
-
+	AddAppletFunc( AppMain_WndPartyFinder	   , APP_PARTY_FINDER				 , _T( "WndPartyFinder" )	   , _T( "Icon_Applet.dds"    )	   , _T( "PartyFinder" ),  'L' );
 	AddAppletFunc( AppMain_WndGuild        , APP_GUILD                   , _T( "WndGuild"     )    , _T( "Icon_Troupe.dds"    )    , GETTEXT( TID_TIP_COMPANY          ),  'G' );
 
 #ifdef __GUILDVOTE

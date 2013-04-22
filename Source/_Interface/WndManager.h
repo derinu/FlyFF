@@ -377,6 +377,7 @@ public:
 	CWndChangeWeapon* m_pWndChangeWeapon;
 	CWndPetStatus* m_pWndPetStatus;
 	CWndPetFilter* m_pWndPetFilter;
+	CWndPartyFinder* m_pWndPartyFinder;
 
 	CWndFoodConfirm* m_pWndFoodConfirm;
 	CWndPetMiracle* m_pWndPetMiracle;

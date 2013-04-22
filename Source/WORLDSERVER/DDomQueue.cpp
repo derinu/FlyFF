@@ -4,7 +4,8 @@
 #include "DDom.h"
 #include "DDomQueue.h"
 
-
+#include "DPCoreClient.h"
+extern	CDPCoreClient		g_DPCoreClient;
 
 void CDDomQueue::Add( CUser* pUser )
 {
@@ -12,23 +13,23 @@ void CDDomQueue::Add( CUser* pUser )
 	{
 		if( CDDom::GetInstance().GetRunTime() != RUN_CLOSED )
 		{
-			pUser->AddTextD3D( "An instance is on run", 0xFFFF0000 );
+			pUser->AddTextD3D( "An instance is already running.", 0xFFFF0000 );
 			return;
 		}
 		if( m_PlayerQueue.size() == DoubleDom::Queue::nAmount )
 		{
-			pUser->AddTextD3D( "The queue is full", 0xFFFF0000 );
+			pUser->AddTextD3D( "The queue is full.", 0xFFFF0000 );
 			return;
 		}
 		vector<DOMQPL>::iterator it = find( m_PlayerQueue.begin(), m_PlayerQueue.end(), pUser->m_idPlayer );
 		if( it != m_PlayerQueue.end() )
 		{
-			pUser->AddTextD3D( "You're already queued", 0xFFFF0000 );
+			pUser->AddTextD3D( "You're already queued.", 0xFFFF0000 );
 			return;
 		}
 
-
-		CDDom::GetInstance().Safe( pUser ); 
+		//wtf?
+		//CDDom::GetInstance().Safe( pUser ); 
 
 		DOMQPL domPlayer;
 		domPlayer.idPlayer = pUser->m_idPlayer;
@@ -54,6 +55,9 @@ void CDDomQueue::Add( CUser* pUser )
 		{
 			Send();
 		}
+
+		if(m_PlayerQueue.size() == (DoubleDom::Queue::nAmount/2))
+			g_DPCoreClient.SendSystem("Double Domination is filling up! Go join in!");
 	}
 }
 
@@ -86,13 +90,13 @@ void CDDomQueue::Serialize( CAr & ar )
 
 			ar << it->nJob;
 			ar << it->nLevel;
-			ar << it->nRebirth;
+			//ar << it->nRebirth;
 			ar << nWorldId;
 			ar.WriteString( LPCTSTR( it->szName ) );
 		}
 		else
 		{
-			ar << 0 << 0 << 0 << WI_WORLD_MADRIGAL;
+			ar << 0 << 0 << WI_WORLD_MADRIGAL;
 			ar.WriteString( "Unknown" );
 		}
 	}

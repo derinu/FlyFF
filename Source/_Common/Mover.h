@@ -1285,7 +1285,7 @@ public:
 #endif	// __WORLDSERVER
 #endif	// __LORD
 	void			SetGold( int nGold );
-	BOOL			AddGold( int nGold, BOOL bSend = TRUE );
+	BOOL			AddGold( __int64 nGold, BOOL bSend = TRUE );
 	void			SetPerin( int nPerin );
 	BOOL			AddPerin ( int nPerin, BOOL bSend = TRUE );
 	void			SetDonor( int nDonor );

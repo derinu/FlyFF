@@ -267,6 +267,8 @@ BOOL CDDom::Start( vector<u_long>& playerList  )
 		return FALSE;
 	SetRunTime( RUN_FIGHT );
 
+	g_DPCoreClient.SendSystem("Double Domination has started!");
+
 #ifdef __NEW_FONT
 	Send( "Double Domination Start", FONT_MIDMED, DoubleDom::Color::nBlueCol );
 	//g_UserMng.AddTextFontType(  );
@@ -304,13 +306,13 @@ void CDDom::Touch( CUser* pUser, DDOM_BASE base )
 		{
 			if( team == pUser->m_ddomTeam )
 			{
-				pUser->AddTextD3D( "This base is already touched by your team", 0xFFFF0000 );
+				pUser->AddTextD3D( "This base is already captured by your team.", 0xFFFF0000 );
 				return;
 			}
 		}
 
 		CString strTouch;
-		strTouch.Format( "[%s] %s capped %s base", GetName( teamUser ), pUser->GetName(), GetBaseName( base ) );
+		strTouch.Format( "[%s] %s captured %s base", GetName( teamUser ), pUser->GetName(), GetBaseName( base ) );
 		//SendBaseTouch( strTouch, base, pUser->m_ddomTeam ); //ATTENTION
 		Send( strTouch );
 
@@ -405,11 +407,11 @@ void CDDom::End( void )
 
 	team.SendPrize();
 	CString strTeam;
-	strTeam.Format( "Team %s has won the Double Domination game!", GetName( dteam ) );
-	this->Send( strTeam );
-	this->Send( "The game has ended!" );
+	strTeam.Format( "Team %s has won the Double Domination game! You can now join at Is!", GetName( dteam ) );
+	//this->Send( strTeam );
+	//this->Send( "The game has ended!" );
+	//g_DPCoreClient.SendSystem( strTeam );
 	g_DPCoreClient.SendSystem( strTeam );
-	g_DPCoreClient.SendSystem( "The game has ended!" );
 	
 	ReturnAll();
 	
@@ -444,9 +446,9 @@ void CDDom::Capped( DDOM_TEAM team )
 		return;
 	} 
 
-#ifdef __LEA_MONDE
+/*#ifdef __LEA_MONDE
 	g_UserMng.AddDominationWireframe();
-#endif
+#endif*/
 
 	CString strCaptured;
 	strCaptured.Format( "Team %s has increased the score, new round in 9 seconds", GetName( team ) );

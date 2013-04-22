@@ -1279,7 +1279,7 @@ inline __int64 CMover::GetTotalGold( void )
 	return (__int64)GetPerin() * PERIN_VALUE + GetGold();
 }
 
-inline BOOL CMover::AddGold( int nGold, BOOL bSend )
+inline BOOL CMover::AddGold( __int64 nGold, BOOL bSend )
 {
 	if(nGold == 0)
 		return TRUE;

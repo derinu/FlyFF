@@ -189,7 +189,7 @@ CDPSrvr::CDPSrvr()
 	ON_MSG( PACKETTYPE_PLAYERSETDESTOBJ, OnPlayerSetDestObj );
 	ON_MSG( PACKETTYPE_TRADE, OnTrade );
 	ON_MSG( PACKETTYPE_CONFIRMTRADE, OnConfirmTrade );
-	ON_MSG( PACKETTYPE_CONFIRMTRADECANCEL, OnConfirmTradeCancel )
+	ON_MSG( PACKETTYPE_CONFIRMTRADECANCEL, OnConfirmTradeCancel );
 	ON_MSG( PACKETTYPE_TRADECANCEL, OnTradeCancel );
 	ON_MSG( PACKETTYPE_DOUSEITEM, OnDoUseItem );
 #if __VER >= 11 // __SYS_IDENTIFY
@@ -593,6 +593,7 @@ CDPSrvr::CDPSrvr()
 	ON_MSG( PACKETTYPE_PETFILTER, OnPetFilter );
 	ON_MSG( PACKETTYPE_PTYJOINREQ, JoinPartyByFinder );
 	ON_MSG( PACKETTYPE_PTYALLOW, TogglePartyAllow );
+	ON_MSG( PACKETTYPE_PTYLIST, OnPartyList );
 }
 
 CDPSrvr::~CDPSrvr()
@@ -614,6 +615,14 @@ void CDPSrvr::OnPetFilter(CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf,
 		if(ItemType >= 0 && ItemType <= 11 && ItemPriority >= 0 && ItemPriority < 4)
 			pUser->m_dwPetFilter[ItemType] = ItemPriority;
 	}
+}
+
+void CDPSrvr::OnPartyList(CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
+{
+	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
+
+	if(IsValidObj(pUser))
+		pUser->SendPartyList();
 }
 
 void CDPSrvr::JoinPartyByFinder(CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
@@ -1130,6 +1139,9 @@ void CDPSrvr::OnRevival( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 			if( pWorld->GetID() == WI_WORLD_GUILDWAR )
 				fRate = 1.0f;
 
+			if( pWorld->GetID() == WI_WORLD_DOMINATION )
+				fRate = 1.0f;
+
 #if __VER < 9 // __S_9_ADD	// 아래에서 채워주고 패킷까지 보내버리는 것으로 수정
 			pUser->SetHitPoint( (int)(pUser->GetMaxHitPoint() * fRate) );	// hp 회복
 
@@ -1233,12 +1245,15 @@ void CDPSrvr::OnRevivalLodestar( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE
 			return;
 		}
 
-		CCommonCtrl* pCtrl	= CreateExpBox( pUser );
-		if( pCtrl )
+		if(pWorld->GetID() != WI_WORLD_DOMINATION)
 		{
-			pCtrl->AddItToGlobalId();
-			pWorld->ADDOBJ( pCtrl, FALSE, pUser->GetLayer() );
-			g_dpDBClient.SendLogExpBox( pUser->m_idPlayer, pCtrl->GetId(), pCtrl->m_nExpBox );
+			CCommonCtrl* pCtrl	= CreateExpBox( pUser );
+			if( pCtrl )
+			{
+				pCtrl->AddItToGlobalId();
+				pWorld->ADDOBJ( pCtrl, FALSE, pUser->GetLayer() );
+				g_dpDBClient.SendLogExpBox( pUser->m_idPlayer, pCtrl->GetId(), pCtrl->m_nExpBox );
+			}
 		}
 		
 		BOOL bGuildCombat = FALSE;
@@ -1246,10 +1261,14 @@ void CDPSrvr::OnRevivalLodestar( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE
 		g_dpDBClient.SendLogLevelUp( (CMover*)pUser, 9 );	// 로드스타로 부활 로그
 
 		pUser->m_nDead = PROCESS_COUNT * 5;		// 죽은 후 5초간은 무적
-		float fRate		= pUser->SubDieDecExp();		// 죽어서 부활하면 겸치 깎임,.
+		float fRate = 1.0f;
+
+		if(pWorld->GetID() != WI_WORLD_DOMINATION)
+			fRate = pUser->SubDieDecExp();		// 죽어서 부활하면 겸치 깎임,.
+
 		pUser->m_pActMover->ClearState();
 
-		if( pWorld->GetID() == WI_WORLD_GUILDWAR )
+		if( pWorld->GetID() == WI_WORLD_GUILDWAR || pWorld->GetID() == WI_WORLD_DOMINATION)
 			fRate = 1.0f;
 #if __VER >= 11 // __GUILD_COMBAT_1TO1
 		else if( g_GuildCombat1to1Mng.IsPossibleUser( pUser ) )
@@ -2578,6 +2597,17 @@ void CDPSrvr::OnPlayerBehavior( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE 
 	else 
 		pUser->ActionForceSet( v, vd, f, dwState, dwStateFlag, dwMotion, nMotionEx, nLoop, dwMotionOption );
 
+	CTime Now = CTime::GetCurrentTime();
+
+	CMover* cMover = (CMover*)pUser;
+	cMover->m_ctLastAction = Now;
+
+	if(cMover->isAFK)
+	{
+		cMover->isAFK = FALSE;
+		g_UserMng.AddAFKToggle(cMover, cMover->isAFK); 
+	}
+
 	g_UserMng.AddMoverBehavior( pUser, v, vd, f, dwState, dwStateFlag, dwMotion,  nMotionEx, nLoop, dwMotionOption, nTickCount );
 }
 
@@ -2642,17 +2672,17 @@ void CDPSrvr::OnPlayerMoved2( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lp
 				int nRemnant	= (int)nFrame - delay;
 				pUser->m_uRemnantCorrFrm	= nRemnant;
 				pUser->SetDestPos( v );
+			}
 
-				CTime Now = CTime::GetCurrentTime();
+			CTime Now = CTime::GetCurrentTime();
 
-				CMover* cMover = (CMover*)pUser;
-				cMover->m_ctLastAction = Now;
+			CMover* cMover = (CMover*)pUser;
+			cMover->m_ctLastAction = Now;
 
-				if(cMover->isAFK)
-				{
-					cMover->isAFK = FALSE;
-					g_UserMng.AddAFKToggle(cMover, cMover->isAFK); 
-				}
+			if(cMover->isAFK)
+			{
+				cMover->isAFK = FALSE;
+				g_UserMng.AddAFKToggle(cMover, cMover->isAFK); 
 			}
 
 			g_UserMng.AddMoverMoved2
@@ -2701,6 +2731,18 @@ void CDPSrvr::OnPlayerBehavior2( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE
 		// 3
 		pUser->ActionForceSet2( v, vd, f, fAngleX, fAccPower, fTurnAngle, dwState, dwStateFlag, dwMotion, nMotionEx, nLoop, dwMotionOption );
 		// 4
+
+		CTime Now = CTime::GetCurrentTime();
+
+		CMover* cMover = (CMover*)pUser;
+		cMover->m_ctLastAction = Now;
+
+		if(cMover->isAFK)
+		{
+			cMover->isAFK = FALSE;
+			g_UserMng.AddAFKToggle(cMover, cMover->isAFK); 
+		}
+
 		g_UserMng.AddMoverBehavior2
 			( pUser, v, vd, f, fAngleX, fAccPower, fTurnAngle, dwState, dwStateFlag, dwMotion,  nMotionEx, nLoop, dwMotionOption, nTickCount );
 	}
@@ -2910,6 +2952,10 @@ void CDPSrvr::OnDDomCap( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 	CUser* pUser = g_UserMng.GetUser( dpidCache, dpidUser );
 	if( IsValidObj( pUser ) )
 	{
+		CMover* cMover = (CMover*)pUser;
+		D3DXVECTOR3 vPos = cMover->GetPos();
+		if((vPos.x  >= 1227.881104f && vPos.x <= 1234.785034f && vPos.z >= 1140.664917f && vPos.z <= 1147.700317f) ||
+		   (vPos.x  >= 1574.364990f && vPos.x <= 1580.535278f && vPos.z >= 1148.937012f && vPos.z <= 1155.514526f))
 		CDDom::GetInstance().Touch( pUser, static_cast<DDOM_BASE>( nBase ) );
 	}
 }
@@ -3131,7 +3177,7 @@ void CDPSrvr::OnBuyItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 		}
 #endif // __OCCUPATION_SHOPITEM
 		
-		int nCost = (int)pItemElem->GetCost();
+		__int64 nCost = (int)pItemElem->GetCost();
 		nCost = (int)( prj.m_fShopCost * nCost );
 #ifdef __SHOP_COST_RATE
 		nCost = (int)( prj.m_EventLua.GetShopBuyFactor() * nCost );
@@ -3159,7 +3205,7 @@ void CDPSrvr::OnBuyItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 		if( nCost < 1 )
 			nCost = 1;
 		
-		int nPracticable = (int)pUser->GetTotalGold() / nCost;
+		__int64 nPracticable = pUser->GetTotalGold() / nCost;
 		if( nNum > nPracticable )
 			nNum = (short)nPracticable;
 
@@ -3176,7 +3222,7 @@ void CDPSrvr::OnBuyItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 		nCost += nTax;
 		nTax *= nNum;
 #endif // __TAX
-		int nGold = nCost * nNum;
+		__int64 nGold = nCost * nNum;
 		if( nGold <= 0 )
 			return;
 
@@ -3207,7 +3253,7 @@ void CDPSrvr::OnBuyItem( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 				aLogItem.RecvName = pVendor->GetName();
 				aLogItem.WorldId = pUser->GetWorld()->GetID();
 				aLogItem.Gold = pUser->GetGold();
-				aLogItem.Gold2 = pUser->GetGold() - nGold;
+				aLogItem.Gold2 = (int)((__int64)pUser->GetGold() - nGold);
 				aLogItem.Gold_1 = pVendor->GetGold();
 
 				pItemElem->SetSerialNumber( itemElem.GetSerialNumber() );
@@ -5320,6 +5366,12 @@ void CDPSrvr::OnSetHair( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, 
 void CDPSrvr::OnBlock( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_long uBufSize )
 {
 	BYTE nGu;
+
+	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
+
+	if(!IsValidObj( pUser ) )
+		return;
+
 	u_long uidPlayerTo, uidPlayerFrom;
 	char szNameTo[MAX_NAME] = {0,};
 	char szNameFrom[MAX_NAME] = {0,};
@@ -5334,6 +5386,9 @@ void CDPSrvr::OnBlock( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBuf, u_
 	uidPlayerTo = prj.GetPlayerID( szNameTo );
 	uidPlayerFrom = prj.GetPlayerID( szNameFrom );
 #endif	// __SYS_PLAYER_DATA
+
+	if(pUser->m_idPlayer != uidPlayerFrom)
+		return;
 
 	if( uidPlayerTo > 0 && uidPlayerFrom > 0 )
 		g_DPCoreClient.SendBlock( nGu, uidPlayerTo, szNameTo, uidPlayerFrom );
@@ -9299,11 +9354,11 @@ void CDPSrvr::OnPVendorOpen( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpB
 		
 		// 대전장에서는 개인상점을 열수 없습니다.
 		CWorld* pWorld = pUser->GetWorld();
-		if( pWorld && pWorld->GetID() != WI_WORLD_MARKET )
+		/*if( pWorld && pWorld->GetID() != WI_WORLD_MARKET )
 		{			
 			//pUser->AddText(); //길드대전장 에서는 거래에 관한 모든것들을 이용 할 수 없습니다.
 			return;
-		}
+		}*/
 #if __VER >= 11 // __GUILD_COMBAT_1TO1
 		if( g_GuildCombat1to1Mng.IsPossibleUser( pUser ) )
 		{
@@ -12659,26 +12714,33 @@ void CDPSrvr::OnGuildHouseGoOut( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE
 #if __VER >= 15 // __TELEPORTER
 void CDPSrvr::OnTeleporterReq( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE, u_long )
 {
-	CUser* pUser	=	g_UserMng.GetUser( dpidCache, dpidUser );
-	if( IsValidObj( pUser ) ) 
+	try
 	{
-		CHAR	m_szKey[64];
-		int		nIndex;
-		ar.ReadString(m_szKey, 64);
-		ar >> nIndex;
-		
-		LPCHARACTER lpChar = prj.GetCharacter( m_szKey );
-		if( lpChar )
+		CUser* pUser	=	g_UserMng.GetUser( dpidCache, dpidUser );
+		if( IsValidObj( pUser ) ) 
 		{
-			//MMI_CHRISTMASFAIRY03
-			if( !CNpcChecker::GetInstance()->IsCloseNpc( MMI_TELEPORTER, pUser->GetWorld(), pUser->GetPos() ))
-				return;
+			CHAR	m_szKey[64];
+			int		nIndex;
+			ar.ReadString(m_szKey, 64);
+			ar >> nIndex;
+			
+			LPCHARACTER lpChar = prj.GetCharacter( m_szKey );
+			if( lpChar )
+			{
+				//MMI_CHRISTMASFAIRY03
+				if( !CNpcChecker::GetInstance()->IsCloseNpc( MMI_TELEPORTER, pUser->GetWorld(), pUser->GetPos() ))
+					return;
 
-			if( (int)( lpChar->m_vecTeleportPos.size() ) <= nIndex )
-				return;
+				if( (int)( lpChar->m_vecTeleportPos.size() ) <= nIndex )
+					return;
 
-			pUser->REPLACE( g_uIdofMulti, WI_WORLD_MADRIGAL, lpChar->m_vecTeleportPos[nIndex], REPLACE_NORMAL, nDefaultLayer );
+				pUser->REPLACE( g_uIdofMulti, WI_WORLD_MADRIGAL, lpChar->m_vecTeleportPos[nIndex], REPLACE_NORMAL, nDefaultLayer );
+			}
 		}
+	}
+	catch(...)
+	{
+		Error("OnTeleporterReq");
 	}
 }
 #endif // __TELEPORTER

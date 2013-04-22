@@ -3957,6 +3957,9 @@ void	CSfxPartsLinkShoulder::Render( LPDIRECT3DDEVICE9 pd3dDevice )
 {
 	CMover *pMover = prj.GetMover( m_idSrc );
 
+	if(!pMover)
+		return;
+
 	if( pMover->IsActiveMover() && CWorld::m_nZoomLevel != 0 )
 		return;
 

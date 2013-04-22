@@ -140,6 +140,7 @@ public:
 	void	OnTextD3D( CAr & ar );
 #endif
 	void	SendPetFilter(int ItemType, int ItemPriority);
+	void	SendRequestPartyList( void );
 	void	SendJoinParty(u_long PartyId);
 	void	PostPlayerAngle( BOOL f );
 	void	FlushPlayerAngle( void );
@@ -859,6 +860,7 @@ public:
 		
 		//________________________________________________________________________________
 	void	OnAFKToggle( OBJID objid, CAr & ar );
+	void	OnRecievePartyList( CAr & ar );
 	void	OnMoverMoved( OBJID objid, CAr & ar );
 	void	OnMoverBehavior( OBJID objid, CAr & ar );
 	void	OnMoverMoved2( OBJID objid, CAr & ar );

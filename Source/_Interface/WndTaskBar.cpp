@@ -2401,6 +2401,8 @@ BOOL CWndTaskBar::Process( void )
 				else
 					dwHotkey = dwHotkey2;								
 #else //__Y_INTERFACE_VER3
+				//HOT KEY SYSTEM WILL GO HERE
+				//g_Option.
 				DWORD dwHotkey1[10] = { 0x70, 0x71, 0x72, 0x73, 0x74, 0x75, 0x76, 0x77, 0x78, 0x79 };
 				dwHotkey = dwHotkey1;
 #endif //__Y_INTERFACE_VER3

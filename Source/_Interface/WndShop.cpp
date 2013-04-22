@@ -1118,7 +1118,7 @@ void CWndShop::AddCartItem( DWORD dwNum, CItemElem* pItemElem, CHAR cTab )
 				if(g_pPlayer->m_Inventory.GetAtItemNum( II_CHP_RED ) - (int)pItemElem->GetChipCost() >= 0)
 				{
 
-					g_DPlay.SendBuyChipItem(cTab,(BYTE)(pItemElem->m_dwObjId),dwNum,pItemElem->m_dwItemId);
+					g_DPlay.SendBuyChipItem(cTab,(BYTE)(pItemElem->m_dwObjId),(short)dwNum,pItemElem->m_dwItemId);
 					return;
 				}
 				else
@@ -1142,7 +1142,7 @@ void CWndShop::AddCartItem( DWORD dwNum, CItemElem* pItemElem, CHAR cTab )
 			}
 		}
 
-		if( dwTotalCart >= MAX_CART_ITEM || g_pPlayer->GetTotalGold() < (int)dwTotalCost )
+		if( dwTotalCart >= MAX_CART_ITEM || g_pPlayer->GetTotalGold() < (__int64)dwTotalCost )
 			return;
 		
 		for( int i = 0; i < MAX_CART_ITEM; i++ )
@@ -1208,7 +1208,7 @@ void CWndShop::DeleteCartItem( CHAR cSlot )
 }
 void CWndShop::UpdateCart()
 {
-	DWORD dwTotalCost = 0;
+	__int64 dwTotalCost = 0;
 	DWORD dwTotalCart = 0;
 	for( int i = 0;i < MAX_CART_ITEM; i++ )
 	{
@@ -1233,7 +1233,7 @@ void CWndShop::UpdateCart()
 		pCart->m_dwColor = 0xFF66FF33;
 
 	CWndStatic* pCost1 = (CWndStatic*) GetDlgItem( WIDC_ST_USMOMEY );
-	string.Format( _T( "%d" ), (DWORD)g_pPlayer->GetTotalGold() - dwTotalCost );
+	string.Format( _T( "%d" ), g_pPlayer->GetTotalGold() - dwTotalCost );
 	pCost1->SetTitle( string );
 }
 #endif //__SHOPPING_CART

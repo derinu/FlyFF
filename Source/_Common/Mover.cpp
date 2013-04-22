@@ -621,7 +621,7 @@ void CMover::PostAIMsg( DWORD dwMsg, DWORD dwParam1, DWORD dwParam2 )
 }*/
 #endif // __INSTANCE_AGGRO_SYSTEM
 //raiders.2006.11.28	 trade돈을 계산에 포함하던 것을 제거
-BOOL CMover::AddGold( int nGold, BOOL bSend )
+BOOL CMover::AddGold( __int64 nGold, BOOL bSend )
 {
 	if(nGold == 0)
 		return TRUE;
@@ -3806,6 +3806,10 @@ void CMover::ProcessDustSFX()
 	if( ! ( IsMode( TRANSPARENT_MODE ) ) )		// 투명상태가 아닐때만 렌더.
 	{
 		CModelObject*	pModel = (CModelObject*)m_pModel;
+
+		if(!pModel)
+			return;
+
 		MOTION_ATTR* pAttr = pModel->IsAttrSound();
  		if( IsPlayer() && pAttr && pAttr->m_nSndID > 0 )  // 효과음 속성이 있다면 플레이, pause상태면 사운드 출력 안함
 		{
@@ -4447,7 +4451,7 @@ void CMover::Process()
 				pModel->FrameMove( &vPos, m_fAniSpeed );		// 애니메이션 프레임 증가
 #endif	// __AI_0509
 			#ifdef __CLIENT			
-				ProcessDustSFX();
+				//ProcessDustSFX();
 			#endif // CLIENT
 			}
 		}	// for( 4 )
@@ -6626,6 +6630,7 @@ void CMover::AddKillRecovery()
 // pDead를 죽인후 경험치 처리
 int CMover::SubExperience( CMover *pDead )
 {
+	if( pDead->GetWorld()->GetID() == WI_WORLD_DOMINATION) return 1;
 	if( IsPlayer() == FALSE )	return 0;	// this(Attacker)가 몬스터면 처리안함.
 	if( pDead->IsPlayer() )	return 0;			// 죽은넘이 플레이어면 경험치 처리할일이 없음.
 	

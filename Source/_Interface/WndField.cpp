@@ -14391,6 +14391,7 @@ BOOL CWndReWanted::CheckWantedInfo( int nGold, LPCTSTR szMsg )
 	if( g_pPlayer->GetTotalGold() < (nGold + nTax) ) 
 	{
 		g_WndMng.OpenMessageBoxUpper( prj.GetText(TID_GAME_LACKMONEY) );	// ??? ????
+		::OUTPUTDEBUGSTRING("la\n");
 		return FALSE;
 	}
 
@@ -24224,7 +24225,7 @@ void CWndRemovePiercing::OnDraw( C2DRender* p2DRender )
 			CString strTemp;
 
 			int nPiercingSize = m_pItemElem->GetPiercingSize();
-
+			//::OUTPUTDEBUGSTRING("PiercingSize %d, nPiercingSize");
 			for(int i=0; i<nPiercingSize; i++)
 			{
 				if(nPiercingSize > nMaxPiercing)
@@ -24254,7 +24255,7 @@ void CWndRemovePiercing::OnDraw( C2DRender* p2DRender )
 					}
 					
 					lpWndCtrl = GetWndCtrl( m_nInfoSlot[i] );
-					p2DRender->TextOut( lpWndCtrl->rect.left + 10, lpWndCtrl->rect.top + 8, textOpt, D3DCOLOR_ARGB(255,0,0,0) );
+					p2DRender->TextOut( lpWndCtrl->rect.left + 10, lpWndCtrl->rect.top + 8, textOpt, D3DCOLOR_ARGB(20,255,60,80) );
 					
 					textOpt = "";
 					strTemp = "";
@@ -25937,13 +25938,13 @@ BOOL CWndSmeltSafety::Process()
 			assert(pGoldNumberStatic != NULL);
 			//int nGoldNumber(atoi(pGoldNumberStatic->GetTitle()));
 			__int64 nGoldNumber = g_pPlayer->GetTotalGold();
-			::OUTPUTDEBUGSTRING("before check");
+			//::OUTPUTDEBUGSTRING("before check");
 			if(nGoldNumber < 100000)
 			{
 				g_WndMng.PutString(prj.GetText(TID_GAME_LACKMONEY), NULL, prj.GetTextColor(TID_GAME_LACKMONEY));
 				StopSmelting();
 			}
-			::OUTPUTDEBUGSTRING("hi made it past check client sided");
+			///::OUTPUTDEBUGSTRING("hi made it past check client sided");
 		}
 		if(m_dwEnchantTimeEnd < g_tmCurrent)
 		{
@@ -30629,4 +30630,106 @@ BOOL CWndPetFilter::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 	}
 
 	return CWndNeuz::OnChildNotify( message, nID, pLResult ); 
+}
+
+// Party Finder Window
+CWndPartyFinder::CWndPartyFinder()
+{
+       
+}
+ 
+CWndPartyFinder::~CWndPartyFinder()
+{
+       
+}
+ 
+BOOL CWndPartyFinder::Initialize( CWndBase* pWndParent, DWORD )
+{
+	return CWndNeuz::InitDialog( g_Neuz.GetSafeHwnd(), APP_PARTY_FINDER, WBS_MOVE, CPoint( 0, 0 ), pWndParent );
+}
+ 
+void CWndPartyFinder::OnInitialUpdate()
+{
+	CWndNeuz::OnInitialUpdate();
+	
+	Parties.clear();
+
+    CRect rect = GetWindowRect();
+    rect.top    += 30;
+    rect.bottom -= 80;
+    rect.left    = rect.right - 30;
+    rect.right  -= 30;
+
+	g_DPlay.SendRequestPartyList();
+}
+
+void CWndPartyFinder::AddParty(_PartyInfo partyInfo)
+{
+	Parties.push_back(partyInfo);
+}
+ 
+void CWndPartyFinder::LoadParties()
+{
+	CWndListBox* pListBox = (CWndListBox*)GetDlgItem( WIDC_CONTROL1 );
+ 
+	for(int i = 0; i < (int)Parties.size(); i++)
+	{
+		CString PartyInfoStr;
+		PartyInfoStr.Format("%3d\t%-30s\t%-20s\t%-3d\t%1d/8", Parties[i].m_nLevel, Parties[i].m_sParty, Parties[i].m_szName, Parties[i].m_nPoint, Parties[i].m_nSizeofMember);
+        int nIndex = pListBox->AddString(PartyInfoStr);
+        pListBox->SetItemDataPtr( nIndex, &Parties[i] );
+	}
+}
+ 
+BOOL CWndPartyFinder::OnCommand( UINT nID, DWORD dwMessage, CWndBase* pWndBase )
+{
+	return CWndNeuz::OnCommand( nID, dwMessage, pWndBase );
+}
+ 
+void CWndPartyFinder::OnDraw( C2DRender* p2DRender )
+{
+       
+}
+ 
+BOOL CWndPartyFinder::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
+{
+	if((nID == WIDC_CONTROL1 && message == WNM_DBLCLK) || nID == WIDC_BUTTON1)
+	{
+		CWndListBox* pListBox = (CWndListBox*)GetDlgItem(WIDC_CONTROL1);
+		  
+		int nSelectedIndex = pListBox->GetCurSel();
+
+		if(nSelectedIndex != -1)  
+		{
+			_PartyInfo* PartyInfo = (_PartyInfo*)pListBox->GetItemDataPtr(nSelectedIndex);
+			g_DPlay.SendJoinParty(PartyInfo->m_uPartyId);
+		}
+	}
+	else if(nID == WIDC_BUTTON2)
+	{
+		CWndListBox* pListBox = (CWndListBox*)GetDlgItem(WIDC_CONTROL1);
+
+		if(pListBox)
+			pListBox->ResetContent();
+
+		Parties.clear();
+		g_DPlay.SendRequestPartyList();
+	}
+	
+	return CWndNeuz::OnChildNotify( message, nID, pLResult );
+}
+ 
+void CWndPartyFinder::OnSize( UINT nType, int cx, int cy )
+{
+	CWndNeuz::OnSize( nType, cx, cy );
+}
+ 
+void CWndPartyFinder::OnLButtonUp( UINT nFlags, CPoint point )
+{
+       
+}
+ 
+void CWndPartyFinder::OnLButtonDown( UINT nFlags, CPoint point )
+{
+       
 }

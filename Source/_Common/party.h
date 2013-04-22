@@ -46,7 +46,7 @@ struct _PartyInfo
 	int		m_nSizeofMember;
 	LONG	m_nLevel;
 	LONG	m_nPoint;
-	LPCTSTR	m_szName;
+	char	m_szName[20];
 
 };
 

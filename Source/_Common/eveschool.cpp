@@ -1599,7 +1599,10 @@ void CGuildCombat::GuildCombatResultRanking()
 				continue;
 			}
 
-			itemElem.m_nItemNum = 3 * pJoinPlayer->nPoint;
+			if(pGCMember->m_uidDefender == pJoinPlayer->uidPlayer)
+				itemElem.m_nItemNum = (5 * pJoinPlayer->nlife)+10;
+			else
+				itemElem.m_nItemNum = 3 * pJoinPlayer->nPoint;
 
 			CUser* pUsertmp = (CUser*)prj.GetUserByID( pJoinPlayer->uidPlayer );
 			if( IsValidObj( pUsertmp ) )

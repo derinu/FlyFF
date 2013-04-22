@@ -20,6 +20,7 @@
 #define __BSXPACK_OBJ
 #define	__DDOM
 #define	__ARENA_PARADISE
+#define __RESTAT_FIX
 
 #define __NO_SWAP
 
