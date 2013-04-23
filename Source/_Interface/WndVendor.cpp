@@ -316,7 +316,7 @@ BOOL CWndVendor::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 			strVendor.TrimLeft();
 			strVendor.TrimRight();
 
-		#if __VER >= 11 // __MOD_VENDOR
+		/*#if __VER >= 11 // __MOD_VENDOR
 			// 매물 액수 총합 + 현재 소지금이 2억1천이 넘으면 경고띄우고 리턴시킴.
 			int nGold = (int)g_pPlayer->GetTotalGold();
 
@@ -334,7 +334,7 @@ BOOL CWndVendor::OnChildNotify( UINT message, UINT nID, LRESULT* pLResult )
 				g_WndMng.OpenMessageBox( _T(prj.GetText(TID_GAME_VENDOR_MAX_ALL_GOLD)), MB_OK, this );
 				return TRUE;
 			}
-		#endif
+		#endif*/
 
 			if( prj.IsInvalidName( strVendor )
 #ifdef __RULE_0615

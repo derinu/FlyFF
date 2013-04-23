@@ -948,7 +948,7 @@ HRESULT CNeuzApp::Render()
 #if __VER >= 9 // __CSC_VER9_RESOLUTION
 				int wideOffsetX = 0;
 				
-				if(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800)) //Wide Offset
+				if(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 680 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800)) //Wide Offset
 				{
 					m_TexLoading.m_size = CSize(960, FULLSCREEN_HEIGHT);
 					wideOffsetX = (g_Option.m_nResWidth - 960) / 2;

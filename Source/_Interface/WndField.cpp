@@ -30675,7 +30675,7 @@ void CWndPartyFinder::LoadParties()
 	for(int i = 0; i < (int)Parties.size(); i++)
 	{
 		CString PartyInfoStr;
-		PartyInfoStr.Format("%3d\t%-30s\t%-20s\t%-3d\t%1d/8", Parties[i].m_nLevel, Parties[i].m_sParty, Parties[i].m_szName, Parties[i].m_nPoint, Parties[i].m_nSizeofMember);
+		PartyInfoStr.Format("%3d\t%-30s\t%-20s\t%-3d\t%1d/8", Parties[i].m_nLevel, "Name", "Leader", Parties[i].m_nPoint, Parties[i].m_nSizeofMember);
         int nIndex = pListBox->AddString(PartyInfoStr);
         pListBox->SetItemDataPtr( nIndex, &Parties[i] );
 	}

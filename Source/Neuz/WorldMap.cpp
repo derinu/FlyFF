@@ -261,6 +261,14 @@ void CWorldMap::Init()
 			m_cOffset.x = (g_Option.m_nResWidth-m_cpScreen.x) / 2;
 			m_cOffset.y = (g_Option.m_nResHeight-m_cpScreen.y) / 2;			
 		}
+		else if(g_Option.m_nResHeight == 680) //Wide
+		{
+			m_fRate = (FLOAT)1280 / (FLOAT)1280;
+			m_cpScreen.x = 960;
+			m_cpScreen.y = 680;
+			m_cOffset.x = (g_Option.m_nResWidth-m_cpScreen.x) / 2;
+			m_cOffset.y = (g_Option.m_nResHeight-m_cpScreen.y) / 2;			
+		}
 		else if(g_Option.m_nResHeight == 800) //Wide
 		{
 			m_fRate = (FLOAT)1280 / (FLOAT)1280;
@@ -335,7 +343,7 @@ void CWorldMap::Init()
 #if __VER >= 9 // __CSC_VER9_RESOLUTION
 	int wideOffsetX = 0;
 	if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680) || 
-		(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800))) //Wide Offset
+		(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800 || g_Option.m_nResHeight == 680))) //Wide Offset
 		wideOffsetX = m_cOffset.x;
 
 	CTexture *pTexture = m_texMapButton.GetAt(0);
@@ -547,7 +555,7 @@ void CWorldMap::RenderPlayer( C2DRender *p2DRender, BOOL bMyPlayer, D3DXVECTOR3 
 #if __VER >= 9 // __CSC_VER9_RESOLUTION
 	D3DVIEWPORT9 viewport;
 	if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680) || 
-		(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800))) //Wide Offset
+		(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 680 || g_Option.m_nResHeight == 800))) //Wide Offset
 	{
 		viewport.X      = m_cOffset.x;
 		viewport.Y      = 0;
@@ -745,7 +753,7 @@ void CWorldMap::RenderPlayer( C2DRender *p2DRender, BOOL bMyPlayer, D3DXVECTOR3 
 		int nY;
 #if __VER >= 9 // __CSC_VER9_RESOLUTION
 	if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680) || 
-		(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800))) //Wide Offset
+		(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 680 || g_Option.m_nResHeight == 800))) //Wide Offset
 	{
 		v1 = D3DXVECTOR3( (FLOAT)( m_cOffset.x ), 0.0f, 0.0f );
 		v2 = D3DXVECTOR3( (FLOAT)( m_cpScreen.x + m_cOffset.x ), (FLOAT)( m_cpScreen.y ), 0.0f );
@@ -790,7 +798,7 @@ void CWorldMap::RenderWorldMap( C2DRender *p2DRender )
 	{	
 #if __VER >= 9 // __CSC_VER9_RESOLUTION
 		if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680) || 
-			(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800))) //Wide Background Black
+			(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 680 || g_Option.m_nResHeight == 800))) //Wide Background Black
 			p2DRender->RenderFillRect( CRect( 0, 0, g_Option.m_nResWidth, g_Option.m_nResHeight ), 0xff000000 );
 		else
 			p2DRender->RenderFillRect( CRect( 0, 0, g_Option.m_nResWidth, g_Option.m_nResHeight ), 0xff3B3D2F );
@@ -1474,7 +1482,7 @@ BOOL CWorldMap::WorldPosToMapPos( const D3DXVECTOR3& vPos, OUT CPoint& cPos )
 	int nX;
 	int nY;
 	if((g_Option.m_nResWidth == 1360 || g_Option.m_nResWidth == 1440 || g_Option.m_nResWidth == 1680) || 
-		(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800))) //Wide Offset
+		(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 680 || g_Option.m_nResHeight == 800))) //Wide Offset
 	{
 		v1 = D3DXVECTOR3( (FLOAT)( m_cOffset.x ), 0.0f, 0.0f );
 		v2 = D3DXVECTOR3( (FLOAT)( m_cpScreen.x + m_cOffset.x ), (FLOAT)( m_cpScreen.y ), 0.0f );

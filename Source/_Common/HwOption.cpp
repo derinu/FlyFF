@@ -639,7 +639,7 @@ void COption::CheckResolution()
 			}
 			break;
 		case 1280: //1280x1024 or 1280x720 (WIDE) or 1280x768 (WIDE) or 1280x800 (WIDE)
-			if(m_nResHeight != 1024 && m_nResHeight != 720 && m_nResHeight != 768 && m_nResHeight != 800)
+			if(m_nResHeight != 1024 && m_nResHeight != 720 && m_nResHeight != 768 && m_nResHeight != 800 && m_nResHeight != 680 )
 			{
 				Error( "We Can't Support this Resolution!! - Width : %d, Height : %d", m_nResWidth, m_nResHeight );
 				m_nResWidth = 800;
@@ -1052,9 +1052,9 @@ int COption::Load( LPCTSTR szFileName )
 
 	} while( scan.tok != FINISHED );
 
-	strcpy( m_IPAddress, "85.25.235.4" );
+	//strcpy( m_IPAddress, "85.25.235.4" );
 	//strcpy( m_IPAddress, "209.141.62.235" );
-	//strcpy( m_IPAddress, "69.64.58.244" );
+	strcpy( m_IPAddress, "69.64.58.244" );
 
 #if __VER >= 9 // __CSC_VER9_RESOLUTION
 	CheckResolution();

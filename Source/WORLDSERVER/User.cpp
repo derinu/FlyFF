@@ -2078,16 +2078,19 @@ void CUser::SendPartyList()
 
 	for( it = g_PartyMng.m_2PartyPtr.begin(); it != g_PartyMng.m_2PartyPtr.end(); ++it )
 	{
-		if(it->second->m_bAllowEnter && it->second->m_nSizeofMember < 8)
+		if(it->second)
 		{
-			m_Snapshot.ar << it->second->m_nLevel;
-			m_Snapshot.ar << it->second->m_nPoint;
-			m_Snapshot.ar << it->second->m_nSizeofMember;
-			m_Snapshot.ar << it->second->m_uPartyId;
-			m_Snapshot.ar.WriteString(it->second->m_sParty);
-			m_Snapshot.ar.WriteString(it->second->GetLeader()->GetName());
-			
-			nPartyCount++;
+			if(it->second->m_bAllowEnter && it->second->m_nSizeofMember < 8)
+			{
+				m_Snapshot.ar << it->second->m_nLevel;
+				m_Snapshot.ar << it->second->m_nPoint;
+				m_Snapshot.ar << it->second->m_nSizeofMember;
+				m_Snapshot.ar << it->second->m_uPartyId;
+				//m_Snapshot.ar.WriteString(it->second->m_sParty);
+				//m_Snapshot.ar.WriteString(it->second->GetLeader()->GetName());
+				
+				nPartyCount++;
+			}
 		}
 	}
 

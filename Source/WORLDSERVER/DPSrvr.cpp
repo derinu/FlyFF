@@ -6784,13 +6784,10 @@ void CDPSrvr::OnBuyingInfo( CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE lpBu
 {
 #ifndef __SECURITY_FIXES
 	BUYING_INFO2 bi2;
-    ar.Read( (void*)&bi2, sizeof(BUYING_INFO2) );
+	ar.Read( (void*)&bi2, sizeof(BUYING_INFO2) );
 
-    CWorld* pWorld;
-    CUser* pUser    = g_UserMng.GetUser( dpidCache, dpidUser );
-
-    if( !strstr( bi2.szBxaid, "m!Z*9&rTYG47V+Qj!0QL5*hf&C7s!4" ) ) // change password to what pass you want(use spiken's script with this).
-        return;
+	CWorld* pWorld;
+	CUser* pUser	= g_UserMng.GetUser( dpidCache, dpidUser );
 
 	SERIALNUMBER iSerialNumber	= 0;
 	if( IsValidObj( pUser ) && ( pWorld = pUser->GetWorld() ) )

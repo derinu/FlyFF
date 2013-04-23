@@ -791,7 +791,7 @@ void CTheme::RenderDesktop( C2DRender* p2DRender )
 	if( m_dwWallPaperType == WPT_STRETCH ) // 전체 늘리기 
 	{
 #if __VER >= 9 // __CSC_VER9_RESOLUTION
-		if(rectWindow.Width() == 1280 && (rectWindow.Height() == 720 || rectWindow.Height() == 768 || rectWindow.Height() == 800)) //Wide
+		if(rectWindow.Width() == 1280 && (rectWindow.Height() == 720 || rectWindow.Height() == 768 || rectWindow.Height() == 800 || rectWindow.Height() == 680)) //Wide
 		{
 			rectWidth = 960;
 			isWide = TRUE;
@@ -903,7 +903,7 @@ void CTheme::RenderGameGradeScreen( C2DRender* p2DRender )
 	CRect rectWindow = p2DRender->m_clipRect;
 	if( g_WndMng.m_Theme.m_dwWallPaperType == WPT_STRETCH ) // 전체 늘리기 
 	{
-		if(rectWindow.Width() == 1280 && (rectWindow.Height() == 720 || rectWindow.Height() == 768 || rectWindow.Height() == 800)) //Wide
+		if(rectWindow.Width() == 1280 && (rectWindow.Height() == 720 || rectWindow.Height() == 768 || rectWindow.Height() == 800 || rectWindow.Height() == 680)) //Wide
 		{
 			rectWidth = 960;
 			isWide = TRUE;

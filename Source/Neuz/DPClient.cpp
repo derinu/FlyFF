@@ -2614,7 +2614,7 @@ void CDPClient::OnReplace( CAr & ar )
 #if __VER >= 9 // __CSC_VER9_RESOLUTION
 		int wideOffsetX = 0;
 		
-		if(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800)) //Wide Offset
+		if(g_Option.m_nResWidth == 1280 && (g_Option.m_nResHeight == 720 || g_Option.m_nResHeight == 768 || g_Option.m_nResHeight == 800 || g_Option.m_nResHeight == 680)) //Wide Offset
 		{
 			g_Neuz.m_TexLoading.m_size = CSize(960, FULLSCREEN_HEIGHT);
 			wideOffsetX = (g_Option.m_nResWidth - 960) / 2;
@@ -8906,8 +8906,8 @@ void CDPClient::OnRecievePartyList( CAr & ar )
 		ar >> partyInfo.m_nSizeofMember;
 		ar >> partyInfo.m_uPartyId;
 
-		ar.ReadString(partyInfo.m_sParty);
-		ar.ReadString(partyInfo.m_szName);
+		//ar.ReadString(partyInfo.m_sParty);
+		//ar.ReadString(partyInfo.m_szName);
 
 		if(pWndPartyFinder)
 			pWndPartyFinder->AddParty(partyInfo);
