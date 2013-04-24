@@ -641,8 +641,17 @@ void CDPSrvr::JoinPartyByFinder(CAr & ar, DPID dpidCache, DPID dpidUser, LPBYTE 
 		//check and make sure world isn't siege worlds
 
 		if(pParty)
+		{
 			if(pParty->m_bAllowEnter)
-				this->InviteParty(pParty->GetLeader()->m_idPlayer, pUser->m_idPlayer, FALSE);
+			{
+				CMover* pLeader = pParty->GetLeader();
+
+				if(pLeader)
+				{
+					InviteParty(pLeader->m_idPlayer, pUser->m_idPlayer, FALSE);
+				}
+			}
+		}
 				/*if(pParty->NewMember(pUser->m_idPlayer))
 				{
 					pUser->AddPartyMember(pParty, pUser->m_idPlayer, (char*)pParty->GetLeader()->GetName(), (char*)pUser->GetName());
